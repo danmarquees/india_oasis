@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="pt-BR">
     <head>
@@ -23,7 +24,7 @@
         />
 
         <!-- Link para o arquivo CSS externo -->
-        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
         <style>
             /* Menu lateral - animações de slide */
@@ -221,7 +222,7 @@
                 <ul class="space-y-2">
                     <li>
                         <a
-                            href="products.html"
+                            href="{% url 'store:product_list' %}"
                             class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
                             data-category="all"
                         >
@@ -441,7 +442,7 @@
                     <ul class="space-y-2">
                         <li>
                             <a
-                                href="wishlist.html"
+                                href="{% url 'store:wishlist' %}"
                                 class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
                             >
                                 <i
@@ -452,7 +453,7 @@
                         </li>
                         <li>
                             <a
-                                href="cart.html"
+                                href="{% url 'store:cart' %}"
                                 class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
                             >
                                 <i
@@ -496,21 +497,31 @@
                             class="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full"
                         ></span>
                     </button>
-                    <a href="index.html" class="text-3xl font-teko text-primary"
+                    <a
+                        href="{% url 'store:home' %}"
+                        class="text-3xl font-teko text-primary"
                         >India Oasis</a
                     >
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-lg text-primary font-bold"
+                    <a
+                        href="{% url 'store:home' %}"
+                        class="text-lg text-primary font-bold"
                         >Início</a
                     >
-                    <a href="products.html" class="text-lg hover:text-primary"
+                    <a
+                        href="{% url 'store:product_list' %}"
+                        class="text-lg hover:text-primary"
                         >Produtos</a
                     >
-                    <a href="contact.html" class="text-lg hover:text-primary"
+                    <a
+                        href="{% url 'store:contact' %}"
+                        class="text-lg hover:text-primary"
                         >Contato</a
                     >
-                    <a href="about.html" class="text-lg hover:text-primary"
+                    <a
+                        href="{% url 'store:about' %}"
+                        class="text-lg hover:text-primary"
                         >Sobre Nós</a
                     >
                 </div>
@@ -524,7 +535,10 @@
                         <span>Entrar</span>
                     </button>
 
-                    <a href="wishlist.html" class="relative hover:text-primary">
+                    <a
+                        href="{% url 'store:wishlist' %}"
+                        class="relative hover:text-primary"
+                    >
                         <i class="fas fa-heart text-xl"></i>
                         <span
                             id="wishlist-count"
@@ -532,7 +546,10 @@
                             >0</span
                         >
                     </a>
-                    <a href="cart.html" class="relative hover:text-primary">
+                    <a
+                        href="{% url 'store:cart' %}"
+                        class="relative hover:text-primary"
+                    >
                         <i class="fas fa-shopping-cart text-xl"></i>
                         <span
                             id="cart-count"
@@ -592,7 +609,7 @@
                                         class="flex flex-col sm:flex-row gap-4"
                                     >
                                         <a
-                                            href="products.html"
+                                            href="{% url 'store:product_list' %}"
                                             class="btn btn-primary text-lg px-8 py-4"
                                         >
                                             <i
@@ -1035,7 +1052,7 @@
                     </div>
                     <div class="text-center">
                         <a
-                            href="products.html"
+                            href="{% url 'store:product_list' %}"
                             class="btn btn-secondary text-lg px-8 py-3"
                         >
                             <i class="fas fa-th-large mr-2"></i>
@@ -2173,7 +2190,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="index.html"
+                                    href="{% url 'store:home' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-home w-4 mr-2"></i>
@@ -2182,7 +2199,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="products.html"
+                                    href="{% url 'store:product_list' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-box w-4 mr-2"></i>
@@ -2191,7 +2208,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="about.html"
+                                    href="{% url 'store:about' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-heart w-4 mr-2"></i>
@@ -2200,7 +2217,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="contact.html"
+                                    href="{% url 'store:contact' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-envelope w-4 mr-2"></i>
@@ -2209,7 +2226,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="cart.html"
+                                    href="{% url 'store:cart' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i
@@ -2220,7 +2237,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="wishlist.html"
+                                    href="{% url 'store:wishlist' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-star w-4 mr-2"></i>
@@ -2776,13 +2793,13 @@
                             class="flex flex-wrap justify-center gap-4 text-xs"
                         >
                             <a
-                                href="#"
+                                href="{% url 'store:privacy' %}"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Política de Privacidade</a
                             >
                             <span class="text-gray-500">|</span>
                             <a
-                                href="#"
+                                href="{% url 'store:terms' %}"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Termos de Uso</a
                             >
@@ -2926,10 +2943,10 @@
         </div>
 
         <!-- Sistema de Notificações Toast -->
-        <script src="assets/js/toast-system.js"></script>
+        <script src="{% static 'js/toast-system.js' %}"></script>
 
         <!-- Link para o arquivo JavaScript externo -->
-        <script src="assets/js/script.js" defer></script>
+        <script src="{% static 'js/script.js' %}" defer></script>
         <script>
             // Modal de Login
             document

@@ -261,7 +261,7 @@
 
                     <!-- Botão do Carrinho -->
                     <a
-                        href="{% url 'store:cart' %}"
+                        href="cart.html"
                         class="relative flex items-center space-x-2 text-sm hover:text-primary transition-colors"
                     >
                         <i class="fas fa-shopping-cart text-lg"></i>
@@ -284,7 +284,7 @@
                 <ol class="flex space-x-2 text-sm">
                     <li>
                         <a
-                            href="{% url 'store:home' %}"
+                            href="index.html"
                             class="text-primary hover:underline"
                             >Início</a
                         >
@@ -1656,7 +1656,7 @@
 
                     // Redirecionar após 3 segundos
                     setTimeout(() => {
-                        window.location.href = "{% url 'store:home' %}";
+                        window.location.href = "index.html";
                     }, 3000);
                 } catch (error) {
                     alert("Erro ao processar cadastro. Tente novamente.");

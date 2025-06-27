@@ -244,7 +244,7 @@
                 <ul class="space-y-2">
                     <li>
                         <a
-                            href="{% url 'store:product_list' %}"
+                            href="products.html"
                             class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
                             data-category="all"
                         >
@@ -277,7 +277,7 @@
                             >
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=masalas"
+                                        href="products.html?subcategory=masalas"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -288,7 +288,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=especiarias"
+                                        href="products.html?subcategory=especiarias"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -299,7 +299,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=misturas"
+                                        href="products.html?subcategory=misturas"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -334,7 +334,7 @@
                             >
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=chai"
+                                        href="products.html?subcategory=chai"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -345,7 +345,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=cha-verde"
+                                        href="products.html?subcategory=cha-verde"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -356,7 +356,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=infusoes"
+                                        href="products.html?subcategory=infusoes"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -391,7 +391,7 @@
                             >
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=lentilhas"
+                                        href="products.html?subcategory=lentilhas"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -402,7 +402,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=arroz"
+                                        href="products.html?subcategory=arroz"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -413,7 +413,7 @@
                                 </li>
                                 <li>
                                     <a
-                                        href="{% url 'store:product_list' %}?subcategory=graos-especiais"
+                                        href="products.html?subcategory=graos-especiais"
                                         class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
                                     >
                                         <i
@@ -429,7 +429,7 @@
                     <!-- Acompanhamentos -->
                     <li>
                         <a
-                            href="{% url 'store:product_list_by_category' 'acompanhamentos' %}"
+                            href="products.html?category=acompanhamentos"
                             class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
                             data-category="Acompanhamentos"
                         >
@@ -464,7 +464,7 @@
                     <ul class="space-y-2">
                         <li>
                             <a
-                                href="{% url 'store:wishlist' %}"
+                                href="wishlist.html"
                                 class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
                             >
                                 <i
@@ -475,7 +475,7 @@
                         </li>
                         <li>
                             <a
-                                href="{% url 'store:cart' %}"
+                                href="cart.html"
                                 class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
                             >
                                 <i
@@ -512,39 +512,26 @@
                     >
                         <i class="fas fa-bars"></i>
                     </button>
-                    <a
-                        href="{% url 'store:home' %}"
-                        class="text-3xl font-teko text-primary"
+                    <a href="index.html" class="text-3xl font-teko text-primary"
                         >India Oasis</a
                     >
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a
-                        href="{% url 'store:home' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="index.html" class="text-lg hover:text-primary"
                         >Início</a
                     >
-                    <a
-                        href="{% url 'store:product_list' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="products.html" class="text-lg hover:text-primary"
                         >Produtos</a
                     >
-                    <a
-                        href="{% url 'store:contact' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="contact.html" class="text-lg hover:text-primary"
                         >Contato</a
                     >
-                    <a
-                        href="{% url 'store:about' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="about.html" class="text-lg hover:text-primary"
                         >Sobre Nós</a
                     >
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a
-                        href="{% url 'store:wishlist' %}"
-                        class="relative hover:text-primary"
-                    >
+                    <a href="wishlist.html" class="relative hover:text-primary">
                         <i class="fas fa-heart text-xl"></i>
                         <span
                             id="wishlist-count"
@@ -552,10 +539,7 @@
                             >0</span
                         >
                     </a>
-                    <a
-                        href="{% url 'store:cart' %}"
-                        class="relative text-primary"
-                    >
+                    <a href="cart.html" class="relative text-primary">
                         <i class="fas fa-shopping-cart text-xl"></i>
                         <span
                             id="cart-count"
@@ -574,7 +558,7 @@
                 <ol class="flex space-x-2 text-sm">
                     <li>
                         <a
-                            href="{% url 'store:home' %}"
+                            href="index.html"
                             class="text-primary hover:underline"
                             >Início</a
                         >
@@ -939,7 +923,7 @@
                             </div>
 
                             <a
-                                href="{% url 'store:checkout' %}"
+                                href="checkout.html"
                                 class="btn btn-primary w-full text-lg mb-3 relative overflow-hidden block text-center"
                             >
                                 <span class="relative z-10">
@@ -1024,7 +1008,7 @@
                                 Especiarias autênticas direto da Índia
                             </p>
                             <a
-                                href="{% url 'store:product_list_by_category' 'temperos' %}"
+                                href="products.html?category=temperos"
                                 class="text-primary hover:underline text-sm font-semibold"
                             >
                                 Ver Temperos →
@@ -1044,7 +1028,7 @@
                                 Masala chai e infusões ayurvédicas
                             </p>
                             <a
-                                href="{% url 'store:product_list_by_category' 'chas' %}"
+                                href="products.html?category=chas"
                                 class="text-primary hover:underline text-sm font-semibold"
                             >
                                 Ver Chás →
@@ -1064,7 +1048,7 @@
                                 Combinações perfeitas para iniciantes
                             </p>
                             <a
-                                href="{% url 'store:product_list_by_category' 'kits' %}"
+                                href="products.html?category=kits"
                                 class="text-primary hover:underline text-sm font-semibold"
                             >
                                 Ver Kits →
@@ -1074,7 +1058,7 @@
 
                     <div class="space-y-4">
                         <a
-                            href="{% url 'store:product_list' %}"
+                            href="products.html"
                             class="btn btn-primary text-lg inline-block animate-pulse-subtle"
                         >
                             <i class="fas fa-shopping-bag mr-2"></i>
@@ -1474,7 +1458,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="{% url 'store:home' %}"
+                                    href="index.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-home w-4 mr-2"></i>
@@ -1483,7 +1467,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list' %}"
+                                    href="products.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-box w-4 mr-2"></i>
@@ -1492,7 +1476,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:about' %}"
+                                    href="about.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-heart w-4 mr-2"></i>
@@ -1501,7 +1485,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:contact' %}"
+                                    href="contact.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-envelope w-4 mr-2"></i>
@@ -1510,7 +1494,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:cart' %}"
+                                    href="cart.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i
@@ -1521,7 +1505,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:wishlist' %}"
+                                    href="wishlist.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-star w-4 mr-2"></i>
@@ -1542,7 +1526,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'temperos' %}"
+                                    href="products.html?category=temperos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-pepper-hot w-4 mr-2"></i>
@@ -1551,7 +1535,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'chas' %}"
+                                    href="products.html?category=chas"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-mug-hot w-4 mr-2"></i>
@@ -1560,7 +1544,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'graos' %}"
+                                    href="products.html?category=graos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-seedling w-4 mr-2"></i>
@@ -1569,7 +1553,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'oleos' %}"
+                                    href="products.html?category=oleos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-tint w-4 mr-2"></i>
@@ -1578,7 +1562,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'combos' %}"
+                                    href="products.html?category=combos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-gift w-4 mr-2"></i>

@@ -118,26 +118,18 @@
                     >
                         <i class="fas fa-bars"></i>
                     </button>
-                    <a
-                        href="{% url 'store:home' %}"
-                        class="text-3xl font-teko text-primary"
+                    <a href="index.html" class="text-3xl font-teko text-primary"
                         >India Oasis</a
                     >
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a
-                        href="{% url 'store:home' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="index.html" class="text-lg hover:text-primary"
                         >Início</a
                     >
-                    <a
-                        href="{% url 'store:product_list' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="products.html" class="text-lg hover:text-primary"
                         >Produtos</a
                     >
-                    <a
-                        href="{% url 'store:contact' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="contact.html" class="text-lg hover:text-primary"
                         >Contato</a
                     >
                     <a href="about.html" class="text-lg text-primary font-bold"
@@ -145,10 +137,7 @@
                     >
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a
-                        href="{% url 'store:wishlist' %}"
-                        class="relative hover:text-primary"
-                    >
+                    <a href="wishlist.html" class="relative hover:text-primary">
                         <i class="fas fa-heart text-xl"></i>
                         <span
                             id="wishlist-count"
@@ -156,10 +145,7 @@
                             >0</span
                         >
                     </a>
-                    <a
-                        href="{% url 'store:cart' %}"
-                        class="relative hover:text-primary"
-                    >
+                    <a href="cart.html" class="relative hover:text-primary">
                         <i class="fas fa-shopping-cart text-xl"></i>
                         <span
                             id="cart-count"
@@ -178,7 +164,7 @@
                 <ol class="flex space-x-2 text-sm">
                     <li>
                         <a
-                            href="{% url 'store:home' %}"
+                            href="index.html"
                             class="text-primary hover:underline"
                             >Início</a
                         >
@@ -531,17 +517,11 @@
                     culinária com nossos temperos premium.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a
-                        href="{% url 'store:product_list' %}"
-                        class="btn btn-primary text-lg"
-                    >
+                    <a href="products.html" class="btn btn-primary text-lg">
                         <i class="fas fa-shopping-bag mr-2"></i>
                         Explorar Produtos
                     </a>
-                    <a
-                        href="{% url 'store:contact' %}"
-                        class="btn btn-secondary text-lg"
-                    >
+                    <a href="contact.html" class="btn btn-secondary text-lg">
                         <i class="fas fa-envelope mr-2"></i>
                         Entre em Contato
                     </a>
@@ -633,7 +613,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="{% url 'store:home' %}"
+                                    href="index.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-home w-4 mr-2"></i>
@@ -642,7 +622,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list' %}"
+                                    href="products.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-box w-4 mr-2"></i>
@@ -651,7 +631,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:about' %}"
+                                    href="about.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-heart w-4 mr-2"></i>
@@ -660,7 +640,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:contact' %}"
+                                    href="contact.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-envelope w-4 mr-2"></i>
@@ -669,7 +649,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:cart' %}"
+                                    href="cart.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i
@@ -680,7 +660,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:wishlist' %}"
+                                    href="wishlist.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-star w-4 mr-2"></i>
@@ -701,7 +681,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'temperos' %}"
+                                    href="products.html?category=temperos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-pepper-hot w-4 mr-2"></i>
@@ -710,7 +690,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'chas' %}"
+                                    href="products.html?category=chas"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-mug-hot w-4 mr-2"></i>
@@ -719,7 +699,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'graos' %}"
+                                    href="products.html?category=graos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-seedling w-4 mr-2"></i>
@@ -728,7 +708,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'oleos' %}"
+                                    href="products.html?category=oleos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-tint w-4 mr-2"></i>
@@ -737,7 +717,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list_by_category' 'combos' %}"
+                                    href="products.html?category=combos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-gift w-4 mr-2"></i>

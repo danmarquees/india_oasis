@@ -519,7 +519,7 @@
                     <ul class="space-y-2">
                         <li>
                             <a
-                                href="{% url 'store:wishlist' %}"
+                                href="wishlist.html"
                                 class="flex items-center p-2 rounded-lg bg-red-50 text-red-700 border border-red-200"
                             >
                                 <i
@@ -530,7 +530,7 @@
                         </li>
                         <li>
                             <a
-                                href="{% url 'store:cart' %}"
+                                href="cart.html"
                                 class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
                             >
                                 <i
@@ -567,39 +567,26 @@
                     >
                         <i class="fas fa-bars"></i>
                     </button>
-                    <a
-                        href="{% url 'store:home' %}"
-                        class="text-3xl font-teko text-primary"
+                    <a href="index.html" class="text-3xl font-teko text-primary"
                         >India Oasis</a
                     >
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a
-                        href="{% url 'store:home' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="index.html" class="text-lg hover:text-primary"
                         >Início</a
                     >
-                    <a
-                        href="{% url 'store:product_list' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="products.html" class="text-lg hover:text-primary"
                         >Produtos</a
                     >
-                    <a
-                        href="{% url 'store:contact' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="contact.html" class="text-lg hover:text-primary"
                         >Contato</a
                     >
-                    <a
-                        href="{% url 'store:about' %}"
-                        class="text-lg hover:text-primary"
+                    <a href="about.html" class="text-lg hover:text-primary"
                         >Sobre Nós</a
                     >
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a
-                        href="{% url 'store:wishlist' %}"
-                        class="relative text-primary"
-                    >
+                    <a href="wishlist.html" class="relative text-primary">
                         <i class="fas fa-heart text-xl"></i>
                         <span
                             id="wishlist-count"
@@ -607,10 +594,7 @@
                             >0</span
                         >
                     </a>
-                    <a
-                        href="{% url 'store:cart' %}"
-                        class="relative hover:text-primary"
-                    >
+                    <a href="cart.html" class="relative hover:text-primary">
                         <i class="fas fa-shopping-cart text-xl"></i>
                         <span
                             id="cart-count"
@@ -629,7 +613,7 @@
                 <ol class="flex space-x-2 text-sm">
                     <li>
                         <a
-                            href="{% url 'store:home' %}"
+                            href="index.html"
                             class="text-primary hover:underline"
                             >Início</a
                         >
@@ -831,7 +815,7 @@
                                 ></span>
                             </div>
                             <a
-                                href="{% url 'store:product_list_by_category' 'temperos' %}"
+                                href="products.html?category=temperos"
                                 class="text-primary hover:underline text-sm font-semibold"
                             >
                                 Explorar Temperos →
@@ -863,7 +847,7 @@
                                 ></span>
                             </div>
                             <a
-                                href="{% url 'store:product_list_by_category' 'chas' %}"
+                                href="products.html?category=chas"
                                 class="text-primary hover:underline text-sm font-semibold"
                             >
                                 Descobrir Chás →
@@ -895,7 +879,7 @@
                                 ></span>
                             </div>
                             <a
-                                href="{% url 'store:product_list_by_category' 'combos' %}"
+                                href="products.html?category=kits"
                                 class="text-primary hover:underline text-sm font-semibold"
                             >
                                 Ver Kits →
@@ -1164,7 +1148,7 @@
                         <ul class="space-y-1">
                             <li>
                                 <a
-                                    href="{% url 'store:home' %}"
+                                    href="index.html"
                                     class="hover:text-accent text-sm"
                                     >Início</a
                                 >
@@ -1178,14 +1162,14 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:contact' %}"
+                                    href="contact.html"
                                     class="hover:text-accent text-sm"
                                     >Contato</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:about' %}"
+                                    href="about.html"
                                     class="hover:text-accent text-sm"
                                     >Sobre Nós</a
                                 >
