@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste do Menu Lateral - India Oasis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <style>
+        body {
+            font-family: 'Poppins', 'Lato', sans-serif;
+            background: linear-gradient(135deg, var(--ginger-cream), #fff8dc);
+            min-height: 100vh;
+        }
+
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .test-button {
+            background: linear-gradient(135deg, var(--saffron-deep), var(--paprika-red));
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+            background: linear-gradient(135deg, var(--paprika-red), var(--saffron-deep));
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-ok { background: #10b981; }
+        .status-error { background: #ef4444; }
+        .status-warning { background: #f59e0b; }
+    </style>
+</head>
+<body>
+    <!-- Menu Lateral (copiado do index.html) -->
+    <div id="menu-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"></div>
+
+    <aside id="side-menu" class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg z-50 overflow-y-auto">
+        <div class="p-4">
+            <button id="close-menu-btn" class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-primary">
+                &times;
+            </button>
+            <h2 class="text-3xl font-teko text-primary mb-6">Menu de Teste</h2>
+
+            <!-- Barra de Busca -->
+            <div class="relative mb-6">
+                <input type="text" id="search-input" placeholder="Buscar produtos..."
+                       class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <i class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+
+            <!-- Categorias com Subcategorias -->
+            <h3 class="font-teko text-2xl text-secondary mb-4">
+                <i class="fas fa-tags mr-2 text-primary"></i>
+                Categorias
+            </h3>
+
+            <ul class="space-y-2">
+                <!-- Temperos -->
+                <li class="category-section">
+                    <div class="category-parent">
+                        <button class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md" data-category="Temperos">
+                            <div class="flex items-center">
+                                <i class="fas fa-pepper-hot mr-3 text-orange-600 w-5"></i>
+                                <span>Temperos e Masalas</span>
+                            </div>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200"></i>
+                        </button>
+                        <ul class="subcategory-list hidden ml-8 mt-2 space-y-1">
+                            <li>
+                                <a href="#" class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm">
+                                    <i class="fas fa-circle mr-2 text-orange-400 text-xs"></i>
+                                    <span>Masalas Tradicionais</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm">
+                                    <i class="fas fa-circle mr-2 text-orange-400 text-xs"></i>
+                                    <span>Especiarias Puras</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Chás -->
+                <li class="category-section">
+                    <div class="category-parent">
+                        <button class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md" data-category="Chás">
+                            <div class="flex items-center">
+                                <i class="fas fa-mug-hot mr-3 text-green-600 w-5"></i>
+                                <span>Chás e Infusões</span>
+                            </div>
+                            <i class="fas fa-chevron-down transform transition-transform duration-200"></i>
+                        </button>
+                        <ul class="subcategory-list hidden ml-8 mt-2 space-y-1">
+                            <li>
+                                <a href="#" class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm">
+                                    <i class="fas fa-circle mr-2 text-green-400 text-xs"></i>
+                                    <span>Masala Chai</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm">
+                                    <i class="fas fa-circle mr-2 text-green-400 text-xs"></i>
+                                    <span>Chás Verdes</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Header simples -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <button id="open-menu-btn" class="text-xl hover:text-primary">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="text-2xl font-bold text-primary">Teste do Menu</h1>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <div class="test-container">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">
+                🧪 Teste do Menu Lateral Retrátil
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-3 text-blue-800">
+                        <i class="fas fa-play-circle mr-2"></i>
+                        Como Testar
+                    </h3>
+                    <ol class="space-y-2 text-sm">
+                        <li>1. Clique no ícone ☰ no canto superior esquerdo</li>
+                        <li>2. O menu deve deslizar da esquerda</li>
+                        <li>3. Clique nas categorias para expandir subcategorias</li>
+                        <li>4. Use a barra de busca</li>
+                        <li>5. Feche clicando no X ou na área escura</li>
+                    </ol>
+                </div>
+
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold mb-3 text-green-800">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Status dos Componentes
+                    </h3>
+                    <div class="space-y-2 text-sm">
+                        <div id="status-menu"><span class="status-indicator status-warning"></span>Menu: Carregando...</div>
+                        <div id="status-overlay"><span class="status-indicator status-warning"></span>Overlay: Carregando...</div>
+                        <div id="status-buttons"><span class="status-indicator status-warning"></span>Botões: Carregando...</div>
+                        <div id="status-categories"><span class="status-indicator status-warning"></span>Categorias: Carregando...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mb-6">
+                <button class="test-button" onclick="testMenu()">
+                    <i class="fas fa-play mr-2"></i>
+                    Testar Abertura do Menu
+                </button>
+                <button class="test-button" onclick="testCategories()">
+                    <i class="fas fa-expand mr-2"></i>
+                    Testar Categorias
+                </button>
+                <button class="test-button" onclick="showLogs()">
+                    <i class="fas fa-terminal mr-2"></i>
+                    Ver Logs
+                </button>
+            </div>
+
+            <div id="log-container" class="bg-gray-100 p-4 rounded-lg hidden">
+                <h4 class="font-semibold mb-2">Console de Logs:</h4>
+                <div id="logs" class="text-sm font-mono bg-black text-green-400 p-3 rounded max-h-48 overflow-y-auto"></div>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                <h4 class="font-semibold text-yellow-800 mb-2">
+                    <i class="fas fa-lightbulb mr-2"></i>
+                    Funcionalidades Testadas
+                </h4>
+                <ul class="space-y-1 text-sm text-yellow-700">
+                    <li>✅ Abertura/fechamento do menu com animação</li>
+                    <li>✅ Overlay com transparência</li>
+                    <li>✅ Categorias expandíveis com ícones</li>
+                    <li>✅ Subcategorias com hover effects</li>
+                    <li>✅ Fechamento com ESC</li>
+                    <li>✅ Responsividade mobile</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Log system
+        const logs = [];
+        function log(message) {
+            logs.push(`[${new Date().toLocaleTimeString()}] ${message}`);
+            console.log(message);
+            updateLogDisplay();
+        }
+
+        function updateLogDisplay() {
+            const logElement = document.getElementById('logs');
+            if (logElement) {
+                logElement.innerHTML = logs.slice(-10).join('\n');
+                logElement.scrollTop = logElement.scrollHeight;
+            }
+        }
+
+        // Status indicators
+        function updateStatus(element, status) {
+            const statusElement = document.getElementById(element);
+            if (statusElement) {
+                const indicator = statusElement.querySelector('.status-indicator');
+                const text = statusElement.textContent.split(':')[0];
+
+                indicator.className = `status-indicator status-${status}`;
+                statusElement.innerHTML = `<span class="status-indicator status-${status}"></span>${text}: ${status === 'ok' ? 'OK' : status === 'error' ? 'Erro' : 'Aviso'}`;
+            }
+        }
+
+        // Test functions
+        function testMenu() {
+            log('Iniciando teste do menu...');
+            const openBtn = document.getElementById('open-menu-btn');
+            if (openBtn) {
+                openBtn.click();
+                log('Menu aberto programaticamente');
+                setTimeout(() => {
+                    const closeBtn = document.getElementById('close-menu-btn');
+                    if (closeBtn) {
+                        closeBtn.click();
+                        log('Menu fechado programaticamente');
+                    }
+                }, 2000);
+            }
+        }
+
+        function testCategories() {
+            log('Testando expansão de categorias...');
+            const toggles = document.querySelectorAll('.category-toggle');
+            toggles.forEach((toggle, index) => {
+                setTimeout(() => {
+                    toggle.click();
+                    log(`Categoria ${index + 1} expandida`);
+                }, index * 1000);
+            });
+        }
+
+        function showLogs() {
+            const container = document.getElementById('log-container');
+            container.classList.toggle('hidden');
+        }
+
+        // Initialize test
+        document.addEventListener('DOMContentLoaded', function() {
+            log('Página de teste carregada');
+
+            // Check components
+            const sideMenu = document.getElementById('side-menu');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const openBtn = document.getElementById('open-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+
+            updateStatus('status-menu', sideMenu ? 'ok' : 'error');
+            updateStatus('status-overlay', menuOverlay ? 'ok' : 'error');
+            updateStatus('status-buttons', (openBtn && closeBtn) ? 'ok' : 'error');
+
+            const categories = document.querySelectorAll('.category-toggle');
+            updateStatus('status-categories', categories.length > 0 ? 'ok' : 'error');
+
+            log(`Componentes encontrados: Menu(${!!sideMenu}), Overlay(${!!menuOverlay}), Botões(${!!(openBtn && closeBtn)}), Categorias(${categories.length})`);
+        });
+    </script>
+
+    <!-- Scripts necessários -->
+    <script src="assets/js/toast-system.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

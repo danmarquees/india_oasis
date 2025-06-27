@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Finalizar Compra - India Oasis</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Fontes do Google -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+
+        <!-- CSS personalizado -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+
+        <style>
+            .checkout-step {
+                position: relative;
+            }
+
+            .checkout-step::before {
+                content: "";
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100%;
+                height: 2px;
+                background: #e5e7eb;
+                z-index: 1;
+            }
+
+            .checkout-step.active::before {
+                background: var(--saffron-deep);
+            }
+
+            .checkout-step.completed::before {
+                background: var(--cardamom-green);
+            }
+
+            .step-circle {
+                position: relative;
+                z-index: 2;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #e5e7eb;
+                color: #6b7280;
+                font-weight: bold;
+                margin: 0 auto 8px;
+                transition: all 0.3s ease;
+            }
+
+            .checkout-step.active .step-circle {
+                background: var(--saffron-deep);
+                color: white;
+                transform: scale(1.1);
+            }
+
+            .checkout-step.completed .step-circle {
+                background: var(--cardamom-green);
+                color: white;
+            }
+
+            .payment-method {
+                transition: all 0.3s ease;
+                cursor: pointer;
+            }
+
+            .payment-method:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+            }
+
+            .payment-method.selected {
+                border: 2px solid var(--saffron-deep);
+                background: linear-gradient(135deg, var(--ginger-cream), #fff);
+            }
+
+            .form-group {
+                position: relative;
+                margin-bottom: 1.5rem;
+            }
+
+            .form-input {
+                width: 100%;
+                padding: 12px 16px;
+                border: 2px solid #e5e7eb;
+                border-radius: 8px;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                background: white;
+            }
+
+            .form-input:focus {
+                outline: none;
+                border-color: var(--saffron-deep);
+                box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+            }
+
+            .form-label {
+                position: absolute;
+                top: 12px;
+                left: 16px;
+                color: #6b7280;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                pointer-events: none;
+                background: white;
+                padding: 0 4px;
+            }
+
+            .form-input:focus + .form-label,
+            .form-input:not(:placeholder-shown) + .form-label {
+                top: -8px;
+                left: 12px;
+                font-size: 12px;
+                color: var(--saffron-deep);
+                font-weight: 600;
+            }
+
+            .security-badge {
+                background: linear-gradient(
+                    135deg,
+                    var(--cardamom-green),
+                    #5d7c56
+                );
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .order-summary-sticky {
+                position: sticky;
+                top: 20px;
+                max-height: calc(100vh - 40px);
+                overflow-y: auto;
+            }
+
+            .processing-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.8);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+
+            .processing-spinner {
+                width: 60px;
+                height: 60px;
+                border: 4px solid rgba(255, 107, 53, 0.3);
+                border-top: 4px solid var(--saffron-deep);
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            .success-animation {
+                animation: successPulse 2s ease-in-out;
+            }
+
+            @keyframes successPulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+            }
+        </style>
+    </head>
+    <body class="min-h-screen">
+        <!-- Processing Overlay -->
+        <div id="processing-overlay" class="processing-overlay">
+            <div class="text-center text-white">
+                <div class="processing-spinner mx-auto mb-4"></div>
+                <h3 class="text-xl font-rajdhani mb-2">
+                    Processando seu pedido...
+                </h3>
+                <p class="opacity-80">
+                    Aguarde enquanto finalizamos sua compra
+                </p>
+            </div>
+        </div>
+
+        <!-- Header Simplificado -->
+        <header class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <a
+                            href="index.html"
+                            class="text-2xl font-teko text-primary hover:text-orange-600"
+                        >
+                            <i class="fas fa-arrow-left mr-2"></i>
+                            India Oasis
+                        </a>
+                    </div>
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        Compra 100% Segura
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Progress Steps -->
+        <section class="bg-gray-50 py-8">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <div class="checkout-step completed text-center">
+                        <div class="step-circle">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-600">
+                            Carrinho
+                        </p>
+                    </div>
+                    <div class="checkout-step completed text-center">
+                        <div class="step-circle">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-600">Dados</p>
+                    </div>
+                    <div class="checkout-step active text-center">
+                        <div class="step-circle">3</div>
+                        <p class="text-sm font-medium text-primary">
+                            Pagamento
+                        </p>
+                    </div>
+                    <div class="checkout-step text-center">
+                        <div class="step-circle">4</div>
+                        <p class="text-sm font-medium text-gray-400">
+                            Confirmação
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Checkout Form -->
+                <div class="lg:col-span-2">
+                    <!-- Dados de Entrega -->
+                    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2
+                                class="text-2xl font-rajdhani font-bold text-cinnamon-brown"
+                            >
+                                <i
+                                    class="fas fa-shipping-fast mr-3 text-primary"
+                                ></i>
+                                Dados de Entrega
+                            </h2>
+                            <button
+                                class="text-primary hover:text-orange-600 font-medium"
+                            >
+                                <i class="fas fa-edit mr-1"></i>Editar
+                            </button>
+                        </div>
+
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p class="font-semibold text-gray-800">
+                                        João Silva Santos
+                                    </p>
+                                    <p class="text-gray-600">
+                                        joao.silva@email.com
+                                    </p>
+                                    <p class="text-gray-600">(11) 99999-9999</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-800">
+                                        Rua das Especiarias, 123
+                                    </p>
+                                    <p class="text-gray-600">
+                                        Apt 45 - Vila Madalena
+                                    </p>
+                                    <p class="text-gray-600">
+                                        São Paulo - SP, 05435-000
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Método de Pagamento -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h2
+                            class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
+                        >
+                            <i class="fas fa-credit-card mr-3 text-primary"></i>
+                            Método de Pagamento
+                        </h2>
+
+                        <!-- Payment Methods Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <!-- PIX -->
+                            <div
+                                class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                                data-method="pix"
+                            >
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <i
+                                            class="fas fa-qrcode text-white text-xl"
+                                        ></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">
+                                            PIX
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            Aprovação instantânea
+                                        </p>
+                                        <div class="ingredient-badge mt-1">
+                                            5% de desconto
+                                        </div>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <div
+                                            class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cartão de Crédito -->
+                            <div
+                                class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                                data-method="credit"
+                            >
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <i
+                                            class="fas fa-credit-card text-white text-xl"
+                                        ></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">
+                                            Cartão de Crédito
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            Até 12x sem juros
+                                        </p>
+                                        <div class="flex space-x-1 mt-1">
+                                            <i
+                                                class="fab fa-cc-visa text-blue-600"
+                                            ></i>
+                                            <i
+                                                class="fab fa-cc-mastercard text-red-500"
+                                            ></i>
+                                            <i
+                                                class="fab fa-cc-amex text-blue-500"
+                                            ></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <div
+                                            class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cartão de Débito -->
+                            <div
+                                class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                                data-method="debit"
+                            >
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <i
+                                            class="fas fa-credit-card text-white text-xl"
+                                        ></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">
+                                            Cartão de Débito
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            Débito em conta
+                                        </p>
+                                        <div class="flex space-x-1 mt-1">
+                                            <i
+                                                class="fab fa-cc-visa text-blue-600"
+                                            ></i>
+                                            <i
+                                                class="fab fa-cc-mastercard text-red-500"
+                                            ></i>
+                                        </div>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <div
+                                            class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Boleto -->
+                            <div
+                                class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                                data-method="boleto"
+                            >
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center"
+                                    >
+                                        <i
+                                            class="fas fa-barcode text-white text-xl"
+                                        ></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">
+                                            Boleto Bancário
+                                        </h3>
+                                        <p class="text-sm text-gray-600">
+                                            Vencimento em 3 dias
+                                        </p>
+                                        <div class="ingredient-badge mt-1">
+                                            3% de desconto
+                                        </div>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <div
+                                            class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Forms -->
+                        <div id="payment-forms">
+                            <!-- PIX Form -->
+                            <div id="pix-form" class="payment-form hidden">
+                                <div
+                                    class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-4"
+                                    >
+                                        <i
+                                            class="fas fa-qrcode mr-2 text-green-600"
+                                        ></i>
+                                        Pagamento via PIX
+                                    </h3>
+                                    <div class="text-center">
+                                        <div
+                                            class="w-48 h-48 bg-white border-2 border-gray-200 rounded-lg mx-auto mb-4 flex items-center justify-center"
+                                        >
+                                            <div class="text-center">
+                                                <i
+                                                    class="fas fa-qrcode text-6xl text-gray-400 mb-2"
+                                                ></i>
+                                                <p
+                                                    class="text-sm text-gray-600"
+                                                >
+                                                    QR Code será gerado<br />após
+                                                    confirmação
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mb-2">
+                                            <i
+                                                class="fas fa-info-circle text-blue-500 mr-1"
+                                            ></i>
+                                            Escaneie o QR Code com o app do seu
+                                            banco
+                                        </p>
+                                        <p class="text-xs text-gray-500">
+                                            O pagamento é processado
+                                            instantaneamente
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Credit Card Form -->
+                            <div id="credit-form" class="payment-form hidden">
+                                <div class="space-y-4">
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            id="card-number"
+                                            class="form-input"
+                                            placeholder=" "
+                                            maxlength="19"
+                                        />
+                                        <label
+                                            for="card-number"
+                                            class="form-label"
+                                            >Número do Cartão</label
+                                        >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            id="card-name"
+                                            class="form-input"
+                                            placeholder=" "
+                                        />
+                                        <label
+                                            for="card-name"
+                                            class="form-label"
+                                            >Nome no Cartão</label
+                                        >
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="form-group">
+                                            <input
+                                                type="text"
+                                                id="card-expiry"
+                                                class="form-input"
+                                                placeholder=" "
+                                                maxlength="5"
+                                            />
+                                            <label
+                                                for="card-expiry"
+                                                class="form-label"
+                                                >MM/AA</label
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <input
+                                                type="text"
+                                                id="card-cvv"
+                                                class="form-input"
+                                                placeholder=" "
+                                                maxlength="4"
+                                            />
+                                            <label
+                                                for="card-cvv"
+                                                class="form-label"
+                                                >CVV</label
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-blue-50 p-4 rounded-lg">
+                                        <h4
+                                            class="font-semibold text-gray-800 mb-3"
+                                        >
+                                            Parcelas
+                                        </h4>
+                                        <select
+                                            class="w-full p-3 border border-gray-200 rounded-lg"
+                                        >
+                                            <option>
+                                                1x de R$ 156,90 à vista
+                                            </option>
+                                            <option>
+                                                2x de R$ 78,45 sem juros
+                                            </option>
+                                            <option>
+                                                3x de R$ 52,30 sem juros
+                                            </option>
+                                            <option>
+                                                4x de R$ 39,23 sem juros
+                                            </option>
+                                            <option>
+                                                5x de R$ 31,38 sem juros
+                                            </option>
+                                            <option>
+                                                6x de R$ 26,15 sem juros
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Debit Card Form -->
+                            <div id="debit-form" class="payment-form hidden">
+                                <div class="space-y-4">
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            id="debit-number"
+                                            class="form-input"
+                                            placeholder=" "
+                                            maxlength="19"
+                                        />
+                                        <label
+                                            for="debit-number"
+                                            class="form-label"
+                                            >Número do Cartão</label
+                                        >
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input
+                                            type="text"
+                                            id="debit-name"
+                                            class="form-input"
+                                            placeholder=" "
+                                        />
+                                        <label
+                                            for="debit-name"
+                                            class="form-label"
+                                            >Nome no Cartão</label
+                                        >
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="form-group">
+                                            <input
+                                                type="text"
+                                                id="debit-expiry"
+                                                class="form-input"
+                                                placeholder=" "
+                                                maxlength="5"
+                                            />
+                                            <label
+                                                for="debit-expiry"
+                                                class="form-label"
+                                                >MM/AA</label
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <input
+                                                type="text"
+                                                id="debit-cvv"
+                                                class="form-input"
+                                                placeholder=" "
+                                                maxlength="4"
+                                            />
+                                            <label
+                                                for="debit-cvv"
+                                                class="form-label"
+                                                >CVV</label
+                                            >
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-indigo-50 p-4 rounded-lg">
+                                        <p class="text-sm text-gray-700">
+                                            <i
+                                                class="fas fa-info-circle text-indigo-500 mr-2"
+                                            ></i>
+                                            O valor será debitado diretamente da
+                                            sua conta bancária
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Boleto Form -->
+                            <div id="boleto-form" class="payment-form hidden">
+                                <div
+                                    class="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-lg"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-4"
+                                    >
+                                        <i
+                                            class="fas fa-barcode mr-2 text-orange-600"
+                                        ></i>
+                                        Pagamento via Boleto
+                                    </h3>
+                                    <div class="space-y-3">
+                                        <div
+                                            class="flex items-center justify-between"
+                                        >
+                                            <span class="text-gray-700"
+                                                >Vencimento:</span
+                                            >
+                                            <span
+                                                class="font-semibold"
+                                                id="boleto-due-date"
+                                            ></span>
+                                        </div>
+                                        <div
+                                            class="flex items-center justify-between"
+                                        >
+                                            <span class="text-gray-700"
+                                                >Valor com desconto:</span
+                                            >
+                                            <span
+                                                class="font-semibold text-green-600"
+                                                >R$ 152,19</span
+                                            >
+                                        </div>
+                                        <hr class="border-gray-200" />
+                                        <p class="text-sm text-gray-600">
+                                            <i
+                                                class="fas fa-exclamation-triangle text-orange-500 mr-1"
+                                            ></i>
+                                            O boleto será enviado por email após
+                                            a confirmação do pedido
+                                        </p>
+                                        <p class="text-xs text-gray-500">
+                                            Prazo de processamento: até 2 dias
+                                            úteis após o pagamento
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="lg:col-span-1">
+                    <div class="order-summary-sticky">
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h2
+                                class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
+                            >
+                                <i
+                                    class="fas fa-shopping-bag mr-3 text-primary"
+                                ></i>
+                                Resumo do Pedido
+                            </h2>
+
+                            <!-- Order Items -->
+                            <div class="space-y-4 mb-6">
+                                <div
+                                    class="flex items-center space-x-3 pb-3 border-b border-gray-100"
+                                >
+                                    <img
+                                        src="https://placehold.co/60x60/D84315/FFFFFF?text=Garam"
+                                        alt="Garam Masala"
+                                        class="w-12 h-12 rounded-lg"
+                                    />
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-gray-800">
+                                            Garam Masala Premium
+                                        </h4>
+                                        <p class="text-sm text-gray-600">
+                                            Qtd: 2
+                                        </p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-semibold">R$ 50,00</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-center space-x-3 pb-3 border-b border-gray-100"
+                                >
+                                    <img
+                                        src="https://placehold.co/60x60/FFC107/333333?text=Curcuma"
+                                        alt="Cúrcuma"
+                                        class="w-12 h-12 rounded-lg"
+                                    />
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-gray-800">
+                                            Cúrcuma Pura
+                                        </h4>
+                                        <p class="text-sm text-gray-600">
+                                            Qtd: 1
+                                        </p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-semibold">R$ 18,00</p>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="flex items-center space-x-3 pb-3 border-b border-gray-100"
+                                >
+                                    <img
+                                        src="https://placehold.co/60x60/8D6E63/FFFFFF?text=Chai"
+                                        alt="Chai"
+                                        class="w-12 h-12 rounded-lg"
+                                    />
+                                    <div class="flex-1">
+                                        <h4 class="font-medium text-gray-800">
+                                            Chá Masala Chai
+                                        </h4>
+                                        <p class="text-sm text-gray-600">
+                                            Qtd: 3
+                                        </p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-semibold">R$ 96,00</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Coupon -->
+                            <div class="mb-6">
+                                <div class="flex space-x-2">
+                                    <input
+                                        type="text"
+                                        placeholder="Cupom de desconto"
+                                        class="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                                    />
+                                    <button
+                                        class="btn btn-secondary px-4 py-2 text-sm"
+                                    >
+                                        Aplicar
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Price Breakdown -->
+                            <div class="space-y-3 mb-6">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Subtotal:</span>
+                                    <span class="font-medium">R$ 164,00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-600">Frete:</span>
+                                    <span class="font-medium text-green-600"
+                                        >Grátis</span
+                                    >
+                                </div>
+                                <div
+                                    class="flex justify-between discount-row hidden"
+                                >
+                                    <span class="text-gray-600"
+                                        >Desconto PIX (5%):</span
+                                    >
+                                    <span class="font-medium text-green-600"
+                                        >-R$ 8,20</span
+                                    >
+                                </div>
+                                <div
+                                    class="flex justify-between discount-row-boleto hidden"
+                                >
+                                    <span class="text-gray-600"
+                                        >Desconto Boleto (3%):</span
+                                    >
+                                    <span class="font-medium text-green-600"
+                                        >-R$ 4,92</span
+                                    >
+                                </div>
+                                <hr class="border-gray-200" />
+                                <div
+                                    class="flex justify-between text-lg font-bold"
+                                >
+                                    <span>Total:</span>
+                                    <span
+                                        class="price-highlight"
+                                        id="total-price"
+                                        >R$ 164,00</span
+                                    >
+                                </div>
+                            </div>
+
+                            <!-- Security Info -->
+                            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <i
+                                        class="fas fa-shield-alt text-green-600"
+                                    ></i>
+                                    <span class="font-semibold text-gray-800"
+                                        >Compra Protegida</span
+                                    >
+                                </div>
+                                <p class="text-xs text-gray-600">
+                                    Seus dados estão protegidos com criptografia
+                                    SSL de 256 bits
+                                </p>
+                            </div>
+
+                            <!-- Finalize Button -->
+                            <button
+                                id="finalize-order"
+                                class="btn btn-primary w-full text-lg py-4 font-rajdhani"
+                                disabled
+                            >
+                                <i class="fas fa-lock mr-2"></i>
+                                Finalizar Compra
+                            </button>
+
+                            <p class="text-xs text-gray-500 text-center mt-3">
+                                Ao finalizar, você concorda com nossos
+                                <a href="#" class="text-primary hover:underline"
+                                    >Termos de Uso</a
+                                >
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Scripts -->
+        <script src="assets/js/toast-system.js"></script>
+        <script>
+            // Initialize checkout functionality
+            document.addEventListener("DOMContentLoaded", function () {
+                const paymentMethods =
+                    document.querySelectorAll(".payment-method");
+                const paymentForms = document.querySelectorAll(".payment-form");
+                const finalizeBtn = document.getElementById("finalize-order");
+                const totalPriceEl = document.getElementById("total-price");
+                const discountRow = document.querySelector(".discount-row");
+                const discountRowBoleto = document.querySelector(
+                    ".discount-row-boleto",
+                );
+                const processingOverlay =
+                    document.getElementById("processing-overlay");
+
+                let selectedPaymentMethod = null;
+                const basePrice = 164.0;
+
+                // Set boleto due date (3 days from now)
+                const dueDate = new Date();
+                dueDate.setDate(dueDate.getDate() + 3);
+                const dueDateEl = document.getElementById("boleto-due-date");
+                if (dueDateEl) {
+                    dueDateEl.textContent = dueDate.toLocaleDateString("pt-BR");
+                }
+
+                // Payment method selection
+                paymentMethods.forEach((method) => {
+                    method.addEventListener("click", function () {
+                        const methodType = this.dataset.method;
+
+                        // Remove selection from all methods
+                        paymentMethods.forEach((m) => {
+                            m.classList.remove("selected");
+                            m.querySelector(".payment-radio").style.background =
+                                "#fff";
+                            m.querySelector(".payment-radio").style.border =
+                                "2px solid #d1d5db";
+                        });
+
+                        // Hide all forms
+                        paymentForms.forEach((form) => {
+                            form.classList.add("hidden");
+                        });
+
+                        // Select current method
+                        this.classList.add("selected");
+                        this.querySelector(".payment-radio").style.background =
+                            "var(--saffron-deep)";
+                        this.querySelector(".payment-radio").style.border =
+                            "2px solid var(--saffron-deep)";
+
+                        // Show corresponding form
+                        const targetForm = document.getElementById(
+                            methodType + "-form",
+                        );
+                        if (targetForm) {
+                            targetForm.classList.remove("hidden");
+                        }
+
+                        selectedPaymentMethod = methodType;
+                        updatePricing();
+                        enableFinalizeButton();
+                    });
+                });
+
+                // Update pricing based on payment method
+                function updatePricing() {
+                    let finalPrice = basePrice;
+                    let discountAmount = 0;
+
+                    // Hide all discount rows
+                    discountRow.classList.add("hidden");
+                    discountRowBoleto.classList.add("hidden");
+
+                    if (selectedPaymentMethod === "pix") {
+                        discountAmount = basePrice * 0.05; // 5% discount
+                        finalPrice = basePrice - discountAmount;
+                        discountRow.classList.remove("hidden");
+                        discountRow.querySelector(
+                            "span:last-child",
+                        ).textContent = `-R$ ${discountAmount.toFixed(2)}`;
+                    } else if (selectedPaymentMethod === "boleto") {
+                        discountAmount = basePrice * 0.03; // 3% discount
+                        finalPrice = basePrice - discountAmount;
+                        discountRowBoleto.classList.remove("hidden");
+                        discountRowBoleto.querySelector(
+                            "span:last-child",
+                        ).textContent = `-R$ ${discountAmount.toFixed(2)}`;
+                    }
+
+                    totalPriceEl.textContent = `R$ ${finalPrice.toFixed(2)}`;
+                }
+
+                // Enable/disable finalize button
+                function enableFinalizeButton() {
+                    if (selectedPaymentMethod) {
+                        finalizeBtn.disabled = false;
+                        finalizeBtn.classList.remove(
+                            "opacity-50",
+                            "cursor-not-allowed",
+                        );
+                    } else {
+                        finalizeBtn.disabled = true;
+                        finalizeBtn.classList.add(
+                            "opacity-50",
+                            "cursor-not-allowed",
+                        );
+                    }
+                }
+
+                // Format card number input
+                function formatCardNumber(input) {
+                    let value = input.value
+                        .replace(/\s/g, "")
+                        .replace(/[^0-9]/gi, "");
+                    let formattedValue =
+                        value.match(/.{1,4}/g)?.join(" ") || value;
+                    if (formattedValue.length > 19)
+                        formattedValue = formattedValue.substr(0, 19);
+                    input.value = formattedValue;
+                }
+
+                // Format expiry date
+                function formatExpiry(input) {
+                    let value = input.value.replace(/\D/g, "");
+                    if (value.length >= 2) {
+                        value =
+                            value.substring(0, 2) + "/" + value.substring(2, 4);
+                    }
+                    input.value = value;
+                }
+
+                // Add input formatters
+                const cardNumbers = document.querySelectorAll(
+                    "#card-number, #debit-number",
+                );
+                cardNumbers.forEach((input) => {
+                    input.addEventListener("input", () =>
+                        formatCardNumber(input),
+                    );
+                });
+
+                const expiryInputs = document.querySelectorAll(
+                    "#card-expiry, #debit-expiry",
+                );
+                expiryInputs.forEach((input) => {
+                    input.addEventListener("input", () => formatExpiry(input));
+                });
+
+                // CVV input restriction
+                const cvvInputs = document.querySelectorAll(
+                    "#card-cvv, #debit-cvv",
+                );
+                cvvInputs.forEach((input) => {
+                    input.addEventListener("input", function () {
+                        this.value = this.value.replace(/[^0-9]/g, "");
+                    });
+                });
+
+                // Finalize order
+                finalizeBtn.addEventListener("click", function () {
+                    if (!selectedPaymentMethod) {
+                        if (window.toastSystem) {
+                            window.toastSystem.show(
+                                "Selecione um método de pagamento",
+                                "error",
+                            );
+                        }
+                        return;
+                    }
+
+                    // Validate form fields for card payments
+                    if (
+                        selectedPaymentMethod === "credit" ||
+                        selectedPaymentMethod === "debit"
+                    ) {
+                        const prefix =
+                            selectedPaymentMethod === "credit"
+                                ? "card"
+                                : "debit";
+                        const number = document.getElementById(
+                            `${prefix}-number`,
+                        ).value;
+                        const name = document.getElementById(
+                            `${prefix}-name`,
+                        ).value;
+                        const expiry = document.getElementById(
+                            `${prefix}-expiry`,
+                        ).value;
+                        const cvv = document.getElementById(
+                            `${prefix}-cvv`,
+                        ).value;
+
+                        if (!number || !name || !expiry || !cvv) {
+                            if (window.toastSystem) {
+                                window.toastSystem.show(
+                                    "Preencha todos os campos do cartão",
+                                    "error",
+                                );
+                            }
+                            return;
+                        }
+
+                        if (number.replace(/\s/g, "").length < 13) {
+                            if (window.toastSystem) {
+                                window.toastSystem.show(
+                                    "Número do cartão inválido",
+                                    "error",
+                                );
+                            }
+                            return;
+                        }
+
+                        if (expiry.length !== 5) {
+                            if (window.toastSystem) {
+                                window.toastSystem.show(
+                                    "Data de validade inválida",
+                                    "error",
+                                );
+                            }
+                            return;
+                        }
+
+                        if (cvv.length < 3) {
+                            if (window.toastSystem) {
+                                window.toastSystem.show(
+                                    "CVV inválido",
+                                    "error",
+                                );
+                            }
+                            return;
+                        }
+                    }
+
+                    // Show processing overlay
+                    processingOverlay.style.display = "flex";
+
+                    // Simulate processing time
+                    setTimeout(() => {
+                        processingOverlay.style.display = "none";
+
+                        // Show success message
+                        if (window.toastSystem) {
+                            window.toastSystem.show(
+                                "Pedido realizado com sucesso!",
+                                "success",
+                            );
+                        }
+
+                        // Redirect to success page after 2 seconds
+                        setTimeout(() => {
+                            // Create success page URL with order data
+                            const orderData = {
+                                orderId: "IN" + Date.now(),
+                                total: totalPriceEl.textContent,
+                                paymentMethod: selectedPaymentMethod,
+                                items: 3,
+                            };
+
+                            const params = new URLSearchParams(orderData);
+                            window.location.href = `order-success.html?${params.toString()}`;
+                        }, 2000);
+                    }, 3000);
+                });
+
+                // Initialize
+                enableFinalizeButton();
+            });
+        </script>
+    </body>
+</html>

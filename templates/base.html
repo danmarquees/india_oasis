@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            {% block title %}India Oasis - Temperos e Grãos Importados{%
+            endblock %}
+        </title>
+        {% load static %}
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        {% block extra_css %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="{% url 'store:home' %}">
+                            <h1>India Oasis</h1>
+                        </a>
+                    </div>
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="{% url 'store:home' %}">Home</a></li>
+                            <li>
+                                <a href="{% url 'store:product_list' %}"
+                                    >Produtos</a
+                                >
+                            </li>
+                            <li><a href="{% url 'store:about' %}">Sobre</a></li>
+                            <li>
+                                <a href="{% url 'store:contact' %}">Contato</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="user-actions">
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'store:profile' %}" class="btn-user">
+                            <i class="fas fa-user"></i>
+                            <span>Minha Conta</span>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'store:signup' %}" class="btn-user">
+                            <i class="fas fa-user"></i>
+                            <span>Entrar</span>
+                        </a>
+                        {% endif %}
+                        <a
+                            href="{% url 'store:wishlist' %}"
+                            class="btn-wishlist"
+                        >
+                            <i class="fas fa-heart"></i>
+                            <span>Favoritos</span>
+                        </a>
+                        <a href="{% url 'store:cart' %}" class="btn-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Carrinho</span>
+                            <span class="cart-count"
+                                >{{ request.cart.total_items|default:"0"
+                                }}</span
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %} {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section about">
+                        <h2>India Oasis</h2>
+                        <p>Sua loja de temperos e grãos importados da Índia.</p>
+                        <div class="contact">
+                            <span
+                                ><i class="fas fa-phone"></i> (11)
+                                99999-9999</span
+                            >
+                            <span
+                                ><i class="fas fa-envelope"></i>
+                                contato@indiaoasis.com.br</span
+                            >
+                        </div>
+                        <div class="social-media">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-section links">
+                        <h2>Links Rápidos</h2>
+                        <ul>
+                            <li><a href="{% url 'store:home' %}">Home</a></li>
+                            <li>
+                                <a href="{% url 'store:product_list' %}"
+                                    >Produtos</a
+                                >
+                            </li>
+                            <li><a href="{% url 'store:about' %}">Sobre</a></li>
+                            <li>
+                                <a href="{% url 'store:contact' %}">Contato</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-section newsletter">
+                        <h2>Newsletter</h2>
+                        <p>Inscreva-se para receber novidades e promoções.</p>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Seu e-mail"
+                            />
+                            <button type="submit">Inscrever</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>
+                        &copy; 2024 India Oasis. Todos os direitos reservados.
+                    </p>
+                    <div class="footer-links">
+                        <a href="{% url 'store:terms' %}">Termos de Uso</a>
+                        <a href="{% url 'store:privacy' %}"
+                            >Política de Privacidade</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{% static 'js/script.js' %}" defer></script>
+        <script src="{% static 'js/toast-system.js' %}" defer></script>
+        {% block extra_js %}{% endblock %}
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (typeof init === "function") {
+                    init();
+                }
+            });
+        </script>
+    </body>
+</html>

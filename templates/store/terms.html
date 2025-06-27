@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Termos de Uso - India Oasis - Temperos e Sabores da Índia</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Fontes do Google -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome (Ícones) -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+
+        <!-- Link para o arquivo CSS externo -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+
+        <style>
+            /* Estilos específicos para página de termos */
+            .terms-content {
+                max-width: 800px;
+                margin: 0 auto;
+                line-height: 1.8;
+            }
+
+            .terms-section {
+                margin-bottom: 2rem;
+                padding: 1.5rem;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                border-left: 4px solid #ff6b35;
+            }
+
+            .terms-section h2 {
+                color: #1f2937;
+                font-size: 1.5rem;
+                font-weight: 600;
+                margin-bottom: 1rem;
+                padding-bottom: 0.5rem;
+                border-bottom: 2px solid #f3f4f6;
+            }
+
+            .terms-section h3 {
+                color: #374151;
+                font-size: 1.25rem;
+                font-weight: 500;
+                margin: 1.5rem 0 0.75rem 0;
+            }
+
+            .terms-section p {
+                margin-bottom: 1rem;
+                color: #4b5563;
+            }
+
+            .terms-section ul {
+                margin-bottom: 1rem;
+                padding-left: 1.5rem;
+            }
+
+            .terms-section li {
+                margin-bottom: 0.5rem;
+                color: #4b5563;
+            }
+
+            .highlight-box {
+                background: linear-gradient(135deg, #fef3c7, #fed7aa);
+                border: 1px solid #f59e0b;
+                border-radius: 8px;
+                padding: 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .contact-box {
+                background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+                border: 1px solid #3b82f6;
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin: 2rem 0;
+                text-align: center;
+            }
+
+            .toc {
+                background: #f9fafb;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .toc ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .toc li {
+                margin: 0.5rem 0;
+            }
+
+            .toc a {
+                color: #ff6b35;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+            .toc a:hover {
+                color: #e55a2b;
+                text-decoration: underline;
+            }
+
+            .last-updated {
+                background: #ecfdf5;
+                border: 1px solid #10b981;
+                border-radius: 8px;
+                padding: 1rem;
+                margin-bottom: 2rem;
+                text-align: center;
+                color: #065f46;
+            }
+        </style>
+    </head>
+    <body class="text-gray-800 bg-gray-50">
+        <!-- ==== MENU LATERAL RETRÁTIL ==== -->
+        <div
+            id="menu-overlay"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"
+        ></div>
+        <aside
+            id="side-menu"
+            class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg z-50 overflow-y-auto transform -translate-x-full transition-transform duration-300"
+        >
+            <div class="p-4">
+                <button
+                    id="close-menu-btn"
+                    class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-primary"
+                >
+                    &times;
+                </button>
+                <h2 class="text-3xl font-teko text-primary mb-6">Menu</h2>
+
+                <!-- Barra de Busca -->
+                <div class="relative mb-6">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Buscar produtos..."
+                        class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <i
+                        class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                    ></i>
+                </div>
+
+                <!-- Links de Navegação -->
+                <div class="space-y-4">
+                    <a
+                        href="index.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-home w-5"></i>
+                        <span>Início</span>
+                    </a>
+                    <a
+                        href="products.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-shopping-bag w-5"></i>
+                        <span>Produtos</span>
+                    </a>
+                    <a
+                        href="about.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-info-circle w-5"></i>
+                        <span>Sobre Nós</span>
+                    </a>
+                    <a
+                        href="contact.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-envelope w-5"></i>
+                        <span>Contato</span>
+                    </a>
+                    <hr class="my-4" />
+                    <a
+                        href="terms.html"
+                        class="flex items-center space-x-3 text-primary font-semibold"
+                    >
+                        <i class="fas fa-file-contract w-5"></i>
+                        <span>Termos de Uso</span>
+                    </a>
+                    <a
+                        href="privacy.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-shield-alt w-5"></i>
+                        <span>Política de Privacidade</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ==== CABEÇALHO ==== -->
+        <header class="bg-white shadow-md sticky top-0 z-40">
+            <nav
+                class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
+            >
+                <div class="flex items-center space-x-4">
+                    <button
+                        id="open-menu-btn"
+                        class="text-xl hover:text-primary"
+                    >
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <a href="index.html" class="flex items-center">
+                        <h1 class="text-2xl md:text-3xl font-teko text-primary">
+                            India<span class="text-secondary">Oasis</span>
+                        </h1>
+                    </a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Botão de Login -->
+                    <a
+                        href="profile.html"
+                        class="hidden md:flex items-center space-x-2 text-sm hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-user text-lg"></i>
+                        <span>Minha Conta</span>
+                    </a>
+
+                    <!-- Botão do Carrinho -->
+                    <a
+                        href="{% url 'store:cart' %}"
+                        class="relative flex items-center space-x-2 text-sm hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-shopping-cart text-lg"></i>
+                        <span class="hidden md:block">Carrinho</span>
+                        <span
+                            id="cart-count"
+                            class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                        >
+                            0
+                        </span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
+        <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+            <!-- Breadcrumb -->
+            <nav class="mb-6">
+                <ol class="flex space-x-2 text-sm">
+                    <li>
+                        <a
+                            href="{% url 'store:home' %}"
+                            class="text-primary hover:underline"
+                            >Início</a
+                        >
+                    </li>
+                    <li class="text-gray-500">/</li>
+                    <li class="text-gray-700">Termos de Uso</li>
+                </ol>
+            </nav>
+
+            <!-- Título da Página -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-teko text-secondary mb-4">
+                    <i class="fas fa-file-contract text-primary mr-3"></i>
+                    Termos de Uso
+                </h1>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+                    Leia atentamente nossos termos e condições de uso antes de utilizar
+                    nossos serviços. Sua segurança e transparência são nossas prioridades.
+                </p>
+            </div>
+
+            <div class="terms-content">
+                <!-- Data de Última Atualização -->
+                <div class="last-updated">
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    <strong>Última atualização:</strong> 15 de dezembro de 2024
+                </div>
+
+                <!-- Índice -->
+                <div class="toc">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-800">
+                        <i class="fas fa-list mr-2"></i>
+                        Índice
+                    </h2>
+                    <ul>
+                        <li><a href="#aceitacao">1. Aceitação dos Termos</a></li>
+                        <li><a href="#definicoes">2. Definições</a></li>
+                        <li><a href="#cadastro">3. Cadastro e Conta do Usuário</a></li>
+                        <li><a href="#uso">4. Uso do Site</a></li>
+                        <li><a href="#produtos">5. Produtos e Preços</a></li>
+                        <li><a href="#pedidos">6. Pedidos e Pagamentos</a></li>
+                        <li><a href="#entrega">7. Entrega e Devolução</a></li>
+                        <li><a href="#propriedade">8. Propriedade Intelectual</a></li>
+                        <li><a href="#privacidade">9. Privacidade e Dados</a></li>
+                        <li><a href="#responsabilidades">10. Responsabilidades</a></li>
+                        <li><a href="#limitacao">11. Limitação de Responsabilidade</a></li>
+                        <li><a href="#modificacoes">12. Modificações</a></li>
+                        <li><a href="#rescisao">13. Rescisão</a></li>
+                        <li><a href="#lei">14. Lei Aplicável</a></li>
+                        <li><a href="#contato">15. Contato</a></li>
+                    </ul>
+                </div>
+
+                <!-- Seção 1: Aceitação dos Termos -->
+                <div class="terms-section" id="aceitacao">
+                    <h2>1. Aceitação dos Termos</h2>
+                    <p>
+                        Bem-vindo ao <strong>India Oasis</strong>! Estes Termos de Uso ("Termos")
+                        regem o uso do nosso site e serviços. Ao acessar ou usar nosso site,
+                        você concorda em cumprir e ficar vinculado a estes Termos.
+                    </p>
+                    <p>
+                        Se você não concorda com qualquer parte destes Termos, não deve usar
+                        nossos serviços. Recomendamos que leia estes Termos cuidadosamente antes
+                        de criar uma conta ou fazer uma compra.
+                    </p>
+                    <div class="highlight-box">
+                        <i class="fas fa-exclamation-triangle text-yellow-600 mr-2"></i>
+                        <strong>Importante:</strong> Ao continuar navegando em nosso site,
+                        você confirma que leu, entendeu e aceita todos os termos e condições
+                        aqui estabelecidos.
+                    </div>
+                </div>
+
+                <!-- Seção 2: Definições -->
+                <div class="terms-section" id="definicoes">
+                    <h2>2. Definições</h2>
+                    <p>Para os fins destes Termos, as seguintes definições se aplicam:</p>
+                    <ul>
+                        <li><strong>"Empresa"</strong> ou <strong>"Nós"</strong>: refere-se à India Oasis</li>
+                        <li><strong>"Usuário"</strong> ou <strong>"Você"</strong>: qualquer pessoa que acesse nosso site</li>
+                        <li><strong>"Site"</strong>: o website India Oasis e todas as suas páginas</li>
+                        <li><strong>"Serviços"</strong>: todos os serviços oferecidos através do nosso site</li>
+                        <li><strong>"Produtos"</strong>: temperos, especiarias e demais itens vendidos</li>
+                        <li><strong>"Conta"</strong>: conta de usuário criada no nosso site</li>
+                        <li><strong>"Conteúdo"</strong>: textos, imagens, vídeos e outros materiais do site</li>
+                    </ul>
+                </div>
+
+                <!-- Seção 3: Cadastro e Conta do Usuário -->
+                <div class="terms-section" id="cadastro">
+                    <h2>3. Cadastro e Conta do Usuário</h2>
+
+                    <h3>3.1 Criação de Conta</h3>
+                    <p>
+                        Para fazer compras e</p> acessar determinados recursos, você deve criar uma conta.
+                        Você se compromete a fornecer informações precisas, atuais e completas
+                        durante o processo de registro.
+                    </p>
+
+                    <h3>3.2 Responsabilidade pela Conta</h3>
+                    <p>
+                        Você é responsável por manter a confidencialidade de suas credenciais de
+                        login e por todas as atividades que ocorram em sua conta. Deve notificar-nos
+                        imediatamente sobre qualquer uso não autorizado.
+                    </p>
+
+                    <h3>3.3 Idade Mínima</h3>
+                    <p>
+                        Você deve ter pelo menos 18 anos para criar uma conta e fazer compras.
+                        Ao se registrar, você declara que possui idade legal para celebrar contratos.
+                    </p>
+
+                    <h3>3.4 Suspensão de Conta</h3>
+                    <p>
+                        Reservamo-nos o direito de suspender ou encerrar contas que violem estes
+                        Termos ou sejam usadas para atividades fraudulentas ou ilegais.
+                    </p>
+                </div>
+
+                <!-- Seção 4: Uso do Site -->
+                <div class="terms-section" id="uso">
+                    <h2>4. Uso do Site</h2>
+
+                    <h3>4.1 Uso Permitido</h3>
+                    <p>
+                        Você pode usar nosso site para navegar, pesquisar produtos, fazer compras
+                        e acessar informações relacionadas aos nossos serviços, sempre em conformidade
+                        com estes Termos.
+                    </p>
+
+                    <h3>4.2 Uso Não Permitido</h3>
+                    <p>Você concorda em NÃO usar o site para:</p>
+                    <ul>
+                        <li>Atividades ilegais ou fraudulentas</li>
+                        <li>Violar direitos de terceiros</li>
+                        <li>Transmitir vírus ou códigos maliciosos</li>
+                        <li>Fazer engenharia reversa ou copiar o site</li>
+                        <li>Usar bots ou ferramentas automatizadas não autorizadas</li>
+                        <li>Interferir no funcionamento normal do site</li>
+                        <li>Coletar dados de outros usuários sem autorização</li>
+                    </ul>
+
+                    <h3>4.3 Monitoramento</h3>
+                    <p>
+                        Reservamo-nos o direito de monitorar o uso do site e tomar medidas apropriadas
+                        contra usos inadequados, incluindo a suspensão de acesso.
+                    </p>
+                </div>
+
+                <!-- Seção 5: Produtos e Preços -->
+                <div class="terms-section" id="produtos">
+                    <h2>5. Produtos e Preços</h2>
+
+                    <h3>5.1 Informações dos Produtos</h3>
+                    <p>
+                        Fazemos o possível para fornecer descrições precisas e imagens representativas
+                        dos nossos produtos. No entanto, não garantimos que as descrições sejam
+                        completamente precisas ou livres de erros.
+                    </p>
+
+                    <h3>5.2 Disponibilidade</h3>
+                    <p>
+                        Todos os produtos estão sujeitos à disponibilidade. Reservamo-nos o direito
+                        de descontinuar produtos a qualquer momento e de limitar quantidades de compra.
+                    </p>
+
+                    <h3>5.3 Preços</h3>
+                    <p>
+                        Os preços são expressos em reais (R$) e podem ser alterados a qualquer momento
+                        sem aviso prévio. O preço aplicável será aquele vigente no momento da confirmação
+                        do pedido.
+                    </p>
+
+                    <h3>5.4 Erros de Preço</h3>
+                    <p>
+                        Reservamo-nos o direito de corrigir erros de preço e cancelar pedidos com
+                        preços incorretos, mesmo após a confirmação da compra.
+                    </p>
+                </div>
+
+                <!-- Seção 6: Pedidos e Pagamentos -->
+                <div class="terms-section" id="pedidos">
+                    <h2>6. Pedidos e Pagamentos</h2>
+
+                    <h3>6.1 Processo de Compra</h3>
+                    <p>
+                        Ao fazer um pedido, você faz uma oferta de compra. Reservamo-nos o direito
+                        de aceitar ou recusar qualquer pedido por qualquer motivo.
+                    </p>
+
+                    <h3>6.2 Confirmação</h3>
+                    <p>
+                        Você receberá um email de confirmação após a realização do pedido. Esta
+                        confirmação não garante a aceitação do pedido, que ocorre apenas após a
+                        aprovação do pagamento.
+                    </p>
+
+                    <h3>6.3 Métodos de Pagamento</h3>
+                    <p>Aceitamos os seguintes métodos de pagamento:</p>
+                    <ul>
+                        <li>Cartões de crédito (Visa, Mastercard, Elo)</li>
+                        <li>Cartões de débito</li>
+                        <li>PIX</li>
+                        <li>Boleto bancário</li>
+                    </ul>
+
+                    <h3>6.4 Segurança de Pagamento</h3>
+                    <p>
+                        Utilizamos sistemas seguros para processar pagamentos. Não armazenamos
+                        informações completas de cartões de crédito em nossos servidores.
+                    </p>
+                </div>
+
+                <!-- Seção 7: Entrega e Devolução -->
+                <div class="terms-section" id="entrega">
+                    <h2>7. Entrega e Devolução</h2>
+
+                    <h3>7.1 Entrega</h3>
+                    <p>
+                        Realizamos entregas para todo o território nacional. Os prazos de entrega
+                        são estimados e podem variar devido a fatores externos.
+                    </p>
+
+                    <h3>7.2 Frete</h3>
+                    <p>
+                        Os custos de frete são calculados com base no CEP de destino e peso dos
+                        produtos. Oferecemos frete grátis para pedidos acima de determinado valor.
+                    </p>
+
+                    <h3>7.3 Direito de Arrependimento</h3>
+                    <p>
+                        Conforme o Código de Defesa do Consumidor, você tem até 7 dias corridos
+                        para desistir da compra, contados a partir do recebimento do produto.
+                    </p>
+
+                    <h3>7.4 Trocas e Devoluções</h3>
+                    <p>
+                        Produtos podem ser trocados ou devolvidos dentro do prazo legal, desde que
+                        estejam em perfeitas condições, na embalagem original e com nota fiscal.
+                    </p>
+                </div>
+
+                <!-- Seção 8: Propriedade Intelectual -->
+                <div class="terms-section" id="propriedade">
+                    <h2>8. Propriedade Intelectual</h2>
+                    <p>
+                        Todo o conteúdo do site, incluindo textos, imagens, logotipos, design e
+                        código, é de propriedade da India Oasis ou de terceiros licenciados e
+                        está protegido por leis de direitos autorais.
+                    </p>
+                    <p>
+                        Você não pode copiar, modificar, distribuir ou usar nosso conteúdo sem
+                        autorização expressa por escrito.
+                    </p>
+                </div>
+
+                <!-- Seção 9: Privacidade e Dados -->
+                <div class="terms-section" id="privacidade">
+                    <h2>9. Privacidade e Dados</h2>
+                    <p>
+                        A coleta e uso de seus dados pessoais são regidos por nossa
+                        <a href="privacy.html" class="text-primary hover:underline">Política de Privacidade</a>,
+                        que faz parte integrante destes Termos.
+                    </p>
+                    <p>
+                        Ao usar nossos serviços, você consente com a coleta e uso de suas informações
+                        conforme descrito em nossa Política de Privacidade.
+                    </p>
+                </div>
+
+                <!-- Seção 10: Responsabilidades -->
+                <div class="terms-section" id="responsabilidades">
+                    <h2>10. Responsabilidades</h2>
+
+                    <h3>10.1 Nossas Responsabilidades</h3>
+                    <p>Comprometemo-nos a:</p>
+                    <ul>
+                        <li>Fornecer produtos de qualidade</li>
+                        <li>Processar pedidos de forma eficiente</li>
+                        <li>Manter a segurança dos dados</li>
+                        <li>Cumprir prazos de entrega estimados</li>
+                        <li>Atender ao cliente com qualidade</li>
+                    </ul>
+
+                    <h3>10.2 Suas Responsabilidades</h3>
+                    <p>Você é responsável por:</p>
+                    <ul>
+                        <li>Fornecer informações precisas</li>
+                        <li>Manter suas credenciais seguras</li>
+                        <li>Usar o site de forma adequada</li>
+                        <li>Efetuar pagamentos no prazo</li>
+                        <li>Receber produtos no endereço indicado</li>
+                    </ul>
+                </div>
+
+                <!-- Seção 11: Limitação de Responsabilidade -->
+                <div class="terms-section" id="limitacao">
+                    <h2>11. Limitação de Responsabilidade</h2>
+                    <p>
+                        Nossa responsabilidade é limitada ao valor pago pelo produto ou serviço.
+                        Não seremos responsáveis por danos indiretos, incidentais ou consequenciais.
+                    </p>
+                    <p>
+                        Não garantimos que o site estará sempre disponível ou livre de erros,
+                        embora façamos nossos melhores esforços para mantê-lo funcionando adequadamente.
+                    </p>
+                </div>
+
+                <!-- Seção 12: Modificações -->
+                <div class="terms-section" id="modificacoes">
+                    <h2>12. Modificações</h2>
+                    <p>
+                        Reservamo-nos o direito de modificar estes Termos a qualquer momento.
+                        As alterações entrarão em vigor imediatamente após a publicação no site.
+                    </p>
+                    <p>
+                        É sua responsabilidade revisar estes Termos periodicamente. O uso continuado
+                        do site após as modificações constitui aceitação dos novos termos.
+                    </p>
+                </div>
+
+                <!-- Seção 13: Rescisão -->
+                <div class="terms-section" id="rescisao">
+                    <h2>13. Rescisão</h2>
+                    <p>
+                        Você pode encerrar sua conta a qualquer momento entrando em contato conosco.
+                        Podemos suspender ou encerrar sua conta se você violar estes Termos.
+                    </p>
+                    <p>
+                        Após o encerramento, você não poderá mais acessar sua conta, mas suas
+                        obrigações financeiras permanecerão em vigor.
+                    </p>
+                </div>
+
+                <!-- Seção 14: Lei Aplicável -->
+                <div class="terms-section" id="lei">
+                    <h2>14. Lei Aplicável</h2>
+                    <p>
+                        Estes Termos são regidos pelas leis da República Federativa do Brasil.
+                        Qualquer disputa será resolvida nos tribunais brasileiros.
+                    </p>
+                    <p>
+                        Tentaremos resolver qualquer disputa através de negociação direta antes
+                        de recorrer a procedimentos legais formais.
+                    </p>
+                </div>
+
+                <!-- Seção 15: Contato -->
+                <div class="terms-section" id="contato">
+                    <h2>15. Contato</h2>
+                    <p>
+                        Se você tiver dúvidas sobre estes Termos de Uso, entre em contato conosco:
+                    </p>
+
+                    <div class="contact-box">
+                        <h3 class="text-lg font-semibold mb-4 text-blue-800">
+                            <i class="fas fa-envelope mr-2"></i>
+                            Informações de Contato
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p><strong>E-mail:</strong> contato@indiaoasis.com.br</p>
+                                <p><strong>Telefone:</strong> (11) 99999-9999</p>
+                            </div>
+                            <div>
+                                <p><strong>WhatsApp:</strong> (11) 99999-9999</p>
+                                <p><strong>Horário:</strong> Seg-Sex, 8h às 18h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Declaração Final -->
+                <div class="highlight-box text-center">
+                    <i class="fas fa-handshake text-primary text-2xl mb-3"></i>
+                    <p class="font-semibold text-lg mb-2">
+                        Obrigado por escolher a India Oasis!
+                    </p>
+                    <p class="text-sm">
+                        Estamos comprometidos em oferecer a você a melhor experiência em
+                        temperos e especiarias autênticas da Índia.
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <!-- ==== RODAPÉ ==== -->
+        <footer class="bg-gray-900 text-gray-300 py-12 mt-16">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Logo e Descrição -->
+                    <div class="col-span-1 md:col-span-2">
+                        <h2 class="text-3xl font-teko text-primary mb-4">
+                            India<span class="text-secondary">Oasis</span>
+                        </h2>
+                        <p class="text-gray-400 mb-4 max-w-md">
+                            Descubra os autênticos sabores da Índia com nossos
+                            temperos e especiarias selecionados. Uma jornada
+                            culinária que desperta os sentidos.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a
+                                href="#"
+                                class="text-gray-400 hover:text-primary transition-colors"
+                            >
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a
+                                href="#"
+                                class="text-gray-400 hover:text-primary transition-colors"
+                            >
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a
+                                href="#"
+                                class="text-gray-400 hover:text-primary transition-colors"
+                            >
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Links Úteis -->
+                    <div>
+                        <h3 class="font-rajdhani font-semibold text-white mb-4">
+                            Links Úteis
+                        </h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a
+                                    href="{% url 'store:home' %}"
+                                    class="hover:text-primary transition-colors"
+                                    >Início</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="{% url 'store:product_list' %}"
+                                    class="hover:text-primary transition-colors"
+                                    >Produtos</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="{% url 'store:about' %}"
+                                    class="hover:text-primary transition-colors"
+                                    >Sobre Nós</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="contact.html"
+                                    class="hover:text-primary transition-colors"
+                                    >Contato</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Políticas -->
+                    <div>
+                        <h3 class="font-rajdhani font-semibold text-white mb-4">
+                            Políticas
+                        </h3>
+                        <ul class="space-y-2">
+                            <li>
+                                <a
+                                    href="terms.html"
+                                    class="text-primary font-semibold"
+                                    >Termos de Uso</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="privacy.html"
+                                    class="hover:text-primary transition-colors"
+                                    >Política de Privacidade</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="{% url 'store:contact' %}"
+                                    class="hover:text-primary transition-colors"
+                                    >Suporte</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                    <p class="text-gray-400">
+                        &copy; 2024 India Oasis. Todos os direitos reservados.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- ==== JAVASCRIPT ==== -->
+        <script>
+            // Inicialização
+            document.addEventListener('DOMContentLoaded', function() {
+                setupEventListeners();
+                loadCartCount();
+                smoothScrollToSections();
+            });
+
+            // Event Listeners
+            function setupEventListeners() {
+                // Menu lateral
+                document.getElementById('open-menu-btn').addEventListener('click', () => {
+                    document.getElementById('side-menu').classList.remove('-translate-x-full');
+                    document.getElementById('menu-overlay').classList.remove('hidden');
+                });
+
+                document.getElementById('close-menu-btn').addEventListener('click', closeMenu);
+                document.getElementById('menu-overlay').addEventListener('click', closeMenu);
+            }
+
+            // Fechar menu
+            function closeMenu() {
+                document.getElementById('side-menu').classList.add('-translate-x-full');
+                document.getElementById('menu-overlay').classList.add('hidden');
+            }
+
+            // Scroll suave para seções
+            function smoothScrollToSections() {
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+                    });
+                });
+            }
+
+            // Carregar contador do carrinho
+            function loadCartCount() {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                document.getElementById('cart-count').textContent = totalItems;
+            }
+
+            // Highlight seção ativa no scroll
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('.terms-section');
+                const tocLinks = document.querySelectorAll('.toc a');
+
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('font-bold');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('font-bold');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

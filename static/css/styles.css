@@ -1,0 +1,3944 @@
+/* Estilos personalizados para complementar o Tailwind */
+/* Paleta de cores inspirada na Índia e especiarias */
+:root {
+    --saffron-deep: #ff6b35; /* Açafrão profundo */
+    --turmeric-gold: #f7931e; /* Açafrão dourado */
+    --cardamom-green: #4a6741; /* Verde cardamomo */
+    --cinnamon-brown: #8b4513; /* Canela */
+    --paprika-red: #cc2936; /* Páprica vermelha */
+    --ginger-cream: #fdf6e3; /* Creme gengibre */
+    --clove-dark: #2f1b14; /* Cravo escuro */
+    --cumin-tan: #d2b48c; /* Bege cominho */
+}
+
+/* Animações globais */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+body {
+    font-family: "Poppins", "Lato", sans-serif;
+    background: linear-gradient(135deg, var(--ginger-cream) 0%, #fff8dc 100%);
+    color: var(--clove-dark);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-teko {
+    font-family: "Rajdhani", "Teko", sans-serif;
+    letter-spacing: 1.2px;
+    color: var(--cinnamon-brown);
+}
+/* Cores temáticas */
+.bg-primary {
+    background: linear-gradient(
+        135deg,
+        var(--saffron-deep),
+        var(--turmeric-gold)
+    );
+}
+.text-primary {
+    color: var(--saffron-deep);
+}
+.bg-secondary {
+    background: linear-gradient(135deg, var(--cardamom-green), #5d7c56);
+}
+.text-secondary {
+    color: var(--cardamom-green);
+}
+.bg-accent {
+    background: linear-gradient(135deg, var(--turmeric-gold), #ffd700);
+}
+.text-accent {
+    color: var(--turmeric-gold);
+}
+.border-primary {
+    border-color: var(--saffron-deep);
+}
+
+/* Padrões decorativos indianos */
+.indian-pattern {
+    background-image:
+        radial-gradient(
+            circle at 25% 25%,
+            var(--turmeric-gold) 2px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 75% 75%,
+            var(--saffron-deep) 1px,
+            transparent 1px
+        );
+    background-size: 20px 20px;
+    background-position:
+        0 0,
+        10px 10px;
+}
+
+.mandala-bg {
+    background-image:
+        radial-gradient(
+            circle at center,
+            transparent 40%,
+            var(--ginger-cream) 41%,
+            var(--ginger-cream) 43%,
+            transparent 44%
+        ),
+        radial-gradient(
+            circle at center,
+            var(--turmeric-gold) 0.5px,
+            transparent 1px
+        );
+    background-size:
+        40px 40px,
+        8px 8px;
+}
+
+.spice-texture {
+    background:
+        linear-gradient(
+            45deg,
+            transparent 30%,
+            var(--cumin-tan) 30%,
+            var(--cumin-tan) 70%,
+            transparent 70%
+        ),
+        linear-gradient(
+            -45deg,
+            transparent 30%,
+            var(--ginger-cream) 30%,
+            var(--ginger-cream) 70%,
+            transparent 70%
+        );
+    background-size: 6px 6px;
+}
+
+/* Tailwind @apply não funciona em CSS puro, então definimos as classes manualmente */
+.btn {
+    font-weight: 700;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.5rem;
+    box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: all 0.3s ease;
+    transform: scale(1);
+    position: relative;
+    overflow: hidden;
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(
+        135deg,
+        var(--saffron-deep),
+        var(--paprika-red)
+    );
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+.btn-primary:hover {
+    background: linear-gradient(
+        135deg,
+        var(--paprika-red),
+        var(--saffron-deep)
+    );
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: linear-gradient(
+        135deg,
+        var(--cardamom-green),
+        var(--cinnamon-brown)
+    );
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 15px rgba(74, 103, 65, 0.3);
+}
+.btn-secondary:hover {
+    background: linear-gradient(
+        135deg,
+        var(--cinnamon-brown),
+        var(--cardamom-green)
+    );
+    box-shadow: 0 6px 20px rgba(74, 103, 65, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Animação de Fade-in para as páginas */
+.page {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.active-page {
+    display: block;
+}
+/* Estrela de avaliação com brilho */
+.rating .fa-star {
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+}
+.rating .fa-star.text-accent {
+    color: var(--turmeric-gold);
+    text-shadow: 0 0 8px rgba(247, 147, 30, 0.5);
+    animation: starGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes starGlow {
+    from {
+        text-shadow: 0 0 5px rgba(247, 147, 30, 0.5);
+    }
+    to {
+        text-shadow:
+            0 0 15px rgba(247, 147, 30, 0.8),
+            0 0 25px rgba(247, 147, 30, 0.3);
+    }
+}
+
+/* Cards com estilo indiano */
+.indian-card {
+    background: linear-gradient(135deg, var(--ginger-cream), #ffffff);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.indian-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        var(--turmeric-gold),
+        var(--saffron-deep),
+        var(--cardamom-green)
+    );
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+}
+
+.indian-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+}
+
+/* Elementos decorativos */
+.paisley-decoration {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20z' fill='%23f7931e' fill-opacity='0.1'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
+}
+
+/* Menu Lateral */
+#side-menu {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 51;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 288px;
+    height: 100vh;
+    background: white;
+    overflow-y: auto;
+}
+#side-menu.open {
+    transform: translateX(0);
+}
+#menu-overlay {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+}
+#menu-overlay:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Prevenir scroll do body quando menu está aberto */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Elementos com tema de especiarias */
+.spice-container {
+    background: var(--ginger-cream);
+    border-left: 4px solid var(--turmeric-gold);
+    position: relative;
+}
+
+.spice-container::after {
+    content: "✦";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: var(--saffron-deep);
+    font-size: 18px;
+    opacity: 0.6;
+}
+
+.ingredient-badge {
+    background: linear-gradient(
+        45deg,
+        var(--turmeric-gold),
+        var(--saffron-deep)
+    );
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(247, 147, 30, 0.3);
+}
+
+/* Texto com estilo indiano */
+.hindi-accent {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 600;
+    color: var(--cinnamon-brown);
+    text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.1);
+}
+
+.price-highlight {
+    background: linear-gradient(
+        45deg,
+        var(--turmeric-gold),
+        var(--saffron-deep)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+/* Classes para cores específicas das avaliações */
+.border-saffron-deep {
+    border-color: var(--saffron-deep);
+}
+
+.border-cardamom-green {
+    border-color: var(--cardamom-green);
+}
+
+.border-turmeric-gold {
+    border-color: var(--turmeric-gold);
+}
+
+.from-ginger-cream {
+    --tw-gradient-from: var(--ginger-cream);
+    --tw-gradient-to: rgb(253 246 227 / 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.bg-opacity-10 {
+    --tw-bg-opacity: 0.1;
+}
+
+/* Animações para cards de avaliação */
+.review-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.review-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(247, 147, 30, 0.1),
+        transparent
+    );
+    transition: left 0.6s;
+}
+
+.review-card:hover::before {
+    left: 100%;
+}
+
+.review-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255, 107, 53, 0.25);
+}
+
+/* Estilo para avatares das avaliações */
+.review-avatar {
+    border: 3px solid var(--turmeric-gold);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.3);
+    transition: all 0.3s ease;
+}
+
+.review-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(247, 147, 30, 0.5);
+}
+
+/* Melhorar botão do menu */
+#open-menu-btn {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#open-menu-btn:hover {
+    transform: scale(1.1);
+    color: #d84315;
+}
+
+/* Animação de pulse para demonstração */
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(216, 67, 21, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(216, 67, 21, 0);
+    }
+}
+
+/* Tooltip para demonstração */
+.demo-tooltip {
+    position: absolute;
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10000;
+}
+
+/* Estilos para categorias e subcategorias */
+.category-toggle,
+.category-link,
+.subcategory-link {
+    transition: all 0.2s ease-in-out;
+}
+
+.category-toggle:hover,
+.category-link:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(216, 67, 21, 0.15);
+}
+
+.subcategory-link:hover {
+    transform: translateX(2px);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 193, 7, 0.1) 0%,
+        transparent 100%
+    );
+}
+
+.category-toggle.active {
+    background-color: rgba(216, 67, 21, 0.05);
+    border-left: 3px solid #d84315;
+}
+
+.category-toggle.active .fa-chevron-down {
+    transform: rotate(180deg);
+    color: #d84315;
+}
+
+.subcategory-list {
+    border-left: 2px solid rgba(216, 67, 21, 0.2);
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+}
+
+/* Animação suave para barra de busca */
+#search-input:focus {
+    box-shadow: 0 0 0 3px rgba(216, 67, 21, 0.1);
+    border-color: #d84315;
+}
+
+/* Contador visual para itens do menu */
+.menu-counter {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Melhorias responsivas para o menu */
+@media (max-width: 768px) {
+    #side-menu {
+        width: 280px;
+    }
+}
+
+/* Indicador de categoria ativa */
+.category-active {
+    background: linear-gradient(
+        90deg,
+        rgba(216, 67, 21, 0.1) 0%,
+        transparent 100%
+    );
+    border-left: 3px solid #d84315;
+}
+
+/* ===== CARROSSEL APRIMORADO ===== */
+.carousel-item {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.carousel-item.prev {
+    transform: translateX(-100%);
+}
+
+/* Animações de entrada suaves */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Indicadores do carrossel */
+.carousel-indicator {
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.carousel-indicator.active {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Controles do carrossel com efeitos aprimorados */
+#prev-slide,
+#next-slide {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+#prev-slide:hover,
+#next-slide:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Barra de progresso do carrossel */
+#carousel-progress {
+    animation: progressBar 5s linear infinite;
+}
+
+@keyframes progressBar {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Pausa no hover */
+#carousel-container:hover #carousel-progress {
+    animation-play-state: paused;
+}
+
+/* Efeitos parallax para os slides */
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.carousel-item.active::before {
+    opacity: 1;
+}
+
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+    .carousel-item h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+
+    .carousel-item p {
+        font-size: 1rem !important;
+    }
+
+    .carousel-indicator {
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    #prev-slide,
+    #next-slide {
+        padding: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item h1 {
+        font-size: 2rem !important;
+    }
+
+    .carousel-item .btn {
+        padding: 12px 24px !important;
+        font-size: 0.9rem !important;
+    }
+
+    .carousel-item .flex-col {
+        gap: 0.75rem !important;
+    }
+}
+
+/* Animação de texto nos slides */
+.carousel-item.active h1 {
+    animation: slideInRight 0.8s ease-out 0.2s both;
+}
+
+.carousel-item.active p {
+    animation: slideInRight 0.8s ease-out 0.4s both;
+}
+
+.carousel-item.active .btn {
+    animation: slideInRight 0.8s ease-out 0.6s both;
+}
+
+.carousel-item.active span {
+    animation: slideInRight 0.8s ease-out 0.1s both;
+}
+
+/* Efeito de hover nos botões do carrossel */
+.carousel-item .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item .btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.carousel-item .btn:hover::before {
+    left: 100%;
+}
+
+/* ==== ESTILOS AVANÇADOS PARA CARRINHO ==== */
+
+/* Animações para itens do carrinho */
+.cart-item-enter {
+    animation: cartItemEnter 0.5s ease-out;
+}
+
+@keyframes cartItemEnter {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.cart-item-exit {
+    animation: cartItemExit 0.3s ease-out forwards;
+}
+
+@keyframes cartItemExit {
+    to {
+        opacity: 0;
+        transform: translateX(-100%) scale(0.8);
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Estilos para quantidades no carrinho */
+.quantity-input {
+    transition: all 0.2s ease;
+}
+
+.quantity-input:focus {
+    box-shadow: 0 0 0 3px rgba(216, 67, 21, 0.1);
+    border-color: #d84315;
+    transform: scale(1.05);
+}
+
+.quantity-btn {
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(216, 67, 21, 0.1);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+/* Estilos para resumo do pedido sticky */
+.sticky-summary {
+    position: sticky;
+    top: 2rem;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+    .sticky-summary {
+        position: static;
+    }
+}
+
+/* Animação para total do carrinho */
+.total-animate {
+    animation: totalPulse 0.5s ease-out;
+}
+
+@keyframes totalPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        color: #d84315;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Estilos para barra de progresso de frete grátis */
+.free-shipping-progress {
+    transition: all 0.5s ease;
+}
+
+.free-shipping-bar {
+    transition: width 0.8s ease-out;
+}
+
+/* Estilos para cupons */
+.coupon-suggestion {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.coupon-suggestion:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.coupon-applied {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    animation: couponApplied 0.6s ease-out;
+}
+
+@keyframes couponApplied {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Estilos para opções de frete */
+.shipping-option {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.shipping-option:hover {
+    background-color: rgba(216, 67, 21, 0.05);
+    border-color: #d84315;
+    transform: translateX(4px);
+}
+
+.shipping-option.selected {
+    background-color: rgba(216, 67, 21, 0.1);
+    border-color: #d84315;
+    border-width: 2px;
+}
+
+/* Estilos para modal de checkout */
+.checkout-modal {
+    backdrop-filter: blur(4px);
+}
+
+.checkout-form-section {
+    animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Validação de formulário */
+.form-field.valid {
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+}
+
+.form-field.invalid {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+    animation: shake 0.5s ease-out;
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Estilos para loading states */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Estilos responsivos para carrinho */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .cart-item-image {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .cart-item-details {
+        width: 100%;
+    }
+
+    .quantity-controls {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .checkout-modal .modal-content {
+        margin: 1rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-summary {
+        position: static;
+        margin-top: 2rem;
+    }
+
+    .checkout-btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        z-index: 40;
+    }
+
+    body.cart-page {
+        padding-bottom: 80px;
+    }
+}
+
+/* Estados de hover melhorados */
+.cart-item:hover .remove-item {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.remove-item {
+    opacity: 0.6;
+    transform: scale(0.9);
+    transition: all 0.2s ease;
+}
+
+.remove-item:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+    transform: scale(1.1);
+}
+
+/* Estilos para indicadores visuais */
+.price-change {
+    animation: priceChange 0.5s ease-out;
+}
+
+@keyframes priceChange {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(34, 197, 94, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.savings-highlight {
+    animation: savingsHighlight 1s ease-out;
+}
+
+@keyframes savingsHighlight {
+    0% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+    50% {
+        transform: scale(1.05);
+        background-color: rgba(34, 197, 94, 0.1);
+    }
+    100% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+}
+
+/* Micro-interações */
+.btn-checkout {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-checkout::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.btn-checkout:hover::before {
+    left: 100%;
+}
+
+/* Estilos para badges e indicadores */
+.discount-badge {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.free-shipping-badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+    animation: freeShippingGlow 2s infinite;
+}
+
+@keyframes freeShippingGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+    }
+}
+
+/* ==== SISTEMA DE NOTIFICAÇÕES TOAST GLOBAL ==== */
+
+/* Container para toasts */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+    pointer-events: none;
+}
+
+/* Estilos base para toast */
+.toast {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
+    padding: 16px;
+    pointer-events: auto;
+    transform: translateX(100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 4px solid #d84315;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 300px;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.hiding {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Tipos de toast */
+.toast.success {
+    border-left-color: #10b981;
+}
+
+.toast.error {
+    border-left-color: #ef4444;
+}
+
+.toast.warning {
+    border-left-color: #f59e0b;
+}
+
+.toast.info {
+    border-left-color: #3b82f6;
+}
+
+/* Ícones dos toasts */
+.toast-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+}
+
+.toast.success .toast-icon {
+    background: #10b981;
+}
+
+.toast.error .toast-icon {
+    background: #ef4444;
+}
+
+.toast.warning .toast-icon {
+    background: #f59e0b;
+}
+
+.toast.info .toast-icon {
+    background: #3b82f6;
+}
+
+/* Conteúdo do toast */
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #1f2937;
+}
+
+.toast-message {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Botão de fechar */
+.toast-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.toast-close:hover {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+/* Barra de progresso */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
+
+.toast-progress-bar {
+    height: 100%;
+    background: currentColor;
+    width: 100%;
+    transform: translateX(-100%);
+    transition: transform linear;
+}
+
+.toast.success .toast-progress-bar {
+    background: #10b981;
+}
+
+.toast.error .toast-progress-bar {
+    background: #ef4444;
+}
+
+.toast.warning .toast-progress-bar {
+    background: #f59e0b;
+}
+
+.toast.info .toast-progress-bar {
+    background: #3b82f6;
+}
+
+/* Responsividade para toasts */
+@media (max-width: 480px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .toast {
+        min-width: auto;
+    }
+}
+
+/* ==== MELHORIAS DE PERFORMANCE ==== */
+
+/* Otimizações de animação */
+.smooth-transition {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Lazy loading para imagens */
+.lazy-image {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
+/* Preloader melhorado */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+}
+
+.preloader-logo {
+    font-family: "Teko", sans-serif;
+    font-size: 3rem;
+    color: #d84315;
+    margin-bottom: 1rem;
+    animation: logoFloat 2s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.preloader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #d84315;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==== ESTILOS AVANÇADOS PARA WISHLIST ==== */
+
+/* Animações para itens da wishlist */
+.wishlist-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.wishlist-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(216, 67, 21, 0.1),
+        transparent
+    );
+    transition: left 0.6s;
+}
+
+.wishlist-item:hover::before {
+    left: 100%;
+}
+
+.wishlist-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(216, 67, 21, 0.15);
+}
+
+/* Estilos para abas de listas */
+.tab-btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #d84315, #bf360c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(216, 67, 21, 0.3);
+}
+
+.tab-btn:not(.active):hover {
+    background-color: #f3f4f6;
+    transform: translateY(-1px);
+}
+
+/* Filtros de wishlist */
+.filter-chip {
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.filter-chip.active {
+    background: linear-gradient(135deg, #d84315, #bf360c);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(216, 67, 21, 0.3);
+}
+
+.filter-chip:hover:not(.active) {
+    background-color: #f9fafb;
+    transform: translateX(4px);
+}
+
+/* Estados de comparação */
+.compare-mode-active {
+    cursor: crosshair;
+}
+
+.compare-mode-active .wishlist-item {
+    cursor: pointer;
+    border: 2px dashed transparent;
+    transition: all 0.3s ease;
+}
+
+.compare-mode-active .wishlist-item:hover {
+    border-color: #d84315;
+    background-color: rgba(216, 67, 21, 0.05);
+}
+
+.wishlist-item.compare-selected {
+    border: 2px solid #10b981;
+    background-color: rgba(16, 185, 129, 0.1);
+    position: relative;
+}
+
+.wishlist-item.compare-selected::after {
+    content: "✓";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #10b981;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    animation: compareSelected 0.3s ease-out;
+}
+
+@keyframes compareSelected {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Alertas de preço */
+.price-alert-indicator {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    animation: alertPulse 2s infinite;
+}
+
+@keyframes alertPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+}
+
+/* Histórico de preços */
+.price-history {
+    position: relative;
+    overflow: hidden;
+}
+
+.price-trend-up {
+    color: #dc2626;
+}
+
+.price-trend-down {
+    color: #059669;
+}
+
+.price-trend-stable {
+    color: #6b7280;
+}
+
+/* Animações para modais */
+.modal-appear {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Drag and drop para reorganização */
+.wishlist-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+    z-index: 1000;
+}
+
+.drop-zone {
+    min-height: 200px;
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+}
+
+.drop-zone.drag-over {
+    border-color: #d84315;
+    background-color: rgba(216, 67, 21, 0.05);
+}
+
+/* Sugestões inteligentes */
+.smart-suggestion {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-left: 4px solid #f59e0b;
+    animation: suggestionGlow 3s ease-in-out infinite;
+}
+
+@keyframes suggestionGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(245, 158, 11, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+    }
+}
+
+/* Indicadores de lista */
+.list-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.list-indicator.main {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+.list-indicator.gifts {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+}
+
+.list-indicator.recipes {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+/* Responsividade para wishlist */
+@media (max-width: 768px) {
+    .wishlist-item {
+        margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    #wishlist-actions .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .filter-chip {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wishlist-container {
+        padding: 0.5rem;
+    }
+
+    .modal-content {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animações de carregamento para wishlist */
+.wishlist-loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: wishlistLoading 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes wishlistLoading {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Estados especiais */
+.item-out-of-stock {
+    opacity: 0.6;
+    position: relative;
+}
+
+.item-out-of-stock::after {
+    content: "Fora de Estoque";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.item-price-drop {
+    animation: priceDropHighlight 2s ease-out;
+}
+
+@keyframes priceDropHighlight {
+    0% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+    50% {
+        background-color: rgba(34, 197, 94, 0.1);
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+/* Melhorias de acessibilidade */
+.wishlist-item:focus {
+    outline: 2px solid #d84315;
+    outline-offset: 2px;
+}
+
+.filter-chip:focus,
+.tab-btn:focus {
+    outline: 2px solid #d84315;
+    outline-offset: 2px;
+}
+
+/* Efeitos de micro-interação */
+.heart-favorite {
+    transition: all 0.3s ease;
+}
+
+.heart-favorite:hover {
+    transform: scale(1.2);
+    color: #dc2626;
+}
+
+.heart-favorite.active {
+    color: #dc2626;
+    animation: heartBeat 0.6s ease-out;
+}
+
+@keyframes heartBeat {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    75% {
+        transform: scale(1.15);
+    }
+}
+
+/* ==== SISTEMA DE CACHE E OTIMIZAÇÃO ==== */
+
+/* Otimizações para elementos frequentemente animados */
+.optimized-element {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* Redução de repaints */
+.no-repaint {
+    contain: layout style paint;
+}
+
+/* Estados de loading otimizados */
+.skeleton-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeletonWave 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeletonWave {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ==== MELHORIAS GLOBAIS DE UX ==== */
+
+/* Indicador de scroll */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(216, 67, 21, 0.2);
+    z-index: 9998;
+}
+
+.scroll-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #d84315, #ff6f00);
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* Botão de voltar ao topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #d84315, #bf360c);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(216, 67, 21, 0.3);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(216, 67, 21, 0.4);
+}
+
+/* Seleção de texto personalizada */
+::selection {
+    background: rgba(216, 67, 21, 0.2);
+    color: #1f2937;
+}
+
+::-moz-selection {
+    background: rgba(216, 67, 21, 0.2);
+    color: #1f2937;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #d84315, #bf360c);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #bf360c, #a62d00);
+}
+
+/* Estados de focus melhorados */
+.focus-visible {
+    outline: 2px solid #d84315;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Animações de entrada para elementos */
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-left {
+    animation: fadeInLeft 0.6s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-right {
+    animation: fadeInRight 0.6s ease-out;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark mode support (preparação futura) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1f2937;
+        --text-primary: #f9fafb;
+        --border-color: #374151;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .bg-primary,
+    .bg-secondary,
+    .bg-accent {
+        background: transparent !important;
+        color: black !important;
+    }
+}
+/* Estilos personalizados para complementar o Tailwind */
+/* Paleta de cores inspirada na Índia e especiarias */
+:root {
+    --saffron-deep: #ff6b35; /* Açafrão profundo */
+    --turmeric-gold: #f7931e; /* Açafrão dourado */
+    --cardamom-green: #4a6741; /* Verde cardamomo */
+    --cinnamon-brown: #8b4513; /* Canela */
+    --paprika-red: #cc2936; /* Páprica vermelha */
+    --ginger-cream: #fdf6e3; /* Creme gengibre */
+    --clove-dark: #2f1b14; /* Cravo escuro */
+    --cumin-tan: #d2b48c; /* Bege cominho */
+}
+
+/* Animações globais */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+body {
+    font-family: "Poppins", "Lato", sans-serif;
+    background: linear-gradient(135deg, var(--ginger-cream) 0%, #fff8dc 100%);
+    color: var(--clove-dark);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-teko {
+    font-family: "Rajdhani", "Teko", sans-serif;
+    letter-spacing: 1.2px;
+    color: var(--cinnamon-brown);
+}
+/* Cores temáticas */
+.bg-primary {
+    background: linear-gradient(
+        135deg,
+        var(--saffron-deep),
+        var(--turmeric-gold)
+    );
+}
+.text-primary {
+    color: var(--saffron-deep);
+}
+.bg-secondary {
+    background: linear-gradient(135deg, var(--cardamom-green), #5d7c56);
+}
+.text-secondary {
+    color: var(--cardamom-green);
+}
+.bg-accent {
+    background: linear-gradient(135deg, var(--turmeric-gold), #ffd700);
+}
+.text-accent {
+    color: var(--turmeric-gold);
+}
+.border-primary {
+    border-color: var(--saffron-deep);
+}
+
+/* Padrões decorativos indianos */
+.indian-pattern {
+    background-image:
+        radial-gradient(
+            circle at 25% 25%,
+            var(--turmeric-gold) 2px,
+            transparent 2px
+        ),
+        radial-gradient(
+            circle at 75% 75%,
+            var(--saffron-deep) 1px,
+            transparent 1px
+        );
+    background-size: 20px 20px;
+    background-position:
+        0 0,
+        10px 10px;
+}
+
+.mandala-bg {
+    background-image:
+        radial-gradient(
+            circle at center,
+            transparent 40%,
+            var(--ginger-cream) 41%,
+            var(--ginger-cream) 43%,
+            transparent 44%
+        ),
+        radial-gradient(
+            circle at center,
+            var(--turmeric-gold) 0.5px,
+            transparent 1px
+        );
+    background-size:
+        40px 40px,
+        8px 8px;
+}
+
+.spice-texture {
+    background:
+        linear-gradient(
+            45deg,
+            transparent 30%,
+            var(--cumin-tan) 30%,
+            var(--cumin-tan) 70%,
+            transparent 70%
+        ),
+        linear-gradient(
+            -45deg,
+            transparent 30%,
+            var(--ginger-cream) 30%,
+            var(--ginger-cream) 70%,
+            transparent 70%
+        );
+    background-size: 6px 6px;
+}
+
+/* Tailwind @apply não funciona em CSS puro, então definimos as classes manualmente */
+.btn {
+    font-weight: 700;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 0.5rem;
+    box-shadow:
+        0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: all 0.3s ease;
+    transform: scale(1);
+    position: relative;
+    overflow: hidden;
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(
+        135deg,
+        var(--saffron-deep),
+        var(--paprika-red)
+    );
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+.btn-primary:hover {
+    background: linear-gradient(
+        135deg,
+        var(--paprika-red),
+        var(--saffron-deep)
+    );
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: linear-gradient(
+        135deg,
+        var(--cardamom-green),
+        var(--cinnamon-brown)
+    );
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 15px rgba(74, 103, 65, 0.3);
+}
+.btn-secondary:hover {
+    background: linear-gradient(
+        135deg,
+        var(--cinnamon-brown),
+        var(--cardamom-green)
+    );
+    box-shadow: 0 6px 20px rgba(74, 103, 65, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Animação de Fade-in para as páginas */
+.page {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.active-page {
+    display: block;
+}
+/* Estrela de avaliação com brilho */
+.rating .fa-star {
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+}
+.rating .fa-star.text-accent {
+    color: var(--turmeric-gold);
+    text-shadow: 0 0 8px rgba(247, 147, 30, 0.5);
+    animation: starGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes starGlow {
+    from {
+        text-shadow: 0 0 5px rgba(247, 147, 30, 0.5);
+    }
+    to {
+        text-shadow:
+            0 0 15px rgba(247, 147, 30, 0.8),
+            0 0 25px rgba(247, 147, 30, 0.3);
+    }
+}
+
+/* Cards com estilo indiano */
+.indian-card {
+    background: linear-gradient(135deg, var(--ginger-cream), #ffffff);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+}
+
+.indian-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        var(--turmeric-gold),
+        var(--saffron-deep),
+        var(--cardamom-green)
+    );
+    z-index: -1;
+    margin: -2px;
+    border-radius: inherit;
+}
+
+.indian-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+}
+
+/* Elementos decorativos */
+.paisley-decoration {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20z' fill='%23f7931e' fill-opacity='0.1'/%3E%3C/svg%3E");
+    background-size: 40px 40px;
+}
+
+/* Menu Lateral */
+#side-menu {
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 51;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 288px;
+    height: 100vh;
+    background: white;
+    overflow-y: auto;
+}
+#side-menu.open {
+    transform: translateX(0);
+}
+#menu-overlay {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+}
+#menu-overlay:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Prevenir scroll do body quando menu está aberto */
+body.menu-open {
+    overflow: hidden;
+}
+
+/* Elementos com tema de especiarias */
+.spice-container {
+    background: var(--ginger-cream);
+    border-left: 4px solid var(--turmeric-gold);
+    position: relative;
+}
+
+.spice-container::after {
+    content: "✦";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: var(--saffron-deep);
+    font-size: 18px;
+    opacity: 0.6;
+}
+
+.ingredient-badge {
+    background: linear-gradient(
+        45deg,
+        var(--turmeric-gold),
+        var(--saffron-deep)
+    );
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(247, 147, 30, 0.3);
+}
+
+/* Texto com estilo indiano */
+.hindi-accent {
+    font-family: "Rajdhani", sans-serif;
+    font-weight: 600;
+    color: var(--cinnamon-brown);
+    text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.1);
+}
+
+.price-highlight {
+    background: linear-gradient(
+        45deg,
+        var(--turmeric-gold),
+        var(--saffron-deep)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+/* Classes para cores específicas das avaliações */
+.border-saffron-deep {
+    border-color: var(--saffron-deep);
+}
+
+.border-cardamom-green {
+    border-color: var(--cardamom-green);
+}
+
+.border-turmeric-gold {
+    border-color: var(--turmeric-gold);
+}
+
+.from-ginger-cream {
+    --tw-gradient-from: var(--ginger-cream);
+    --tw-gradient-to: rgb(253 246 227 / 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.bg-opacity-10 {
+    --tw-bg-opacity: 0.1;
+}
+
+/* Animações para cards de avaliação */
+.review-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.review-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(247, 147, 30, 0.1),
+        transparent
+    );
+    transition: left 0.6s;
+}
+
+.review-card:hover::before {
+    left: 100%;
+}
+
+.review-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255, 107, 53, 0.25);
+}
+
+/* Estilo para avatares das avaliações */
+.review-avatar {
+    border: 3px solid var(--turmeric-gold);
+    box-shadow: 0 4px 12px rgba(247, 147, 30, 0.3);
+    transition: all 0.3s ease;
+}
+
+.review-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(247, 147, 30, 0.5);
+}
+
+/* Melhorar botão do menu */
+#open-menu-btn {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#open-menu-btn:hover {
+    transform: scale(1.1);
+    color: #d84315;
+}
+
+/* Animação de pulse para demonstração */
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(216, 67, 21, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(216, 67, 21, 0);
+    }
+}
+
+/* Tooltip para demonstração */
+.demo-tooltip {
+    position: absolute;
+    background: #333;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10000;
+}
+
+/* Estilos para categorias e subcategorias */
+.category-toggle,
+.category-link,
+.subcategory-link {
+    transition: all 0.2s ease-in-out;
+}
+
+.category-toggle:hover,
+.category-link:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(216, 67, 21, 0.15);
+}
+
+.subcategory-link:hover {
+    transform: translateX(2px);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 193, 7, 0.1) 0%,
+        transparent 100%
+    );
+}
+
+.category-toggle.active {
+    background-color: rgba(216, 67, 21, 0.05);
+    border-left: 3px solid #d84315;
+}
+
+.category-toggle.active .fa-chevron-down {
+    transform: rotate(180deg);
+    color: #d84315;
+}
+
+.subcategory-list {
+    border-left: 2px solid rgba(216, 67, 21, 0.2);
+    margin-left: 1rem;
+    padding-left: 0.5rem;
+}
+
+/* Animação suave para barra de busca */
+#search-input:focus {
+    box-shadow: 0 0 0 3px rgba(216, 67, 21, 0.1);
+    border-color: #d84315;
+}
+
+/* Contador visual para itens do menu */
+.menu-counter {
+    background: linear-gradient(135deg, #ffc107, #ff9800);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Melhorias responsivas para o menu */
+@media (max-width: 768px) {
+    #side-menu {
+        width: 280px;
+    }
+}
+
+/* Indicador de categoria ativa */
+.category-active {
+    background: linear-gradient(
+        90deg,
+        rgba(216, 67, 21, 0.1) 0%,
+        transparent 100%
+    );
+    border-left: 3px solid #d84315;
+}
+
+/* ===== CARROSSEL APRIMORADO ===== */
+.carousel-item {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.carousel-item.prev {
+    transform: translateX(-100%);
+}
+
+/* Animações de entrada suaves */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Indicadores do carrossel */
+.carousel-indicator {
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.carousel-indicator.active {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    transform: scale(1.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Controles do carrossel com efeitos aprimorados */
+#prev-slide,
+#next-slide {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+#prev-slide:hover,
+#next-slide:hover {
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Barra de progresso do carrossel */
+#carousel-progress {
+    animation: progressBar 5s linear infinite;
+}
+
+@keyframes progressBar {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Pausa no hover */
+#carousel-container:hover #carousel-progress {
+    animation-play-state: paused;
+}
+
+/* Efeitos parallax para os slides */
+.carousel-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.1) 0%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+}
+
+.carousel-item.active::before {
+    opacity: 1;
+}
+
+/* Responsividade aprimorada */
+@media (max-width: 768px) {
+    .carousel-item h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+
+    .carousel-item p {
+        font-size: 1rem !important;
+    }
+
+    .carousel-indicator {
+        width: 10px !important;
+        height: 10px !important;
+    }
+
+    #prev-slide,
+    #next-slide {
+        padding: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item h1 {
+        font-size: 2rem !important;
+    }
+
+    .carousel-item .btn {
+        padding: 12px 24px !important;
+        font-size: 0.9rem !important;
+    }
+
+    .carousel-item .flex-col {
+        gap: 0.75rem !important;
+    }
+}
+
+/* Animação de texto nos slides */
+.carousel-item.active h1 {
+    animation: slideInRight 0.8s ease-out 0.2s both;
+}
+
+.carousel-item.active p {
+    animation: slideInRight 0.8s ease-out 0.4s both;
+}
+
+.carousel-item.active .btn {
+    animation: slideInRight 0.8s ease-out 0.6s both;
+}
+
+.carousel-item.active span {
+    animation: slideInRight 0.8s ease-out 0.1s both;
+}
+
+/* Efeito de hover nos botões do carrossel */
+.carousel-item .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-item .btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.carousel-item .btn:hover::before {
+    left: 100%;
+}
+
+/* ==== ESTILOS AVANÇADOS PARA CARRINHO ==== */
+
+/* Animações para itens do carrinho */
+.cart-item-enter {
+    animation: cartItemEnter 0.5s ease-out;
+}
+
+@keyframes cartItemEnter {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.cart-item-exit {
+    animation: cartItemExit 0.3s ease-out forwards;
+}
+
+@keyframes cartItemExit {
+    to {
+        opacity: 0;
+        transform: translateX(-100%) scale(0.8);
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Estilos para quantidades no carrinho */
+.quantity-input {
+    transition: all 0.2s ease;
+}
+
+.quantity-input:focus {
+    box-shadow: 0 0 0 3px rgba(216, 67, 21, 0.1);
+    border-color: #d84315;
+    transform: scale(1.05);
+}
+
+.quantity-btn {
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(216, 67, 21, 0.1);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+/* Estilos para resumo do pedido sticky */
+.sticky-summary {
+    position: sticky;
+    top: 2rem;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+    .sticky-summary {
+        position: static;
+    }
+}
+
+/* Animação para total do carrinho */
+.total-animate {
+    animation: totalPulse 0.5s ease-out;
+}
+
+@keyframes totalPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+        color: #d84315;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Estilos para barra de progresso de frete grátis */
+.free-shipping-progress {
+    transition: all 0.5s ease;
+}
+
+.free-shipping-bar {
+    transition: width 0.8s ease-out;
+}
+
+/* Estilos para cupons */
+.coupon-suggestion {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.coupon-suggestion:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.coupon-applied {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    animation: couponApplied 0.6s ease-out;
+}
+
+@keyframes couponApplied {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Estilos para opções de frete */
+.shipping-option {
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.shipping-option:hover {
+    background-color: rgba(216, 67, 21, 0.05);
+    border-color: #d84315;
+    transform: translateX(4px);
+}
+
+.shipping-option.selected {
+    background-color: rgba(216, 67, 21, 0.1);
+    border-color: #d84315;
+    border-width: 2px;
+}
+
+/* Estilos para modal de checkout */
+.checkout-modal {
+    backdrop-filter: blur(4px);
+}
+
+.checkout-form-section {
+    animation: slideInUp 0.4s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Validação de formulário */
+.form-field.valid {
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+}
+
+.form-field.invalid {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+    animation: shake 0.5s ease-out;
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Estilos para loading states */
+.loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Estilos responsivos para carrinho */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .cart-item-image {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .cart-item-details {
+        width: 100%;
+    }
+
+    .quantity-controls {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .checkout-modal .modal-content {
+        margin: 1rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-summary {
+        position: static;
+        margin-top: 2rem;
+    }
+
+    .checkout-btn {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        z-index: 40;
+    }
+
+    body.cart-page {
+        padding-bottom: 80px;
+    }
+}
+
+/* Estados de hover melhorados */
+.cart-item:hover .remove-item {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.remove-item {
+    opacity: 0.6;
+    transform: scale(0.9);
+    transition: all 0.2s ease;
+}
+
+.remove-item:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
+    transform: scale(1.1);
+}
+
+/* Estilos para indicadores visuais */
+.price-change {
+    animation: priceChange 0.5s ease-out;
+}
+
+@keyframes priceChange {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(34, 197, 94, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.savings-highlight {
+    animation: savingsHighlight 1s ease-out;
+}
+
+@keyframes savingsHighlight {
+    0% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+    50% {
+        transform: scale(1.05);
+        background-color: rgba(34, 197, 94, 0.1);
+    }
+    100% {
+        transform: scale(1);
+        background-color: transparent;
+    }
+}
+
+/* Micro-interações */
+.btn-checkout {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-checkout::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.btn-checkout:hover::before {
+    left: 100%;
+}
+
+/* Estilos para badges e indicadores */
+.discount-badge {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.free-shipping-badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+    animation: freeShippingGlow 2s infinite;
+}
+
+@keyframes freeShippingGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+    }
+}
+
+/* ==== SISTEMA DE NOTIFICAÇÕES TOAST GLOBAL ==== */
+
+/* Container para toasts */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+    pointer-events: none;
+}
+
+/* Estilos base para toast */
+.toast {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-bottom: 10px;
+    padding: 16px;
+    pointer-events: auto;
+    transform: translateX(100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 4px solid #d84315;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 300px;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.hiding {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+/* Tipos de toast */
+.toast.success {
+    border-left-color: #10b981;
+}
+
+.toast.error {
+    border-left-color: #ef4444;
+}
+
+.toast.warning {
+    border-left-color: #f59e0b;
+}
+
+.toast.info {
+    border-left-color: #3b82f6;
+}
+
+/* Ícones dos toasts */
+.toast-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+}
+
+.toast.success .toast-icon {
+    background: #10b981;
+}
+
+.toast.error .toast-icon {
+    background: #ef4444;
+}
+
+.toast.warning .toast-icon {
+    background: #f59e0b;
+}
+
+.toast.info .toast-icon {
+    background: #3b82f6;
+}
+
+/* Conteúdo do toast */
+.toast-content {
+    flex: 1;
+}
+
+.toast-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #1f2937;
+}
+
+.toast-message {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Botão de fechar */
+.toast-close {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.toast-close:hover {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+/* Barra de progresso */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+}
+
+.toast-progress-bar {
+    height: 100%;
+    background: currentColor;
+    width: 100%;
+    transform: translateX(-100%);
+    transition: transform linear;
+}
+
+.toast.success .toast-progress-bar {
+    background: #10b981;
+}
+
+.toast.error .toast-progress-bar {
+    background: #ef4444;
+}
+
+.toast.warning .toast-progress-bar {
+    background: #f59e0b;
+}
+
+.toast.info .toast-progress-bar {
+    background: #3b82f6;
+}
+
+/* Responsividade para toasts */
+@media (max-width: 480px) {
+    .toast-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .toast {
+        min-width: auto;
+    }
+}
+
+/* ==== MELHORIAS DE PERFORMANCE ==== */
+
+/* Otimizações de animação */
+.smooth-transition {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Lazy loading para imagens */
+.lazy-image {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.lazy-image.loaded {
+    opacity: 1;
+}
+
+/* Preloader melhorado */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease;
+}
+
+.preloader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-content {
+    text-align: center;
+}
+
+.preloader-logo {
+    font-family: "Teko", sans-serif;
+    font-size: 3rem;
+    color: #d84315;
+    margin-bottom: 1rem;
+    animation: logoFloat 2s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.preloader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #d84315;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==== ESTILOS AVANÇADOS PARA WISHLIST ==== */
+
+/* Animações para itens da wishlist */
+.wishlist-item {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.wishlist-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(216, 67, 21, 0.1),
+        transparent
+    );
+    transition: left 0.6s;
+}
+
+.wishlist-item:hover::before {
+    left: 100%;
+}
+
+.wishlist-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(216, 67, 21, 0.15);
+}
+
+/* Estilos para abas de listas */
+.tab-btn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #d84315, #bf360c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(216, 67, 21, 0.3);
+}
+
+.tab-btn:not(.active):hover {
+    background-color: #f3f4f6;
+    transform: translateY(-1px);
+}
+
+/* Filtros de wishlist */
+.filter-chip {
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.filter-chip.active {
+    background: linear-gradient(135deg, #d84315, #bf360c);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(216, 67, 21, 0.3);
+}
+
+.filter-chip:hover:not(.active) {
+    background-color: #f9fafb;
+    transform: translateX(4px);
+}
+
+/* Estados de comparação */
+.compare-mode-active {
+    cursor: crosshair;
+}
+
+.compare-mode-active .wishlist-item {
+    cursor: pointer;
+    border: 2px dashed transparent;
+    transition: all 0.3s ease;
+}
+
+.compare-mode-active .wishlist-item:hover {
+    border-color: #d84315;
+    background-color: rgba(216, 67, 21, 0.05);
+}
+
+.wishlist-item.compare-selected {
+    border: 2px solid #10b981;
+    background-color: rgba(16, 185, 129, 0.1);
+    position: relative;
+}
+
+.wishlist-item.compare-selected::after {
+    content: "✓";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #10b981;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    animation: compareSelected 0.3s ease-out;
+}
+
+@keyframes compareSelected {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Alertas de preço */
+.price-alert-indicator {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    animation: alertPulse 2s infinite;
+}
+
+@keyframes alertPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+}
+
+/* Histórico de preços */
+.price-history {
+    position: relative;
+    overflow: hidden;
+}
+
+.price-trend-up {
+    color: #dc2626;
+}
+
+.price-trend-down {
+    color: #059669;
+}
+
+.price-trend-stable {
+    color: #6b7280;
+}
+
+/* Animações para modais */
+.modal-appear {
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Drag and drop para reorganização */
+.wishlist-item.dragging {
+    opacity: 0.5;
+    transform: rotate(5deg);
+    z-index: 1000;
+}
+
+.drop-zone {
+    min-height: 200px;
+    border: 2px dashed #d1d5db;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+}
+
+.drop-zone.drag-over {
+    border-color: #d84315;
+    background-color: rgba(216, 67, 21, 0.05);
+}
+
+/* Sugestões inteligentes */
+.smart-suggestion {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    border-left: 4px solid #f59e0b;
+    animation: suggestionGlow 3s ease-in-out infinite;
+}
+
+@keyframes suggestionGlow {
+    0%,
+    100% {
+        box-shadow: 0 0 5px rgba(245, 158, 11, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+    }
+}
+
+/* Indicadores de lista */
+.list-indicator {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.list-indicator.main {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+.list-indicator.gifts {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+}
+
+.list-indicator.recipes {
+    background: linear-gradient(135deg, #059669, #047857);
+}
+
+/* Responsividade para wishlist */
+@media (max-width: 768px) {
+    .wishlist-item {
+        margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    #wishlist-actions .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .filter-chip {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .wishlist-container {
+        padding: 0.5rem;
+    }
+
+    .modal-content {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animações de carregamento para wishlist */
+.wishlist-loading-skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: wishlistLoading 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes wishlistLoading {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Estados especiais */
+.item-out-of-stock {
+    opacity: 0.6;
+    position: relative;
+}
+
+.item-out-of-stock::after {
+    content: "Fora de Estoque";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.item-price-drop {
+    animation: priceDropHighlight 2s ease-out;
+}
+
+@keyframes priceDropHighlight {
+    0% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+    50% {
+        background-color: rgba(34, 197, 94, 0.1);
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+    }
+    100% {
+        background-color: transparent;
+        box-shadow: none;
+    }
+}
+
+/* Melhorias de acessibilidade */
+.wishlist-item:focus {
+    outline: 2px solid #d84315;
+    outline-offset: 2px;
+}
+
+.filter-chip:focus,
+.tab-btn:focus {
+    outline: 2px solid #d84315;
+    outline-offset: 2px;
+}
+
+/* Efeitos de micro-interação */
+.heart-favorite {
+    transition: all 0.3s ease;
+}
+
+.heart-favorite:hover {
+    transform: scale(1.2);
+    color: #dc2626;
+}
+
+.heart-favorite.active {
+    color: #dc2626;
+    animation: heartBeat 0.6s ease-out;
+}
+
+@keyframes heartBeat {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    75% {
+        transform: scale(1.15);
+    }
+}
+
+/* ==== SISTEMA DE CACHE E OTIMIZAÇÃO ==== */
+
+/* Otimizações para elementos frequentemente animados */
+.optimized-element {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* Redução de repaints */
+.no-repaint {
+    contain: layout style paint;
+}
+
+/* Estados de loading otimizados */
+.skeleton-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeletonWave 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes skeletonWave {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ==== MELHORIAS GLOBAIS DE UX ==== */
+
+/* Indicador de scroll */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(216, 67, 21, 0.2);
+    z-index: 9998;
+}
+
+.scroll-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #d84315, #ff6f00);
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* Botão de voltar ao topo */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #d84315, #bf360c);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(216, 67, 21, 0.3);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(216, 67, 21, 0.4);
+}
+
+/* Seleção de texto personalizada */
+::selection {
+    background: rgba(216, 67, 21, 0.2);
+    color: #1f2937;
+}
+
+::-moz-selection {
+    background: rgba(216, 67, 21, 0.2);
+    color: #1f2937;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #d84315, #bf360c);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #bf360c, #a62d00);
+}
+
+/* Estados de focus melhorados */
+.focus-visible {
+    outline: 2px solid #d84315;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Animações de entrada para elementos */
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-left {
+    animation: fadeInLeft 0.6s ease-out;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-right {
+    animation: fadeInRight 0.6s ease-out;
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark mode support (preparação futura) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1f2937;
+        --text-primary: #f9fafb;
+        --border-color: #374151;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+
+    .bg-primary,
+    .bg-secondary,
+    .bg-accent {
+        background: transparent !important;
+        color: black !important;
+    }
+}

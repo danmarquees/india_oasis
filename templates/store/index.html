@@ -1,0 +1,3292 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>India Oasis - Temperos e Sabores da Índia</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Fontes do Google -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome (Ícones) -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+
+        <!-- Link para o arquivo CSS externo -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+
+        <style>
+            /* Menu lateral - animações de slide */
+            #side-menu {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 288px !important;
+                height: 100vh !important;
+                background: white !important;
+                box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1) !important;
+                z-index: 9999 !important;
+                overflow-y: auto !important;
+                transform: translateX(-100%) !important;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+
+            #side-menu.open {
+                transform: translateX(0) !important;
+            }
+
+            #menu-overlay {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                background: rgba(0, 0, 0, 0.5) !important;
+                z-index: 9998 !important;
+                transition: opacity 0.3s ease-in-out !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            #menu-overlay:not(.hidden) {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+
+            /* Animações específicas para subcategorias */
+            .subcategory-list {
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    max-height 0.4s ease-out,
+                    opacity 0.3s ease-out,
+                    padding 0.3s ease-out,
+                    margin 0.3s ease-out;
+                opacity: 0;
+                padding: 0;
+                margin: 0;
+            }
+
+            .subcategory-list.show {
+                max-height: 300px;
+                opacity: 1;
+                padding: 0.5rem 0;
+                margin: 0.5rem 0;
+            }
+
+            .category-toggle.active .fa-chevron-down {
+                transform: rotate(180deg);
+            }
+
+            /* Efeito hover melhorado */
+            .category-link:hover,
+            .category-toggle:hover {
+                transform: translateX(4px);
+            }
+
+            .subcategory-link:hover {
+                transform: translateX(2px);
+            }
+
+            /* Prevenir scroll quando menu estiver aberto */
+            body.menu-open {
+                overflow: hidden;
+            }
+
+            /* Animação de pulso para demonstração */
+            @keyframes pulse {
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Tooltip de demonstração */
+            .demo-tooltip {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #ff6b35;
+                color: white;
+                padding: 0.5rem;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                white-space: nowrap;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                z-index: 1000;
+                pointer-events: none;
+            }
+
+            .demo-tooltip::before {
+                content: "";
+                position: absolute;
+                top: -4px;
+                left: 50%;
+                transform: translateX(-50%);
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-bottom: 4px solid #ff6b35;
+            }
+        </style>
+    </head>
+    <body class="text-gray-800">
+        <!--
+
+            =
+            =
+
+                =
+            = M
+                    E
+
+                NU LATERAL RETRÁTIL ====
+        Funcionalidades implementadas:
+        - Menu lateral deslizante com overlay
+        - Barra de busca em tempo real
+        - Categorias principais com subcategorias expandíveis
+        - Contador de resultados de busca
+        - Botão para limpar filtros
+        - Links de acesso rápido com mini contadores
+        - Animações suaves e responsivo
+        -->
+        <div
+            id="menu-overlay"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"
+        ></div>
+        <aside
+            id="side-menu"
+            class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg overflow-y-auto"
+        >
+            <div class="p-4">
+                <button
+                    id="close-menu-btn"
+                    class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-primary"
+                >
+                    &times;
+                </button>
+                <h2 class="text-3xl font-teko text-primary mb-6">Menu</h2>
+
+                <!-- Barra de Busca com Contador de Resultados -->
+                <div class="relative mb-6">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Buscar produtos..."
+                        class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <i
+                        class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                    ></i>
+                    <!-- Contador de Resultados -->
+                    <div
+                        id="search-results-counter"
+                        class="hidden mt-2 text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full"
+                    >
+                        <i class="fas fa-info-circle mr-1 text-primary"></i>
+                        <span id="results-count">0</span> resultados encontrados
+                    </div>
+                </div>
+
+                <!-- Categorias com Subcategorias Expandíveis -->
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-teko text-2xl text-secondary">
+                        <i class="fas fa-tags mr-2 text-primary"></i>
+                        Categorias
+                    </h3>
+                    <button
+                        id="reset-filters-btn"
+                        class="hidden text-xs text-primary hover:text-secondary transition-colors px-2 py-1 rounded-md border border-primary hover:bg-primary hover:text-white"
+                    >
+                        <i class="fas fa-times mr-1"></i>
+                        Limpar
+                    </button>
+                </div>
+                <ul class="space-y-2">
+                    <li>
+                        <a
+                            href="products.html"
+                            class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
+                            data-category="all"
+                        >
+                            <i
+                                class="fas fa-th-large mr-3 text-primary w-5"
+                            ></i>
+                            <span>Todos os Produtos</span>
+                        </a>
+                    </li>
+
+                    <!-- Temperos e Masalas com Subcategorias -->
+                    <li class="category-section">
+                        <div class="category-parent">
+                            <button
+                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
+                                data-category="Temperos"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-pepper-hot mr-3 text-orange-600 w-5"
+                                    ></i>
+                                    <span>Temperos e Masalas</span>
+                                </div>
+                                <i
+                                    class="fas fa-chevron-down transform transition-transform duration-200"
+                                ></i>
+                            </button>
+                            <ul
+                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
+                            >
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=masalas"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-orange-400 text-xs"
+                                        ></i>
+                                        <span>Masalas Tradicionais</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=especiarias"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-orange-400 text-xs"
+                                        ></i>
+                                        <span>Especiarias Puras</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=misturas"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-orange-400 text-xs"
+                                        ></i>
+                                        <span>Misturas Especiais</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Chás e Infusões com Subcategorias -->
+                    <li class="category-section">
+                        <div class="category-parent">
+                            <button
+                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
+                                data-category="Chás"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-mug-hot mr-3 text-green-600 w-5"
+                                    ></i>
+                                    <span>Chás e Infusões</span>
+                                </div>
+                                <i
+                                    class="fas fa-chevron-down transform transition-transform duration-200"
+                                ></i>
+                            </button>
+                            <ul
+                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
+                            >
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=chai"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-green-400 text-xs"
+                                        ></i>
+                                        <span>Masala Chai</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=cha-verde"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-green-400 text-xs"
+                                        ></i>
+                                        <span>Chás Verdes</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=infusoes"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-green-400 text-xs"
+                                        ></i>
+                                        <span>Infusões Ayurvédicas</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Grãos e Lentilhas com Subcategorias -->
+                    <li class="category-section">
+                        <div class="category-parent">
+                            <button
+                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
+                                data-category="Grãos"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-seedling mr-3 text-yellow-600 w-5"
+                                    ></i>
+                                    <span>Grãos e Lentilhas</span>
+                                </div>
+                                <i
+                                    class="fas fa-chevron-down transform transition-transform duration-200"
+                                ></i>
+                            </button>
+                            <ul
+                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
+                            >
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=lentilhas"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
+                                        ></i>
+                                        <span>Lentilhas (Dal)</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=arroz"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
+                                        ></i>
+                                        <span>Arroz Basmati</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="products.html?subcategory=graos-especiais"
+                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
+                                    >
+                                        <i
+                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
+                                        ></i>
+                                        <span>Grãos Especiais</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Acompanhamentos -->
+                    <li>
+                        <a
+                            href="products.html?category=acompanhamentos"
+                            class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
+                            data-category="Acompanhamentos"
+                        >
+                            <i
+                                class="fas fa-utensils mr-3 text-purple-600 w-5"
+                            ></i>
+                            <span>Acompanhamentos</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Links Rápidos com Mini Contadores -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-teko text-xl text-secondary">
+                            <i class="fas fa-star mr-2 text-accent"></i>
+                            Acesso Rápido
+                        </h3>
+                        <div class="flex space-x-1">
+                            <span
+                                class="menu-counter bg-accent text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold"
+                                id="wishlist-mini-count"
+                                >0</span
+                            >
+                            <span
+                                class="menu-counter bg-accent text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold"
+                                id="cart-mini-count"
+                                >0</span
+                            >
+                        </div>
+                    </div>
+                    <ul class="space-y-2">
+                        <li>
+                            <a
+                                href="wishlist.html"
+                                class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
+                            >
+                                <i
+                                    class="fas fa-heart mr-3 text-red-500 w-5"
+                                ></i>
+                                <span>Meus Favoritos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="cart.html"
+                                class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
+                            >
+                                <i
+                                    class="fas fa-shopping-cart mr-3 text-blue-500 w-5"
+                                ></i>
+                                <span>Meu Carrinho</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="#ofertas"
+                                class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
+                            >
+                                <i
+                                    class="fas fa-percentage mr-3 text-green-500 w-5"
+                                ></i>
+                                <span>Ofertas Especiais</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ==== CABEÇALHO ==== -->
+        <header class="bg-white shadow-md sticky top-0 z-40">
+            <nav
+                class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
+            >
+                <div class="flex items-center space-x-4">
+                    <button
+                        id="open-menu-btn"
+                        class="relative text-xl hover:text-primary bg-gradient-to-r from-primary to-secondary text-white p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                        title="Clique aqui para abrir o menu lateral!"
+                    >
+                        <i class="fas fa-bars"></i>
+                        <span
+                            class="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-ping"
+                        ></span>
+                        <span
+                            class="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full"
+                        ></span>
+                    </button>
+                    <a href="index.html" class="text-3xl font-teko text-primary"
+                        >India Oasis</a
+                    >
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-lg text-primary font-bold"
+                        >Início</a
+                    >
+                    <a href="products.html" class="text-lg hover:text-primary"
+                        >Produtos</a
+                    >
+                    <a href="contact.html" class="text-lg hover:text-primary"
+                        >Contato</a
+                    >
+                    <a href="about.html" class="text-lg hover:text-primary"
+                        >Sobre Nós</a
+                    >
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Botão de Login -->
+                    <button
+                        id="login-btn"
+                        class="hidden md:flex items-center space-x-2 text-sm hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-user-circle text-lg"></i>
+                        <span>Entrar</span>
+                    </button>
+
+                    <a href="wishlist.html" class="relative hover:text-primary">
+                        <i class="fas fa-heart text-xl"></i>
+                        <span
+                            id="wishlist-count"
+                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+                            >0</span
+                        >
+                    </a>
+                    <a href="cart.html" class="relative hover:text-primary">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span
+                            id="cart-count"
+                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+                            >0</span
+                        >
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main id="main-content" class="container mx-auto p-4 sm:p-6 lg:p-8">
+            <!-- ==== PÁGINA INICIAL ==== -->
+            <div id="home-page" class="page active-page">
+                <!-- Hero Carousel Section -->
+                <section
+                    class="relative w-full h-80 md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl mb-12"
+                >
+                    <div id="carousel-container" class="relative w-full h-full">
+                        <!-- Slide 1 - Especiarias Aromáticas -->
+                        <div
+                            class="carousel-item active absolute inset-0 bg-gradient-to-r from-amber-900/90 to-orange-800/90 text-white flex items-center"
+                            style="
+                                background-image: url(&quot;https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80&quot;);
+                                background-size: cover;
+                                background-position: center;
+                            "
+                        >
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
+                            ></div>
+                            <div class="relative z-10 container mx-auto px-8">
+                                <div class="max-w-2xl">
+                                    <div class="mb-4">
+                                        <span
+                                            class="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-semibold"
+                                        >
+                                            🌟 Especiarias Autênticas
+                                        </span>
+                                    </div>
+                                    <h1
+                                        class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight"
+                                    >
+                                        Sabores da Índia<br />
+                                        <span class="text-yellow-400"
+                                            >Direto para sua Cozinha</span
+                                        >
+                                    </h1>
+                                    <p
+                                        class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed"
+                                    >
+                                        Explore uma seleção autêntica de
+                                        temperos que trazem a alma da culinária
+                                        indiana para suas receitas.
+                                    </p>
+                                    <div
+                                        class="flex flex-col sm:flex-row gap-4"
+                                    >
+                                        <a
+                                            href="products.html"
+                                            class="btn btn-primary text-lg px-8 py-4"
+                                        >
+                                            <i
+                                                class="fas fa-shopping-bag mr-2"
+                                            ></i>
+                                            Ver Temperos
+                                        </a>
+                                        <a
+                                            href="#catalog"
+                                            class="btn btn-secondary text-lg px-8 py-4"
+                                        >
+                                            <i
+                                                class="fas fa-info-circle mr-2"
+                                            ></i>
+                                            Saiba Mais
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 - Chás e Infusões -->
+                        <div
+                            class="carousel-item absolute inset-0 bg-gradient-to-r from-green-900/90 to-teal-800/90 text-white flex items-center"
+                            style="
+                                background-image: url(&quot;https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80&quot;);
+                                background-size: cover;
+                                background-position: center;
+                            "
+                        >
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
+                            ></div>
+                            <div class="relative z-10 container mx-auto px-8">
+                                <div class="max-w-2xl">
+                                    <div class="mb-4">
+                                        <span
+                                            class="inline-block bg-green-400 text-black px-4 py-2 rounded-full text-sm font-semibold"
+                                        >
+                                            🍃 Chás Premium
+                                        </span>
+                                    </div>
+                                    <h1
+                                        class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight"
+                                    >
+                                        Aconchego em<br />
+                                        <span class="text-green-400"
+                                            >Cada Gole</span
+                                        >
+                                    </h1>
+                                    <p
+                                        class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed"
+                                    >
+                                        Descubra nossos chás e infusões,
+                                        perfeitos para um momento de paz e sabor
+                                        autêntico.
+                                    </p>
+                                    <div
+                                        class="flex flex-col sm:flex-row gap-4"
+                                    >
+                                        <a
+                                            href="products.html"
+                                            class="btn btn-secondary text-lg px-8 py-4"
+                                        >
+                                            <i class="fas fa-leaf mr-2"></i>
+                                            Ver Chás
+                                        </a>
+                                        <a
+                                            href="#catalog"
+                                            class="btn btn-primary text-lg px-8 py-4"
+                                        >
+                                            <i class="fas fa-heart mr-2"></i>
+                                            Favoritos
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 - Receitas Tradicionais -->
+                        <div
+                            class="carousel-item absolute inset-0 bg-gradient-to-r from-red-900/90 to-pink-800/90 text-white flex items-center"
+                            style="
+                                background-image: url(&quot;https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80&quot;);
+                                background-size: cover;
+                                background-position: center;
+                            "
+                        >
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
+                            ></div>
+                            <div class="relative z-10 container mx-auto px-8">
+                                <div class="max-w-2xl">
+                                    <div class="mb-4">
+                                        <span
+                                            class="inline-block bg-red-400 text-white px-4 py-2 rounded-full text-sm font-semibold"
+                                        >
+                                            🍛 Receitas Tradicionais
+                                        </span>
+                                    </div>
+                                    <h1
+                                        class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight"
+                                    >
+                                        Tradição que<br />
+                                        <span class="text-red-400"
+                                            >Inspira</span
+                                        >
+                                    </h1>
+                                    <p
+                                        class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed"
+                                    >
+                                        Aprenda receitas autênticas da Índia com
+                                        ingredientes selecionados especialmente
+                                        para você.
+                                    </p>
+                                    <div
+                                        class="flex flex-col sm:flex-row gap-4"
+                                    >
+                                        <a
+                                            href="products.html"
+                                            class="btn btn-primary text-lg px-8 py-4"
+                                        >
+                                            <i class="fas fa-book mr-2"></i>
+                                            Ver Receitas
+                                        </a>
+                                        <a
+                                            href="#catalog"
+                                            class="btn btn-secondary text-lg px-8 py-4"
+                                        >
+                                            <i class="fas fa-utensils mr-2"></i>
+                                            Ingredientes
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Controls -->
+                    <button
+                        id="prev-slide"
+                        class="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 md:p-4 rounded-full transition-all duration-300 hover:scale-110 group"
+                    >
+                        <i
+                            class="fas fa-chevron-left text-lg group-hover:text-yellow-400"
+                        ></i>
+                    </button>
+                    <button
+                        id="next-slide"
+                        class="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white p-3 md:p-4 rounded-full transition-all duration-300 hover:scale-110 group"
+                    >
+                        <i
+                            class="fas fa-chevron-right text-lg group-hover:text-yellow-400"
+                        ></i>
+                    </button>
+
+                    <!-- Carousel Indicators -->
+                    <div
+                        class="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex space-x-3"
+                    >
+                        <button
+                            class="carousel-indicator active w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300"
+                            data-slide="0"
+                        ></button>
+                        <button
+                            class="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-all duration-300"
+                            data-slide="1"
+                        ></button>
+                        <button
+                            class="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-all duration-300"
+                            data-slide="2"
+                        ></button>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div
+                        class="absolute bottom-0 left-0 w-full h-1 bg-white/20"
+                    >
+                        <div
+                            id="carousel-progress"
+                            class="h-full bg-gradient-to-r from-yellow-400 to-orange-400 transition-all duration-300 ease-linear"
+                            style="width: 0%"
+                        ></div>
+                    </div>
+                </section>
+
+                <!-- Catálogo de Produtos Preview -->
+                <section class="mb-16">
+                    <h2
+                        class="text-4xl font-teko text-center text-secondary mb-8"
+                    >
+                        <i class="fas fa-fire text-primary mr-3"></i>
+                        Nosso Catálogo
+                    </h2>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+                    >
+                        <!-- Produto 1 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/D84315/FFFFFF?text=Garam+Masala"
+                                    alt="Garam Masala Premium"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=1"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Garam Masala Premium
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Mistura de especiarias aromáticas
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(127)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 25,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Produto 2 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/00695C/FFFFFF?text=Chai+Masala"
+                                    alt="Chai Masala"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=2"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Chai Masala
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Chá tradicional indiano
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(89)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 18,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Produto 3 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/FFC107/000000?text=Açafrão"
+                                    alt="Açafrão Premium"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                                <span
+                                    class="absolute top-3 left-3 bg-red-500 text-white text-xs px-2 py-1 rounded"
+                                    >OFERTA</span
+                                >
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=3"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Açafrão Premium
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Açafrão puro do Kashmir
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(234)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-sm text-gray-500 line-through"
+                                            >R$ 80,00</span
+                                        >
+                                        <span
+                                            class="text-lg font-bold text-primary"
+                                            >R$ 65,00</span
+                                        >
+                                    </div>
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Produto 4 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/8B4513/FFFFFF?text=Cardamomo"
+                                    alt="Cardamomo Verde"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=4"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Cardamomo Verde
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Especiaria aromática premium
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(156)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 35,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <a
+                            href="products.html"
+                            class="btn btn-secondary text-lg px-8 py-3"
+                        >
+                            <i class="fas fa-th-large mr-2"></i>
+                            Ver Todos os Produtos
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Produtos em Destaque -->
+                <section>
+                    <h2
+                        class="text-4xl font-teko text-center text-secondary mb-8"
+                    >
+                        <i class="fas fa-crown text-accent mr-3"></i>
+                        Produtos em Destaque
+                    </h2>
+                    <div
+                        id="featured-products"
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                    >
+                        <!-- Cards de produtos serão inseridos aqui pelo JS -->
+                        <!-- Produto 1 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/D84315/FFFFFF?text=Garam+Masala"
+                                    alt="Garam Masala Premium"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=1"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Garam Masala Premium
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Mistura de especiarias aromáticas
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(127)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 25,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Produto 2 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/00695C/FFFFFF?text=Chai+Masala"
+                                    alt="Chai Masala"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=2"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Chai Masala
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Chá tradicional indiano
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(89)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 18,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Produto 3 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/FFC107/000000?text=Açafrão"
+                                    alt="Açafrão Premium"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                                <span
+                                    class="absolute top-3 left-3 bg-red-500 text-white text-xs px-2 py-1 rounded"
+                                    >OFERTA</span
+                                >
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=3"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Açafrão Premium
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Açafrão puro do Kashmir
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(234)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-sm text-gray-500 line-through"
+                                            >R$ 80,00</span
+                                        >
+                                        <span
+                                            class="text-lg font-bold text-primary"
+                                            >R$ 65,00</span
+                                        >
+                                    </div>
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Produto 4 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/8B4513/FFFFFF?text=Cardamomo"
+                                    alt="Cardamomo Verde"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=4"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Cardamomo Verde
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Especiaria aromática premium
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(156)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 35,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recomendações -->
+                <section class="mt-12">
+                    <h2
+                        class="text-4xl font-teko text-center text-secondary mb-8"
+                    >
+                        <i class="fas fa-magic text-primary mr-3"></i>
+                        Recomendado para Você
+                    </h2>
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+                    >
+                        <!-- Recomendação 1 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border-2 border-accent"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/FF6B6B/FFFFFF?text=Curry+Leaves"
+                                    alt="Folhas de Curry"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                                <span
+                                    class="absolute top-3 left-3 bg-accent text-black text-xs px-2 py-1 rounded font-bold"
+                                    >TOP</span
+                                >
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=5"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Folhas de Curry
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Folhas aromáticas frescas
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(198)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 22,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendação 2 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/4ECDC4/FFFFFF?text=Fenugreek"
+                                    alt="Feno Grego"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=6"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Feno Grego
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Sementes aromáticas
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(76)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 15,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendação 3 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/95E1D3/000000?text=Masala+Chai"
+                                    alt="Masala Chai Blend"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=7"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Masala Chai Blend
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Mistura especial para chá
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(142)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 28,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recomendação 4 -->
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                        >
+                            <div class="aspect-square bg-gray-100 relative">
+                                <img
+                                    src="https://placehold.co/300x300/F38BA8/FFFFFF?text=Rose+Water"
+                                    alt="Água de Rosas"
+                                    class="w-full h-full object-cover"
+                                />
+                                <button
+                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+                                >
+                                    <i
+                                        class="fas fa-heart text-gray-400 hover:text-red-500"
+                                    ></i>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <a
+                                    href="product-detail.html?id=8"
+                                    class="block"
+                                >
+                                    <h3
+                                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+                                    >
+                                        Água de Rosas
+                                    </h3>
+                                </a>
+                                <p class="text-sm text-gray-600 mb-3">
+                                    Essência floral pura
+                                </p>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400 text-sm">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500 ml-1"
+                                        >(93)</span
+                                    >
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-primary"
+                                        >R$ 32,00</span
+                                    >
+                                    <button
+                                        class="btn btn-primary text-sm px-4 py-2"
+                                    >
+                                        <i class="fas fa-cart-plus mr-1"></i>
+                                        Adicionar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Avaliações em Destaque -->
+                <section class="mt-12 bg-white p-8 rounded-lg shadow-md">
+                    <h2
+                        class="text-4xl font-teko text-center text-secondary mb-8"
+                    >
+                        O que nossos clientes dizem
+                    </h2>
+                    <div
+                        id="featured-reviews"
+                        class="grid grid-cols-1 md:grid-cols-3 gap-8"
+                    >
+                        <!-- Avaliação 1 - Garam Masala -->
+                        <div
+                            class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                            <div class="flex items-center mb-4">
+                                <img
+                                    src="https://placehold.co/60x60/D84315/FFFFFF?text=CM"
+                                    alt="Carla Mendes"
+                                    class="w-12 h-12 rounded-full mr-4 review-avatar"
+                                />
+                                <div>
+                                    <h4
+                                        class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
+                                    >
+                                        Carla Mendes
+                                    </h4>
+                                    <div class="rating flex">
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ingredient-badge mb-3">
+                                Garam Masala Premium
+                            </div>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Simplesmente incrível! O aroma é tão autêntico
+                                que me transporta diretamente para a Índia. Meu
+                                curry de frango nunca ficou tão saboroso.
+                                Produto de altíssima qualidade!"
+                            </p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <i class="fas fa-calendar mr-1"></i>
+                                Comprou há 2 semanas
+                            </div>
+                        </div>
+
+                        <!-- Avaliação 2 - Cúrcuma -->
+                        <div
+                            class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                            <div class="flex items-center mb-4">
+                                <img
+                                    src="https://placehold.co/60x60/F7931E/FFFFFF?text=RS"
+                                    alt="Ricardo Santos"
+                                    class="w-12 h-12 rounded-full mr-4 review-avatar"
+                                />
+                                <div>
+                                    <h4
+                                        class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
+                                    >
+                                        Ricardo Santos
+                                    </h4>
+                                    <div class="rating flex">
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ingredient-badge mb-3">
+                                Cúrcuma Pura
+                            </div>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "A cor dourada é impressionante! Uso tanto na
+                                culinária quanto no golden milk matinal. Sinto
+                                os benefícios anti-inflamatórios. Melhor cúrcuma
+                                que já comprei!"
+                            </p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <i class="fas fa-calendar mr-1"></i>
+                                Cliente há 3 meses
+                            </div>
+                        </div>
+
+                        <!-- Avaliação 3 - Chai Masala -->
+                        <div
+                            class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                            <div class="flex items-center mb-4">
+                                <img
+                                    src="https://placehold.co/60x60/4A6741/FFFFFF?text=AL"
+                                    alt="Ana Lucia"
+                                    class="w-12 h-12 rounded-full mr-4 review-avatar"
+                                />
+                                <div>
+                                    <h4
+                                        class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
+                                    >
+                                        Ana Lúcia
+                                    </h4>
+                                    <div class="rating flex">
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ingredient-badge mb-3">
+                                Chá Masala Chai
+                            </div>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Este chai é puro amor em uma xícara! A mistura
+                                de especiarias é perfeita - nem muito forte, nem
+                                muito suave. Já virou ritual na minha casa.
+                                Recomendo demais!"
+                            </p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <i class="fas fa-calendar mr-1"></i>
+                                Comprou ontem
+                            </div>
+                        </div>
+
+                        <!-- Avaliação 4 - Cardamomo -->
+                        <div
+                            class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                            <div class="flex items-center mb-4">
+                                <img
+                                    src="https://placehold.co/60x60/8B4513/FFFFFF?text=MF"
+                                    alt="Marcos Ferreira"
+                                    class="w-12 h-12 rounded-full mr-4 review-avatar"
+                                />
+                                <div>
+                                    <h4
+                                        class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
+                                    >
+                                        Marcos Ferreira
+                                    </h4>
+                                    <div class="rating flex">
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ingredient-badge mb-3">
+                                Cardamomo Verde
+                            </div>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Cardamomo fresco e aromático! Uso para fazer
+                                café árabe e doces indianos. A qualidade é
+                                excepcional, as vagens chegaram verdinhas e
+                                perfumadas. Excelente!"
+                            </p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <i class="fas fa-calendar mr-1"></i>
+                                Cliente fiel há 1 ano
+                            </div>
+                        </div>
+
+                        <!-- Avaliação 5 - Lentilhas -->
+                        <div
+                            class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                            <div class="flex items-center mb-4">
+                                <img
+                                    src="https://placehold.co/60x60/CC2936/FFFFFF?text=JS"
+                                    alt="Julia Silva"
+                                    class="w-12 h-12 rounded-full mr-4 review-avatar"
+                                />
+                                <div>
+                                    <h4
+                                        class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
+                                    >
+                                        Júlia Silva
+                                    </h4>
+                                    <div class="rating flex">
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ingredient-badge mb-3">
+                                Lentilha Vermelha
+                            </div>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Perfeitas para o dal! Cozinham rapidinho e
+                                ficam cremosas. Minha família toda se apaixonou
+                                pelos pratos indianos que faço com essas
+                                lentilhas. Proteína de qualidade!"
+                            </p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <i class="fas fa-calendar mr-1"></i>
+                                3ª compra este mês
+                            </div>
+                        </div>
+
+                        <!-- Avaliação 6 - Pimenta -->
+                        <div
+                            class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                            <div class="flex items-center mb-4">
+                                <img
+                                    src="https://placehold.co/60x60/2F1B14/FFFFFF?text=PA"
+                                    alt="Pedro Almeida"
+                                    class="w-12 h-12 rounded-full mr-4 review-avatar"
+                                />
+                                <div>
+                                    <h4
+                                        class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
+                                    >
+                                        Pedro Almeida
+                                    </h4>
+                                    <div class="rating flex">
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                        <i class="fas fa-star text-accent"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ingredient-badge mb-3">
+                                Pimenta Caiena
+                            </div>
+                            <p class="text-gray-700 italic leading-relaxed">
+                                "Para quem gosta de comida bem temperada, essa
+                                pimenta é sensacional! Ardência na medida certa
+                                e um sabor incrível. Meus convidados sempre
+                                perguntam o segredo dos meus pratos!"
+                            </p>
+                            <div class="mt-4 text-sm text-gray-500">
+                                <i class="fas fa-calendar mr-1"></i>
+                                Recompra garantida!
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Estatísticas de Satisfação -->
+                <section
+                    class="mt-16 mb-12 rounded-lg p-8 text-white relative overflow-hidden shadow-2xl"
+                    style="
+                        background: linear-gradient(
+                            135deg,
+                            #8b4513 0%,
+                            #a0522d 25%,
+                            #cd853f 50%,
+                            #d2691e 75%,
+                            #cc2936 100%
+                        );
+                    "
+                >
+                    <!-- Background Pattern -->
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="paisley-decoration h-full w-full"></div>
+                    </div>
+                    <!-- Spice-themed Background Overlay -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-transparent to-orange-800/20"
+                    ></div>
+                    <!-- Indian Pattern Overlay -->
+                    <div
+                        class="absolute inset-0 opacity-5"
+                        style="
+                            background-image:
+                                radial-gradient(
+                                    circle at 25% 25%,
+                                    #f7931e 2px,
+                                    transparent 2px
+                                ),
+                                radial-gradient(
+                                    circle at 75% 75%,
+                                    #ff6b35 1px,
+                                    transparent 1px
+                                );
+                            background-size: 20px 20px;
+                            background-position:
+                                0 0,
+                                10px 10px;
+                        "
+                    ></div>
+
+                    <div class="relative z-10">
+                        <div class="text-center mb-8">
+                            <h2 class="text-4xl font-teko mb-4 text-yellow-200">
+                                <i
+                                    class="fas fa-chart-line mr-3 text-yellow-300"
+                                ></i>
+                                Nossa Satisfação em Números
+                            </h2>
+                            <p class="text-xl text-orange-100">
+                                A opinião dos nossos clientes é o que mais
+                                importa para nós
+                            </p>
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center"
+                        >
+                            <div
+                                class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <div
+                                    class="text-4xl font-bold text-yellow-300 mb-2"
+                                >
+                                    98%
+                                </div>
+                                <div class="text-lg font-rajdhani text-white">
+                                    Satisfação Geral
+                                </div>
+                                <div class="text-sm text-orange-200 mt-2">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    Baseado em 2.847 avaliações
+                                </div>
+                            </div>
+
+                            <div
+                                class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <div
+                                    class="text-4xl font-bold text-yellow-300 mb-2"
+                                >
+                                    4.9
+                                </div>
+                                <div class="text-lg font-rajdhani text-white">
+                                    Nota Média
+                                </div>
+                                <div class="text-sm text-orange-200 mt-2">
+                                    <i
+                                        class="fas fa-thumbs-up text-yellow-400"
+                                    ></i>
+                                    Avaliação de 5 estrelas
+                                </div>
+                            </div>
+
+                            <div
+                                class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <div
+                                    class="text-4xl font-bold text-yellow-300 mb-2"
+                                >
+                                    95%
+                                </div>
+                                <div class="text-lg font-rajdhani text-white">
+                                    Recompram
+                                </div>
+                                <div class="text-sm text-orange-200 mt-2">
+                                    <i class="fas fa-redo text-yellow-400"></i>
+                                    Clientes que voltam
+                                </div>
+                            </div>
+
+                            <div
+                                class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
+                            >
+                                <div
+                                    class="text-4xl font-bold text-yellow-300 mb-2"
+                                >
+                                    24h
+                                </div>
+                                <div class="text-lg font-rajdhani text-white">
+                                    Suporte Rápido
+                                </div>
+                                <div class="text-sm text-orange-200 mt-2">
+                                    <i class="fas fa-clock text-yellow-400"></i>
+                                    Tempo médio de resposta
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <button
+                                class="btn bg-yellow-500 text-black hover:bg-yellow-400 px-8 py-3 text-lg font-rajdhani shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                            >
+                                <i class="fas fa-comment-dots mr-2"></i>
+                                Ver Todas as Avaliações
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Depoimentos Rápidos -->
+                <section class="mb-16 bg-white rounded-lg shadow-lg p-8">
+                    <h2
+                        class="text-3xl font-teko text-center text-secondary mb-8"
+                    >
+                        <i class="fas fa-quote-left mr-3 text-accent"></i>
+                        Palavras dos Nossos Clientes
+                    </h2>
+
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    >
+                        <div
+                            class="bg-gradient-to-br from-ginger-cream to-white p-4 rounded-lg border-l-4 border-saffron-deep"
+                        >
+                            <p class="text-gray-700 italic mb-3">
+                                "Produtos autênticos que transformaram minha
+                                cozinha!"
+                            </p>
+                            <div class="flex items-center">
+                                <div class="rating mr-3">
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                </div>
+                                <span
+                                    class="text-sm font-semibold text-cinnamon-brown"
+                                    >- Marina C.</span
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-gradient-to-br from-ginger-cream to-white p-4 rounded-lg border-l-4 border-cardamom-green"
+                        >
+                            <p class="text-gray-700 italic mb-3">
+                                "Entrega super rápida e produtos fresquíssimos!"
+                            </p>
+                            <div class="flex items-center">
+                                <div class="rating mr-3">
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                </div>
+                                <span
+                                    class="text-sm font-semibold text-cinnamon-brown"
+                                    >- Roberto L.</span
+                                >
+                            </div>
+                        </div>
+
+                        <div
+                            class="bg-gradient-to-br from-ginger-cream to-white p-4 rounded-lg border-l-4 border-turmeric-gold"
+                        >
+                            <p class="text-gray-700 italic mb-3">
+                                "Atendimento excepcional e preços justos!"
+                            </p>
+                            <div class="flex items-center">
+                                <div class="rating mr-3">
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                    <i
+                                        class="fas fa-star text-accent text-sm"
+                                    ></i>
+                                </div>
+                                <span
+                                    class="text-sm font-semibold text-cinnamon-brown"
+                                    >- Fernanda S.</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Blocos de Informação -->
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md flex items-center space-x-4"
+                    >
+                        <i class="fas fa-truck-fast text-4xl text-primary"></i>
+                        <div>
+                            <h3 class="text-2xl font-teko text-secondary">
+                                Entrega em todo o Brasil
+                            </h3>
+                            <p>
+                                Receba seus produtos favoritos no conforto da
+                                sua casa, onde quer que você esteja.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white p-6 rounded-lg shadow-md flex items-center space-x-4"
+                    >
+                        <i class="fas fa-credit-card text-4xl text-primary"></i>
+                        <div>
+                            <h3 class="text-2xl font-teko text-secondary">
+                                Pagamento Facilitado
+                            </h3>
+                            <p>
+                                Aceitamos cartão de crédito, PIX e boleto.
+                                Compre com segurança e praticidade.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- ==== RODAPÉ ==== -->
+        <footer
+            class="bg-gradient-to-br from-orange-900 via-amber-900 to-red-900 text-white mt-16 relative overflow-hidden shadow-2xl"
+            style="
+                background: linear-gradient(
+                    135deg,
+                    #8b4513 0%,
+                    #a0522d 25%,
+                    #cd853f 50%,
+                    #d2691e 75%,
+                    #cc2936 100%
+                );
+            "
+        >
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="paisley-decoration h-full w-full"></div>
+            </div>
+            <!-- Spice-themed Background Overlay -->
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-transparent to-orange-800/20"
+            ></div>
+            <!-- Indian Pattern Overlay -->
+            <div
+                class="absolute inset-0 opacity-5"
+                style="
+                    background-image:
+                        radial-gradient(
+                            circle at 25% 25%,
+                            #f7931e 2px,
+                            transparent 2px
+                        ),
+                        radial-gradient(
+                            circle at 75% 75%,
+                            #ff6b35 1px,
+                            transparent 1px
+                        );
+                    background-size: 20px 20px;
+                    background-position:
+                        0 0,
+                        10px 10px;
+                "
+            ></div>
+
+            <div
+                class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10"
+            >
+                <!-- Main Footer Content -->
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8"
+                >
+                    <!-- Company Info -->
+                    <div class="lg:col-span-1">
+                        <div class="flex items-center mb-4">
+                            <i
+                                class="fas fa-seedling text-3xl text-accent mr-3"
+                            ></i>
+                            <h3 class="font-teko text-3xl text-accent">
+                                India Oasis
+                            </h3>
+                        </div>
+                        <p class="text-gray-200 mb-4 leading-relaxed">
+                            Trazendo os autênticos sabores e aromas da Índia
+                            diretamente para sua mesa. Especiarias premium, chás
+                            tradicionais e ingredientes selecionados com amor e
+                            tradição milenar.
+                        </p>
+                        <div class="flex items-center text-sm text-gray-300">
+                            <i class="fas fa-shield-alt text-accent mr-2"></i>
+                            <span>Produtos 100% naturais e certificados</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div>
+                        <h4
+                            class="font-rajdhani text-xl font-semibold mb-4 text-accent"
+                        >
+                            <i class="fas fa-compass mr-2"></i>
+                            Navegação
+                        </h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a
+                                    href="index.html"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-home w-4 mr-2"></i>
+                                    Início
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="products.html"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-box w-4 mr-2"></i>
+                                    Produtos
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="about.html"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-heart w-4 mr-2"></i>
+                                    Sobre Nós
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="contact.html"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-envelope w-4 mr-2"></i>
+                                    Contato
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="cart.html"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i
+                                        class="fas fa-shopping-cart w-4 mr-2"
+                                    ></i>
+                                    Carrinho
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="wishlist.html"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-star w-4 mr-2"></i>
+                                    Lista de Desejos
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Categories -->
+                    <div>
+                        <h4
+                            class="font-rajdhani text-xl font-semibold mb-4 text-accent"
+                        >
+                            <i class="fas fa-tags mr-2"></i>
+                            Categorias
+                        </h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a
+                                    href="products.html?category=temperos"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-pepper-hot w-4 mr-2"></i>
+                                    Temperos
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="products.html?category=chas"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-mug-hot w-4 mr-2"></i>
+                                    Chás
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="products.html?category=graos"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-seedling w-4 mr-2"></i>
+                                    Grãos
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="products.html?category=oleos"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-tint w-4 mr-2"></i>
+                                    Óleos
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="products.html?category=combos"
+                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                >
+                                    <i class="fas fa-gift w-4 mr-2"></i>
+                                    Combos
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="lg:col-span-5">
+                        <h4
+                            class="font-rajdhani text-xl font-semibold mb-6 text-yellow-300 border-b border-yellow-300/40 pb-3 text-center"
+                        >
+                            <i class="fas fa-headset mr-2 text-yellow-400"></i>
+                            Central de Atendimento
+                        </h4>
+
+                        <!-- Canais de Atendimento em Linha -->
+                        <div
+                            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6"
+                        >
+                            <!-- WhatsApp -->
+                            <a
+                                href="https://wa.me/5511987654321"
+                                target="_blank"
+                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-green-700/20 p-4 rounded-lg border border-green-500/30 hover:border-green-400/50 hover:scale-105"
+                            >
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
+                                >
+                                    <i
+                                        class="fab fa-whatsapp text-white text-2xl"
+                                    ></i>
+                                </div>
+                                <p
+                                    class="font-semibold text-white text-sm text-center"
+                                >
+                                    (11) 98765-4321
+                                </p>
+                                <p
+                                    class="text-xs text-green-200 text-center mt-1"
+                                >
+                                    WhatsApp 24h
+                                </p>
+                            </a>
+
+                            <!-- SAC -->
+                            <a
+                                href="tel:+55114003-2024"
+                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-blue-700/20 p-4 rounded-lg border border-blue-500/30 hover:border-blue-400/50 hover:scale-105"
+                            >
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
+                                >
+                                    <i
+                                        class="fas fa-phone text-white text-xl"
+                                    ></i>
+                                </div>
+                                <p
+                                    class="font-semibold text-white text-sm text-center"
+                                >
+                                    4003-2024
+                                </p>
+                                <p
+                                    class="text-xs text-blue-200 text-center mt-1"
+                                >
+                                    SAC 8h-20h
+                                </p>
+                            </a>
+
+                            <!-- Email Geral -->
+                            <a
+                                href="mailto:contato@indiaoasis.com.br"
+                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-red-700/20 p-4 rounded-lg border border-red-500/30 hover:border-red-400/50 hover:scale-105"
+                            >
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
+                                >
+                                    <i
+                                        class="fas fa-envelope text-white text-xl"
+                                    ></i>
+                                </div>
+                                <p
+                                    class="font-semibold text-white text-xs text-center"
+                                >
+                                    contato@indiaoasis.com.br
+                                </p>
+                                <p
+                                    class="text-xs text-red-200 text-center mt-1"
+                                >
+                                    Geral 2h
+                                </p>
+                            </a>
+
+                            <!-- Email Vendas -->
+                            <a
+                                href="mailto:vendas@indiaoasis.com.br"
+                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-orange-700/20 p-4 rounded-lg border border-orange-500/30 hover:border-orange-400/50 hover:scale-105"
+                            >
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
+                                >
+                                    <i
+                                        class="fas fa-shopping-bag text-white text-xl"
+                                    ></i>
+                                </div>
+                                <p
+                                    class="font-semibold text-white text-xs text-center"
+                                >
+                                    vendas@indiaoasis.com.br
+                                </p>
+                                <p
+                                    class="text-xs text-orange-200 text-center mt-1"
+                                >
+                                    Vendas
+                                </p>
+                            </a>
+
+                            <!-- Telefone Vendas -->
+                            <a
+                                href="tel:+55113456-7890"
+                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-purple-700/20 p-4 rounded-lg border border-purple-500/30 hover:border-purple-400/50 hover:scale-105"
+                            >
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
+                                >
+                                    <i
+                                        class="fas fa-phone-volume text-white text-xl"
+                                    ></i>
+                                </div>
+                                <p
+                                    class="font-semibold text-white text-sm text-center"
+                                >
+                                    (11) 3456-7890
+                                </p>
+                                <p
+                                    class="text-xs text-purple-200 text-center mt-1"
+                                >
+                                    Vendas 9h-17h
+                                </p>
+                            </a>
+
+                            <!-- Endereço -->
+                            <div
+                                class="flex flex-col items-center text-orange-100 bg-teal-700/20 p-4 rounded-lg border border-teal-500/30"
+                            >
+                                <div
+                                    class="w-16 h-16 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full flex items-center justify-center mb-3 shadow-lg"
+                                >
+                                    <i
+                                        class="fas fa-map-marker-alt text-white text-xl"
+                                    ></i>
+                                </div>
+                                <p
+                                    class="font-semibold text-white text-xs text-center"
+                                >
+                                    Rua Antônio de Godói, 122 - Sala 31
+                                </p>
+                                <p
+                                    class="text-xs text-teal-200 text-center mt-1"
+                                >
+                                    República - SP
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Horário de Funcionamento -->
+                        <div
+                            class="p-4 bg-amber-800/30 rounded-lg border border-yellow-400/30 backdrop-blur-sm"
+                        >
+                            <h5
+                                class="font-semibold text-yellow-300 mb-3 flex items-center justify-center"
+                            >
+                                <i
+                                    class="fas fa-clock mr-2 text-yellow-400"
+                                ></i>
+                                Horário de Funcionamento
+                            </h5>
+                            <div
+                                class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs"
+                            >
+                                <div class="text-center">
+                                    <span class="text-orange-200 block"
+                                        >Segunda à Sexta</span
+                                    >
+                                    <span class="text-white font-semibold"
+                                        >9h às 17h</span
+                                    >
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-orange-200 block"
+                                        >Sábado</span
+                                    >
+                                    <span class="text-white font-semibold"
+                                        >Fechado</span
+                                    >
+                                </div>
+                                <div class="text-center">
+                                    <span class="text-orange-200 block"
+                                        >Domingo</span
+                                    >
+                                    <span class="text-white font-semibold"
+                                        >Fechado</span
+                                    >
+                                </div>
+                                <div
+                                    class="text-center border-l border-yellow-400/30"
+                                >
+                                    <span class="text-orange-200 block"
+                                        >WhatsApp</span
+                                    >
+                                    <span class="text-green-300 font-bold"
+                                        >24h</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services & Newsletter -->
+                <div class="border-t border-orange-300/40 pt-8 mb-8">
+                    <!-- Services Info -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div
+                            class="text-center p-4 bg-white/5 rounded-lg border border-accent/20"
+                        >
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3"
+                            >
+                                <i
+                                    class="fas fa-shipping-fast text-white text-xl"
+                                ></i>
+                            </div>
+                            <h5 class="font-semibold text-white mb-2">
+                                Entrega Rápida
+                            </h5>
+                            <p class="text-xs text-gray-300">
+                                Receba em até 24h na Grande SP
+                            </p>
+                        </div>
+                        <div
+                            class="text-center p-4 bg-white/5 rounded-lg border border-accent/20"
+                        >
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3"
+                            >
+                                <i
+                                    class="fas fa-shield-alt text-white text-xl"
+                                ></i>
+                            </div>
+                            <h5 class="font-semibold text-white mb-2">
+                                Compra Segura
+                            </h5>
+                            <p class="text-xs text-gray-300">
+                                SSL e pagamentos protegidos
+                            </p>
+                        </div>
+                        <div
+                            class="text-center p-4 bg-white/5 rounded-lg border border-accent/20"
+                        >
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3"
+                            >
+                                <i class="fas fa-award text-white text-xl"></i>
+                            </div>
+                            <h5 class="font-semibold text-white mb-2">
+                                Qualidade Premium
+                            </h5>
+                            <p class="text-xs text-gray-300">
+                                Produtos certificados e frescos
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div
+                        class="max-w-2xl mx-auto text-center bg-gradient-to-r from-yellow-600/20 to-orange-600/20 p-6 rounded-lg border border-yellow-400/40 backdrop-blur-sm"
+                    >
+                        <h4
+                            class="font-rajdhani text-2xl font-semibold mb-3 text-yellow-300"
+                        >
+                            <i class="fas fa-bell mr-2"></i>
+                            Receba Ofertas Especiais
+                        </h4>
+                        <p class="text-gray-200 mb-4">
+                            Cadastre-se e seja o primeiro a saber sobre novos
+                            produtos, receitas exclusivas e promoções
+                            imperdíveis!
+                        </p>
+                        <div
+                            class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                        >
+                            <input
+                                type="email"
+                                placeholder="Seu melhor email"
+                                class="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent bg-white shadow-lg"
+                            />
+                            <button
+                                class="btn bg-yellow-500 text-black hover:bg-yellow-400 px-1 py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                            >
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Cadastrar
+                            </button>
+                        </div>
+                        <p
+                            class="text-xs text-orange-200 mt-3 flex items-center justify-center"
+                        >
+                            <i class="fas fa-lock mr-1 text-yellow-400"></i>
+                            Seus dados estão seguros conosco • Sem spam
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Social Media & Payment -->
+                <div class="border-t border-orange-300/40 pt-8 mb-8">
+                    <div
+                        class="flex flex-col lg:flex-row justify-between items-center gap-6"
+                    >
+                        <!-- Social Media -->
+                        <div class="text-center lg:text-left">
+                            <h5
+                                class="font-rajdhani text-lg font-semibold mb-3 text-accent"
+                            >
+                                <i class="fas fa-share-alt mr-2"></i>
+                                Siga-nos nas Redes
+                            </h5>
+                            <div
+                                class="flex justify-center lg:justify-start space-x-4"
+                            >
+                                <a
+                                    href="https://instagram.com/indiaoasis"
+                                    target="_blank"
+                                    class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                                >
+                                    <i class="fab fa-instagram text-white"></i>
+                                </a>
+                                <a
+                                    href="https://facebook.com/indiaoasis"
+                                    target="_blank"
+                                    class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                                >
+                                    <i class="fab fa-facebook-f text-white"></i>
+                                </a>
+                                <a
+                                    href="https://youtube.com/indiaoasis"
+                                    target="_blank"
+                                    class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                                >
+                                    <i class="fab fa-youtube text-white"></i>
+                                </a>
+                                <a
+                                    href="https://tiktok.com/@indiaoasis"
+                                    target="_blank"
+                                    class="w-10 h-10 bg-black rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                                >
+                                    <i class="fab fa-tiktok text-white"></i>
+                                </a>
+                                <a
+                                    href="https://pinterest.com/indiaoasis"
+                                    target="_blank"
+                                    class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+                                >
+                                    <i class="fab fa-pinterest text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Payment Methods -->
+                        <div class="text-center lg:text-right">
+                            <h5
+                                class="font-rajdhani text-lg font-semibold mb-3 text-yellow-300 border-b border-yellow-300/40 pb-2"
+                            >
+                                <i class="fas fa-credit-card mr-2"></i>
+                                Formas de Pagamento
+                            </h5>
+                            <div
+                                class="flex justify-center lg:justify-end items-center space-x-2 flex-wrap gap-2 mb-3"
+                            >
+                                <div
+                                    class="bg-white rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
+                                >
+                                    <i
+                                        class="fab fa-cc-visa text-blue-600 text-xl"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="bg-white rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
+                                >
+                                    <i
+                                        class="fab fa-cc-mastercard text-red-500 text-xl"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="bg-white rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
+                                >
+                                    <i
+                                        class="fab fa-cc-amex text-blue-500 text-xl"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="bg-gradient-to-r from-green-400 to-green-600 rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
+                                >
+                                    <span class="text-white font-bold text-sm"
+                                        >PIX</span
+                                    >
+                                </div>
+                                <div
+                                    class="bg-gradient-to-r from-orange-400 to-orange-600 rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
+                                >
+                                    <i class="fas fa-barcode text-white"></i>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs text-orange-200">
+                                    <i
+                                        class="fas fa-shield-alt mr-1 text-green-400"
+                                    ></i>
+                                    Pagamentos 100% seguros
+                                </p>
+                                <p class="text-xs text-orange-200">
+                                    <i
+                                        class="fas fa-percentage mr-1 text-yellow-400"
+                                    ></i>
+                                    Parcelamento em até 12x sem juros
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Certifications -->
+                        <div class="text-center">
+                            <h5
+                                class="font-rajdhani text-lg font-semibold mb-3 text-accent"
+                            >
+                                <i class="fas fa-certificate mr-2"></i>
+                                Certificações
+                            </h5>
+                            <div class="flex justify-center space-x-3">
+                                <div
+                                    class="bg-white rounded-full w-12 h-12 flex items-center justify-center"
+                                >
+                                    <i class="fas fa-leaf text-green-600"></i>
+                                </div>
+                                <div
+                                    class="bg-white rounded-full w-12 h-12 flex items-center justify-center"
+                                >
+                                    <i class="fas fa-award text-yellow-600"></i>
+                                </div>
+                                <div
+                                    class="bg-white rounded-full w-12 h-12 flex items-center justify-center"
+                                >
+                                    <i
+                                        class="fas fa-shield-alt text-blue-600"
+                                    ></i>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-300 mt-2">
+                                Qualidade Certificada
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Footer -->
+                <div
+                    class="border-t border-orange-300/40 pt-6 bg-amber-900/30 -mx-8 px-8 -mb-12 pb-6"
+                >
+                    <div
+                        class="flex flex-col lg:flex-row justify-between items-center gap-4"
+                    >
+                        <div class="text-center lg:text-left">
+                            <p class="text-sm text-orange-100">
+                                &copy; 2023
+                                <strong class="text-yellow-300"
+                                    >India Oasis Brasil</strong
+                                >
+                                - Todos os direitos reservados.
+                            </p>
+                            <div class="text-xs text-orange-300 mt-2 space-y-1">
+                                <p>CNPJ: 39.588.327/0001-61</p>
+                                <p>
+                                    Razão Social: India Oasis Comercio de
+                                    Especiarias Ltda.
+                                </p>
+                                <p class="flex items-center">
+                                    <i
+                                        class="fas fa-award mr-1 text-yellow-400"
+                                    ></i>
+                                    Empresa certificada pela ANVISA
+                                </p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex flex-wrap justify-center gap-4 text-xs"
+                        >
+                            <a
+                                href="#"
+                                class="text-gray-300 hover:text-accent transition-colors"
+                                >Política de Privacidade</a
+                            >
+                            <span class="text-gray-500">|</span>
+                            <a
+                                href="#"
+                                class="text-gray-300 hover:text-accent transition-colors"
+                                >Termos de Uso</a
+                            >
+                            <span class="text-gray-500">|</span>
+                            <a
+                                href="#"
+                                class="text-gray-300 hover:text-accent transition-colors"
+                                >Política de Entrega</a
+                            >
+                            <span class="text-gray-500">|</span>
+                            <a
+                                href="#"
+                                class="text-gray-300 hover:text-accent transition-colors"
+                                >Trocas e Devoluções</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="absolute top-20 left-20 w-2 h-2 bg-accent rounded-full opacity-30 animate-ping"
+            ></div>
+            <div
+                class="absolute bottom-32 right-32 w-1 h-1 bg-accent rounded-full opacity-40 animate-ping"
+                style="animation-delay: 1s"
+            ></div>
+            <div
+                class="absolute top-1/3 right-20 w-1.5 h-1.5 bg-accent rounded-full opacity-25 animate-ping"
+                style="animation-delay: 2s"
+            ></div>
+        </footer>
+
+        <!-- ==== MODAL DE FEEDBACK ==== -->
+        <div
+            id="feedback-modal"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
+            <div
+                class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto"
+            >
+                <h3 id="modal-title" class="text-2xl font-teko mb-4"></h3>
+                <p id="modal-message" class="mb-6"></p>
+                <button id="modal-close-btn" class="btn btn-primary">
+                    Fechar
+                </button>
+            </div>
+        </div>
+
+        <!-- ==== MODAL DE LOGIN ==== -->
+        <div
+            id="login-modal"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+        >
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-teko text-secondary">
+                            Entrar na sua Conta
+                        </h2>
+                        <button
+                            id="close-login"
+                            class="text-gray-500 hover:text-gray-700 text-2xl"
+                        >
+                            &times;
+                        </button>
+                    </div>
+
+                    <form id="login-form">
+                        <div class="mb-4">
+                            <label
+                                for="login-email"
+                                class="block mb-2 font-semibold text-gray-700"
+                            >
+                                E-mail
+                            </label>
+                            <input
+                                type="email"
+                                id="login-email"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                required
+                            />
+                        </div>
+
+                        <div class="mb-6">
+                            <label
+                                for="login-password"
+                                class="block mb-2 font-semibold text-gray-700"
+                            >
+                                Senha
+                            </label>
+                            <input
+                                type="password"
+                                id="login-password"
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                required
+                            />
+                        </div>
+
+                        <div class="flex items-center justify-between mb-6">
+                            <label class="flex items-center">
+                                <input
+                                    type="checkbox"
+                                    class="mr-2 text-primary focus:ring-2 focus:ring-primary"
+                                />
+                                <span class="text-sm text-gray-600"
+                                    >Lembrar de mim</span
+                                >
+                            </label>
+                            <a
+                                href="#"
+                                class="text-sm text-primary hover:underline"
+                                >Esqueci minha senha</a
+                            >
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-full text-lg py-3 mb-4"
+                        >
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Entrar
+                        </button>
+
+                        <div class="text-center">
+                            <p class="text-sm text-gray-600 mb-4">
+                                Não tem uma conta?
+                            </p>
+                            <button
+                                type="button"
+                                id="register-btn"
+                                class="btn btn-secondary w-full text-lg py-3"
+                            >
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Criar Conta
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sistema de Notificações Toast -->
+        <script src="assets/js/toast-system.js"></script>
+
+        <!-- Link para o arquivo JavaScript externo -->
+        <script src="assets/js/script.js" defer></script>
+        <script>
+            // Modal de Login
+            document
+                .getElementById("login-btn")
+                .addEventListener("click", function () {
+                    document
+                        .getElementById("login-modal")
+                        .classList.remove("hidden");
+                });
+
+            document
+                .getElementById("close-login")
+                .addEventListener("click", function () {
+                    document
+                        .getElementById("login-modal")
+                        .classList.add("hidden");
+                });
+
+            // Fechar modal clicando fora
+            document
+                .getElementById("login-modal")
+                .addEventListener("click", function (e) {
+                    if (e.target === this) {
+                        this.classList.add("hidden");
+                    }
+                });
+
+            // Form de login
+            document
+                .getElementById("login-form")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    // Aqui você pode adicionar a lógica de autenticação
+                    alert("Funcionalidade de login em desenvolvimento!");
+                    document
+                        .getElementById("login-modal")
+                        .classList.add("hidden");
+                });
+
+            // ========================================
+            // FUNCIONALIDADE DO MENU LATERAL PARA DEMONSTRAÇÃO
+            // ========================================
+
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("🎯 Inicializando demonstração do menu lateral...");
+
+                // Elementos do menu
+                const sideMenu = document.getElementById("side-menu");
+                const menuOverlay = document.getElementById("menu-overlay");
+                const openMenuBtn = document.getElementById("open-menu-btn");
+                const closeMenuBtn = document.getElementById("close-menu-btn");
+                const searchInput = document.getElementById("search-input");
+
+                // Debug detalhado dos elementos
+                console.log("🔍 Verificando elementos:", {
+                    sideMenu: !!sideMenu,
+                    menuOverlay: !!menuOverlay,
+                    openMenuBtn: !!openMenuBtn,
+                    closeMenuBtn: !!closeMenuBtn,
+                    searchInput: !!searchInput,
+                });
+
+                // Verificar se todos os elementos existem
+                if (
+                    !sideMenu ||
+                    !menuOverlay ||
+                    !openMenuBtn ||
+                    !closeMenuBtn
+                ) {
+                    console.error("❌ Elementos do menu não encontrados!");
+                    console.error("Missing elements:", {
+                        sideMenu: !sideMenu ? "MISSING" : "OK",
+                        menuOverlay: !menuOverlay ? "MISSING" : "OK",
+                        openMenuBtn: !openMenuBtn ? "MISSING" : "OK",
+                        closeMenuBtn: !closeMenuBtn ? "MISSING" : "OK",
+                    });
+                    return;
+                }
+
+                console.log("✅ Elementos do menu encontrados!");
+
+                // Função para abrir o menu
+                function openMenu() {
+                    console.log("🔓 Abrindo menu...");
+                    console.log("Estado antes:", {
+                        menuOpen: sideMenu.classList.contains("open"),
+                        overlayHidden: menuOverlay.classList.contains("hidden"),
+                        bodyMenuOpen:
+                            document.body.classList.contains("menu-open"),
+                    });
+
+                    sideMenu.classList.add("open");
+                    menuOverlay.classList.remove("hidden");
+                    document.body.classList.add("menu-open");
+
+                    console.log("Estado depois:", {
+                        menuOpen: sideMenu.classList.contains("open"),
+                        overlayHidden: menuOverlay.classList.contains("hidden"),
+                        bodyMenuOpen:
+                            document.body.classList.contains("menu-open"),
+                    });
+
+                    // Foco no campo de busca quando menu abrir
+                    setTimeout(() => {
+                        if (searchInput) {
+                            searchInput.focus();
+                        }
+                    }, 300);
+                }
+
+                // Função para fechar o menu
+                function closeMenu() {
+                    console.log("🔒 Fechando menu...");
+                    console.log("Estado antes:", {
+                        menuOpen: sideMenu.classList.contains("open"),
+                        overlayHidden: menuOverlay.classList.contains("hidden"),
+                        bodyMenuOpen:
+                            document.body.classList.contains("menu-open"),
+                    });
+
+                    sideMenu.classList.remove("open");
+                    menuOverlay.classList.add("hidden");
+                    document.body.classList.remove("menu-open");
+
+                    console.log("Estado depois:", {
+                        menuOpen: sideMenu.classList.contains("open"),
+                        overlayHidden: menuOverlay.classList.contains("hidden"),
+                        bodyMenuOpen:
+                            document.body.classList.contains("menu-open"),
+                    });
+                }
+
+                // Event listeners
+                openMenuBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    console.log("👆 Botão abrir menu clicado");
+                    console.log("Elemento botão:", openMenuBtn);
+                    openMenu();
+                });
+
+                closeMenuBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    console.log("👆 Botão fechar menu clicado");
+                    console.log("Elemento botão:", closeMenuBtn);
+                    closeMenu();
+                });
+
+                // Fechar menu clicando no overlay
+                menuOverlay.addEventListener("click", function (e) {
+                    if (e.target === menuOverlay) {
+                        console.log("👆 Overlay clicado - fechando menu");
+                        closeMenu();
+                    }
+                });
+
+                // Fechar menu com tecla ESC
+                document.addEventListener("keydown", function (e) {
+                    if (
+                        e.key === "Escape" &&
+                        sideMenu.classList.contains("open")
+                    ) {
+                        console.log("⌨️ ESC pressionado - fechando menu");
+                        closeMenu();
+                    }
+                });
+
+                // ========================================
+                // FUNCIONALIDADES DE DEMONSTRAÇÃO
+                // ========================================
+
+                // Animar botão do menu para chamar atenção
+                function animateMenuButton() {
+                    openMenuBtn.style.animation = "pulse 2s infinite";
+
+                    // Parar animação após 10 segundos
+                    setTimeout(() => {
+                        openMenuBtn.style.animation = "";
+                    }, 10000);
+                }
+
+                // Adicionar tooltip de demonstração
+                function addDemoTooltip() {
+                    const tooltip = document.createElement("div");
+                    tooltip.className = "demo-tooltip";
+                    tooltip.textContent = "👈 Clique aqui para ver o menu!";
+                    tooltip.style.cssText = `
+                        position: absolute;
+                        top: 100%;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: #ff6b35;
+                        color: white;
+                        padding: 0.5rem 0.75rem;
+                        border-radius: 6px;
+                        font-size: 0.75rem;
+                        white-space: nowrap;
+                        opacity: 0;
+                        transition: opacity 0.3s ease;
+                        z-index: 1000;
+                        pointer-events: none;
+                        margin-top: 5px;
+                    `;
+
+                    // Adicionar seta do tooltip
+                    const arrow = document.createElement("div");
+                    arrow.style.cssText = `
+                        position: absolute;
+                        top: -4px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 0;
+                        height: 0;
+                        border-left: 4px solid transparent;
+                        border-right: 4px solid transparent;
+                        border-bottom: 4px solid #ff6b35;
+                    `;
+                    tooltip.appendChild(arrow);
+
+                    openMenuBtn.style.position = "relative";
+                    openMenuBtn.appendChild(tooltip);
+
+                    // Mostrar tooltip no hover
+                    openMenuBtn.addEventListener("mouseenter", () => {
+                        tooltip.style.opacity = "1";
+                    });
+
+                    openMenuBtn.addEventListener("mouseleave", () => {
+                        tooltip.style.opacity = "0";
+                    });
+
+                    // Mostrar tooltip automaticamente
+                    setTimeout(() => {
+                        tooltip.style.opacity = "1";
+                        setTimeout(() => {
+                            tooltip.style.opacity = "0";
+                        }, 3000);
+                    }, 2000);
+                }
+
+                // ========================================
+                // FUNCIONALIDADES DO MENU
+                // ========================================
+
+                // Expansão de categorias
+                const categoryToggles =
+                    document.querySelectorAll(".category-toggle");
+                categoryToggles.forEach((toggle) => {
+                    toggle.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const subcategoryList =
+                            this.parentElement.querySelector(
+                                ".subcategory-list",
+                            );
+
+                        if (subcategoryList) {
+                            // Toggle classe show
+                            subcategoryList.classList.toggle("show");
+
+                            // Toggle classe hidden
+                            if (subcategoryList.classList.contains("show")) {
+                                subcategoryList.classList.remove("hidden");
+                            } else {
+                                setTimeout(() => {
+                                    subcategoryList.classList.add("hidden");
+                                }, 300);
+                            }
+
+                            // Rotacionar seta
+                            const icon = this.querySelector(".fa-chevron-down");
+                            if (icon) {
+                                icon.style.transform =
+                                    subcategoryList.classList.contains("show")
+                                        ? "rotate(180deg)"
+                                        : "rotate(0deg)";
+                            }
+
+                            console.log(
+                                "📂 Categoria expandida:",
+                                this.dataset.category,
+                            );
+                        }
+                    });
+                });
+
+                // Busca em tempo real (simulada)
+                if (searchInput) {
+                    const searchCounter = document.getElementById(
+                        "search-results-counter",
+                    );
+                    const resultsCount =
+                        document.getElementById("results-count");
+
+                    searchInput.addEventListener("input", function (e) {
+                        const query = e.target.value.trim();
+
+                        if (query.length > 0) {
+                            // Simular busca
+                            const fakeResults =
+                                Math.floor(Math.random() * 20) + 1;
+                            if (resultsCount)
+                                resultsCount.textContent = fakeResults;
+                            if (searchCounter)
+                                searchCounter.classList.remove("hidden");
+
+                            console.log(
+                                "🔍 Buscando por:",
+                                query,
+                                "- Resultados:",
+                                fakeResults,
+                            );
+                        } else {
+                            if (searchCounter)
+                                searchCounter.classList.add("hidden");
+                        }
+                    });
+                }
+
+                // Atualizar contadores do carrinho e wishlist
+                function updateCounters() {
+                    const cartCount =
+                        document.getElementById("cart-mini-count");
+                    const wishlistCount = document.getElementById(
+                        "wishlist-mini-count",
+                    );
+
+                    if (cartCount)
+                        cartCount.textContent = Math.floor(Math.random() * 10);
+                    if (wishlistCount)
+                        wishlistCount.textContent = Math.floor(
+                            Math.random() * 15,
+                        );
+                }
+
+                // Inicializar demonstração
+                setTimeout(() => {
+                    animateMenuButton();
+                    addDemoTooltip();
+                    updateCounters();
+                    console.log("🎉 Menu lateral pronto para demonstração!");
+
+                    // Teste adicional para garantir funcionamento
+                    console.log("🧪 Teste final dos elementos:", {
+                        menuExists:
+                            document.getElementById("side-menu") !== null,
+                        overlayExists:
+                            document.getElementById("menu-overlay") !== null,
+                        buttonExists:
+                            document.getElementById("open-menu-btn") !== null,
+                        menuStyle: window.getComputedStyle(sideMenu).transform,
+                        overlayStyle:
+                            window.getComputedStyle(menuOverlay).display,
+                    });
+                }, 1000);
+
+                // Simular atividade nos contadores a cada 5 segundos
+                setInterval(updateCounters, 5000);
+            });
+        </script>
+    </body>
+</html>

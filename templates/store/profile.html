@@ -1,0 +1,1912 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Minha Conta - India Oasis - Temperos e Sabores da Índia</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Fontes do Google -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Font Awesome (Ícones) -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+
+        <!-- Link para o arquivo CSS externo -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+
+        <style>
+            /* Estilos específicos para a página de perfil */
+            .profile-sidebar {
+                background: linear-gradient(135deg, #ff6b35, #f7931e);
+                color: white;
+                min-height: calc(100vh - 80px);
+            }
+
+            .profile-content {
+                min-height: calc(100vh - 80px);
+            }
+
+            .profile-menu-item {
+                padding: 0.75rem 1rem;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                margin-bottom: 0.5rem;
+            }
+
+            .profile-menu-item:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateX(5px);
+            }
+
+            .profile-menu-item.active {
+                background: rgba(255, 255, 255, 0.2);
+                border-left: 4px solid white;
+            }
+
+            .profile-section {
+                display: none;
+                animation: fadeIn 0.3s ease-in;
+            }
+
+            .profile-section.active {
+                display: block;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .profile-card {
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+                border: 1px solid #e5e7eb;
+                transition: all 0.3s ease;
+            }
+
+            .profile-card:hover {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                transform: translateY(-2px);
+            }
+
+            .order-status {
+                padding: 0.25rem 0.75rem;
+                border-radius: 20px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+
+            .status-pending {
+                background-color: #fef3c7;
+                color: #92400e;
+            }
+
+            .status-processing {
+                background-color: #dbeafe;
+                color: #1e40af;
+            }
+
+            .status-delivered {
+                background-color: #d1fae5;
+                color: #065f46;
+            }
+
+            .status-cancelled {
+                background-color: #fee2e2;
+                color: #991b1b;
+            }
+
+            .progress-bar {
+                height: 4px;
+                background-color: #e5e7eb;
+                border-radius: 2px;
+                overflow: hidden;
+            }
+
+            .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #ff6b35, #f7931e);
+                transition: width 0.3s ease;
+            }
+
+            .loyalty-card {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                border-radius: 16px;
+                padding: 2rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .loyalty-card::before {
+                content: "";
+                position: absolute;
+                top: -50%;
+                right: -50%;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                    circle,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    transparent 70%
+                );
+                transform: rotate(45deg);
+            }
+
+            .avatar-upload {
+                position: relative;
+                display: inline-block;
+            }
+
+            .avatar-upload input[type="file"] {
+                display: none;
+            }
+
+            .avatar-upload .avatar-preview {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 4px solid white;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .avatar-upload .upload-overlay {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                background: #ff6b35;
+                color: white;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 3px solid white;
+            }
+
+            .avatar-upload .upload-overlay:hover {
+                background: #e55a2b;
+                transform: scale(1.1);
+            }
+
+            .notification-badge {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                background: #ef4444;
+                color: white;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.75rem;
+                font-weight: bold;
+            }
+
+            .mobile-menu-toggle {
+                display: none;
+            }
+
+            @media (max-width: 768px) {
+                .profile-sidebar {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 280px;
+                    height: 100vh;
+                    transform: translateX(-100%);
+                    transition: transform 0.3s ease;
+                    z-index: 1000;
+                }
+
+                .profile-sidebar.show {
+                    transform: translateX(0);
+                }
+
+                .mobile-menu-toggle {
+                    display: block;
+                }
+
+                .profile-content {
+                    margin-left: 0;
+                }
+            }
+
+            .address-card {
+                border: 2px solid #e5e7eb;
+                border-radius: 8px;
+                padding: 1rem;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .address-card.default {
+                border-color: #ff6b35;
+                background: rgba(255, 107, 53, 0.05);
+            }
+
+            .address-card:hover {
+                border-color: #ff6b35;
+                box-shadow: 0 4px 12px rgba(255, 107, 53, 0.15);
+            }
+
+            .default-badge {
+                position: absolute;
+                top: -8px;
+                right: 12px;
+                background: #ff6b35;
+                color: white;
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body class="text-gray-800 bg-gray-50">
+        <!-- ==== MENU LATERAL RETRÁTIL ==== -->
+        <div
+            id="menu-overlay"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"
+        ></div>
+        <aside
+            id="side-menu"
+            class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg z-50 overflow-y-auto transform -translate-x-full transition-transform duration-300"
+        >
+            <div class="p-4">
+                <button
+                    id="close-menu-btn"
+                    class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-primary"
+                >
+                    &times;
+                </button>
+                <h2 class="text-3xl font-teko text-primary mb-6">Menu</h2>
+
+                <!-- Barra de Busca -->
+                <div class="relative mb-6">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Buscar produtos..."
+                        class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <i
+                        class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                    ></i>
+                </div>
+
+                <!-- Links de Navegação -->
+                <div class="space-y-4">
+                    <a
+                        href="index.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-home w-5"></i>
+                        <span>Início</span>
+                    </a>
+                    <a
+                        href="products.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-shopping-bag w-5"></i>
+                        <span>Produtos</span>
+                    </a>
+                    <a
+                        href="about.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-info-circle w-5"></i>
+                        <span>Sobre Nós</span>
+                    </a>
+                    <a
+                        href="contact.html"
+                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-envelope w-5"></i>
+                        <span>Contato</span>
+                    </a>
+                    <hr class="my-4" />
+                    <a
+                        href="profile.html"
+                        class="flex items-center space-x-3 text-primary font-semibold"
+                    >
+                        <i class="fas fa-user w-5"></i>
+                        <span>Minha Conta</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ==== CABEÇALHO ==== -->
+        <header class="bg-white shadow-md sticky top-0 z-40">
+            <nav
+                class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
+            >
+                <div class="flex items-center space-x-4">
+                    <button
+                        id="open-menu-btn"
+                        class="text-xl hover:text-primary"
+                    >
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <a href="index.html" class="flex items-center">
+                        <h1 class="text-2xl md:text-3xl font-teko text-primary">
+                            India<span class="text-secondary">Oasis</span>
+                        </h1>
+                    </a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- Botão Mobile do Menu do Perfil -->
+                    <button
+                        id="mobile-profile-menu"
+                        class="mobile-menu-toggle md:hidden text-xl hover:text-primary"
+                    >
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+
+                    <!-- Notificações -->
+                    <div class="relative">
+                        <button class="text-xl hover:text-primary">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                    </div>
+
+                    <!-- Botão do Carrinho -->
+                    <a
+                        href="cart.html"
+                        class="relative flex items-center space-x-2 text-sm hover:text-primary transition-colors"
+                    >
+                        <i class="fas fa-shopping-cart text-lg"></i>
+                        <span class="hidden md:block">Carrinho</span>
+                        <span
+                            id="cart-count"
+                            class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
+                        >
+                            0
+                        </span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
+        <div class="flex">
+            <!-- Sidebar do Perfil -->
+            <aside class="profile-sidebar w-80 p-6" id="profile-sidebar">
+                <div class="text-center mb-8">
+                    <div class="avatar-upload">
+                        <img
+                            src="https://images.unsplash.com/photo-1494790108755-2616b79bd74c?w=150&h=150&fit=crop&crop=face"
+                            alt="Avatar"
+                            class="avatar-preview mx-auto"
+                            id="avatar-preview"
+                        />
+                        <label for="avatar-input" class="upload-overlay">
+                            <i class="fas fa-camera"></i>
+                        </label>
+                        <input type="file" id="avatar-input" accept="image/*" />
+                    </div>
+                    <h2 class="text-xl font-semibold mt-4" id="user-name">
+                        Maria Silva Santos
+                    </h2>
+                    <p class="text-white/80" id="user-email">
+                        maria.silva@email.com
+                    </p>
+                    <div class="mt-4">
+                        <div class="loyalty-card">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm opacity-90"
+                                    >Status VIP</span
+                                >
+                                <i class="fas fa-crown text-yellow-300"></i>
+                            </div>
+                            <div class="text-2xl font-bold mb-1">GOLD</div>
+                            <div class="text-sm opacity-90">
+                                Próximo nível: 280 pontos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav>
+                    <div
+                        class="profile-menu-item active"
+                        data-section="dashboard"
+                    >
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        Dashboard
+                    </div>
+                    <div class="profile-menu-item" data-section="personal-info">
+                        <i class="fas fa-user mr-3"></i>
+                        Dados Pessoais
+                    </div>
+                    <div class="profile-menu-item" data-section="orders">
+                        <i class="fas fa-shopping-bag mr-3"></i>
+                        Meus Pedidos
+                        <span class="notification-badge ml-auto">2</span>
+                    </div>
+                    <div class="profile-menu-item" data-section="addresses">
+                        <i class="fas fa-map-marker-alt mr-3"></i>
+                        Endereços
+                    </div>
+                    <div class="profile-menu-item" data-section="favorites">
+                        <i class="fas fa-heart mr-3"></i>
+                        Favoritos
+                    </div>
+                    <div class="profile-menu-item" data-section="loyalty">
+                        <i class="fas fa-star mr-3"></i>
+                        Programa de Fidelidade
+                    </div>
+                    <div class="profile-menu-item" data-section="notifications">
+                        <i class="fas fa-bell mr-3"></i>
+                        Notificações
+                    </div>
+                    <div class="profile-menu-item" data-section="security">
+                        <i class="fas fa-shield-alt mr-3"></i>
+                        Segurança
+                    </div>
+                    <div class="profile-menu-item" data-section="support">
+                        <i class="fas fa-headset mr-3"></i>
+                        Suporte
+                    </div>
+                    <hr class="my-4 border-white/20" />
+                    <div class="profile-menu-item" onclick="logout()">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        Sair
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Conteúdo Principal -->
+            <main class="profile-content flex-1 p-6">
+                <!-- Dashboard -->
+                <section class="profile-section active" id="dashboard">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Olá, Maria! 👋
+                        </h1>
+                        <p class="text-gray-600">
+                            Bem-vinda de volta ao seu painel de controle
+                        </p>
+                    </div>
+
+                    <!-- Cards de Resumo -->
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+                    >
+                        <div class="profile-card text-center">
+                            <div class="text-3xl font-bold text-primary mb-2">
+                                12
+                            </div>
+                            <div class="text-gray-600">Pedidos Realizados</div>
+                        </div>
+                        <div class="profile-card text-center">
+                            <div class="text-3xl font-bold text-green-600 mb-2">
+                                R$ 1.247,89
+                            </div>
+                            <div class="text-gray-600">Total Economizado</div>
+                        </div>
+                        <div class="profile-card text-center">
+                            <div
+                                class="text-3xl font-bold text-purple-600 mb-2"
+                            >
+                                720
+                            </div>
+                            <div class="text-gray-600">
+                                Pontos de Fidelidade
+                            </div>
+                        </div>
+                        <div class="profile-card text-center">
+                            <div class="text-3xl font-bold text-blue-600 mb-2">
+                                15
+                            </div>
+                            <div class="text-gray-600">Produtos Favoritos</div>
+                        </div>
+                    </div>
+
+                    <!-- Pedidos Recentes -->
+                    <div class="profile-card">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold">
+                                Pedidos Recentes
+                            </h3>
+                            <a
+                                href="#"
+                                class="text-primary hover:underline"
+                                onclick="showSection('orders')"
+                                >Ver todos</a
+                            >
+                        </div>
+                        <div class="space-y-4">
+                            <div
+                                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                            >
+                                <div class="flex items-center space-x-4">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=60&h=60&fit=crop"
+                                        alt="Produto"
+                                        class="w-12 h-12 rounded object-cover"
+                                    />
+                                    <div>
+                                        <div class="font-medium">
+                                            Kit Temperos Premium
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Pedido #12345
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold">R$ 89,90</div>
+                                    <span class="order-status status-delivered"
+                                        >Entregue</span
+                                    >
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                            >
+                                <div class="flex items-center space-x-4">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=60&h=60&fit=crop"
+                                        alt="Produto"
+                                        class="w-12 h-12 rounded object-cover"
+                                    />
+                                    <div>
+                                        <div class="font-medium">
+                                            Curry em Pó Especial
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Pedido #12344
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-semibold">R$ 24,90</div>
+                                    <span class="order-status status-processing"
+                                        >Em trânsito</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progresso de Fidelidade -->
+                    <div class="profile-card">
+                        <h3 class="text-xl font-semibold mb-4">
+                            Programa de Fidelidade
+                        </h3>
+                        <div class="mb-4">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-medium">
+                                    Progresso para Platinum
+                                </span>
+                                <span class="text-sm text-gray-500">
+                                    720/1000 pontos
+                                </span>
+                            </div>
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    style="width: 72%"
+                                ></div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">
+                            Você está a apenas 280 pontos do status Platinum!
+                            Continue comprando para desbloquear benefícios
+                            exclusivos.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Dados Pessoais -->
+                <section class="profile-section" id="personal-info">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Dados Pessoais
+                        </h1>
+                        <p class="text-gray-600">
+                            Mantenha suas informações sempre atualizadas
+                        </p>
+                    </div>
+
+                    <div class="profile-card">
+                        <form id="personal-info-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Nome Completo
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value="Maria Silva Santos"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        E-mail
+                                    </label>
+                                    <input
+                                        type="email"
+                                        value="maria.silva@email.com"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        CPF
+                                    </label>
+                                    <input
+                                        type="text"
+                                        value="123.456.789-00"
+                                        readonly
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Telefone
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        value="(11) 99999-9999"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Data de Nascimento
+                                    </label>
+                                    <input
+                                        type="date"
+                                        value="1990-05-15"
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-2"
+                                    >
+                                        Gênero
+                                    </label>
+                                    <select
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                    >
+                                        <option value="feminino" selected>
+                                            Feminino
+                                        </option>
+                                        <option value="masculino">
+                                            Masculino
+                                        </option>
+                                        <option value="nao-informar">
+                                            Prefiro não informar
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-6">
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary px-8 py-3"
+                                >
+                                    <i class="fas fa-save mr-2"></i>
+                                    Salvar Alterações
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Meus Pedidos -->
+                <section class="profile-section" id="orders">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Meus Pedidos
+                        </h1>
+                        <p class="text-gray-600">
+                            Acompanhe o status de todos os seus pedidos
+                        </p>
+                    </div>
+
+                    <!-- Filtros -->
+                    <div class="profile-card mb-6">
+                        <div class="flex flex-wrap gap-4">
+                            <select
+                                class="px-4 py-2 border border-gray-300 rounded-lg"
+                            >
+                                <option>Todos os pedidos</option>
+                                <option>Pendente</option>
+                                <option>Em processamento</option>
+                                <option>Entregue</option>
+                                <option>Cancelado</option>
+                            </select>
+                            <input
+                                type="date"
+                                class="px-4 py-2 border border-gray-300 rounded-lg"
+                            />
+                            <button class="btn btn-secondary px-4 py-2">
+                                <i class="fas fa-filter mr-2"></i>Filtrar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Pedidos -->
+                    <div class="space-y-4">
+                        <div class="profile-card">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="font-semibold text-lg">
+                                        Pedido #12345
+                                    </h3>
+                                    <p class="text-gray-500 text-sm">
+                                        Feito em 15 de dezembro, 2024
+                                    </p>
+                                </div>
+                                <span class="order-status status-delivered"
+                                    >Entregue</span
+                                >
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-4">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=60&h=60&fit=crop"
+                                        alt="Produto"
+                                        class="w-16 h-16 rounded object-cover"
+                                    />
+                                    <div class="flex-1">
+                                        <div class="font-medium">
+                                            Kit Temperos Premium
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Quantidade: 2
+                                        </div>
+                                    </div>
+                                    <div class="font-semibold">R$ 89,90</div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex justify-between items-center mt-4 pt-4 border-t"
+                            >
+                                <div class="font-semibold">Total: R$ 89,90</div>
+                                <div class="space-x-2">
+                                    <button class="btn btn-secondary btn-sm">
+                                        Ver Detalhes
+                                    </button>
+                                    <button class="btn btn-primary btn-sm">
+                                        Comprar Novamente
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-card">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="font-semibold text-lg">
+                                        Pedido #12344
+                                    </h3>
+                                    <p class="text-gray-500 text-sm">
+                                        Feito em 10 de dezembro, 2024
+                                    </p>
+                                </div>
+                                <span class="order-status status-processing"
+                                    >Em trânsito</span
+                                >
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-4">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=60&h=60&fit=crop"
+                                        alt="Produto"
+                                        class="w-16 h-16 rounded object-cover"
+                                    />
+                                    <div class="flex-1">
+                                        <div class="font-medium">
+                                            Curry em Pó Especial
+                                        </div>
+                                        <div class="text-sm text-gray-500">
+                                            Quantidade: 1
+                                        </div>
+                                    </div>
+                                    <div class="font-semibold">R$ 24,90</div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex justify-between items-center mt-4 pt-4 border-t"
+                            >
+                                <div class="font-semibold">Total: R$ 24,90</div>
+                                <div class="space-x-2">
+                                    <button class="btn btn-secondary btn-sm">
+                                        Rastrear Pedido
+                                    </button>
+                                    <button class="btn btn-outline btn-sm">
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Endereços -->
+                <section class="profile-section" id="addresses">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Meus Endereços
+                        </h1>
+                        <p class="text-gray-600">
+                            Gerencie seus endereços de entrega
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <button
+                            class="btn btn-primary"
+                            onclick="openAddressModal()"
+                        >
+                            <i class="fas fa-plus mr-2"></i>
+                            Adicionar Novo Endereço
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="address-card default">
+                            <div class="default-badge">Padrão</div>
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-semibold">Casa</h3>
+                                <div class="space-x-2">
+                                    <button
+                                        class="text-primary hover:text-orange-600"
+                                    >
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button
+                                        class="text-red-500 hover:text-red-700"
+                                    >
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-600 space-y-1">
+                                <p>Rua das Flores, 123</p>
+                                <p>Apartamento 45</p>
+                                <p>Jardim Primavera</p>
+                                <p>São Paulo - SP</p>
+                                <p>CEP: 01234-567</p>
+                            </div>
+                        </div>
+
+                        <div class="address-card">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-semibold">Trabalho</h3>
+                                <div class="space-x-2">
+                                    <button
+                                        class="text-primary hover:text-orange-600"
+                                    >
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button
+                                        class="text-red-500 hover:text-red-700"
+                                    >
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-600 space-y-1">
+                                <p>Av. Paulista, 1000</p>
+                                <p>Sala 1205</p>
+                                <p>Bela Vista</p>
+                                <p>São Paulo - SP</p>
+                                <p>CEP: 01310-100</p>
+                            </div>
+                            <button
+                                class="mt-3 text-sm text-primary font-medium"
+                            >
+                                Definir como padrão
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Favoritos -->
+                <section class="profile-section" id="favorites">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Produtos Favoritos
+                        </h1>
+                        <p class="text-gray-600">
+                            Seus temperos e especiarias preferidos
+                        </p>
+                    </div>
+
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    >
+                        <div class="profile-card">
+                            <div class="relative">
+                                <img
+                                    src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&h=200&fit=crop"
+                                    alt="Produto"
+                                    class="w-full h-48 object-cover rounded-lg mb-4"
+                                />
+                                <button
+                                    class="absolute top-2 right-2 text-red-500 text-xl"
+                                >
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2">
+                                Kit Temperos Premium
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">
+                                Mix completo de especiarias indianas
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-primary">
+                                    R$ 89,90
+                                </span>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-shopping-cart mr-1"></i>
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="profile-card">
+                            <div class="relative">
+                                <img
+                                    src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=300&h=200&fit=crop"
+                                    alt="Produto"
+                                    class="w-full h-48 object-cover rounded-lg mb-4"
+                                />
+                                <button
+                                    class="absolute top-2 right-2 text-red-500 text-xl"
+                                >
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2">
+                                Curry em Pó Especial
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">
+                                Blend autêntico de curry indiano
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-primary">
+                                    R$ 24,90
+                                </span>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-shopping-cart mr-1"></i>
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="profile-card">
+                            <div class="relative">
+                                <img
+                                    src="https://images.unsplash.com/photo-1599909533624-4d89c3fae8c7?w=300&h=200&fit=crop"
+                                    alt="Produto"
+                                    class="w-full h-48 object-cover rounded-lg mb-4"
+                                />
+                                <button
+                                    class="absolute top-2 right-2 text-red-500 text-xl"
+                                >
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                            <h3 class="font-semibold mb-2">
+                                Garam Masala Premium
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-3">
+                                Mix aromático de especiarias tostadas
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-lg font-bold text-primary">
+                                    R$ 32,90
+                                </span>
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-shopping-cart mr-1"></i>
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Programa de Fidelidade -->
+                <section class="profile-section" id="loyalty">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Programa de Fidelidade
+                        </h1>
+                        <p class="text-gray-600">
+                            Acumule pontos e desbloqueie benefícios exclusivos
+                        </p>
+                    </div>
+
+                    <div class="profile-card">
+                        <div class="loyalty-card">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold mb-2">
+                                        720
+                                    </div>
+                                    <div class="text-white/80">
+                                        Pontos Atuais
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold mb-2">
+                                        GOLD
+                                    </div>
+                                    <div class="text-white/80">
+                                        Status Atual
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold mb-2">
+                                        280
+                                    </div>
+                                    <div class="text-white/80">
+                                        Para Platinum
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <div class="profile-card">
+                            <h3 class="font-semibold mb-4">
+                                Como Ganhar Pontos
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex justify-between">
+                                    <span>A cada R$ 1,00 gasto</span>
+                                    <span class="font-semibold">1 ponto</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Avaliação de produto</span>
+                                    <span class="font-semibold">10 pontos</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Indicação de amigo</span>
+                                    <span class="font-semibold">50 pontos</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Aniversário</span>
+                                    <span class="font-semibold"
+                                        >100 pontos</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-card">
+                            <h3 class="font-semibold mb-4">
+                                Benefícios por Nível
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="font-medium text-yellow-600">
+                                        GOLD (atual)
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        • Frete grátis acima de R$ 50<br />
+                                        • 5% de desconto em produtos
+                                        selecionados<br />
+                                        • Acesso antecipado a promoções
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="font-medium text-purple-600">
+                                        PLATINUM
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        • Frete grátis sem valor mínimo<br />
+                                        • 10% de desconto permanente<br />
+                                        • Produtos exclusivos<br />
+                                        • Suporte prioritário
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notificações -->
+                <section class="profile-section" id="notifications">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Notificações
+                        </h1>
+                        <p class="text-gray-600">
+                            Configure suas preferências de comunicação
+                        </p>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3 class="font-semibold mb-4">
+                            Preferências de E-mail
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">
+                                        Promoções e Ofertas
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        Receba descontos exclusivos e novidades
+                                    </div>
+                                </div>
+                                <label
+                                    class="relative inline-flex items-center cursor-pointer"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="sr-only peer"
+                                        checked
+                                    />
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"
+                                    ></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">
+                                        Status de Pedidos
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        Atualizações sobre seus pedidos
+                                    </div>
+                                </div>
+                                <label
+                                    class="relative inline-flex items-center cursor-pointer"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="sr-only peer"
+                                        checked
+                                    />
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"
+                                    ></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <div class="font-medium">
+                                        Newsletter Semanal
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        Receitas e dicas culinárias
+                                    </div>
+                                </div>
+                                <label
+                                    class="relative inline-flex items-center cursor-pointer"
+                                >
+                                    <input
+                                        type="checkbox"
+                                        class="sr-only peer"
+                                    />
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-orange-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"
+                                    ></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3 class="font-semibold mb-4">
+                            Notificações Recentes
+                        </h3>
+                        <div class="space-y-4">
+                            <div
+                                class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg"
+                            >
+                                <i
+                                    class="fas fa-shipping-fast text-blue-600 mt-1"
+                                ></i>
+                                <div class="flex-1">
+                                    <div class="font-medium">
+                                        Pedido em trânsito
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        Seu pedido #12344 está a caminho
+                                    </div>
+                                    <div class="text-xs text-gray-500 mt-1">
+                                        2 horas atrás
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-start space-x-3 p-3 bg-green-50 rounded-lg"
+                            >
+                                <i class="fas fa-star text-green-600 mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="font-medium">
+                                        Pontos adicionados
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        Você ganhou 89 pontos pela sua última
+                                        compra
+                                    </div>
+                                    <div class="text-xs text-gray-500 mt-1">
+                                        1 dia atrás
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-start space-x-3 p-3 bg-orange-50 rounded-lg"
+                            >
+                                <i class="fas fa-tag text-orange-600 mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="font-medium">
+                                        Oferta especial!
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        20% de desconto em temperos premium
+                                    </div>
+                                    <div class="text-xs text-gray-500 mt-1">
+                                        3 dias atrás
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Segurança -->
+                <section class="profile-section" id="security">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Segurança
+                        </h1>
+                        <p class="text-gray-600">Mantenha sua conta segura</p>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3 class="font-semibold mb-4">Alterar Senha</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-700 mb-2"
+                                >
+                                    Senha Atual
+                                </label>
+                                <input
+                                    type="password"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-700 mb-2"
+                                >
+                                    Nova Senha
+                                </label>
+                                <input
+                                    type="password"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-700 mb-2"
+                                >
+                                    Confirmar Nova Senha
+                                </label>
+                                <input
+                                    type="password"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                                />
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-shield-alt mr-2"></i>
+                                Alterar Senha
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3 class="font-semibold mb-4">Sessões Ativas</h3>
+                        <div class="space-y-3">
+                            <div
+                                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                            >
+                                <div class="flex items-center space-x-3">
+                                    <i
+                                        class="fas fa-desktop text-green-600"
+                                    ></i>
+                                    <div>
+                                        <div class="font-medium">
+                                            Windows - Chrome
+                                        </div>
+                                        <div class="text-sm text-gray-600">
+                                            São Paulo, SP • Atual
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-green-600 font-medium"
+                                    >Ativa</span
+                                >
+                            </div>
+                            <div
+                                class="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                            >
+                                <div class="flex items-center space-x-3">
+                                    <i
+                                        class="fas fa-mobile-alt text-gray-400"
+                                    ></i>
+                                    <div>
+                                        <div class="font-medium">
+                                            iPhone - Safari
+                                        </div>
+                                        <div class="text-sm text-gray-600">
+                                            São Paulo, SP • 2 dias atrás
+                                        </div>
+                                    </div>
+                                </div>
+                                <button
+                                    class="text-sm text-red-600 hover:text-red-800"
+                                >
+                                    Encerrar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Suporte -->
+                <section class="profile-section" id="support">
+                    <div class="mb-6">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                            Suporte
+                        </h1>
+                        <p class="text-gray-600">
+                            Estamos aqui para ajudar você
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="profile-card text-center">
+                            <i
+                                class="fas fa-comments text-4xl text-primary mb-4"
+                            ></i>
+                            <h3 class="font-semibold mb-2">Chat Online</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                Fale conosco em tempo real
+                            </p>
+                            <button class="btn btn-primary btn-sm">
+                                Iniciar Chat
+                            </button>
+                        </div>
+                        <div class="profile-card text-center">
+                            <i
+                                class="fas fa-phone text-4xl text-green-600 mb-4"
+                            ></i>
+                            <h3 class="font-semibold mb-2">Telefone</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                (11) 9999-9999<br />
+                                Seg-Sex: 8h às 18h
+                            </p>
+                            <button class="btn btn-secondary btn-sm">
+                                Ligar Agora
+                            </button>
+                        </div>
+                        <div class="profile-card text-center">
+                            <i
+                                class="fas fa-envelope text-4xl text-blue-600 mb-4"
+                            ></i>
+                            <h3 class="font-semibold mb-2">E-mail</h3>
+                            <p class="text-gray-600 text-sm mb-4">
+                                contato@indiaoasis.com.br<br />
+                                Resposta em até 24h
+                            </p>
+                            <button class="btn btn-outline btn-sm">
+                                Enviar E-mail
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="profile-card">
+                        <h3 class="font-semibold mb-4">Perguntas Frequentes</h3>
+                        <div class="space-y-4">
+                            <div class="border-b pb-4">
+                                <button
+                                    class="w-full text-left font-medium py-2 flex justify-between items-center"
+                                >
+                                    Como rastrear meu pedido?
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="border-b pb-4">
+                                <button
+                                    class="w-full text-left font-medium py-2 flex justify-between items-center"
+                                >
+                                    Qual o prazo de entrega?
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="border-b pb-4">
+                                <button
+                                    class="w-full text-left font-medium py-2 flex justify-between items-center"
+                                >
+                                    Como cancelar um pedido?
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                            <div class="border-b pb-4">
+                                <button
+                                    class="w-full text-left font-medium py-2 flex justify-between items-center"
+                                >
+                                    Política de devolução
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Modal para Adicionar Endereço -->
+        <div
+            id="address-modal"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+        >
+            <div class="bg-white rounded-lg p-6 w-full max-w-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold">Adicionar Endereço</h3>
+                    <button
+                        onclick="closeAddressModal()"
+                        class="text-gray-500 hover:text-gray-700"
+                    >
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form class="space-y-4">
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                            Nome do Endereço
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Ex: Casa, Trabalho"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        />
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                            CEP
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="00000-000"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        />
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                                Rua
+                            </label>
+                            <input
+                                type="text"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-gray-700 mb-2"
+                            >
+                                Número
+                            </label>
+                            <input
+                                type="text"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-2"
+                        >
+                            Complemento
+                        </label>
+                        <input
+                            type="text"
+                            placeholder="Apartamento, bloco, etc."
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        />
+                    </div>
+                    <div class="flex space-x-4">
+                        <button
+                            type="button"
+                            onclick="closeAddressModal()"
+                            class="flex-1 btn btn-secondary"
+                        >
+                            Cancelar
+                        </button>
+                        <button type="submit" class="flex-1 btn btn-primary">
+                            Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==== JAVASCRIPT ==== -->
+        <script>
+            // Inicialização
+            document.addEventListener("DOMContentLoaded", function () {
+                setupEventListeners();
+                loadCartCount();
+                loadUserData();
+            });
+
+            // Event Listeners
+            function setupEventListeners() {
+                // Menu lateral
+                document
+                    .getElementById("open-menu-btn")
+                    .addEventListener("click", () => {
+                        document
+                            .getElementById("side-menu")
+                            .classList.remove("-translate-x-full");
+                        document
+                            .getElementById("menu-overlay")
+                            .classList.remove("hidden");
+                    });
+
+                document
+                    .getElementById("close-menu-btn")
+                    .addEventListener("click", closeMainMenu);
+                document
+                    .getElementById("menu-overlay")
+                    .addEventListener("click", closeMainMenu);
+
+                // Menu do perfil (mobile)
+                document
+                    .getElementById("mobile-profile-menu")
+                    .addEventListener("click", () => {
+                        document
+                            .getElementById("profile-sidebar")
+                            .classList.toggle("show");
+                    });
+
+                // Navegação do perfil
+                document
+                    .querySelectorAll(".profile-menu-item")
+                    .forEach((item) => {
+                        if (item.dataset.section) {
+                            item.addEventListener("click", () => {
+                                showSection(item.dataset.section);
+                                setActiveMenuItem(item);
+                            });
+                        }
+                    });
+
+                // Upload de avatar
+                document
+                    .getElementById("avatar-input")
+                    .addEventListener("change", handleAvatarUpload);
+
+                // Formulários
+                document
+                    .getElementById("personal-info-form")
+                    .addEventListener("submit", handlePersonalInfoSubmit);
+            }
+
+            // Navegação entre seções
+            function showSection(sectionId) {
+                // Esconder todas as seções
+                document
+                    .querySelectorAll(".profile-section")
+                    .forEach((section) => {
+                        section.classList.remove("active");
+                    });
+
+                // Mostrar seção selecionada
+                document.getElementById(sectionId).classList.add("active");
+
+                // Fechar menu mobile se estiver aberto
+                if (window.innerWidth <= 768) {
+                    document
+                        .getElementById("profile-sidebar")
+                        .classList.remove("show");
+                }
+            }
+
+            function setActiveMenuItem(activeItem) {
+                document
+                    .querySelectorAll(".profile-menu-item")
+                    .forEach((item) => {
+                        item.classList.remove("active");
+                    });
+                activeItem.classList.add("active");
+            }
+
+            // Fechar menu principal
+            function closeMainMenu() {
+                document
+                    .getElementById("side-menu")
+                    .classList.add("-translate-x-full");
+                document.getElementById("menu-overlay").classList.add("hidden");
+            }
+
+            // Upload de avatar
+            function handleAvatarUpload(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById("avatar-preview").src =
+                            e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            // Submissão de dados pessoais
+            function handlePersonalInfoSubmit(event) {
+                event.preventDefault();
+
+                // Simular salvamento
+                const button = event.target.querySelector(
+                    'button[type="submit"]',
+                );
+                const originalText = button.innerHTML;
+
+                button.disabled = true;
+                button.innerHTML =
+                    '<i class="fas fa-spinner fa-spin mr-2"></i>Salvando...';
+
+                setTimeout(() => {
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                    showNotification(
+                        "Dados atualizados com sucesso!",
+                        "success",
+                    );
+                }, 2000);
+            }
+
+            // Modal de endereço
+            function openAddressModal() {
+                document
+                    .getElementById("address-modal")
+                    .classList.remove("hidden");
+            }
+
+            function closeAddressModal() {
+                document
+                    .getElementById("address-modal")
+                    .classList.add("hidden");
+            }
+
+            // Notificações
+            function showNotification(message, type = "info") {
+                const notification = document.createElement("div");
+                notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+                    type === "success"
+                        ? "bg-green-500"
+                        : type === "error"
+                          ? "bg-red-500"
+                          : type === "warning"
+                            ? "bg-yellow-500"
+                            : "bg-blue-500"
+                } text-white`;
+                notification.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-${
+                            type === "success"
+                                ? "check-circle"
+                                : type === "error"
+                                  ? "exclamation-circle"
+                                  : type === "warning"
+                                    ? "exclamation-triangle"
+                                    : "info-circle"
+                        } mr-2"></i>
+                        <span>${message}</span>
+                        <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-white hover:text-gray-200">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 5000);
+            }
+
+            // Logout
+            function logout() {
+                if (confirm("Tem certeza que deseja sair?")) {
+                    localStorage.removeItem("user_session");
+                    window.location.href = "{% url 'store:home' %}";
+                }
+            }
+
+            // Carregar dados do usuário
+            function loadUserData() {
+                // Simular carregamento de dados do usuário
+                const userData = {
+                    name: "Maria Silva Santos",
+                    email: "maria.silva@email.com",
+                    avatar: "https://images.unsplash.com/photo-1494790108755-2616b79bd74c?w=150&h=150&fit=crop&crop=face",
+                };
+
+                document.getElementById("user-name").textContent =
+                    userData.name;
+                document.getElementById("user-email").textContent =
+                    userData.email;
+                document.getElementById("avatar-preview").src = userData.avatar;
+            }
+
+            // Carregar contador do carrinho
+            function loadCartCount() {
+                const cartItems =
+                    JSON.parse(localStorage.getItem("cartItems")) || [];
+                const totalItems = cartItems.reduce(
+                    (sum, item) => sum + item.quantity,
+                    0,
+                );
+                document.getElementById("cart-count").textContent = totalItems;
+            }
+
+            // Adicionar produto aos favoritos
+            function toggleFavorite(productId) {
+                let favorites =
+                    JSON.parse(localStorage.getItem("favorites")) || [];
+
+                if (favorites.includes(productId)) {
+                    favorites = favorites.filter((id) => id !== productId);
+                    showNotification("Produto removido dos favoritos", "info");
+                } else {
+                    favorites.push(productId);
+                    showNotification(
+                        "Produto adicionado aos favoritos",
+                        "success",
+                    );
+                }
+
+                localStorage.setItem("favorites", JSON.stringify(favorites));
+            }
+
+            // Adicionar produto ao carrinho
+            function addToCart(productId, productName, price) {
+                let cartItems =
+                    JSON.parse(localStorage.getItem("cartItems")) || [];
+
+                const existingItem = cartItems.find(
+                    (item) => item.id === productId,
+                );
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cartItems.push({
+                        id: productId,
+                        name: productName,
+                        price: price,
+                        quantity: 1,
+                    });
+                }
+
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                loadCartCount();
+                showNotification(
+                    `${productName} adicionado ao carrinho!`,
+                    "success",
+                );
+            }
+
+            // Rastrear pedido
+            function trackOrder(orderId) {
+                showNotification(
+                    `Abrindo rastreamento do pedido ${orderId}...`,
+                    "info",
+                );
+                // Aqui você implementaria a lógica real de rastreamento
+            }
+
+            // Cancelar pedido
+            function cancelOrder(orderId) {
+                if (confirm("Tem certeza que deseja cancelar este pedido?")) {
+                    showNotification(
+                        `Pedido ${orderId} cancelado com sucesso`,
+                        "success",
+                    );
+                    // Aqui você implementaria a lógica real de cancelamento
+                }
+            }
+
+            // Definir endereço como padrão
+            function setDefaultAddress(addressId) {
+                showNotification("Endereço definido como padrão", "success");
+                // Aqui você implementaria a lógica real para definir endereço padrão
+            }
+
+            // Excluir endereço
+            function deleteAddress(addressId) {
+                if (confirm("Tem certeza que deseja excluir este endereço?")) {
+                    showNotification(
+                        "Endereço excluído com sucesso",
+                        "success",
+                    );
+                    // Aqui você implementaria a lógica real para excluir endereço
+                }
+            }
+
+            // Responsividade
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) {
+                    document
+                        .getElementById("profile-sidebar")
+                        .classList.remove("show");
+                }
+            });
+
+            // Inicializar tooltips (se necessário)
+            function initTooltips() {
+                // Implementar tooltips se necessário
+            }
+        </script>
+    </body>
+</html>

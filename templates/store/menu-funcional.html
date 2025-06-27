@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>India Oasis - Menu Lateral Funcional</title>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            /* Configuração personalizada do Tailwind */
+            @layer utilities {
+                .z-51 {
+                    z-index: 51;
+                }
+            }
+
+            /* Menu lateral - animações e posicionamento */
+            #side-menu {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 288px !important;
+                height: 100vh !important;
+                background: white !important;
+                box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1) !important;
+                z-index: 51 !important;
+                overflow-y: auto !important;
+                transform: translateX(-100%) !important;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+
+            #side-menu.open {
+                transform: translateX(0) !important;
+            }
+
+            #menu-overlay {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                background: rgba(0, 0, 0, 0.5) !important;
+                z-index: 50 !important;
+                transition: opacity 0.3s ease-in-out !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            #menu-overlay:not(.hidden) {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+            }
+
+            /* Prevenir scroll do body quando menu está aberto */
+            body.menu-open {
+                overflow: hidden !important;
+            }
+
+            /* Animações para subcategorias */
+            .subcategory-list {
+                max-height: 0;
+                overflow: hidden;
+                transition:
+                    max-height 0.3s ease-out,
+                    opacity 0.3s ease-out;
+                opacity: 0;
+            }
+
+            .subcategory-list.show {
+                max-height: 300px;
+                opacity: 1;
+            }
+
+            .category-toggle.active .fa-chevron-down {
+                transform: rotate(180deg);
+                transition: transform 0.3s ease;
+            }
+
+            /* Efeitos hover */
+            .category-link:hover,
+            .category-toggle:hover {
+                transform: translateX(4px);
+                transition: transform 0.2s ease;
+            }
+
+            .subcategory-link:hover {
+                transform: translateX(2px);
+                transition: transform 0.2s ease;
+            }
+
+            /* Botão de menu com animação */
+            .menu-btn {
+                background: linear-gradient(45deg, #ff6b35, #f7931e);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 12px 16px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .menu-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            }
+
+            .menu-btn:active {
+                transform: translateY(0);
+            }
+
+            /* Indicador de demo */
+            .demo-indicator {
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                width: 12px;
+                height: 12px;
+                background: #ff6b35;
+                border-radius: 50%;
+                animation: pulse 2s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.2);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+
+            /* Cores personalizadas */
+            :root {
+                --primary-color: #ff6b35;
+                --secondary-color: #f7931e;
+                --accent-color: #ffd700;
+            }
+
+            .text-primary-custom {
+                color: var(--primary-color);
+            }
+            .text-secondary-custom {
+                color: var(--secondary-color);
+            }
+            .bg-primary-custom {
+                background-color: var(--primary-color);
+            }
+
+            /* Scroll customizado */
+            #side-menu::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            #side-menu::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            #side-menu::-webkit-scrollbar-thumb {
+                background: var(--primary-color);
+                border-radius: 3px;
+            }
+
+            #side-menu::-webkit-scrollbar-thumb:hover {
+                background: var(--secondary-color);
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50 font-sans">
+        <!-- Overlay do Menu -->
+        <div id="menu-overlay" class="hidden"></div>
+
+        <!-- Menu Lateral -->
+        <aside id="side-menu">
+            <div class="p-6">
+                <!-- Botão Fechar -->
+                <button
+                    id="close-menu-btn"
+                    class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-red-500 transition-colors p-2"
+                >
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <!-- Cabeçalho do Menu -->
+                <div class="mb-6">
+                    <h2 class="text-3xl font-bold text-primary-custom mb-2">
+                        <i class="fas fa-utensils mr-2"></i>
+                        India Oasis
+                    </h2>
+                    <p class="text-gray-600 text-sm">
+                        Sabores autênticos da Índia
+                    </p>
+                </div>
+
+                <!-- Barra de Busca -->
+                <div class="relative mb-6">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="Buscar produtos..."
+                        class="w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    />
+                    <i
+                        class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    ></i>
+                </div>
+
+                <!-- Navegação Principal -->
+                <nav class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                        <i class="fas fa-compass mr-2 text-primary-custom"></i>
+                        Navegação
+                    </h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a
+                                href="index.html"
+                                class="category-link flex items-center p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all"
+                            >
+                                <i
+                                    class="fas fa-home mr-3 w-5 text-primary-custom"
+                                ></i>
+                                <span>Início</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="products.html"
+                                class="category-link flex items-center p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all"
+                            >
+                                <i
+                                    class="fas fa-store mr-3 w-5 text-primary-custom"
+                                ></i>
+                                <span>Produtos</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="about.html"
+                                class="category-link flex items-center p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all"
+                            >
+                                <i
+                                    class="fas fa-info-circle mr-3 w-5 text-primary-custom"
+                                ></i>
+                                <span>Sobre Nós</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="contact.html"
+                                class="category-link flex items-center p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all"
+                            >
+                                <i
+                                    class="fas fa-envelope mr-3 w-5 text-primary-custom"
+                                ></i>
+                                <span>Contato</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Categorias de Produtos -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                        <i class="fas fa-tags mr-2 text-primary-custom"></i>
+                        Categorias
+                    </h3>
+                    <ul class="space-y-2">
+                        <!-- Especiarias -->
+                        <li>
+                            <button
+                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all text-left"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-seedling mr-3 w-5 text-primary-custom"
+                                    ></i>
+                                    <span>Especiarias</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <ul class="subcategory-list ml-6 mt-2 space-y-1">
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Cardamomo</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Açafrão</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Gengibre</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Cúrcuma</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Pratos Principais -->
+                        <li>
+                            <button
+                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all text-left"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-utensils mr-3 w-5 text-primary-custom"
+                                    ></i>
+                                    <span>Pratos Principais</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <ul class="subcategory-list ml-6 mt-2 space-y-1">
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Biryani</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Curry</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Tandoori</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Dal</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Sobremesas -->
+                        <li>
+                            <button
+                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all text-left"
+                            >
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-birthday-cake mr-3 w-5 text-primary-custom"
+                                    ></i>
+                                    <span>Sobremesas</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <ul class="subcategory-list ml-6 mt-2 space-y-1">
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Gulab Jamun</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Rasgulla</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Kheer</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="subcategory-link block p-2 text-sm text-gray-600 hover:text-primary-custom"
+                                        >Laddu</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Ações Rápidas -->
+                <div class="border-t pt-4">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">
+                        <i class="fas fa-bolt mr-2 text-primary-custom"></i>
+                        Ações Rápidas
+                    </h3>
+                    <div class="space-y-2">
+                        <a
+                            href="cart.html"
+                            class="flex items-center p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all"
+                        >
+                            <i
+                                class="fas fa-shopping-cart mr-3 w-5 text-primary-custom"
+                            ></i>
+                            <span>Carrinho</span>
+                            <span
+                                class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+                                >3</span
+                            >
+                        </a>
+                        <a
+                            href="wishlist.html"
+                            class="flex items-center p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all"
+                        >
+                            <i
+                                class="fas fa-heart mr-3 w-5 text-primary-custom"
+                            ></i>
+                            <span>Lista de Desejos</span>
+                            <span
+                                class="ml-auto bg-gray-500 text-white text-xs px-2 py-1 rounded-full"
+                                >7</span
+                            >
+                        </a>
+                        <a
+                            href="profile.html"
+                            class="flex items-center p-3 rounded-lg hover:bg-orange-50 hover:text-primary-custom transition-all"
+                        >
+                            <i
+                                class="fas fa-user mr-3 w-5 text-primary-custom"
+                            ></i>
+                            <span>Meu Perfil</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <div class="min-h-screen">
+            <!-- Cabeçalho -->
+            <header class="bg-white shadow-md sticky top-0 z-40">
+                <nav
+                    class="container mx-auto px-4 py-4 flex justify-between items-center"
+                >
+                    <div class="flex items-center space-x-4">
+                        <!-- Botão do Menu -->
+                        <button
+                            id="open-menu-btn"
+                            class="menu-btn relative"
+                            title="Abrir Menu Lateral"
+                        >
+                            <i class="fas fa-bars"></i>
+                            <span class="demo-indicator"></span>
+                        </button>
+
+                        <!-- Logo -->
+                        <a
+                            href="{% url 'store:home' %}"
+                            class="text-3xl font-bold text-primary-custom"
+                        >
+                            India Oasis
+                        </a>
+                    </div>
+
+                    <!-- Navegação Desktop -->
+                    <div class="hidden md:flex items-center space-x-6">
+                        <a
+                            href="index.html"
+                            class="text-lg font-semibold text-primary-custom"
+                            >Início</a
+                        >
+                        <a
+                            href="products.html"
+                            class="text-lg hover:text-primary-custom transition-colors"
+                            >Produtos</a
+                        >
+                        <a
+                            href="about.html"
+                            class="text-lg hover:text-primary-custom transition-colors"
+                            >Sobre</a
+                        >
+                        <a
+                            href="contact.html"
+                            class="text-lg hover:text-primary-custom transition-colors"
+                            >Contato</a
+                        >
+                    </div>
+
+                    <!-- Ações do Usuário -->
+                    <div class="flex items-center space-x-4">
+                        <button
+                            class="relative p-2 text-gray-600 hover:text-primary-custom"
+                        >
+                            <i class="fas fa-search text-xl"></i>
+                        </button>
+                        <button
+                            class="relative p-2 text-gray-600 hover:text-primary-custom"
+                        >
+                            <i class="fas fa-heart text-xl"></i>
+                            <span
+                                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                                >7</span
+                            >
+                        </button>
+                        <button
+                            class="relative p-2 text-gray-600 hover:text-primary-custom"
+                        >
+                            <i class="fas fa-shopping-cart text-xl"></i>
+                            <span
+                                class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+                                >3</span
+                            >
+                        </button>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- Conteúdo da Página -->
+            <main class="container mx-auto px-4 py-8">
+                <div class="text-center mb-12">
+                    <h1 class="text-5xl font-bold text-gray-800 mb-4">
+                        Bem-vindo à
+                        <span class="text-primary-custom">India Oasis</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Sabores autênticos da Índia direto para sua mesa
+                    </p>
+
+                    <div
+                        class="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto"
+                    >
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                            <i
+                                class="fas fa-magic text-primary-custom mr-2"
+                            ></i>
+                            Menu Lateral Funcional
+                        </h2>
+                        <p class="text-gray-600 mb-6">
+                            Clique no botão do menu no canto superior esquerdo
+                            para abrir o menu lateral. O menu possui:
+                        </p>
+                        <div class="grid md:grid-cols-2 gap-4 text-left">
+                            <div class="space-y-2">
+                                <div
+                                    class="flex items-center text-sm text-gray-700"
+                                >
+                                    <i
+                                        class="fas fa-check text-green-500 mr-2"
+                                    ></i>
+                                    Abertura suave com animação
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-700"
+                                >
+                                    <i
+                                        class="fas fa-check text-green-500 mr-2"
+                                    ></i>
+                                    Fechar com botão X
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-700"
+                                >
+                                    <i
+                                        class="fas fa-check text-green-500 mr-2"
+                                    ></i>
+                                    Fechar clicando no overlay
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div
+                                    class="flex items-center text-sm text-gray-700"
+                                >
+                                    <i
+                                        class="fas fa-check text-green-500 mr-2"
+                                    ></i>
+                                    Fechar com tecla ESC
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-700"
+                                >
+                                    <i
+                                        class="fas fa-check text-green-500 mr-2"
+                                    ></i>
+                                    Categorias expansíveis
+                                </div>
+                                <div
+                                    class="flex items-center text-sm text-gray-700"
+                                >
+                                    <i
+                                        class="fas fa-check text-green-500 mr-2"
+                                    ></i>
+                                    Busca integrada
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produtos em Destaque -->
+                <section class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <img
+                            src="https://via.placeholder.com/300x200/ff6b35/white?text=Especiarias"
+                            alt="Especiarias"
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                        />
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">
+                            Especiarias Premium
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Especiarias autênticas importadas diretamente da
+                            Índia
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-primary-custom"
+                                >R$ 29,90</span
+                            >
+                            <button
+                                class="bg-primary-custom text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+                            >
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <img
+                            src="https://via.placeholder.com/300x200/f7931e/white?text=Biryani"
+                            alt="Biryani"
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                        />
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">
+                            Biryani Especial
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Arroz basmati com especiarias e frango ou cordeiro
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-primary-custom"
+                                >R$ 45,90</span
+                            >
+                            <button
+                                class="bg-primary-custom text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+                            >
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <img
+                            src="https://via.placeholder.com/300x200/ffd700/white?text=Doces"
+                            alt="Doces"
+                            class="w-full h-48 object-cover rounded-lg mb-4"
+                        />
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">
+                            Doces Tradicionais
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Gulab jamun, rasgulla e outros doces indianos
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-primary-custom"
+                                >R$ 19,90</span
+                            >
+                            <button
+                                class="bg-primary-custom text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors"
+                            >
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Rodapé -->
+            <footer class="bg-gray-800 text-white py-8 mt-12">
+                <div class="container mx-auto px-4 text-center">
+                    <p class="text-lg mb-4">
+                        <span class="text-primary-custom font-bold"
+                            >India Oasis</span
+                        >
+                        - Sabores autênticos da Índia
+                    </p>
+                    <p class="text-gray-400">
+                        © 2024 India Oasis. Todos os direitos reservados.
+                    </p>
+                </div>
+            </footer>
+        </div>
+
+        <!-- JavaScript -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("🎯 Inicializando menu lateral funcional...");
+
+                // Elementos do menu
+                const sideMenu = document.getElementById("side-menu");
+                const menuOverlay = document.getElementById("menu-overlay");
+                const openMenuBtn = document.getElementById("open-menu-btn");
+                const closeMenuBtn = document.getElementById("close-menu-btn");
+                const searchInput = document.getElementById("search-input");
+
+                // Verificar se todos os elementos existem
+                if (
+                    !sideMenu ||
+                    !menuOverlay ||
+                    !openMenuBtn ||
+                    !closeMenuBtn
+                ) {
+                    console.error("❌ Elementos do menu não encontrados!");
+                    return;
+                }
+
+                console.log("✅ Todos os elementos do menu encontrados!");
+
+                // Função para abrir o menu
+                function openMenu() {
+                    console.log("🔓 Abrindo menu...");
+                    sideMenu.classList.add("open");
+                    menuOverlay.classList.remove("hidden");
+                    document.body.classList.add("menu-open");
+
+                    // Foco no campo de busca
+                    setTimeout(() => {
+                        if (searchInput) {
+                            searchInput.focus();
+                        }
+                    }, 300);
+                }
+
+                // Função para fechar o menu
+                function closeMenu() {
+                    console.log("🔒 Fechando menu...");
+                    sideMenu.classList.remove("open");
+                    menuOverlay.classList.add("hidden");
+                    document.body.classList.remove("menu-open");
+                }
+
+                // Event listeners
+                openMenuBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    console.log("👆 Botão abrir menu clicado");
+                    openMenu();
+                });
+
+                closeMenuBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    console.log("👆 Botão fechar menu clicado");
+                    closeMenu();
+                });
+
+                // Fechar menu clicando no overlay
+                menuOverlay.addEventListener("click", function (e) {
+                    if (e.target === menuOverlay) {
+                        console.log("👆 Overlay clicado - fechando menu");
+                        closeMenu();
+                    }
+                });
+
+                // Fechar menu com tecla ESC
+                document.addEventListener("keydown", function (e) {
+                    if (
+                        e.key === "Escape" &&
+                        sideMenu.classList.contains("open")
+                    ) {
+                        console.log("⌨️ ESC pressionado - fechando menu");
+                        closeMenu();
+                    }
+                });
+
+                // Funcionalidade das subcategorias
+                const categoryToggles =
+                    document.querySelectorAll(".category-toggle");
+                categoryToggles.forEach((toggle) => {
+                    toggle.addEventListener("click", function () {
+                        const subcategoryList = this.nextElementSibling;
+                        if (
+                            subcategoryList &&
+                            subcategoryList.classList.contains(
+                                "subcategory-list",
+                            )
+                        ) {
+                            // Toggle das classes
+                            this.classList.toggle("active");
+                            subcategoryList.classList.toggle("show");
+
+                            console.log("📂 Categoria expandida/recolhida");
+                        }
+                    });
+                });
+
+                // Funcionalidade de busca
+                if (searchInput) {
+                    searchInput.addEventListener("input", function () {
+                        const searchTerm = this.value.toLowerCase();
+                        console.log("🔍 Buscando por:", searchTerm);
+
+                        // Aqui você pode implementar a lógica de busca
+                        // Por exemplo, filtrar produtos ou navegar para página de resultados
+                    });
+                }
+
+                console.log("🎉 Menu lateral totalmente funcional!");
+
+                // Remover animação do botão após alguns segundos
+                setTimeout(() => {
+                    if (openMenuBtn.querySelector(".demo-indicator")) {
+                        openMenuBtn.querySelector(
+                            ".demo-indicator",
+                        ).style.animation = "none";
+                    }
+                }, 10000);
+            });
+        </script>
+    </body>
+</html>

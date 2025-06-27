@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Menu - India Oasis</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <style>
+        .debug-box {
+            border: 2px dashed #ff6b35;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .status-ok {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .status-error {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .debug-log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Overlay do Menu -->
+    <div id="menu-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40"></div>
+
+    <!-- Menu Lateral -->
+    <aside id="side-menu" class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg z-50 overflow-y-auto">
+        <div class="p-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary">Menu Debug</h2>
+                <button id="close-menu-btn" class="text-2xl text-gray-500 hover:text-primary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <a href="#" class="block p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-home mr-3"></i>Início
+                </a>
+                <a href="#" class="block p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-box mr-3"></i>Produtos
+                </a>
+                <a href="#" class="block p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-heart mr-3"></i>Lista de Desejos
+                </a>
+                <a href="#" class="block p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-shopping-cart mr-3"></i>Carrinho
+                </a>
+                <a href="#" class="block p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-envelope mr-3"></i>Contato
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <div class="container mx-auto px-4 py-8">
+
+        <!-- Header -->
+        <header class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <button id="open-menu-btn" class="text-2xl text-primary hover:text-orange-600 transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="text-3xl font-bold text-primary">Debug Menu Lateral</h1>
+                </div>
+                <div class="text-sm text-gray-500">
+                    Página para testar funcionalidade do menu
+                </div>
+            </div>
+        </header>
+
+        <!-- Status dos Elementos -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Status dos Elementos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="debug-box">
+                    <h3 class="font-semibold mb-2">Menu Lateral (#side-menu)</h3>
+                    <div id="status-sidemenu" class="status-error">Não encontrado</div>
+                </div>
+
+                <div class="debug-box">
+                    <h3 class="font-semibold mb-2">Overlay (#menu-overlay)</h3>
+                    <div id="status-overlay" class="status-error">Não encontrado</div>
+                </div>
+
+                <div class="debug-box">
+                    <h3 class="font-semibold mb-2">Botão Abrir (#open-menu-btn)</h3>
+                    <div id="status-open" class="status-error">Não encontrado</div>
+                </div>
+
+                <div class="debug-box">
+                    <h3 class="font-semibold mb-2">Botão Fechar (#close-menu-btn)</h3>
+                    <div id="status-close" class="status-error">Não encontrado</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles de Teste -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4">Controles de Teste</h2>
+            <div class="space-x-4">
+                <button id="test-open" class="btn btn-primary">
+                    <i class="fas fa-arrow-right mr-2"></i>Abrir Menu
+                </button>
+                <button id="test-close" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left mr-2"></i>Fechar Menu
+                </button>
+                <button id="test-toggle" class="btn btn-primary">
+                    <i class="fas fa-exchange-alt mr-2"></i>Toggle Menu
+                </button>
+                <button id="clear-log" class="btn btn-secondary">
+                    <i class="fas fa-trash mr-2"></i>Limpar Log
+                </button>
+            </div>
+        </div>
+
+        <!-- Log de Debug -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4">Log de Debug</h2>
+            <div id="debug-log" class="debug-log">
+                <div>Aguardando carregamento...</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Sistema de Log
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEl = document.getElementById('debug-log');
+            const color = type === 'error' ? '#ef4444' : type === 'success' ? '#10b981' : '#f9fafb';
+
+            const logEntry = document.createElement('div');
+            logEntry.style.color = color;
+            logEntry.innerHTML = `[${timestamp}] ${message}`;
+
+            logEl.appendChild(logEntry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function updateStatus(elementId, status) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.textContent = status ? 'Encontrado ✓' : 'Não encontrado ✗';
+                el.className = status ? 'status-ok' : 'status-error';
+            }
+        }
+
+        // Função de toggle do menu
+        function toggleMenu() {
+            log('Executando toggleMenu()');
+            const sideMenu = document.getElementById('side-menu');
+            const menuOverlay = document.getElementById('menu-overlay');
+
+            if (sideMenu && menuOverlay) {
+                const isOpen = sideMenu.classList.contains('open');
+                log(`Menu está ${isOpen ? 'aberto' : 'fechado'} antes do toggle`);
+
+                sideMenu.classList.toggle('open');
+                menuOverlay.classList.toggle('hidden');
+                document.body.classList.toggle('menu-open');
+
+                const isOpenAfter = sideMenu.classList.contains('open');
+                log(`Menu está ${isOpenAfter ? 'aberto' : 'fechado'} após o toggle`, 'success');
+            } else {
+                log('Elementos não encontrados para toggle!', 'error');
+            }
+        }
+
+        function openMenu() {
+            log('Executando openMenu()');
+            const sideMenu = document.getElementById('side-menu');
+            const menuOverlay = document.getElementById('menu-overlay');
+
+            if (sideMenu && menuOverlay) {
+                sideMenu.classList.add('open');
+                menuOverlay.classList.remove('hidden');
+                document.body.classList.add('menu-open');
+                log('Menu aberto com sucesso', 'success');
+            } else {
+                log('Elementos não encontrados para abrir!', 'error');
+            }
+        }
+
+        function closeMenu() {
+            log('Executando closeMenu()');
+            const sideMenu = document.getElementById('side-menu');
+            const menuOverlay = document.getElementById('menu-overlay');
+
+            if (sideMenu && menuOverlay) {
+                sideMenu.classList.remove('open');
+                menuOverlay.classList.add('hidden');
+                document.body.classList.remove('menu-open');
+                log('Menu fechado com sucesso', 'success');
+            } else {
+                log('Elementos não encontrados para fechar!', 'error');
+            }
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            log('DOM carregado - Iniciando debug');
+
+            // Verificar elementos
+            const sideMenu = document.getElementById('side-menu');
+            const menuOverlay = document.getElementById('menu-overlay');
+            const openBtn = document.getElementById('open-menu-btn');
+            const closeBtn = document.getElementById('close-menu-btn');
+
+            // Atualizar status
+            updateStatus('status-sidemenu', !!sideMenu);
+            updateStatus('status-overlay', !!menuOverlay);
+            updateStatus('status-open', !!openBtn);
+            updateStatus('status-close', !!closeBtn);
+
+            // Log dos elementos encontrados
+            log(`Elementos encontrados:`);
+            log(`- side-menu: ${!!sideMenu}`);
+            log(`- menu-overlay: ${!!menuOverlay}`);
+            log(`- open-menu-btn: ${!!openBtn}`);
+            log(`- close-menu-btn: ${!!closeBtn}`);
+
+            // Event Listeners dos botões principais
+            if (openBtn) {
+                openBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    log('Botão ABRIR clicado via evento');
+                    toggleMenu();
+                });
+                log('Listener adicionado ao botão ABRIR');
+            }
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    log('Botão FECHAR clicado via evento');
+                    toggleMenu();
+                });
+                log('Listener adicionado ao botão FECHAR');
+            }
+
+            if (menuOverlay) {
+                menuOverlay.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    log('Overlay clicado');
+                    toggleMenu();
+                });
+                log('Listener adicionado ao OVERLAY');
+            }
+
+            // Event Listeners dos botões de teste
+            document.getElementById('test-open').addEventListener('click', openMenu);
+            document.getElementById('test-close').addEventListener('click', closeMenu);
+            document.getElementById('test-toggle').addEventListener('click', toggleMenu);
+
+            document.getElementById('clear-log').addEventListener('click', function() {
+                document.getElementById('debug-log').innerHTML = '<div>Log limpo...</div>';
+            });
+
+            // Verificar CSS
+            if (sideMenu) {
+                const computedStyle = window.getComputedStyle(sideMenu);
+                log(`CSS do menu - transform: ${computedStyle.transform}`);
+                log(`CSS do menu - z-index: ${computedStyle.zIndex}`);
+                log(`CSS do menu - position: ${computedStyle.position}`);
+            }
+
+            log('Inicialização completa!', 'success');
+        });
+
+        // Esc para fechar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                log('ESC pressionado');
+                closeMenu();
+            }
+        });
+
+        // Log de erros globais
+        window.addEventListener('error', function(e) {
+            log(`ERRO: ${e.message}`, 'error');
+        });
+    </script>
+
+</body>
+</html>
