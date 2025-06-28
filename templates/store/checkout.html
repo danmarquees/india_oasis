@@ -1,3 +1,4 @@
+{% load static%}
 <!doctype html>
 <html lang="pt-BR">
     <head>
@@ -23,7 +24,7 @@
         />
 
         <!-- CSS personalizado -->
-        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
         <style>
             .checkout-step {
@@ -924,7 +925,7 @@
         </main>
 
         <!-- Scripts -->
-        <script src="assets/js/toast-system.js"></script>
+        <script src="{% static 'js/toast-system.js' %}"></script>
         <script>
             // Initialize checkout functionality
             document.addEventListener("DOMContentLoaded", function () {

@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="pt-BR">
     <head>
@@ -25,7 +26,7 @@
         />
 
         <!-- Link para o arquivo CSS externo -->
-        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
         <!--
         ==== MELHORIAS IMPLEMENTADAS NA PÁGINA DO CARRINHO ====
@@ -923,7 +924,7 @@
                             </div>
 
                             <a
-                                href="checkout.html"
+                                href="{% url 'store:checkout' %}"
                                 class="btn btn-primary w-full text-lg mb-3 relative overflow-hidden block text-center"
                             >
                                 <span class="relative z-10">
@@ -2206,9 +2207,9 @@
         </div>
 
         <!-- Sistema de Notificações Toast -->
-        <script src="assets/js/toast-system.js"></script>
+        <script src="{% static 'js/toast-system.js' %}"></script>
 
         <!-- Link para o arquivo JavaScript externo -->
-        <script src="assets/js/script.js" defer></script>
+        <script src="{% static 'js/script.js' %}" defer></script>
     </body>
 </html>
