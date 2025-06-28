@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist
+from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile
+
+@admin.register(CustomerProfile)
+class CustomerProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'cpf', 'telefone', 'data_nascimento', 'genero', 'cidade', 'estado', 'receber_newsletter']
+    search_fields = ['user__username', 'cpf', 'telefone']
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

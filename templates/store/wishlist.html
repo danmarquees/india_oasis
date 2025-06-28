@@ -1,33 +1,11 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>
-            Lista de Desejos - India Oasis - Temperos e Sabores da Índia
-        </title>
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
+<title>
+    {% block title %}Lista de Desejos - India Oasis - Temperos e Sabores da
+    Índia{% endblock %}
+</title>
 
-        <!-- Fontes do Google -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
-            rel="stylesheet"
-        />
-
-        <!-- Font Awesome (Ícones) -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
-
-        <!-- Link para o arquivo CSS externo -->
-        <link rel="stylesheet" href="assets/css/styles.css" />
-
-        <!--
+<!--
         ==== MELHORIAS IMPLEMENTADAS NA WISHLIST ====
 
         💝 FUNCIONALIDADES PRINCIPAIS:
@@ -53,1648 +31,1068 @@
         - Backup automático da lista
         -->
 
-        <style>
-            /* Animações específicas para wishlist */
-            @keyframes heartBeat {
-                0%,
-                100% {
-                    transform: scale(1);
-                }
-                25% {
-                    transform: scale(1.1);
-                }
-                50% {
-                    transform: scale(1.05);
-                }
-                75% {
-                    transform: scale(1.15);
-                }
-            }
+<style>
+    /* Animações específicas para wishlist */
+    @keyframes heartBeat {
+        0%,
+        100% {
+            transform: scale(1);
+        }
+        25% {
+            transform: scale(1.1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        75% {
+            transform: scale(1.15);
+        }
+    }
 
-            @keyframes floatIn {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px) rotate(-5deg);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0) rotate(0deg);
-                }
-            }
+    @keyframes floatIn {
+        from {
+            opacity: 0;
+            transform: translateY(30px) rotate(-5deg);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+    }
 
-            @keyframes wishItemHover {
-                from {
-                    transform: translateY(0) scale(1);
-                }
-                to {
-                    transform: translateY(-5px) scale(1.02);
-                }
-            }
+    @keyframes wishItemHover {
+        from {
+            transform: translateY(0) scale(1);
+        }
+        to {
+            transform: translateY(-5px) scale(1.02);
+        }
+    }
 
-            .wishlist-item {
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                animation: floatIn 0.6s ease-out;
-            }
+    .wishlist-item {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: floatIn 0.6s ease-out;
+    }
 
-            .wishlist-item:hover {
-                animation: wishItemHover 0.3s ease-out forwards;
-                box-shadow: 0 10px 25px rgba(216, 67, 21, 0.15);
-            }
+    .wishlist-item:hover {
+        animation: wishItemHover 0.3s ease-out forwards;
+        box-shadow: 0 10px 25px rgba(216, 67, 21, 0.15);
+    }
 
-            .heart-animation {
-                animation: heartBeat 0.6s ease-out;
-            }
+    .heart-animation {
+        animation: heartBeat 0.6s ease-out;
+    }
 
-            .drag-placeholder {
-                background: linear-gradient(135deg, #fff8e1, #ffe0b2);
-                border: 2px dashed #d84315;
-                opacity: 0.7;
-            }
+    .drag-placeholder {
+        background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+        border: 2px dashed #d84315;
+        opacity: 0.7;
+    }
 
-            .price-alert {
-                animation: priceAlert 1s ease-out;
-            }
+    .price-alert {
+        animation: priceAlert 1s ease-out;
+    }
 
-            @keyframes priceAlert {
-                0%,
-                100% {
-                    background-color: transparent;
-                }
-                50% {
-                    background-color: rgba(34, 197, 94, 0.2);
-                }
-            }
+    @keyframes priceAlert {
+        0%,
+        100% {
+            background-color: transparent;
+        }
+        50% {
+            background-color: rgba(34, 197, 94, 0.2);
+        }
+    }
 
-            /* Estilos para categorias expandíveis */
-            .subcategory-list {
-                max-height: 0;
-                overflow: hidden;
-                transition:
-                    max-height 0.3s ease-out,
-                    opacity 0.3s ease-out;
-                opacity: 0;
-            }
+    /* Estilos para categorias expandíveis */
+    .subcategory-list {
+        max-height: 0;
+        overflow: hidden;
+        transition:
+            max-height 0.3s ease-out,
+            opacity 0.3s ease-out;
+        opacity: 0;
+    }
 
-            .subcategory-list.show {
-                max-height: 200px;
-                opacity: 1;
-            }
+    .subcategory-list.show {
+        max-height: 200px;
+        opacity: 1;
+    }
 
-            .category-toggle.active .fa-chevron-down {
-                transform: rotate(180deg);
-            }
+    .category-toggle.active .fa-chevron-down {
+        transform: rotate(180deg);
+    }
 
-            .category-link:hover,
-            .category-toggle:hover {
-                transform: translateX(4px);
-            }
+    .category-link:hover,
+    .category-toggle:hover {
+        transform: translateX(4px);
+    }
 
-            .subcategory-link:hover {
-                transform: translateX(2px);
-            }
+    .subcategory-link:hover {
+        transform: translateX(2px);
+    }
 
-            /* Filtros avançados */
-            .filter-chip {
-                transition: all 0.2s ease;
-            }
+    /* Filtros avançados */
+    .filter-chip {
+        transition: all 0.2s ease;
+    }
 
-            .filter-chip:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            }
+    .filter-chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-            .filter-chip.active {
-                background: linear-gradient(135deg, #d84315, #bf360c);
-                color: white;
-            }
+    .filter-chip.active {
+        background: linear-gradient(135deg, #d84315, #bf360c);
+        color: white;
+    }
 
-            /* Comparação de produtos */
-            .compare-mode .wishlist-item {
-                cursor: pointer;
-                position: relative;
-            }
+    /* Comparação de produtos */
+    .compare-mode .wishlist-item {
+        cursor: pointer;
+        position: relative;
+    }
 
-            .compare-selected::after {
-                content: "✓";
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                background: #10b981;
-                color: white;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                font-weight: bold;
-            }
-        </style>
-    </head>
-    <body class="text-gray-800">
-        <!--
-        ==== MENU LATERAL RETRÁTIL AVANÇADO ====
-        Funcionalidades implementadas:
-        - Menu lateral deslizante com overlay
-        - Barra de busca em tempo real
-        - Categorias principais com subcategorias expandíveis
-        - Contador de resultados de busca
-        - Botão para limpar filtros
-        - Links de acesso rápido com mini contadores
-        - Filtros específicos para wishlist
-        -->
-        <div
-            id="menu-overlay"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"
-        ></div>
-        <aside
-            id="side-menu"
-            class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg z-50 overflow-y-auto"
-        >
-            <div class="p-4">
-                <button
-                    id="close-menu-btn"
-                    class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-primary"
+    .compare-selected::after {
+        content: "✓";
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #10b981;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+</style>
+
+<!-- ==== CONTEÚDO PRINCIPAL ==== -->
+<main class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6">
+        <ol class="flex space-x-2 text-sm">
+            <li>
+                <a href="index.html" class="text-primary hover:underline"
+                    >Início</a
                 >
-                    &times;
+            </li>
+            <li class="text-gray-500">/</li>
+            <li class="text-gray-700">Lista de Desejos</li>
+        </ol>
+    </nav>
+
+    <!-- Título da Página com Controles -->
+    <div class="text-center mb-8">
+        <h1 class="text-5xl font-teko text-secondary mb-4">
+            <i class="fas fa-heart text-primary mr-3 heart-animation"></i>
+            Minha Lista de Desejos
+        </h1>
+        <p class="text-gray-600 mb-6">
+            Seus produtos favoritos salvos para depois
+        </p>
+
+        <!-- Controles da Wishlist -->
+        <div class="flex flex-wrap justify-center gap-4 mb-6">
+            <div class="flex items-center space-x-2">
+                <label class="text-sm text-gray-600">Ordenar por:</label>
+                <select
+                    id="sort-wishlist"
+                    class="text-sm border rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                    <option value="recent">Mais Recentes</option>
+                    <option value="name">Nome A-Z</option>
+                    <option value="price-low">Menor Preço</option>
+                    <option value="price-high">Maior Preço</option>
+                    <option value="category">Categoria</option>
+                </select>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <button
+                    id="view-grid"
+                    class="p-2 border rounded-md hover:bg-gray-50 transition-colors"
+                    title="Visualização em Grade"
+                >
+                    <i class="fas fa-th"></i>
                 </button>
-                <h2 class="text-3xl font-teko text-primary mb-6">Menu</h2>
+                <button
+                    id="view-list"
+                    class="p-2 border rounded-md hover:bg-gray-50 transition-colors"
+                    title="Visualização em Lista"
+                >
+                    <i class="fas fa-list"></i>
+                </button>
+                <button
+                    id="compare-mode"
+                    class="p-2 border rounded-md hover:bg-gray-50 transition-colors"
+                    title="Modo Comparação"
+                >
+                    <i class="fas fa-balance-scale"></i>
+                </button>
+            </div>
 
-                <!-- Barra de Busca com Contador de Resultados -->
-                <div class="relative mb-6">
-                    <input
-                        type="text"
-                        id="search-input"
-                        placeholder="Buscar na wishlist..."
-                        class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
+            <div class="flex items-center space-x-2">
+                <button
+                    id="export-wishlist"
+                    class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
+                >
+                    <i class="fas fa-download mr-1"></i>
+                    Exportar
+                </button>
+                <button
+                    id="share-wishlist"
+                    class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
+                >
+                    <i class="fas fa-share mr-1"></i>
+                    Compartilhar
+                </button>
+                <button id="create-list" class="btn text-sm btn-primary">
+                    <i class="fas fa-plus mr-1"></i>
+                    Nova Lista
+                </button>
+            </div>
+        </div>
+
+        <!-- Abas de Listas Múltiplas -->
+        <div class="flex justify-center space-x-2 mb-4" id="wishlist-tabs">
+            <button
+                class="tab-btn active px-4 py-2 bg-primary text-white rounded-lg text-sm"
+                data-list="main"
+            >
+                <i class="fas fa-heart mr-1"></i>
+                Principal (0)
+            </button>
+            <button
+                class="tab-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300"
+                data-list="gifts"
+            >
+                <i class="fas fa-gift mr-1"></i>
+                Presentes (0)
+            </button>
+            <button
+                class="tab-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300"
+                data-list="recipes"
+            >
+                <i class="fas fa-utensils mr-1"></i>
+                Para Receitas (0)
+            </button>
+        </div>
+    </div>
+
+    <!-- Lista de Desejos -->
+    <div id="wishlist-container">
+        <!-- Loading State -->
+        <div id="wishlist-loading" class="hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="animate-pulse" v-for="i in 6">
+                    <div class="bg-gray-200 rounded-lg h-64"></div>
+                    <div class="mt-2 bg-gray-200 rounded h-4"></div>
+                    <div class="mt-1 bg-gray-200 rounded h-3 w-2/3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quando há itens na wishlist -->
+        <div
+            id="wishlist-items"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+            <!-- Itens da wishlist serão inseridos aqui pelo JavaScript -->
+        </div>
+
+        <!-- Quando a wishlist está vazia -->
+        <div id="empty-wishlist" class="text-center py-16">
+            <div class="mb-8 relative">
+                <div class="relative mx-auto w-32 h-32">
                     <i
-                        class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
+                        class="fas fa-heart-broken text-6xl text-gray-300 absolute inset-0 animate-pulse"
                     ></i>
-                    <!-- Contador de Resultados -->
                     <div
-                        id="search-results-counter"
-                        class="hidden mt-2 text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full"
+                        class="absolute -top-2 -right-2 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center"
                     >
-                        <i class="fas fa-info-circle mr-1 text-primary"></i>
-                        <span id="results-count">0</span> itens encontrados
+                        <i class="fas fa-exclamation text-red-500 text-sm"></i>
                     </div>
                 </div>
+            </div>
 
-                <!-- Filtros da Wishlist -->
-                <div class="mb-6">
-                    <h3 class="font-teko text-xl text-secondary mb-3">
-                        <i class="fas fa-filter mr-2 text-primary"></i>
-                        Filtros
+            <h2 class="text-4xl font-teko text-gray-500 mb-4 animate-fade-in">
+                Sua lista de desejos está vazia
+            </h2>
+            <p
+                class="text-gray-400 mb-8 max-w-md mx-auto animate-fade-in-delay"
+            >
+                Que tal começar salvando alguns temperos especiais? Explore
+                nossa seleção única de especiarias autênticas da Índia!
+            </p>
+
+            <!-- Cards de Sugestões por Categoria -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
+            >
+                <div
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-slide-up border border-orange-200"
+                >
+                    <i
+                        class="fas fa-pepper-hot text-4xl text-orange-500 mb-4"
+                    ></i>
+                    <h3 class="font-teko text-xl text-secondary mb-2">
+                        Temperos Aromáticos
                     </h3>
-                    <div class="space-y-2">
-                        <button
-                            class="filter-chip w-full text-left p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors text-sm"
-                            data-filter="all"
-                        >
-                            <i class="fas fa-heart mr-2 text-red-500"></i>
-                            Todos os Favoritos
-                        </button>
-                        <button
-                            class="filter-chip w-full text-left p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors text-sm"
-                            data-filter="available"
-                        >
-                            <i
-                                class="fas fa-check-circle mr-2 text-green-500"
-                            ></i>
-                            Disponíveis
-                        </button>
-                        <button
-                            class="filter-chip w-full text-left p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors text-sm"
-                            data-filter="sale"
-                        >
-                            <i class="fas fa-tag mr-2 text-orange-500"></i>
-                            Em Promoção
-                        </button>
-                        <button
-                            class="filter-chip w-full text-left p-2 bg-gray-100 rounded-md hover:bg-gray-200 transition-colors text-sm"
-                            data-filter="price-drop"
-                        >
-                            <i class="fas fa-arrow-down mr-2 text-blue-500"></i>
-                            Preço Reduzido
-                        </button>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Garam masala, cúrcuma, cominho e outras especiarias
+                        essenciais
+                    </p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="w-2 h-2 bg-orange-400 rounded-full"></span>
+                        <span class="w-2 h-2 bg-orange-300 rounded-full"></span>
+                        <span class="w-2 h-2 bg-orange-200 rounded-full"></span>
                     </div>
+                    <a
+                        href="products.html?category=temperos"
+                        class="text-primary hover:underline text-sm font-semibold"
+                    >
+                        Explorar Temperos →
+                    </a>
                 </div>
 
-                <!-- Categorias com Subcategorias Expandíveis -->
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-teko text-2xl text-secondary">
-                        <i class="fas fa-tags mr-2 text-primary"></i>
-                        Categorias
+                <div
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-slide-up-delay border border-green-200"
+                >
+                    <i class="fas fa-mug-hot text-4xl text-green-500 mb-4"></i>
+                    <h3 class="font-teko text-xl text-secondary mb-2">
+                        Chás Tradicionais
                     </h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Masala chai, chás verdes e infusões ayurvédicas
+                        relaxantes
+                    </p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <span class="w-2 h-2 bg-green-300 rounded-full"></span>
+                        <span class="w-2 h-2 bg-green-200 rounded-full"></span>
+                    </div>
+                    <a
+                        href="products.html?category=chas"
+                        class="text-primary hover:underline text-sm font-semibold"
+                    >
+                        Descobrir Chás →
+                    </a>
+                </div>
+
+                <div
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-slide-up-delay-2 border border-purple-200"
+                >
+                    <i class="fas fa-gift text-4xl text-purple-500 mb-4"></i>
+                    <h3 class="font-teko text-xl text-secondary mb-2">
+                        Kits Especiais
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Combinações perfeitas para iniciar sua jornada culinária
+                    </p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                        <span class="w-2 h-2 bg-purple-400 rounded-full"></span>
+                        <span class="w-2 h-2 bg-purple-300 rounded-full"></span>
+                        <span class="w-2 h-2 bg-purple-200 rounded-full"></span>
+                    </div>
+                    <a
+                        href="products.html?category=kits"
+                        class="text-primary hover:underline text-sm font-semibold"
+                    >
+                        Ver Kits →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Ações Rápidas -->
+            <div class="space-y-4">
+                <a
+                    href="products.html"
+                    class="btn btn-primary text-lg inline-block animate-pulse-subtle"
+                >
+                    <i class="fas fa-heart mr-2"></i>
+                    Começar a Favoritar
+                </a>
+
+                <div class="flex justify-center space-x-6 text-sm">
                     <button
-                        id="reset-filters-btn"
-                        class="hidden text-xs text-primary hover:text-secondary transition-colors px-2 py-1 rounded-md border border-primary hover:bg-primary hover:text-white"
+                        id="import-wishlist"
+                        class="text-blue-500 hover:underline flex items-center"
                     >
-                        <i class="fas fa-times mr-1"></i>
-                        Limpar
+                        <i class="fas fa-upload mr-1"></i>
+                        Importar Lista
+                    </button>
+                    <button
+                        id="view-popular"
+                        class="text-green-500 hover:underline flex items-center"
+                    >
+                        <i class="fas fa-fire mr-1"></i>
+                        Mais Populares
+                    </button>
+                    <button
+                        id="surprise-me"
+                        class="text-purple-500 hover:underline flex items-center"
+                    >
+                        <i class="fas fa-magic mr-1"></i>
+                        Me Surpreenda
                     </button>
                 </div>
-                <ul class="space-y-2">
-                    <li>
-                        <a
-                            href="products.html"
-                            class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                            data-category="all"
-                        >
-                            <i
-                                class="fas fa-th-large mr-3 text-primary w-5"
-                            ></i>
-                            <span>Todos os Produtos</span>
-                        </a>
-                    </li>
 
-                    <!-- Temperos e Masalas com Subcategorias -->
-                    <li class="category-section">
-                        <div class="category-parent">
-                            <button
-                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                                data-category="Temperos"
-                            >
-                                <div class="flex items-center">
-                                    <i
-                                        class="fas fa-pepper-hot mr-3 text-orange-600 w-5"
-                                    ></i>
-                                    <span>Temperos e Masalas</span>
-                                </div>
-                                <i
-                                    class="fas fa-chevron-down transform transition-transform duration-200"
-                                ></i>
-                            </button>
-                            <ul
-                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
-                            >
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=masalas"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-orange-400 text-xs"
-                                        ></i>
-                                        <span>Masalas Tradicionais</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=especiarias"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-orange-400 text-xs"
-                                        ></i>
-                                        <span>Especiarias Puras</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=misturas"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-orange-400 text-xs"
-                                        ></i>
-                                        <span>Misturas Especiais</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- Chás e Infusões com Subcategorias -->
-                    <li class="category-section">
-                        <div class="category-parent">
-                            <button
-                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                                data-category="Chás"
-                            >
-                                <div class="flex items-center">
-                                    <i
-                                        class="fas fa-mug-hot mr-3 text-green-600 w-5"
-                                    ></i>
-                                    <span>Chás e Infusões</span>
-                                </div>
-                                <i
-                                    class="fas fa-chevron-down transform transition-transform duration-200"
-                                ></i>
-                            </button>
-                            <ul
-                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
-                            >
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=chai"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-green-400 text-xs"
-                                        ></i>
-                                        <span>Masala Chai</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=cha-verde"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-green-400 text-xs"
-                                        ></i>
-                                        <span>Chás Verdes</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=infusoes"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-green-400 text-xs"
-                                        ></i>
-                                        <span>Infusões Ayurvédicas</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- Grãos e Lentilhas com Subcategorias -->
-                    <li class="category-section">
-                        <div class="category-parent">
-                            <button
-                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                                data-category="Grãos"
-                            >
-                                <div class="flex items-center">
-                                    <i
-                                        class="fas fa-seedling mr-3 text-yellow-600 w-5"
-                                    ></i>
-                                    <span>Grãos e Lentilhas</span>
-                                </div>
-                                <i
-                                    class="fas fa-chevron-down transform transition-transform duration-200"
-                                ></i>
-                            </button>
-                            <ul
-                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
-                            >
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=lentilhas"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
-                                        ></i>
-                                        <span>Lentilhas (Dal)</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=arroz"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
-                                        ></i>
-                                        <span>Arroz Basmati</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=graos-especiais"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
-                                        ></i>
-                                        <span>Grãos Especiais</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- Acompanhamentos -->
-                    <li>
-                        <a
-                            href="products.html?category=acompanhamentos"
-                            class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                            data-category="Acompanhamentos"
-                        >
-                            <i
-                                class="fas fa-utensils mr-3 text-purple-600 w-5"
-                            ></i>
-                            <span>Acompanhamentos</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Links Rápidos com Mini Contadores -->
-                <div class="mt-8 pt-6 border-t border-gray-200">
-                    <div class="flex items-center justify-between mb-3">
-                        <h3 class="font-teko text-xl text-secondary">
-                            <i class="fas fa-star mr-2 text-accent"></i>
-                            Acesso Rápido
-                        </h3>
-                        <div class="flex space-x-1">
-                            <span
-                                class="menu-counter bg-accent text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold"
-                                id="wishlist-mini-count"
-                                >0</span
-                            >
-                            <span
-                                class="menu-counter bg-accent text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold"
-                                id="cart-mini-count"
-                                >0</span
-                            >
-                        </div>
-                    </div>
-                    <ul class="space-y-2">
+                <!-- Dicas para Usar a Wishlist -->
+                <div
+                    class="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4 max-w-lg mx-auto"
+                >
+                    <h4
+                        class="font-semibold text-yellow-800 mb-2 flex items-center"
+                    >
+                        <i class="fas fa-lightbulb mr-2"></i>
+                        Dicas para usar sua wishlist:
+                    </h4>
+                    <ul class="text-sm text-yellow-700 space-y-1">
+                        <li>• Salve produtos para comparar preços depois</li>
                         <li>
-                            <a
-                                href="wishlist.html"
-                                class="flex items-center p-2 rounded-lg bg-red-50 text-red-700 border border-red-200"
-                            >
-                                <i
-                                    class="fas fa-heart mr-3 text-red-500 w-5"
-                                ></i>
-                                <span>Meus Favoritos</span>
-                            </a>
+                            • Crie listas temáticas (presentes, receitas, etc.)
                         </li>
                         <li>
-                            <a
-                                href="cart.html"
-                                class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
-                            >
-                                <i
-                                    class="fas fa-shopping-cart mr-3 text-blue-500 w-5"
-                                ></i>
-                                <span>Meu Carrinho</span>
-                            </a>
+                            • Receba alertas quando produtos entrarem em
+                            promoção
                         </li>
-                        <li>
-                            <a
-                                href="#ofertas"
-                                class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
-                            >
-                                <i
-                                    class="fas fa-percentage mr-3 text-green-500 w-5"
-                                ></i>
-                                <span>Ofertas Especiais</span>
-                            </a>
-                        </li>
+                        <li>• Compartilhe suas listas com amigos e família</li>
                     </ul>
                 </div>
             </div>
-        </aside>
+        </div>
+    </div>
 
-        <!-- ==== CABEÇALHO ==== -->
-        <header class="bg-white shadow-md sticky top-0 z-40">
-            <nav
-                class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
-            >
-                <div class="flex items-center space-x-4">
-                    <button
-                        id="open-menu-btn"
-                        class="text-xl hover:text-primary"
-                    >
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <a href="index.html" class="text-3xl font-teko text-primary"
-                        >India Oasis</a
-                    >
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-lg hover:text-primary"
-                        >Início</a
-                    >
-                    <a href="products.html" class="text-lg hover:text-primary"
-                        >Produtos</a
-                    >
-                    <a href="contact.html" class="text-lg hover:text-primary"
-                        >Contato</a
-                    >
-                    <a href="about.html" class="text-lg hover:text-primary"
-                        >Sobre Nós</a
-                    >
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="wishlist.html" class="relative text-primary">
-                        <i class="fas fa-heart text-xl"></i>
+    <!-- Ações da Wishlist Expandidas -->
+    <div id="wishlist-actions" class="hidden mt-8">
+        <!-- Painel Principal de Ações -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Estatísticas -->
+                <div class="text-center lg:text-left">
+                    <h3 class="text-2xl font-teko text-secondary mb-2">
+                        <span id="wishlist-total-items">0</span> itens salvos
+                    </h3>
+                    <p class="text-gray-600 mb-2">
+                        Valor total:
                         <span
-                            id="wishlist-count"
-                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
-                            >0</span
+                            id="wishlist-total-value"
+                            class="font-bold text-primary text-lg"
+                            >R$ 0,00</span
                         >
-                    </a>
-                    <a href="cart.html" class="relative hover:text-primary">
-                        <i class="fas fa-shopping-cart text-xl"></i>
-                        <span
-                            id="cart-count"
-                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
-                            >0</span
-                        >
-                    </a>
-                </div>
-            </nav>
-        </header>
-
-        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
-        <main class="container mx-auto p-4 sm:p-6 lg:p-8">
-            <!-- Breadcrumb -->
-            <nav class="mb-6">
-                <ol class="flex space-x-2 text-sm">
-                    <li>
-                        <a
-                            href="index.html"
-                            class="text-primary hover:underline"
-                            >Início</a
-                        >
-                    </li>
-                    <li class="text-gray-500">/</li>
-                    <li class="text-gray-700">Lista de Desejos</li>
-                </ol>
-            </nav>
-
-            <!-- Título da Página com Controles -->
-            <div class="text-center mb-8">
-                <h1 class="text-5xl font-teko text-secondary mb-4">
-                    <i
-                        class="fas fa-heart text-primary mr-3 heart-animation"
-                    ></i>
-                    Minha Lista de Desejos
-                </h1>
-                <p class="text-gray-600 mb-6">
-                    Seus produtos favoritos salvos para depois
-                </p>
-
-                <!-- Controles da Wishlist -->
-                <div class="flex flex-wrap justify-center gap-4 mb-6">
-                    <div class="flex items-center space-x-2">
-                        <label class="text-sm text-gray-600"
-                            >Ordenar por:</label
-                        >
-                        <select
-                            id="sort-wishlist"
-                            class="text-sm border rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-primary"
-                        >
-                            <option value="recent">Mais Recentes</option>
-                            <option value="name">Nome A-Z</option>
-                            <option value="price-low">Menor Preço</option>
-                            <option value="price-high">Maior Preço</option>
-                            <option value="category">Categoria</option>
-                        </select>
-                    </div>
-
-                    <div class="flex items-center space-x-2">
-                        <button
-                            id="view-grid"
-                            class="p-2 border rounded-md hover:bg-gray-50 transition-colors"
-                            title="Visualização em Grade"
-                        >
-                            <i class="fas fa-th"></i>
-                        </button>
-                        <button
-                            id="view-list"
-                            class="p-2 border rounded-md hover:bg-gray-50 transition-colors"
-                            title="Visualização em Lista"
-                        >
-                            <i class="fas fa-list"></i>
-                        </button>
-                        <button
-                            id="compare-mode"
-                            class="p-2 border rounded-md hover:bg-gray-50 transition-colors"
-                            title="Modo Comparação"
-                        >
-                            <i class="fas fa-balance-scale"></i>
-                        </button>
-                    </div>
-
-                    <div class="flex items-center space-x-2">
-                        <button
-                            id="export-wishlist"
-                            class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
-                        >
-                            <i class="fas fa-download mr-1"></i>
-                            Exportar
-                        </button>
-                        <button
-                            id="share-wishlist"
-                            class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
-                        >
-                            <i class="fas fa-share mr-1"></i>
-                            Compartilhar
-                        </button>
-                        <button
-                            id="create-list"
-                            class="btn text-sm btn-primary"
-                        >
-                            <i class="fas fa-plus mr-1"></i>
-                            Nova Lista
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Abas de Listas Múltiplas -->
-                <div
-                    class="flex justify-center space-x-2 mb-4"
-                    id="wishlist-tabs"
-                >
-                    <button
-                        class="tab-btn active px-4 py-2 bg-primary text-white rounded-lg text-sm"
-                        data-list="main"
-                    >
-                        <i class="fas fa-heart mr-1"></i>
-                        Principal (0)
-                    </button>
-                    <button
-                        class="tab-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300"
-                        data-list="gifts"
-                    >
-                        <i class="fas fa-gift mr-1"></i>
-                        Presentes (0)
-                    </button>
-                    <button
-                        class="tab-btn px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300"
-                        data-list="recipes"
-                    >
-                        <i class="fas fa-utensils mr-1"></i>
-                        Para Receitas (0)
-                    </button>
-                </div>
-            </div>
-
-            <!-- Lista de Desejos -->
-            <div id="wishlist-container">
-                <!-- Loading State -->
-                <div id="wishlist-loading" class="hidden">
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                    >
-                        <div class="animate-pulse" v-for="i in 6">
-                            <div class="bg-gray-200 rounded-lg h-64"></div>
-                            <div class="mt-2 bg-gray-200 rounded h-4"></div>
-                            <div
-                                class="mt-1 bg-gray-200 rounded h-3 w-2/3"
-                            ></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quando há itens na wishlist -->
-                <div
-                    id="wishlist-items"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                >
-                    <!-- Itens da wishlist serão inseridos aqui pelo JavaScript -->
-                </div>
-
-                <!-- Quando a wishlist está vazia -->
-                <div id="empty-wishlist" class="text-center py-16">
-                    <div class="mb-8 relative">
-                        <div class="relative mx-auto w-32 h-32">
-                            <i
-                                class="fas fa-heart-broken text-6xl text-gray-300 absolute inset-0 animate-pulse"
-                            ></i>
-                            <div
-                                class="absolute -top-2 -right-2 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center"
-                            >
-                                <i
-                                    class="fas fa-exclamation text-red-500 text-sm"
-                                ></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2
-                        class="text-4xl font-teko text-gray-500 mb-4 animate-fade-in"
-                    >
-                        Sua lista de desejos está vazia
-                    </h2>
-                    <p
-                        class="text-gray-400 mb-8 max-w-md mx-auto animate-fade-in-delay"
-                    >
-                        Que tal começar salvando alguns temperos especiais?
-                        Explore nossa seleção única de especiarias autênticas da
-                        Índia!
                     </p>
-
-                    <!-- Cards de Sugestões por Categoria -->
                     <div
-                        class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
+                        class="flex justify-center lg:justify-start space-x-4 text-sm text-gray-500"
                     >
-                        <div
-                            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-slide-up border border-orange-200"
+                        <span
+                            ><i class="fas fa-tag mr-1"></i
+                            ><span id="items-on-sale">0</span> em promoção</span
                         >
-                            <i
-                                class="fas fa-pepper-hot text-4xl text-orange-500 mb-4"
-                            ></i>
-                            <h3 class="font-teko text-xl text-secondary mb-2">
-                                Temperos Aromáticos
-                            </h3>
-                            <p class="text-sm text-gray-600 mb-4">
-                                Garam masala, cúrcuma, cominho e outras
-                                especiarias essenciais
-                            </p>
-                            <div class="flex justify-center space-x-2 mb-4">
-                                <span
-                                    class="w-2 h-2 bg-orange-400 rounded-full"
-                                ></span>
-                                <span
-                                    class="w-2 h-2 bg-orange-300 rounded-full"
-                                ></span>
-                                <span
-                                    class="w-2 h-2 bg-orange-200 rounded-full"
-                                ></span>
-                            </div>
-                            <a
-                                href="products.html?category=temperos"
-                                class="text-primary hover:underline text-sm font-semibold"
-                            >
-                                Explorar Temperos →
-                            </a>
-                        </div>
-
-                        <div
-                            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-slide-up-delay border border-green-200"
+                        <span
+                            ><i class="fas fa-clock mr-1"></i
+                            ><span id="items-recent">0</span> recentes</span
                         >
-                            <i
-                                class="fas fa-mug-hot text-4xl text-green-500 mb-4"
-                            ></i>
-                            <h3 class="font-teko text-xl text-secondary mb-2">
-                                Chás Tradicionais
-                            </h3>
-                            <p class="text-sm text-gray-600 mb-4">
-                                Masala chai, chás verdes e infusões ayurvédicas
-                                relaxantes
-                            </p>
-                            <div class="flex justify-center space-x-2 mb-4">
-                                <span
-                                    class="w-2 h-2 bg-green-400 rounded-full"
-                                ></span>
-                                <span
-                                    class="w-2 h-2 bg-green-300 rounded-full"
-                                ></span>
-                                <span
-                                    class="w-2 h-2 bg-green-200 rounded-full"
-                                ></span>
-                            </div>
-                            <a
-                                href="products.html?category=chas"
-                                class="text-primary hover:underline text-sm font-semibold"
-                            >
-                                Descobrir Chás →
-                            </a>
-                        </div>
-
-                        <div
-                            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 animate-slide-up-delay-2 border border-purple-200"
-                        >
-                            <i
-                                class="fas fa-gift text-4xl text-purple-500 mb-4"
-                            ></i>
-                            <h3 class="font-teko text-xl text-secondary mb-2">
-                                Kits Especiais
-                            </h3>
-                            <p class="text-sm text-gray-600 mb-4">
-                                Combinações perfeitas para iniciar sua jornada
-                                culinária
-                            </p>
-                            <div class="flex justify-center space-x-2 mb-4">
-                                <span
-                                    class="w-2 h-2 bg-purple-400 rounded-full"
-                                ></span>
-                                <span
-                                    class="w-2 h-2 bg-purple-300 rounded-full"
-                                ></span>
-                                <span
-                                    class="w-2 h-2 bg-purple-200 rounded-full"
-                                ></span>
-                            </div>
-                            <a
-                                href="products.html?category=kits"
-                                class="text-primary hover:underline text-sm font-semibold"
-                            >
-                                Ver Kits →
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Ações Rápidas -->
-                    <div class="space-y-4">
-                        <a
-                            href="products.html"
-                            class="btn btn-primary text-lg inline-block animate-pulse-subtle"
-                        >
-                            <i class="fas fa-heart mr-2"></i>
-                            Começar a Favoritar
-                        </a>
-
-                        <div class="flex justify-center space-x-6 text-sm">
-                            <button
-                                id="import-wishlist"
-                                class="text-blue-500 hover:underline flex items-center"
-                            >
-                                <i class="fas fa-upload mr-1"></i>
-                                Importar Lista
-                            </button>
-                            <button
-                                id="view-popular"
-                                class="text-green-500 hover:underline flex items-center"
-                            >
-                                <i class="fas fa-fire mr-1"></i>
-                                Mais Populares
-                            </button>
-                            <button
-                                id="surprise-me"
-                                class="text-purple-500 hover:underline flex items-center"
-                            >
-                                <i class="fas fa-magic mr-1"></i>
-                                Me Surpreenda
-                            </button>
-                        </div>
-
-                        <!-- Dicas para Usar a Wishlist -->
-                        <div
-                            class="mt-8 bg-yellow-50 border border-yellow-200 rounded-lg p-4 max-w-lg mx-auto"
-                        >
-                            <h4
-                                class="font-semibold text-yellow-800 mb-2 flex items-center"
-                            >
-                                <i class="fas fa-lightbulb mr-2"></i>
-                                Dicas para usar sua wishlist:
-                            </h4>
-                            <ul class="text-sm text-yellow-700 space-y-1">
-                                <li>
-                                    • Salve produtos para comparar preços depois
-                                </li>
-                                <li>
-                                    • Crie listas temáticas (presentes,
-                                    receitas, etc.)
-                                </li>
-                                <li>
-                                    • Receba alertas quando produtos entrarem em
-                                    promoção
-                                </li>
-                                <li>
-                                    • Compartilhe suas listas com amigos e
-                                    família
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ações da Wishlist Expandidas -->
-            <div id="wishlist-actions" class="hidden mt-8">
-                <!-- Painel Principal de Ações -->
-                <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        <!-- Estatísticas -->
-                        <div class="text-center lg:text-left">
-                            <h3 class="text-2xl font-teko text-secondary mb-2">
-                                <span id="wishlist-total-items">0</span> itens
-                                salvos
-                            </h3>
-                            <p class="text-gray-600 mb-2">
-                                Valor total:
-                                <span
-                                    id="wishlist-total-value"
-                                    class="font-bold text-primary text-lg"
-                                    >R$ 0,00</span
-                                >
-                            </p>
-                            <div
-                                class="flex justify-center lg:justify-start space-x-4 text-sm text-gray-500"
-                            >
-                                <span
-                                    ><i class="fas fa-tag mr-1"></i
-                                    ><span id="items-on-sale">0</span> em
-                                    promoção</span
-                                >
-                                <span
-                                    ><i class="fas fa-clock mr-1"></i
-                                    ><span id="items-recent">0</span>
-                                    recentes</span
-                                >
-                            </div>
-                        </div>
-
-                        <!-- Ações Principais -->
-                        <div class="flex flex-col space-y-3">
-                            <button
-                                id="add-all-to-cart"
-                                class="btn btn-primary"
-                            >
-                                <i class="fas fa-shopping-cart mr-2"></i>
-                                Adicionar Todos ao Carrinho
-                            </button>
-                            <button
-                                id="add-available-to-cart"
-                                class="btn btn-secondary"
-                            >
-                                <i class="fas fa-check-circle mr-2"></i>
-                                Adicionar Disponíveis
-                            </button>
-                        </div>
-
-                        <!-- Ações Secundárias -->
-                        <div class="flex flex-col space-y-3">
-                            <div class="grid grid-cols-2 gap-2">
-                                <button
-                                    id="export-pdf"
-                                    class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
-                                >
-                                    <i class="fas fa-file-pdf mr-1"></i>
-                                    PDF
-                                </button>
-                                <button
-                                    id="print-list"
-                                    class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
-                                >
-                                    <i class="fas fa-print mr-1"></i>
-                                    Imprimir
-                                </button>
-                            </div>
-                            <button
-                                id="clear-wishlist"
-                                class="btn border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-                            >
-                                <i class="fas fa-trash mr-2"></i>
-                                Limpar Lista Atual
-                            </button>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Alertas e Notificações -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <!-- Alertas de Preço -->
-                    <div
-                        class="bg-blue-50 border border-blue-200 rounded-lg p-4"
+                <!-- Ações Principais -->
+                <div class="flex flex-col space-y-3">
+                    <button id="add-all-to-cart" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Adicionar Todos ao Carrinho
+                    </button>
+                    <button
+                        id="add-available-to-cart"
+                        class="btn btn-secondary"
                     >
-                        <h4
-                            class="font-semibold text-blue-800 mb-3 flex items-center"
-                        >
-                            <i class="fas fa-bell mr-2"></i>
-                            Alertas de Preço
-                        </h4>
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="price-drop-alert"
-                                    class="mr-2"
-                                />
-                                <span class="text-sm text-blue-700"
-                                    >Notificar quando preços caírem</span
-                                >
-                            </label>
-                            <label class="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="back-in-stock-alert"
-                                    class="mr-2"
-                                />
-                                <span class="text-sm text-blue-700"
-                                    >Avisar quando voltar ao estoque</span
-                                >
-                            </label>
-                            <label class="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    id="promotion-alert"
-                                    class="mr-2"
-                                />
-                                <span class="text-sm text-blue-700"
-                                    >Alertar sobre promoções</span
-                                >
-                            </label>
-                        </div>
-                    </div>
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Adicionar Disponíveis
+                    </button>
+                </div>
 
-                    <!-- Sugestões Inteligentes -->
-                    <div
-                        class="bg-green-50 border border-green-200 rounded-lg p-4"
-                    >
-                        <h4
-                            class="font-semibold text-green-800 mb-3 flex items-center"
-                        >
-                            <i class="fas fa-magic mr-2"></i>
-                            Sugestões Inteligentes
-                        </h4>
-                        <div
-                            id="smart-suggestions"
-                            class="space-y-2 text-sm text-green-700"
-                        >
-                            <!-- Sugestões serão inseridas aqui -->
-                            <p>
-                                <i class="fas fa-lightbulb mr-1"></i>Baseado nos
-                                seus favoritos, você pode gostar de Cardamomo
-                                Verde
-                            </p>
-                            <p>
-                                <i class="fas fa-fire mr-1"></i>3 itens da sua
-                                lista estão em alta procura
-                            </p>
-                        </div>
+                <!-- Ações Secundárias -->
+                <div class="flex flex-col space-y-3">
+                    <div class="grid grid-cols-2 gap-2">
                         <button
-                            id="refresh-suggestions"
-                            class="mt-2 text-xs text-green-600 hover:underline"
+                            id="export-pdf"
+                            class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
                         >
-                            Atualizar sugestões
+                            <i class="fas fa-file-pdf mr-1"></i>
+                            PDF
+                        </button>
+                        <button
+                            id="print-list"
+                            class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
+                        >
+                            <i class="fas fa-print mr-1"></i>
+                            Imprimir
                         </button>
                     </div>
+                    <button
+                        id="clear-wishlist"
+                        class="btn border border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                    >
+                        <i class="fas fa-trash mr-2"></i>
+                        Limpar Lista Atual
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <!-- Produtos Recomendados -->
-            <div class="mt-16">
-                <h2 class="text-3xl font-teko text-secondary text-center mb-8">
-                    Você Também Pode Gostar
-                </h2>
-                <div
-                    id="recommended-products"
-                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-                >
-                    <!-- Produtos recomendados serão inseridos aqui pelo JavaScript -->
-                </div>
-            </div>
-        </main>
-
-        <!-- ==== RODAPÉ ==== -->
-        <footer class="bg-secondary text-white mt-12">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div
-                    class="grid grid-cols-1 md:grid-cols-3 text-center md:text-left gap-8"
-                >
-                    <div>
-                        <h4 class="font-teko text-2xl mb-2">India Oasis</h4>
-                        <p class="text-sm">
-                            Importando os sabores autênticos da Índia para sua
-                            casa.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 class="font-teko text-2xl mb-2">Navegue</h4>
-                        <ul class="space-y-1">
-                            <li>
-                                <a
-                                    href="index.html"
-                                    class="hover:text-accent text-sm"
-                                    >Início</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="products.html"
-                                    class="hover:text-accent text-sm"
-                                    >Produtos</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="contact.html"
-                                    class="hover:text-accent text-sm"
-                                    >Contato</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="about.html"
-                                    class="hover:text-accent text-sm"
-                                    >Sobre Nós</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-teko text-2xl mb-2">Siga-nos</h4>
-                        <div
-                            class="flex justify-center md:justify-start space-x-4"
+        <!-- Alertas e Notificações -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <!-- Alertas de Preço -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h4 class="font-semibold text-blue-800 mb-3 flex items-center">
+                    <i class="fas fa-bell mr-2"></i>
+                    Alertas de Preço
+                </h4>
+                <div class="space-y-2">
+                    <label class="flex items-center">
+                        <input
+                            type="checkbox"
+                            id="price-drop-alert"
+                            class="mr-2"
+                        />
+                        <span class="text-sm text-blue-700"
+                            >Notificar quando preços caírem</span
                         >
-                            <a href="#" class="hover:text-accent"
-                                ><i class="fab fa-instagram fa-lg"></i
-                            ></a>
-                            <a href="#" class="hover:text-accent"
-                                ><i class="fab fa-facebook fa-lg"></i
-                            ></a>
-                            <a href="#" class="hover:text-accent"
-                                ><i class="fab fa-pinterest fa-lg"></i
-                            ></a>
-                        </div>
-                    </div>
+                    </label>
+                    <label class="flex items-center">
+                        <input
+                            type="checkbox"
+                            id="back-in-stock-alert"
+                            class="mr-2"
+                        />
+                        <span class="text-sm text-blue-700"
+                            >Avisar quando voltar ao estoque</span
+                        >
+                    </label>
+                    <label class="flex items-center">
+                        <input
+                            type="checkbox"
+                            id="promotion-alert"
+                            class="mr-2"
+                        />
+                        <span class="text-sm text-blue-700"
+                            >Alertar sobre promoções</span
+                        >
+                    </label>
                 </div>
+            </div>
+
+            <!-- Sugestões Inteligentes -->
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <h4 class="font-semibold text-green-800 mb-3 flex items-center">
+                    <i class="fas fa-magic mr-2"></i>
+                    Sugestões Inteligentes
+                </h4>
                 <div
-                    class="border-t border-teal-700 mt-8 pt-6 text-center text-sm"
+                    id="smart-suggestions"
+                    class="space-y-2 text-sm text-green-700"
                 >
+                    <!-- Sugestões serão inseridas aqui -->
                     <p>
-                        &copy; 2024 - India Oasis - Todos os direitos
-                        reservados.
+                        <i class="fas fa-lightbulb mr-1"></i>Baseado nos seus
+                        favoritos, você pode gostar de Cardamomo Verde
+                    </p>
+                    <p>
+                        <i class="fas fa-fire mr-1"></i>3 itens da sua lista
+                        estão em alta procura
                     </p>
                 </div>
+                <button
+                    id="refresh-suggestions"
+                    class="mt-2 text-xs text-green-600 hover:underline"
+                >
+                    Atualizar sugestões
+                </button>
             </div>
-        </footer>
+        </div>
+    </div>
 
-        <!-- ==== MODAL DE COMPARAÇÃO ==== -->
+    <!-- Produtos Recomendados -->
+    <div class="mt-16">
+        <h2 class="text-3xl font-teko text-secondary text-center mb-8">
+            Você Também Pode Gostar
+        </h2>
         <div
-            id="compare-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            id="recommended-products"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
         >
-            <div
-                class="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-screen overflow-y-auto animate-modal-appear"
-            >
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-3xl font-teko text-secondary">
-                            <i
-                                class="fas fa-balance-scale mr-2 text-primary"
-                            ></i>
-                            Comparar Produtos
-                        </h2>
-                        <button
-                            id="close-compare"
-                            class="text-gray-500 hover:text-gray-700 text-2xl"
-                        >
-                            ×
-                        </button>
-                    </div>
+            <!-- Produtos recomendados serão inseridos aqui pelo JavaScript -->
+        </div>
+    </div>
+</main>
 
-                    <div
-                        id="comparison-grid"
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+<!-- ==== MODAL DE COMPARAÇÃO ==== -->
+<div
+    id="compare-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+>
+    <div
+        class="bg-white rounded-lg shadow-xl max-w-6xl w-full max-h-screen overflow-y-auto animate-modal-appear"
+    >
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-teko text-secondary">
+                    <i class="fas fa-balance-scale mr-2 text-primary"></i>
+                    Comparar Produtos
+                </h2>
+                <button
+                    id="close-compare"
+                    class="text-gray-500 hover:text-gray-700 text-2xl"
+                >
+                    ×
+                </button>
+            </div>
+
+            <div
+                id="comparison-grid"
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
+                <!-- Produtos para comparação aparecerão aqui -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==== MODAL DE COMPARTILHAMENTO ==== -->
+<div
+    id="share-wishlist-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+>
+    <div
+        class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
+    >
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-teko text-secondary">Compartilhar Lista</h3>
+            <button
+                id="close-share-modal"
+                class="text-gray-500 hover:text-gray-700"
+            >
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Nome da Lista:</label
+                >
+                <input
+                    type="text"
+                    id="share-list-name"
+                    class="w-full p-2 border rounded-lg"
+                    value="Minha Lista de Temperos"
+                />
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Link para compartilhar:</label
+                >
+                <div class="flex">
+                    <input
+                        type="text"
+                        id="share-link"
+                        readonly
+                        class="flex-1 p-2 border rounded-l-lg bg-gray-50 text-sm"
+                        value="https://indiaoasis.com/wishlist/shared/abc123"
+                    />
+                    <button
+                        id="copy-share-link"
+                        class="px-4 py-2 bg-primary text-white rounded-r-lg hover:bg-orange-600"
                     >
-                        <!-- Produtos para comparação aparecerão aqui -->
-                    </div>
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="border-t pt-4">
+                <p class="text-sm text-gray-600 mb-3">Compartilhar via:</p>
+                <div class="grid grid-cols-2 gap-3">
+                    <button
+                        class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
+                    >
+                        <i
+                            class="fab fa-whatsapp text-green-500 text-xl mb-1 block"
+                        ></i>
+                        <span class="text-xs">WhatsApp</span>
+                    </button>
+                    <button
+                        class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
+                    >
+                        <i
+                            class="fas fa-envelope text-blue-500 text-xl mb-1 block"
+                        ></i>
+                        <span class="text-xs">E-mail</span>
+                    </button>
+                    <button
+                        class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
+                    >
+                        <i
+                            class="fab fa-facebook text-blue-600 text-xl mb-1 block"
+                        ></i>
+                        <span class="text-xs">Facebook</span>
+                    </button>
+                    <button
+                        class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
+                    >
+                        <i
+                            class="fab fa-pinterest text-red-500 text-xl mb-1 block"
+                        ></i>
+                        <span class="text-xs">Pinterest</span>
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- ==== MODAL DE COMPARTILHAMENTO ==== -->
-        <div
-            id="share-wishlist-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-            <div
-                class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
+<!-- ==== MODAL DE NOVA LISTA ==== -->
+<div
+    id="new-list-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+>
+    <div
+        class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
+    >
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-teko text-secondary">
+                Nova Lista de Desejos
+            </h3>
+            <button
+                id="close-new-list-modal"
+                class="text-gray-500 hover:text-gray-700"
             >
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-teko text-secondary">
-                        Compartilhar Lista
-                    </h3>
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <form id="new-list-form" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Nome da Lista *</label
+                >
+                <input
+                    type="text"
+                    id="new-list-name"
+                    required
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Ex: Presentes de Natal"
+                />
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Descrição</label
+                >
+                <textarea
+                    id="new-list-description"
+                    rows="3"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    placeholder="Descreva o propósito desta lista..."
+                ></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Ícone</label
+                >
+                <div class="grid grid-cols-6 gap-2">
                     <button
-                        id="close-share-modal"
-                        class="text-gray-500 hover:text-gray-700"
+                        type="button"
+                        class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
+                        data-icon="heart"
                     >
-                        <i class="fas fa-times"></i>
+                        <i class="fas fa-heart text-red-500"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
+                        data-icon="gift"
+                    >
+                        <i class="fas fa-gift text-purple-500"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
+                        data-icon="utensils"
+                    >
+                        <i class="fas fa-utensils text-green-500"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
+                        data-icon="star"
+                    >
+                        <i class="fas fa-star text-yellow-500"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
+                        data-icon="fire"
+                    >
+                        <i class="fas fa-fire text-orange-500"></i>
+                    </button>
+                    <button
+                        type="button"
+                        class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
+                        data-icon="magic"
+                    >
+                        <i class="fas fa-magic text-indigo-500"></i>
                     </button>
                 </div>
+            </div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-gray-700 mb-2"
-                            >Nome da Lista:</label
-                        >
+            <div class="flex space-x-3 pt-4">
+                <button
+                    type="button"
+                    id="cancel-new-list"
+                    class="btn flex-1 border border-gray-300 text-gray-700 hover:bg-gray-100"
+                >
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-primary flex-1">
+                    <i class="fas fa-plus mr-2"></i>
+                    Criar Lista
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ==== MODAL DE CONFIRMAÇÃO ==== -->
+<div
+    id="confirmation-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+>
+    <div
+        class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto animate-modal-appear"
+    >
+        <div id="confirmation-icon" class="mb-4">
+            <i class="fas fa-question-circle text-4xl text-yellow-500"></i>
+        </div>
+        <h3 id="confirmation-title" class="text-2xl font-teko mb-4">
+            Confirmar Ação
+        </h3>
+        <p id="confirmation-message" class="mb-6 text-gray-600"></p>
+        <div class="flex gap-3 justify-center">
+            <button
+                id="confirmation-cancel"
+                class="btn border border-gray-300 text-gray-700 hover:bg-gray-100"
+            >
+                Cancelar
+            </button>
+            <button id="confirmation-confirm" class="btn btn-primary">
+                Confirmar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==== MODAL DE FEEDBACK ==== -->
+<div
+    id="feedback-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+>
+    <div
+        class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto animate-modal-appear"
+    >
+        <div id="modal-icon" class="mb-4">
+            <i class="fas fa-check-circle text-4xl text-green-500"></i>
+        </div>
+        <h3 id="modal-title" class="text-2xl font-teko mb-4"></h3>
+        <p id="modal-message" class="mb-6 text-gray-600"></p>
+        <div class="flex space-x-3">
+            <button id="modal-close-btn" class="btn btn-primary flex-1">
+                Fechar
+            </button>
+            <button
+                id="modal-action-btn"
+                class="btn border border-gray-300 text-gray-700 hover:bg-gray-100 flex-1 hidden"
+            >
+                Ação
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ==== MODAL DE ALERTAS DE PREÇO ==== -->
+<div
+    id="price-alert-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+>
+    <div
+        class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
+    >
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-teko text-secondary">
+                <i class="fas fa-bell mr-2 text-primary"></i>
+                Configurar Alertas
+            </h3>
+            <button
+                id="close-price-alert-modal"
+                class="text-gray-500 hover:text-gray-700"
+            >
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="space-y-4">
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-semibold text-blue-800 mb-2">
+                    Tipos de Alerta
+                </h4>
+                <div class="space-y-2">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-2" checked />
+                        <span class="text-sm">
+                            Queda de preço (qualquer desconto)
+                        </span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-2" />
+                        <span class="text-sm"> Volta ao estoque </span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-2" />
+                        <span class="text-sm"> Promoções especiais </span>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium mb-2">
+                    E-mail para notificações:
+                </label>
+                <input
+                    type="email"
+                    class="w-full p-2 border rounded-lg"
+                    placeholder="seu@email.com"
+                />
+            </div>
+
+            <div class="flex space-x-3">
+                <button
+                    id="cancel-alerts"
+                    class="btn flex-1 border border-gray-300 text-gray-700 hover:bg-gray-100"
+                >
+                    Cancelar
+                </button>
+                <button id="save-alerts" class="btn btn-primary flex-1">
+                    Salvar Alertas
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==== MODAL DE EXPORTAÇÃO ==== -->
+<div
+    id="export-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+>
+    <div
+        class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
+    >
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-teko text-secondary">
+                <i class="fas fa-download mr-2 text-primary"></i>
+                Exportar Lista
+            </h3>
+            <button
+                id="close-export-modal"
+                class="text-gray-500 hover:text-gray-700"
+            >
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-2">
+                    Formato de exportação:
+                </label>
+                <div class="space-y-2">
+                    <label class="flex items-center">
                         <input
-                            type="text"
-                            id="share-list-name"
-                            class="w-full p-2 border rounded-lg"
-                            value="Minha Lista de Temperos"
+                            type="radio"
+                            name="export-format"
+                            value="pdf"
+                            class="mr-2"
+                            checked
                         />
-                    </div>
-
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-gray-700 mb-2"
-                            >Link para compartilhar:</label
-                        >
-                        <div class="flex">
-                            <input
-                                type="text"
-                                id="share-link"
-                                readonly
-                                class="flex-1 p-2 border rounded-l-lg bg-gray-50 text-sm"
-                                value="https://indiaoasis.com/wishlist/shared/abc123"
-                            />
-                            <button
-                                id="copy-share-link"
-                                class="px-4 py-2 bg-primary text-white rounded-r-lg hover:bg-orange-600"
-                            >
-                                <i class="fas fa-copy"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="border-t pt-4">
-                        <p class="text-sm text-gray-600 mb-3">
-                            Compartilhar via:
-                        </p>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button
-                                class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
-                            >
-                                <i
-                                    class="fab fa-whatsapp text-green-500 text-xl mb-1 block"
-                                ></i>
-                                <span class="text-xs">WhatsApp</span>
-                            </button>
-                            <button
-                                class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
-                            >
-                                <i
-                                    class="fas fa-envelope text-blue-500 text-xl mb-1 block"
-                                ></i>
-                                <span class="text-xs">E-mail</span>
-                            </button>
-                            <button
-                                class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
-                            >
-                                <i
-                                    class="fab fa-facebook text-blue-600 text-xl mb-1 block"
-                                ></i>
-                                <span class="text-xs">Facebook</span>
-                            </button>
-                            <button
-                                class="share-option p-3 border rounded-lg hover:bg-gray-50 text-center"
-                            >
-                                <i
-                                    class="fab fa-pinterest text-red-500 text-xl mb-1 block"
-                                ></i>
-                                <span class="text-xs">Pinterest</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==== MODAL DE NOVA LISTA ==== -->
-        <div
-            id="new-list-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-            <div
-                class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
-            >
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-teko text-secondary">
-                        Nova Lista de Desejos
-                    </h3>
-                    <button
-                        id="close-new-list-modal"
-                        class="text-gray-500 hover:text-gray-700"
-                    >
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-
-                <form id="new-list-form" class="space-y-4">
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-gray-700 mb-2"
-                            >Nome da Lista *</label
-                        >
+                        <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                        <span class="text-sm">PDF (lista formatada)</span>
+                    </label>
+                    <label class="flex items-center">
                         <input
-                            type="text"
-                            id="new-list-name"
-                            required
-                            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                            placeholder="Ex: Presentes de Natal"
+                            type="radio"
+                            name="export-format"
+                            value="csv"
+                            class="mr-2"
                         />
-                    </div>
-
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-gray-700 mb-2"
-                            >Descrição</label
-                        >
-                        <textarea
-                            id="new-list-description"
-                            rows="3"
-                            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                            placeholder="Descreva o propósito desta lista..."
-                        ></textarea>
-                    </div>
-
-                    <div>
-                        <label
-                            class="block text-sm font-medium text-gray-700 mb-2"
-                            >Ícone</label
-                        >
-                        <div class="grid grid-cols-6 gap-2">
-                            <button
-                                type="button"
-                                class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
-                                data-icon="heart"
-                            >
-                                <i class="fas fa-heart text-red-500"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
-                                data-icon="gift"
-                            >
-                                <i class="fas fa-gift text-purple-500"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
-                                data-icon="utensils"
-                            >
-                                <i class="fas fa-utensils text-green-500"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
-                                data-icon="star"
-                            >
-                                <i class="fas fa-star text-yellow-500"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
-                                data-icon="fire"
-                            >
-                                <i class="fas fa-fire text-orange-500"></i>
-                            </button>
-                            <button
-                                type="button"
-                                class="icon-option p-2 border rounded-lg hover:bg-gray-50 text-center"
-                                data-icon="magic"
-                            >
-                                <i class="fas fa-magic text-indigo-500"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-3 pt-4">
-                        <button
-                            type="button"
-                            id="cancel-new-list"
-                            class="btn flex-1 border border-gray-300 text-gray-700 hover:bg-gray-100"
-                        >
-                            Cancelar
-                        </button>
-                        <button type="submit" class="btn btn-primary flex-1">
-                            <i class="fas fa-plus mr-2"></i>
-                            Criar Lista
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- ==== MODAL DE CONFIRMAÇÃO ==== -->
-        <div
-            id="confirmation-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-            <div
-                class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto animate-modal-appear"
-            >
-                <div id="confirmation-icon" class="mb-4">
-                    <i
-                        class="fas fa-question-circle text-4xl text-yellow-500"
-                    ></i>
-                </div>
-                <h3 id="confirmation-title" class="text-2xl font-teko mb-4">
-                    Confirmar Ação
-                </h3>
-                <p id="confirmation-message" class="mb-6 text-gray-600"></p>
-                <div class="flex gap-3 justify-center">
-                    <button
-                        id="confirmation-cancel"
-                        class="btn border border-gray-300 text-gray-700 hover:bg-gray-100"
-                    >
-                        Cancelar
-                    </button>
-                    <button id="confirmation-confirm" class="btn btn-primary">
-                        Confirmar
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==== MODAL DE FEEDBACK ==== -->
-        <div
-            id="feedback-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-            <div
-                class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto animate-modal-appear"
-            >
-                <div id="modal-icon" class="mb-4">
-                    <i class="fas fa-check-circle text-4xl text-green-500"></i>
-                </div>
-                <h3 id="modal-title" class="text-2xl font-teko mb-4"></h3>
-                <p id="modal-message" class="mb-6 text-gray-600"></p>
-                <div class="flex space-x-3">
-                    <button id="modal-close-btn" class="btn btn-primary flex-1">
-                        Fechar
-                    </button>
-                    <button
-                        id="modal-action-btn"
-                        class="btn border border-gray-300 text-gray-700 hover:bg-gray-100 flex-1 hidden"
-                    >
-                        Ação
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==== MODAL DE ALERTAS DE PREÇO ==== -->
-        <div
-            id="price-alert-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-            <div
-                class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
-            >
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-teko text-secondary">
-                        <i class="fas fa-bell mr-2 text-primary"></i>
-                        Configurar Alertas
-                    </h3>
-                    <button
-                        id="close-price-alert-modal"
-                        class="text-gray-500 hover:text-gray-700"
-                    >
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="bg-blue-50 p-4 rounded-lg">
-                        <h4 class="font-semibold text-blue-800 mb-2">
-                            Tipos de Alerta
-                        </h4>
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2" checked />
-                                <span class="text-sm">
-                                    Queda de preço (qualquer desconto)
-                                </span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2" />
-                                <span class="text-sm"> Volta ao estoque </span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2" />
-                                <span class="text-sm">
-                                    Promoções especiais
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-2">
-                            E-mail para notificações:
-                        </label>
+                        <i class="fas fa-file-csv text-green-500 mr-2"></i>
+                        <span class="text-sm">CSV (planilha)</span>
+                    </label>
+                    <label class="flex items-center">
                         <input
-                            type="email"
-                            class="w-full p-2 border rounded-lg"
-                            placeholder="seu@email.com"
+                            type="radio"
+                            name="export-format"
+                            value="txt"
+                            class="mr-2"
                         />
-                    </div>
-
-                    <div class="flex space-x-3">
-                        <button
-                            id="cancel-alerts"
-                            class="btn flex-1 border border-gray-300 text-gray-700 hover:bg-gray-100"
-                        >
-                            Cancelar
-                        </button>
-                        <button id="save-alerts" class="btn btn-primary flex-1">
-                            Salvar Alertas
-                        </button>
-                    </div>
+                        <i class="fas fa-file-alt text-blue-500 mr-2"></i>
+                        <span class="text-sm">TXT (texto simples)</span>
+                    </label>
                 </div>
             </div>
-        </div>
 
-        <!-- ==== MODAL DE EXPORTAÇÃO ==== -->
-        <div
-            id="export-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-            <div
-                class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full animate-modal-appear"
-            >
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-teko text-secondary">
-                        <i class="fas fa-download mr-2 text-primary"></i>
-                        Exportar Lista
-                    </h3>
-                    <button
-                        id="close-export-modal"
-                        class="text-gray-500 hover:text-gray-700"
-                    >
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">
-                            Formato de exportação:
-                        </label>
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input
-                                    type="radio"
-                                    name="export-format"
-                                    value="pdf"
-                                    class="mr-2"
-                                    checked
-                                />
-                                <i
-                                    class="fas fa-file-pdf text-red-500 mr-2"
-                                ></i>
-                                <span class="text-sm"
-                                    >PDF (lista formatada)</span
-                                >
-                            </label>
-                            <label class="flex items-center">
-                                <input
-                                    type="radio"
-                                    name="export-format"
-                                    value="csv"
-                                    class="mr-2"
-                                />
-                                <i
-                                    class="fas fa-file-csv text-green-500 mr-2"
-                                ></i>
-                                <span class="text-sm">CSV (planilha)</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input
-                                    type="radio"
-                                    name="export-format"
-                                    value="txt"
-                                    class="mr-2"
-                                />
-                                <i
-                                    class="fas fa-file-alt text-blue-500 mr-2"
-                                ></i>
-                                <span class="text-sm">TXT (texto simples)</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium mb-2">
-                            Incluir informações:
-                        </label>
-                        <div class="space-y-1">
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2" checked />
-                                <span class="text-sm">Preços</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2" checked />
-                                <span class="text-sm">Descrições</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2" />
-                                <span class="text-sm">Links dos produtos</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-3">
-                        <button
-                            id="cancel-export"
-                            class="btn flex-1 border border-gray-300 text-gray-700 hover:bg-gray-100"
-                        >
-                            Cancelar
-                        </button>
-                        <button
-                            id="download-export"
-                            class="btn btn-primary flex-1"
-                        >
-                            <i class="fas fa-download mr-2"></i>
-                            Baixar
-                        </button>
-                    </div>
+            <div>
+                <label class="block text-sm font-medium mb-2">
+                    Incluir informações:
+                </label>
+                <div class="space-y-1">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-2" checked />
+                        <span class="text-sm">Preços</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-2" checked />
+                        <span class="text-sm">Descrições</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" class="mr-2" />
+                        <span class="text-sm">Links dos produtos</span>
+                    </label>
                 </div>
             </div>
+
+            <div class="flex space-x-3">
+                <button
+                    id="cancel-export"
+                    class="btn flex-1 border border-gray-300 text-gray-700 hover:bg-gray-100"
+                >
+                    Cancelar
+                </button>
+                <button id="download-export" class="btn btn-primary flex-1">
+                    <i class="fas fa-download mr-2"></i>
+                    Baixar
+                </button>
+            </div>
         </div>
+    </div>
+</div>
 
-        <!-- Sistema de Notificações Toast -->
-        <script src="assets/js/toast-system.js"></script>
+<!-- Sistema de Notificações Toast -->
+<script src="{% static 'js/toast-system.js' %}"></script>
 
-        <!-- Link para o arquivo JavaScript externo -->
-        <script src="assets/js/script.js" defer></script>
-    </body>
-</html>
+<!-- Link para o arquivo JavaScript externo -->
+<script src="{% static 'js/script.js' %}" defer></script>
+{% endblock content %}

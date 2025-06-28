@@ -1385,14 +1385,13 @@
                             <p class="text-sm text-gray-600 mb-4">
                                 Não tem uma conta?
                             </p>
-                            <button
-                                type="button"
-                                id="register-btn"
-                                class="btn btn-secondary w-full text-lg py-3"
+                            <a
+                                href="{% url 'store:signup' %}"
+                                class="btn btn-secondary w-full text-lg py-3 inline-block text-center"
                             >
                                 <i class="fas fa-user-plus mr-2"></i>
                                 Criar Conta
-                            </button>
+                            </a>
                         </div>
                     </form>
                 </div>

@@ -190,7 +190,13 @@
 
     <!-- Formulário de Cadastro -->
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8">
-        <form id="cadastro-form" class="space-y-6">
+        {% csrf_token %}
+        <form
+            method="POST"
+            action="{% url 'store:signup' %}"
+            id="cadastro-form"
+            class="space-y-6"
+        >
             <!-- ETAPA 1: Dados Pessoais -->
             <div class="form-step active" id="step-1">
                 <h2
@@ -211,7 +217,7 @@
                         <input
                             type="text"
                             id="nome"
-                            name="nome"
+                            name="username"
                             required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                             placeholder="Seu nome completo"
@@ -284,7 +290,7 @@
                         <input
                             type="date"
                             id="data-nascimento"
-                            name="dataNascimento"
+                            name="data_nascimento"
                             required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                         />
@@ -328,7 +334,7 @@
                             <input
                                 type="password"
                                 id="senha"
-                                name="senha"
+                                name="password1"
                                 required
                                 minlength="8"
                                 class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -362,7 +368,7 @@
                             <input
                                 type="password"
                                 id="confirmar-senha"
-                                name="confirmarSenha"
+                                name="password2"
                                 required
                                 class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                                 placeholder="Confirme sua senha"
@@ -1291,7 +1297,7 @@
 
             // Redirecionar após 3 segundos
             setTimeout(() => {
-                window.location.href = "index.html";
+                window.location.href = "{% url 'store:home' %}";
             }, 3000);
         } catch (error) {
             alert("Erro ao processar cadastro. Tente novamente.");
