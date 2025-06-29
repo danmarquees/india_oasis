@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <title>
-    {% block title %} Detalhes do Produto - India Oasis - Temperos e Sabores da
+    {% block title %} {{ product.name }} - India Oasis - Temperos e Sabores da
     Índia {% endblock %}
 </title>
 
@@ -23,7 +23,7 @@
             </li>
             <li class="text-gray-500">/</li>
             <li id="product-breadcrumb" class="text-gray-700">
-                Detalhes do Produto
+                {{ product.name }}
             </li>
         </ol>
     </nav>
@@ -41,8 +41,8 @@
                 >
                     <img
                         id="product-image"
-                        src="https://placehold.co/600x600/D84315/FFFFFF?text=Garam+Masala+Premium"
-                        alt="Garam Masala Premium"
+                        src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+                        alt="{{ product.name }}"
                         class="w-full h-full object-cover"
                     />
                     <button
@@ -59,36 +59,6 @@
                         Em Estoque
                     </span>
                 </div>
-                <!-- Miniaturas -->
-                <div id="product-thumbnails" class="flex space-x-2">
-                    <button
-                        class="w-20 h-20 rounded-lg overflow-hidden border-2 border-primary"
-                    >
-                        <img
-                            src="https://placehold.co/80x80/D84315/FFFFFF?text=1"
-                            alt="Vista 1"
-                            class="w-full h-full object-cover"
-                        />
-                    </button>
-                    <button
-                        class="w-20 h-20 rounded-lg overflow-hidden border border-gray-300 hover:border-primary"
-                    >
-                        <img
-                            src="https://placehold.co/80x80/FF8A00/FFFFFF?text=2"
-                            alt="Vista 2"
-                            class="w-full h-full object-cover"
-                        />
-                    </button>
-                    <button
-                        class="w-20 h-20 rounded-lg overflow-hidden border border-gray-300 hover:border-primary"
-                    >
-                        <img
-                            src="https://placehold.co/80x80/FF6B35/FFFFFF?text=3"
-                            alt="Vista 3"
-                            class="w-full h-full object-cover"
-                        />
-                    </button>
-                </div>
             </div>
 
             <!-- Informações do Produto -->
@@ -104,7 +74,7 @@
                         id="product-name"
                         class="text-4xl font-teko text-secondary mb-2"
                     >
-                        Garam Masala Premium
+                        {{ product.name }}
                     </h1>
                     <div class="flex items-center space-x-4 mb-4">
                         <div
@@ -136,13 +106,23 @@
                             id="product-price"
                             class="text-3xl font-bold text-primary"
                         >
-                            R$ 25,00
+                            R$ {{ product.price|floatformat:2 }}
                         </p>
-                        <span
-                            class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded"
+
+                        <!-- Botão Adicionar ao Carrinho -->
+                        <form
+                            action="{% url 'store:cart_add' product.id %}"
+                            method="post"
+                            class="mt-6"
                         >
-                            R$ 5,00 por 10g
-                        </span>
+                            {% csrf_token %}
+                            <button
+                                type="submit"
+                                class="bg-primary text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-primary-dark transition duration-300 w-full lg:w-auto"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </form>
                     </div>
                     <div
                         class="flex items-center space-x-2 text-sm text-gray-600"
@@ -161,14 +141,7 @@
                         id="product-description"
                         class="text-gray-700 leading-relaxed"
                     >
-                        O Garam Masala Premium é uma mistura tradicional de
-                        especiarias aromáticas cuidadosamente selecionadas,
-                        importadas diretamente da Índia. Esta blend autêntica
-                        combina cardamomo, canela, cravo, noz-moscada,
-                        pimenta-preta e louro, criando um sabor complexo e
-                        envolvente que é essencial na culinária indiana. Ideal
-                        para pratos de carne, vegetais e legumes, este tempero
-                        elevará suas receitas a um novo patamar de sabor.
+                        {{ product.description|safe }}
                     </p>
                 </div>
 
@@ -177,50 +150,6 @@
                         <i class="fas fa-list-ul text-primary mr-2"></i>
                         Especificações
                     </h2>
-                    <ul id="product-specs" class="space-y-2 text-gray-700">
-                        <li class="flex items-center">
-                            <i class="fas fa-weight text-primary mr-3 w-4"></i>
-                            <span><strong>Peso:</strong> 50g</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-globe text-primary mr-3 w-4"></i>
-                            <span
-                                ><strong>Origem:</strong> Rajasthan, Índia</span
-                            >
-                        </li>
-                        <li class="flex items-center">
-                            <i
-                                class="fas fa-calendar text-primary mr-3 w-4"
-                            ></i>
-                            <span><strong>Validade:</strong> 24 meses</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-leaf text-primary mr-3 w-4"></i>
-                            <span
-                                ><strong>Ingredientes:</strong> Cardamomo,
-                                Canela, Cravo, Noz-moscada, Pimenta-preta,
-                                Louro</span
-                            >
-                        </li>
-                        <li class="flex items-center">
-                            <i
-                                class="fas fa-seedling text-primary mr-3 w-4"
-                            ></i>
-                            <span
-                                ><strong>Certificação:</strong> 100% Natural,
-                                Sem Conservantes</span
-                            >
-                        </li>
-                        <li class="flex items-center">
-                            <i
-                                class="fas fa-utensils text-primary mr-3 w-4"
-                            ></i>
-                            <span
-                                ><strong>Uso:</strong> Carnes, Vegetais, Curry,
-                                Molhos</span
-                            >
-                        </li>
-                    </ul>
                 </div>
 
                 <!-- Opções de Compra -->
@@ -259,6 +188,7 @@
                         <button
                             id="add-to-cart-btn"
                             class="btn btn-primary flex-1 text-lg"
+                            data-product-id="{{ product.id }}"
                         >
                             <i class="fas fa-shopping-cart mr-2"></i>
                             Adicionar ao Carrinho
@@ -266,6 +196,7 @@
                         <button
                             id="add-to-wishlist-btn"
                             class="btn btn-secondary flex-1 text-lg"
+                            data-product-id="{{ product.id }}"
                         >
                             <i class="fas fa-heart mr-2"></i>
                             Adicionar aos Desejos
@@ -577,14 +508,14 @@
             id="related-products"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
         >
-            <!-- Produto Relacionado 1 -->
+            {% for p in related_products %}
             <div
                 class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
             >
                 <div class="aspect-square bg-gray-100 relative">
                     <img
-                        src="https://placehold.co/300x300/00695C/FFFFFF?text=Curry+Powder"
-                        alt="Curry Powder"
+                        src="{% if p.image %}{{ p.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+                        alt="{{ p.name }}"
                         class="w-full h-full object-cover"
                     />
                     <button
@@ -594,192 +525,73 @@
                             class="fas fa-heart text-gray-400 hover:text-red-500"
                         ></i>
                     </button>
+                    {% comment %} You can add logic for tags like \'BEST\n
+                    SELLER\', \'OFFER\', \'NEW\' here, based on product data
+                    {%endcomment %} {% if p.stock == 0 %}
+                    <span
+                        class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
+                        >ESGOTADO</span
+                    >
+                    {% elif p.is_new %} {# Assuming you have an \'is_new\'
+                    attribute or logic for this #}
+                    <span
+                        class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded"
+                        >NOVO</span
+                    >
+                    {% endif %}
                 </div>
                 <div class="p-4">
-                    <a href="product-detail.html?id=9" class="block">
+                    <a
+                        href="{% url 'store:product_detail' p.slug %}"
+                        class="block"
+                    >
                         <h3
                             class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
                         >
-                            Curry Powder Tradicional
+                            {{ p.name }}
                         </h3>
                     </a>
                     <p class="text-sm text-gray-600 mb-3">
-                        Mistura aromática para curry
+                        {{ p.description|truncatechars:50 }}
                     </p>
                     <div class="flex items-center mb-2">
                         <div class="flex text-yellow-400 text-sm">
+                            {# Logic for rating (stars) can be more complex,
+                            adapting to your model #}
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="far fa-star"></i>
                         </div>
-                        <span class="text-xs text-gray-500 ml-1">(89)</span>
+                        <span class="text-xs text-gray-500 ml-1">(0)</span>
+                        {# Adjust to show actual review count #}
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-lg font-bold text-primary"
-                            >R$ 22,00</span
+                            >R$ {{ p.price|floatformat:2 }}</span
                         >
-                        <button class="btn btn-primary text-sm px-4 py-2">
+                        <button
+                            class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                            data-product-id="{{ p.id }}"
+                        >
                             <i class="fas fa-cart-plus mr-1"></i>
                             Adicionar
                         </button>
                     </div>
                 </div>
             </div>
-
-            <!-- Produto Relacionado 2 -->
-            <div
-                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
-                <div class="aspect-square bg-gray-100 relative">
-                    <img
-                        src="https://placehold.co/300x300/8B4513/FFFFFF?text=Cardamomo"
-                        alt="Cardamomo Verde"
-                        class="w-full h-full object-cover"
-                    />
-                    <button
-                        class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                    >
-                        <i
-                            class="fas fa-heart text-gray-400 hover:text-red-500"
-                        ></i>
-                    </button>
-                </div>
-                <div class="p-4">
-                    <a href="product-detail.html?id=4" class="block">
-                        <h3
-                            class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                        >
-                            Cardamomo Verde
-                        </h3>
-                    </a>
-                    <p class="text-sm text-gray-600 mb-3">
-                        Especiaria aromática premium
-                    </p>
-                    <div class="flex items-center mb-2">
-                        <div class="flex text-yellow-400 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(156)</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-lg font-bold text-primary"
-                            >R$ 35,00</span
-                        >
-                        <button class="btn btn-primary text-sm px-4 py-2">
-                            <i class="fas fa-cart-plus mr-1"></i>
-                            Adicionar
-                        </button>
-                    </div>
-                </div>
+            {% empty %}
+            <div class="col-span-full text-center py-12">
+                <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
+                <h3 class="text-2xl font-teko text-gray-500 mb-2">
+                    Nenhum produto relacionado encontrado.
+                </h3>
+                <p class="text-gray-400">
+                    Explore outros produtos em nosso catálogo!
+                </p>
             </div>
-
-            <!-- Produto Relacionado 3 -->
-            <div
-                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
-                <div class="aspect-square bg-gray-100 relative">
-                    <img
-                        src="https://placehold.co/300x300/DC143C/FFFFFF?text=Pimenta+Preta"
-                        alt="Pimenta Preta"
-                        class="w-full h-full object-cover"
-                    />
-                    <button
-                        class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                    >
-                        <i
-                            class="fas fa-heart text-gray-400 hover:text-red-500"
-                        ></i>
-                    </button>
-                </div>
-                <div class="p-4">
-                    <a href="product-detail.html?id=10" class="block">
-                        <h3
-                            class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                        >
-                            Pimenta Preta Premium
-                        </h3>
-                    </a>
-                    <p class="text-sm text-gray-600 mb-3">
-                        Grãos inteiros selecionados
-                    </p>
-                    <div class="flex items-center mb-2">
-                        <div class="flex text-yellow-400 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(203)</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-lg font-bold text-primary"
-                            >R$ 18,00</span
-                        >
-                        <button class="btn btn-primary text-sm px-4 py-2">
-                            <i class="fas fa-cart-plus mr-1"></i>
-                            Adicionar
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Produto Relacionado 4 -->
-            <div
-                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
-                <div class="aspect-square bg-gray-100 relative">
-                    <img
-                        src="https://placehold.co/300x300/8B0000/FFFFFF?text=Canela"
-                        alt="Canela em Pau"
-                        class="w-full h-full object-cover"
-                    />
-                    <button
-                        class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                    >
-                        <i
-                            class="fas fa-heart text-gray-400 hover:text-red-500"
-                        ></i>
-                    </button>
-                </div>
-                <div class="p-4">
-                    <a href="product-detail.html?id=11" class="block">
-                        <h3
-                            class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                        >
-                            Canela em Pau Ceylon
-                        </h3>
-                    </a>
-                    <p class="text-sm text-gray-600 mb-3">
-                        Canela verdadeira do Sri Lanka
-                    </p>
-                    <div class="flex items-center mb-2">
-                        <div class="flex text-yellow-400 text-sm">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <span class="text-xs text-gray-500 ml-1">(178)</span>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <span class="text-lg font-bold text-primary"
-                            >R$ 28,00</span
-                        >
-                        <button class="btn btn-primary text-sm px-4 py-2">
-                            <i class="fas fa-cart-plus mr-1"></i>
-                            Adicionar
-                        </button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </main>
@@ -801,34 +613,10 @@
         .addEventListener("click", function () {
             const input = document.getElementById("quantity");
             const currentValue = parseInt(input.value);
+            // Assuming a max quantity of 10 for demonstration, adjust as needed
             if (currentValue < 10) {
                 input.value = currentValue + 1;
             }
-        });
-
-    // Troca de imagem principal
-    document
-        .querySelectorAll("#product-thumbnails button")
-        .forEach((button) => {
-            button.addEventListener("click", function () {
-                // Remove borda de todos os thumbnails
-                document
-                    .querySelectorAll("#product-thumbnails button")
-                    .forEach((btn) => {
-                        btn.classList.remove("border-primary");
-                        btn.classList.add("border-gray-300");
-                    });
-
-                // Adiciona borda no thumbnail clicado
-                this.classList.remove("border-gray-300");
-                this.classList.add("border-primary");
-
-                // Troca a imagem principal
-                const img = this.querySelector("img");
-                const mainImg = document.getElementById("product-image");
-                const newSrc = img.src.replace("80x80", "600x600");
-                mainImg.src = newSrc;
-            });
         });
 
     // Formulário de avaliação
@@ -845,36 +633,22 @@
         .getElementById("add-to-cart-btn")
         .addEventListener("click", function () {
             const quantity = document.getElementById("quantity").value;
+            const productId = this.dataset.productId;
             alert(
-                `${quantity} unidade(s) de Garam Masala Premium adicionada(s) ao carrinho!`,
+                `${quantity} unidade(s) de {{ product.name }} adicionada(s) ao carrinho!`,
             );
+            // Em uma aplicação real, você enviaria uma requisição AJAX aqui
+            // para adicionar o item ao carrinho no backend.
+            // Exemplo: fetch(`/cart/add/${productId}/`, { method: 'POST', body: JSON.stringify({ quantity }) });
         });
 
     document
         .getElementById("add-to-wishlist-btn")
         .addEventListener("click", function () {
-            alert("Garam Masala Premium adicionado à sua lista de desejos!");
+            const productId = this.dataset.productId;
+            alert("{{ product.name }} adicionado à sua lista de desejos!");
+            // Em uma aplicação real, você enviaria uma requisição AJAX aqui
+            // para adicionar o item à lista de desejos no backend.
         });
-
-    // Atualizar breadcrumb baseado no parâmetro da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get("id");
-
-    if (productId) {
-        const productNames = {
-            1: "Garam Masala Premium",
-            2: "Chai Masala",
-            3: "Açafrão Premium",
-            4: "Cardamomo Verde",
-            5: "Folhas de Curry",
-            6: "Feno Grego",
-            7: "Masala Chai Blend",
-            8: "Água de Rosas",
-        };
-
-        const productName = productNames[productId] || "Produto";
-        document.getElementById("product-breadcrumb").textContent = productName;
-        document.title = `${productName} - India Oasis`;
-    }
 </script>
 {% endblock content %}

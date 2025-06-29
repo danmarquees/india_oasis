@@ -1,21 +1,16 @@
-# store/forms.py
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import CustomerProfile
 
 class CustomUserCreationForm(UserCreationForm):
-    # Campos dos modelos User e CustomerProfile que queremos no formulário.
-    # O UserCreationForm já nos dá os campos de senha por padrão.
     nome = forms.CharField(max_length=150, required=True, label="Nome Completo")
-    email = forms.EmailField(required=True, label="E-mail")
+    email = forms.EmailField(required=True, label="E-mail") # Este será o username
+
     cpf = forms.CharField(max_length=14, required=True)
     telefone = forms.CharField(max_length=20, required=True)
     data_nascimento = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
     genero = forms.CharField(max_length=20, required=False)
-    password = forms.CharField(label="Senha", widget=forms.PasswordInput)
-    password2 = forms.CharField(label="Confirmação de Senha", widget=forms.PasswordInput)
     cep = forms.CharField(max_length=9, required=True)
     endereco = forms.CharField(max_length=255, required=True)
     numero = forms.CharField(max_length=20, required=True)
@@ -26,9 +21,19 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        # AQUI DEFINIMOS OS NOMES DOS CAMPOS QUE O FORMULÁRIO IRÁ USAR.
-        # NOTE QUE NÃO USAMOS 'password1', USAMOS 'password'.
-        fields = ('nome', 'email', 'password', 'password2')
+        # Deixar UserCreationForm lidar com 'username', 'password', 'password2'.
+        # 'email' do formulário será mapeado para 'username'.
+        # 'nome' do formulário será mapeado para 'first_name' e 'last_name'.
+        # Não precisamos listar explicitamente os campos extras aqui,
+        # eles são campos de formulário que serão lidos no save.
+        fields = UserCreationForm.Meta.fields + ('email',) # Adiciona email para o UserCreationForm lidar.
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Remove o campo 'username' gerado pelo UserCreationForm se já não for necessário
+        # Se 'email' está sendo usado como username, o campo 'username' não é exibido.
+        if 'username' in self.fields:
+            self.fields['username'].required = False # Não é mais necessário preencher o username
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -37,9 +42,11 @@ class CustomUserCreationForm(UserCreationForm):
         return email
 
     def save(self, commit=True):
+        # Chama o save do UserCreationForm para criar o objeto User
         user = super().save(commit=False)
-        user.username = self.cleaned_data['email']
-        user.email = self.cleaned_data['email']
+        user.username = self.cleaned_data['email'] # Define o username como o email
+        user.email = self.cleaned_data['email'] # Define o email do User
+
         nome_completo = self.cleaned_data['nome']
         parts = nome_completo.split(' ', 1)
         user.first_name = parts[0]

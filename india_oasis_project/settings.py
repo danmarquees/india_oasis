@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'store.context_processors.cart_processor',
                 'store.context_processors.static_files_processor',
+                'store.context_processors.categories_processor',
             ],
         },
     },

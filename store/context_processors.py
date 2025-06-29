@@ -1,4 +1,4 @@
-from .models import Cart
+from .models import Cart, Category
 from django.conf import settings
 
 def cart_processor(request):
@@ -26,3 +26,10 @@ def static_files_processor(request):
     return {
         'STATIC_URL': settings.STATIC_URL,
     }
+
+def categories_processor(request):
+    """
+    Context processor to make categories available to all templates.
+    """
+    categories = Category.objects.all()
+    return {'categories': categories}

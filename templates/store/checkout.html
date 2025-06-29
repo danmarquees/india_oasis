@@ -761,68 +761,35 @@
 
                             <!-- Order Items -->
                             <div class="space-y-4 mb-6">
+                                {% for item in cart.items.all %}
                                 <div
                                     class="flex items-center space-x-3 pb-3 border-b border-gray-100"
                                 >
                                     <img
-                                        src="https://placehold.co/60x60/D84315/FFFFFF?text=Garam"
-                                        alt="Garam Masala"
+                                        src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+                                        alt="{{ item.product.name }}"
                                         class="w-12 h-12 rounded-lg"
                                     />
                                     <div class="flex-1">
                                         <h4 class="font-medium text-gray-800">
-                                            Garam Masala Premium
+                                            {{ item.product.name }}
                                         </h4>
                                         <p class="text-sm text-gray-600">
-                                            Qtd: 2
+                                            Qtd: {{ item.quantity }}
                                         </p>
                                     </div>
                                     <div class="text-right">
-                                        <p class="font-semibold">R$ 50,00</p>
-                                    </div>
-                                </div>
-
-                                <div
-                                    class="flex items-center space-x-3 pb-3 border-b border-gray-100"
-                                >
-                                    <img
-                                        src="https://placehold.co/60x60/FFC107/333333?text=Curcuma"
-                                        alt="Cúrcuma"
-                                        class="w-12 h-12 rounded-lg"
-                                    />
-                                    <div class="flex-1">
-                                        <h4 class="font-medium text-gray-800">
-                                            Cúrcuma Pura
-                                        </h4>
-                                        <p class="text-sm text-gray-600">
-                                            Qtd: 1
+                                        <p class="font-semibold">
+                                            R$ {{ item.total_price|floatformat:2
+                                            }}
                                         </p>
                                     </div>
-                                    <div class="text-right">
-                                        <p class="font-semibold">R$ 18,00</p>
-                                    </div>
                                 </div>
-
-                                <div
-                                    class="flex items-center space-x-3 pb-3 border-b border-gray-100"
-                                >
-                                    <img
-                                        src="https://placehold.co/60x60/8D6E63/FFFFFF?text=Chai"
-                                        alt="Chai"
-                                        class="w-12 h-12 rounded-lg"
-                                    />
-                                    <div class="flex-1">
-                                        <h4 class="font-medium text-gray-800">
-                                            Chá Masala Chai
-                                        </h4>
-                                        <p class="text-sm text-gray-600">
-                                            Qtd: 3
-                                        </p>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-semibold">R$ 96,00</p>
-                                    </div>
-                                </div>
+                                {% empty %}
+                                <p class="text-center text-gray-500">
+                                    Seu carrinho está vazio.
+                                </p>
+                                {% endfor %}
                             </div>
 
                             <!-- Coupon -->
@@ -845,7 +812,10 @@
                             <div class="space-y-3 mb-6">
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Subtotal:</span>
-                                    <span class="font-medium">R$ 164,00</span>
+                                    <span class="font-medium"
+                                        >R$ {{ cart.total_price|floatformat:2
+                                        }}</span
+                                    >
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Frete:</span>
@@ -881,7 +851,8 @@
                                     <span
                                         class="price-highlight"
                                         id="total-price"
-                                        >R$ 164,00</span
+                                        >R$ {{ cart.total_price|floatformat:2
+                                        }}</span
                                     >
                                 </div>
                             </div>

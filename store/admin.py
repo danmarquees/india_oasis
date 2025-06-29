@@ -3,8 +3,12 @@ from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlis
 
 @admin.register(CustomerProfile)
 class CustomerProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'cpf', 'telefone', 'data_nascimento', 'genero', 'cidade', 'estado',]
+    list_display = ['user', 'full_name', 'cpf', 'telefone', 'data_nascimento', 'genero', 'cidade', 'estado',]
     search_fields = ['user__username', 'cpf', 'telefone']
+
+    def full_name(self, obj):
+        return f"{obj.user.first_name} {obj.user.last_name}"
+    full_name.short_description = 'Nome Completo'
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

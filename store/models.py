@@ -4,6 +4,7 @@ from django.urls import reverse
 
 class CustomerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    nome = models.CharField(max_length=100)
     cpf = models.CharField(max_length=14, unique=True, null=True, blank=True)
     telefone = models.CharField(max_length=20, null=True, blank=True)
     data_nascimento = models.DateField(null=True, blank=True)

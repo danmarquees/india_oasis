@@ -227,14 +227,14 @@
             <div
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
             >
-                <!-- Produto 1 -->
+                {% for product in products %}
                 <div
                     class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                     <div class="aspect-square bg-gray-100 relative">
                         <img
-                            src="https://placehold.co/300x300/D84315/FFFFFF?text=Garam+Masala"
-                            alt="Garam Masala Premium"
+                            src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+                            alt="{{ product.name }}"
                             class="w-full h-full object-cover"
                         />
                         <button
@@ -244,207 +244,73 @@
                                 class="fas fa-heart text-gray-400 hover:text-red-500"
                             ></i>
                         </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=1" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Garam Masala Premium
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Mistura de especiarias aromáticas
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(127)</span
-                            >
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ 25,00</span
-                            >
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Produto 2 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/00695C/FFFFFF?text=Chai+Masala"
-                            alt="Chai Masala"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=2" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Chai Masala
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Chá tradicional indiano
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1">(89)</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ 18,00</span
-                            >
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Produto 3 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/FFC107/000000?text=Açafrão"
-                            alt="Açafrão Premium"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
+                        {% comment %} You can add logic for tags like 'BEST
+                        SELLER', 'OFFER', 'NEW' here, based on product data
+                        {%endcomment %} {% if product.stock == 0 %}
                         <span
-                            class="absolute top-3 left-3 bg-red-500 text-white text-xs px-2 py-1 rounded"
-                            >OFERTA</span
+                            class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
+                            >ESGOTADO</span
                         >
+                        {% elif product.is_new %} {# Assuming you have an
+                        'is_new' attribute or logic for this #}
+                        <span
+                            class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded"
+                            >NOVO</span
+                        >
+                        {% endif %}
                     </div>
                     <div class="p-4">
-                        <a href="product-detail.html?id=3" class="block">
+                        <a
+                            href="{% url 'store:product_detail' product.slug %}"
+                            class="block"
+                        >
                             <h3
                                 class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
                             >
-                                Açafrão Premium
+                                {{ product.name }}
                             </h3>
                         </a>
                         <p class="text-sm text-gray-600 mb-3">
-                            Açafrão puro do Kashmir
+                            {{ product.description|truncatechars:50 }}
                         </p>
                         <div class="flex items-center mb-2">
                             <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(234)</span
-                            >
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <span class="text-sm text-gray-500 line-through"
-                                    >R$ 80,00</span
-                                >
-                                <span class="text-lg font-bold text-primary"
-                                    >R$ 65,00</span
-                                >
-                            </div>
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Produto 4 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/8B4513/FFFFFF?text=Cardamomo"
-                            alt="Cardamomo Verde"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=4" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Cardamomo Verde
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Especiaria aromática premium
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
+                                {# Logic for rating (stars) can be more complex,
+                                adapting to your model #}
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                             </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(156)</span
-                            >
+                            <span class="text-xs text-gray-500 ml-1">(0)</span>
+                            {# Adjust to show actual review count #}
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-lg font-bold text-primary"
-                                >R$ 35,00</span
+                                >R$ {{ product.price|floatformat:2 }}</span
                             >
-                            <button class="btn btn-primary text-sm px-4 py-2">
+                            <button
+                                class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                                data-product-id="{{ product.id }}"
+                            >
                                 <i class="fas fa-cart-plus mr-1"></i>
                                 Adicionar
                             </button>
                         </div>
                     </div>
                 </div>
+                {% empty %}
+                <div class="col-span-full text-center py-12">
+                    <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-2xl font-teko text-gray-500 mb-2">
+                        Nenhum produto disponível no momento.
+                    </h3>
+                    <p class="text-gray-400">
+                        Volte mais tarde para novas opções!
+                    </p>
+                </div>
+                {% endfor %}
             </div>
             <div class="text-center">
                 <a
@@ -468,14 +334,14 @@
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
             >
                 <!-- Cards de produtos serão inseridos aqui pelo JS -->
-                <!-- Produto 1 -->
+                {% for product in products %}
                 <div
                     class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                     <div class="aspect-square bg-gray-100 relative">
                         <img
-                            src="https://placehold.co/300x300/D84315/FFFFFF?text=Garam+Masala"
-                            alt="Garam Masala Premium"
+                            src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+                            alt="{{ product.name }}"
                             class="w-full h-full object-cover"
                         />
                         <button
@@ -485,207 +351,73 @@
                                 class="fas fa-heart text-gray-400 hover:text-red-500"
                             ></i>
                         </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=1" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Garam Masala Premium
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Mistura de especiarias aromáticas
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(127)</span
-                            >
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ 25,00</span
-                            >
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Produto 2 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/00695C/FFFFFF?text=Chai+Masala"
-                            alt="Chai Masala"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=2" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Chai Masala
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Chá tradicional indiano
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1">(89)</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ 18,00</span
-                            >
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Produto 3 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/FFC107/000000?text=Açafrão"
-                            alt="Açafrão Premium"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
+                        {% comment %} You can add logic for tags like 'BEST
+                        SELLER', 'OFFER', 'NEW' here, based on product data
+                        {%endcomment %} {% if product.stock == 0 %}
                         <span
-                            class="absolute top-3 left-3 bg-red-500 text-white text-xs px-2 py-1 rounded"
-                            >OFERTA</span
+                            class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
+                            >ESGOTADO</span
                         >
+                        {% elif product.is_new %} {# Assuming you have an
+                        'is_new' attribute or logic for this #}
+                        <span
+                            class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded"
+                            >NOVO</span
+                        >
+                        {% endif %}
                     </div>
                     <div class="p-4">
-                        <a href="product-detail.html?id=3" class="block">
+                        <a
+                            href="{% url 'store:product_detail' product.slug %}"
+                            class="block"
+                        >
                             <h3
                                 class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
                             >
-                                Açafrão Premium
+                                {{ product.name }}
                             </h3>
                         </a>
                         <p class="text-sm text-gray-600 mb-3">
-                            Açafrão puro do Kashmir
+                            {{ product.description|truncatechars:50 }}
                         </p>
                         <div class="flex items-center mb-2">
                             <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(234)</span
-                            >
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <span class="text-sm text-gray-500 line-through"
-                                    >R$ 80,00</span
-                                >
-                                <span class="text-lg font-bold text-primary"
-                                    >R$ 65,00</span
-                                >
-                            </div>
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Produto 4 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/8B4513/FFFFFF?text=Cardamomo"
-                            alt="Cardamomo Verde"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=4" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Cardamomo Verde
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Especiaria aromática premium
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
+                                {# Logic for rating (stars) can be more complex,
+                                adapting to your model #}
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                             </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(156)</span
-                            >
+                            <span class="text-xs text-gray-500 ml-1">(0)</span>
+                            {# Adjust to show actual review count #}
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-lg font-bold text-primary"
-                                >R$ 35,00</span
+                                >R$ {{ product.price|floatformat:2 }}</span
                             >
-                            <button class="btn btn-primary text-sm px-4 py-2">
+                            <button
+                                class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                                data-product-id="{{ product.id }}"
+                            >
                                 <i class="fas fa-cart-plus mr-1"></i>
                                 Adicionar
                             </button>
                         </div>
                     </div>
                 </div>
+                {% empty %}
+                <div class="col-span-full text-center py-12">
+                    <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-2xl font-teko text-gray-500 mb-2">
+                        Nenhum produto disponível no momento.
+                    </h3>
+                    <p class="text-gray-400">
+                        Volte mais tarde para novas opções!
+                    </p>
+                </div>
+                {% endfor %}
             </div>
         </section>
 
@@ -699,13 +431,14 @@
                 class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
             >
                 <!-- Recomendação 1 -->
+                {% for product in products %}
                 <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border-2 border-accent"
+                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                     <div class="aspect-square bg-gray-100 relative">
                         <img
-                            src="https://placehold.co/300x300/FF6B6B/FFFFFF?text=Curry+Leaves"
-                            alt="Folhas de Curry"
+                            src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+                            alt="{{ product.name }}"
                             class="w-full h-full object-cover"
                         />
                         <button
@@ -715,200 +448,73 @@
                                 class="fas fa-heart text-gray-400 hover:text-red-500"
                             ></i>
                         </button>
+                        {% comment %} You can add logic for tags like 'BEST
+                        SELLER', 'OFFER', 'NEW' here, based on product data
+                        {%endcomment %} {% if product.stock == 0 %}
                         <span
-                            class="absolute top-3 left-3 bg-accent text-black text-xs px-2 py-1 rounded font-bold"
-                            >TOP</span
+                            class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
+                            >ESGOTADO</span
                         >
+                        {% elif product.is_new %} {# Assuming you have an
+                        'is_new' attribute or logic for this #}
+                        <span
+                            class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded"
+                            >NOVO</span
+                        >
+                        {% endif %}
                     </div>
                     <div class="p-4">
-                        <a href="product-detail.html?id=5" class="block">
+                        <a
+                            href="{% url 'store:product_detail' product.slug %}"
+                            class="block"
+                        >
                             <h3
                                 class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
                             >
-                                Folhas de Curry
+                                {{ product.name }}
                             </h3>
                         </a>
                         <p class="text-sm text-gray-600 mb-3">
-                            Folhas aromáticas frescas
+                            {{ product.description|truncatechars:50 }}
                         </p>
                         <div class="flex items-center mb-2">
                             <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(198)</span
-                            >
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ 22,00</span
-                            >
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recomendação 2 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/4ECDC4/FFFFFF?text=Fenugreek"
-                            alt="Feno Grego"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=6" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Feno Grego
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Sementes aromáticas
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
+                                {# Logic for rating (stars) can be more complex,
+                                adapting to your model #}
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="far fa-star"></i>
                             </div>
-                            <span class="text-xs text-gray-500 ml-1">(76)</span>
+                            <span class="text-xs text-gray-500 ml-1">(0)</span>
+                            {# Adjust to show actual review count #}
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-lg font-bold text-primary"
-                                >R$ 15,00</span
+                                >R$ {{ product.price|floatformat:2 }}</span
                             >
-                            <button class="btn btn-primary text-sm px-4 py-2">
+                            <button
+                                class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                                data-product-id="{{ product.id }}"
+                            >
                                 <i class="fas fa-cart-plus mr-1"></i>
                                 Adicionar
                             </button>
                         </div>
                     </div>
                 </div>
-
-                <!-- Recomendação 3 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/95E1D3/000000?text=Masala+Chai"
-                            alt="Masala Chai Blend"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=7" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Masala Chai Blend
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Mistura especial para chá
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1"
-                                >(142)</span
-                            >
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ 28,00</span
-                            >
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
+                {% empty %}
+                <div class="col-span-full text-center py-12">
+                    <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-2xl font-teko text-gray-500 mb-2">
+                        Nenhum produto disponível no momento.
+                    </h3>
+                    <p class="text-gray-400">
+                        Volte mais tarde para novas opções!
+                    </p>
                 </div>
-
-                <!-- Recomendação 4 -->
-                <div
-                    class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                    <div class="aspect-square bg-gray-100 relative">
-                        <img
-                            src="https://placehold.co/300x300/F38BA8/FFFFFF?text=Rose+Water"
-                            alt="Água de Rosas"
-                            class="w-full h-full object-cover"
-                        />
-                        <button
-                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                        >
-                            <i
-                                class="fas fa-heart text-gray-400 hover:text-red-500"
-                            ></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <a href="product-detail.html?id=8" class="block">
-                            <h3
-                                class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                            >
-                                Água de Rosas
-                            </h3>
-                        </a>
-                        <p class="text-sm text-gray-600 mb-3">
-                            Essência floral pura
-                        </p>
-                        <div class="flex items-center mb-2">
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-xs text-gray-500 ml-1">(93)</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ 32,00</span
-                            >
-                            <button class="btn btn-primary text-sm px-4 py-2">
-                                <i class="fas fa-cart-plus mr-1"></i>
-                                Adicionar
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </section>
 

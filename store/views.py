@@ -17,13 +17,16 @@ def home(request):
     products = Product.objects.filter(available=True)[:8]
     categories = Category.objects.all()
     return render(request, 'store/index.html', {'products': products,'categories': categories,'STATIC_URL': settings.STATIC_URL,})
+
 def about(request):
     return render(request, 'store/about.html', {'STATIC_URL': settings.STATIC_URL,})
+
 def contact(request):
     if request.method == 'POST':
         messages.success(request, 'Sua mensagem foi enviada com sucesso!')
         return redirect('store:contact')
     return render(request, 'store/contact.html', {'STATIC_URL': settings.STATIC_URL,})
+
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
@@ -32,10 +35,12 @@ def product_list(request, category_slug=None):
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
     return render(request, 'store/products.html', {'category': category, 'categories': categories, 'products': products, 'STATIC_URL': settings.STATIC_URL,})
+
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, available=True)
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
     return render(request, 'store/product-detail.html', {'product': product, 'related_products': related_products, 'STATIC_URL': settings.STATIC_URL,})
+
 def get_cart(request):
     if request.user.is_authenticated:
         cart, created = Cart.objects.get_or_create(user=request.user)
@@ -46,9 +51,11 @@ def get_cart(request):
             request.session['session_id'] = session_id
         cart, created = Cart.objects.get_or_create(session_id=session_id)
     return cart
+
 def cart(request):
     cart = get_cart(request)
     return render(request, 'store/cart.html', {'cart': cart, 'STATIC_URL': settings.STATIC_URL,})
+
 def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart = get_cart(request)
@@ -61,6 +68,7 @@ def cart_add(request, product_id):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({'success': True, 'cart_total': cart.total_price, 'cart_count': cart.total_items, 'product_name': product.name, 'message': f'{product.name} foi adicionado ao carrinho'})
     return redirect('store:cart')
+
 def cart_remove(request, product_id):
     cart = get_cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -80,6 +88,7 @@ def cart_remove(request, product_id):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({'success': True, 'cart_total': cart.total_price, 'cart_count': cart.total_items, 'product_name': product_name, 'removed_completely': removed_completely, 'message': f'{product_name} foi removido do carrinho' if removed_completely else f'Quantidade de {product_name} foi atualizada'})
     return redirect('store:cart')
+
 @login_required
 def checkout(request):
     cart = get_cart(request)
@@ -90,12 +99,15 @@ def checkout(request):
         cart.items.all().delete()
         return redirect('store:order_success')
     return render(request, 'store/checkout.html', {'cart': cart, 'STATIC_URL': settings.STATIC_URL,})
+
 def order_success(request):
     return render(request, 'store/order-success.html', {'STATIC_URL': settings.STATIC_URL,})
+
 @login_required
 def wishlist(request):
     wishlist, created = Wishlist.objects.get_or_create(user=request.user)
     return render(request, 'store/wishlist.html', {'wishlist': wishlist, 'STATIC_URL': settings.STATIC_URL,})
+
 @login_required
 def wishlist_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -109,6 +121,7 @@ def wishlist_add(request, product_id):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({'success': True, 'in_wishlist': True, 'product_name': product.name, 'message': message})
     return redirect('store:wishlist')
+
 @login_required
 def wishlist_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -117,6 +130,7 @@ def wishlist_remove(request, product_id):
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return JsonResponse({'success': True, 'in_wishlist': False, 'product_name': product.name, 'message': f'{product.name} foi removido dos favoritos'})
     return redirect('store:wishlist')
+
 @login_required
 def profile(request):
     orders = Order.objects.filter(user=request.user)
