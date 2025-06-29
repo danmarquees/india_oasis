@@ -190,13 +190,13 @@
 
     <!-- Formulário de Cadastro -->
     <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6 md:p-8">
-        {% csrf_token %}
         <form
-            method="POST"
+            method="pos"
             action="{% url 'store:signup' %}"
             id="cadastro-form"
             class="space-y-6"
         >
+            {% csrf_token %}
             <!-- ETAPA 1: Dados Pessoais -->
             <div class="form-step active" id="step-1">
                 <h2
@@ -217,7 +217,7 @@
                         <input
                             type="text"
                             id="nome"
-                            name="username"
+                            name="nome"
                             required
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                             placeholder="Seu nome completo"
@@ -334,7 +334,7 @@
                             <input
                                 type="password"
                                 id="senha"
-                                name="password1"
+                                name="password"
                                 required
                                 minlength="8"
                                 class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -797,6 +797,7 @@
 </main>
 
 <!-- ==== JAVASCRIPT ==== -->
+<!-- Cole este script no final do seu arquivo signup.html -->
 <script>
     // Variáveis globais
     let currentStep = 1;
@@ -926,12 +927,9 @@
     }
 
     function showStep(step) {
-        // Esconder todos os steps
         document.querySelectorAll(".form-step").forEach((stepEl) => {
             stepEl.classList.remove("active");
         });
-
-        // Mostrar step atual
         document.getElementById(`step-${step}`).classList.add("active");
     }
 
@@ -953,7 +951,6 @@
                 }
             });
 
-        // Atualizar linhas de progresso
         document.querySelectorAll(".step-line").forEach((line, index) => {
             if (index + 1 < currentStep) {
                 line.classList.add("completed");
@@ -1041,27 +1038,22 @@
             showError("error-cep", "CEP é obrigatório");
             isValid = false;
         }
-
         if (!endereco) {
             showError("error-endereco", "Endereço é obrigatório");
             isValid = false;
         }
-
         if (!numero) {
             showError("error-numero", "Número é obrigatório");
             isValid = false;
         }
-
         if (!bairro) {
             showError("error-bairro", "Bairro é obrigatório");
             isValid = false;
         }
-
         if (!cidade) {
             showError("error-cidade", "Cidade é obrigatória");
             isValid = false;
         }
-
         if (!estado) {
             showError("error-estado", "Estado é obrigatório");
             isValid = false;
@@ -1070,46 +1062,34 @@
         return isValid;
     }
 
-    // Utilitários de validação
     function isValidCPF(cpf) {
         cpf = cpf.replace(/\D/g, "");
         if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-
         let sum = 0;
-        for (let i = 0; i < 9; i++) {
-            sum += parseInt(cpf.charAt(i)) * (10 - i);
-        }
+        for (let i = 0; i < 9; i++) sum += parseInt(cpf.charAt(i)) * (10 - i);
         let remainder = (sum * 10) % 11;
         if (remainder === 10 || remainder === 11) remainder = 0;
         if (remainder !== parseInt(cpf.charAt(9))) return false;
-
         sum = 0;
-        for (let i = 0; i < 10; i++) {
-            sum += parseInt(cpf.charAt(i)) * (11 - i);
-        }
+        for (let i = 0; i < 10; i++) sum += parseInt(cpf.charAt(i)) * (11 - i);
         remainder = (sum * 10) % 11;
         if (remainder === 10 || remainder === 11) remainder = 0;
         return remainder === parseInt(cpf.charAt(10));
     }
 
     function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    // Gerenciamento de erros
     function showError(elementId, message) {
         const errorElement = document.getElementById(elementId);
+        if (!errorElement) return;
         const inputElement =
             errorElement.previousElementSibling ||
             errorElement.parentElement.querySelector("input, select");
-
         errorElement.textContent = message;
         errorElement.classList.add("show");
-
-        if (inputElement) {
-            inputElement.classList.add("form-field-error");
-        }
+        if (inputElement) inputElement.classList.add("form-field-error");
     }
 
     function clearErrors() {
@@ -1117,18 +1097,15 @@
             error.classList.remove("show");
             error.textContent = "";
         });
-
         document.querySelectorAll(".form-field-error").forEach((field) => {
             field.classList.remove("form-field-error");
         });
     }
 
-    // Toggle de senha
     function togglePassword(fieldId) {
         const field = document.getElementById(fieldId);
         const button = document.getElementById(`toggle-${fieldId}`);
         const icon = button.querySelector("i");
-
         if (field.type === "password") {
             field.type = "text";
             icon.classList.replace("fa-eye", "fa-eye-slash");
@@ -1138,21 +1115,17 @@
         }
     }
 
-    // Verificação de força da senha
     function checkPasswordStrength() {
         const password = document.getElementById("senha").value;
         const strengthBar = document.querySelector(".password-strength-bar");
         const strengthText = document.getElementById("password-strength-text");
-
         let strength = 0;
         if (password.length >= 8) strength++;
         if (/[a-z]/.test(password)) strength++;
         if (/[A-Z]/.test(password)) strength++;
         if (/\d/.test(password)) strength++;
         if (/[^a-zA-Z\d]/.test(password)) strength++;
-
         strengthBar.className = "password-strength-bar";
-
         if (strength <= 2) {
             strengthBar.classList.add("password-strength-weak");
             strengthText.textContent = "Senha fraca";
@@ -1173,7 +1146,6 @@
         const confirmPassword =
             document.getElementById("confirmar-senha").value;
         const errorElement = document.getElementById("error-confirmar-senha");
-
         if (confirmPassword && password !== confirmPassword) {
             showError("error-confirmar-senha", "Senhas não coincidem");
         } else {
@@ -1184,25 +1156,19 @@
         }
     }
 
-    // Busca de CEP
     async function buscarCEP() {
         const cepInput = document.getElementById("cep");
         const cep = cepInput.value.replace(/\D/g, "");
-
         if (cep.length !== 8) return;
-
         const loadingElement = document.getElementById("buscar-cep-loading");
         const iconElement = document.getElementById("buscar-cep-icon");
-
         loadingElement.classList.remove("hidden");
         iconElement.classList.add("hidden");
-
         try {
             const response = await fetch(
                 `https://viacep.com.br/ws/${cep}/json/`,
             );
             const data = await response.json();
-
             if (!data.erro) {
                 document.getElementById("endereco").value =
                     data.logradouro || "";
@@ -1220,14 +1186,12 @@
         }
     }
 
-    // Preenchimento da confirmação
     function populateConfirmation() {
         const generoMap = {
             masculino: "Masculino",
             feminino: "Feminino",
             "nao-informar": "Prefiro não informar",
         };
-
         document.getElementById("confirm-nome").textContent =
             document.getElementById("nome").value;
         document.getElementById("confirm-cpf").textContent =
@@ -1237,16 +1201,16 @@
         document.getElementById("confirm-telefone").textContent =
             document.getElementById("telefone").value;
         document.getElementById("confirm-data-nascimento").textContent =
-            formatDate(document.getElementById("data-nascimento").value);
+            new Date(
+                document.getElementById("data-nascimento").value,
+            ).toLocaleDateString("pt-BR");
         document.getElementById("confirm-genero").textContent =
             generoMap[document.getElementById("genero").value] ||
             "Não informado";
-
         document.getElementById("confirm-cep").textContent =
             document.getElementById("cep").value;
         document.getElementById("confirm-bairro").textContent =
             document.getElementById("bairro").value;
-
         const endereco = document.getElementById("endereco").value;
         const numero = document.getElementById("numero").value;
         const complemento = document.getElementById("complemento").value;
@@ -1254,79 +1218,121 @@
         if (complemento) enderecoCompleto += ` - ${complemento}`;
         document.getElementById("confirm-endereco-completo").textContent =
             enderecoCompleto;
-
         const cidade = document.getElementById("cidade").value;
         const estado = document.getElementById("estado").value;
         document.getElementById("confirm-cidade-estado").textContent =
             `${cidade}/${estado}`;
     }
 
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString("pt-BR");
-    }
-
-    // Submissão do formulário
+    // ===================================================================
+    // FUNÇÃO DE SUBMISSÃO DO FORMULÁRIO CORRIGIDA
+    // ===================================================================
     async function handleFormSubmit(e) {
-        e.preventDefault();
+        e.preventDefault(); // Impede a submissão padrão do formulário
+        clearErrors(); // Limpa quaisquer mensagens de erro anteriores
 
-        // Validar termos
+        // Validação final do lado do cliente
         if (!document.getElementById("aceitar-termos").checked) {
-            showError("error-termos", "Você deve aceitar os termos de uso");
+            showError(
+                "error-termos",
+                "Você deve aceitar os termos de uso para continuar.",
+            );
             return;
         }
+
+        const form = e.target;
+        const formData = new FormData(form);
 
         const submitButton = document.getElementById("finalizar-cadastro");
         const submitText = document.getElementById("submit-text");
         const submitIcon = document.getElementById("submit-icon");
         const submitLoading = document.getElementById("submit-loading");
 
-        // Estado de carregamento
+        // Ativa o estado de "carregando" no botão
         submitButton.disabled = true;
         submitText.textContent = "Processando...";
         submitIcon.classList.add("hidden");
         submitLoading.classList.remove("hidden");
 
         try {
-            // Simular envio do formulário
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            // Envia os dados do formulário para a view do Django usando fetch
+            const response = await fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    // Este header ajuda o Django a identificar a requisição como AJAX
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+            });
 
-            // Mostrar mensagem de sucesso
-            document.getElementById("success-message").style.display = "block";
-            document.getElementById("cadastro-form").style.display = "none";
+            // Converte a resposta do servidor para JSON
+            const data = await response.json();
 
-            // Redirecionar após 3 segundos
-            setTimeout(() => {
-                window.location.href = "{% url 'store:home' %}";
-            }, 3000);
+            if (data.success) {
+                // Se o backend retornar sucesso, mostra a mensagem de sucesso
+                document.getElementById("success-message").style.display =
+                    "block";
+                document.getElementById("cadastro-form").style.display = "none";
+
+                // Redireciona para a página inicial após 3 segundos
+                setTimeout(() => {
+                    window.location.href = data.redirect_url;
+                }, 3000);
+            } else {
+                // Se o backend retornar erros, exibe-os
+                if (data.errors) {
+                    Object.keys(data.errors).forEach((fieldName) => {
+                        const messages = data.errors[fieldName];
+                        // Mapeia o nome do campo do backend para o ID do elemento de erro no HTML
+                        const errorElementId = `error-${fieldName.replace("password2", "confirmar-senha").replace("password", "senha")}`;
+                        showError(errorElementId, messages.join(" "));
+                    });
+                    // Se o erro for de dados pessoais, volta para a primeira etapa
+                    if (
+                        data.errors.email ||
+                        data.errors.password ||
+                        data.errors.nome ||
+                        data.errors.cpf
+                    ) {
+                        currentStep = 1;
+                        showStep(1);
+                        updateProgressIndicator();
+                    }
+                }
+                alert("Por favor, corrija os erros indicados no formulário.");
+            }
         } catch (error) {
-            alert("Erro ao processar cadastro. Tente novamente.");
+            // Em caso de erro de rede ou outro problema
+            console.error("Erro na submissão do formulário:", error);
+            alert(
+                "Ocorreu um erro de comunicação com o servidor. Tente novamente.",
+            );
         } finally {
-            // Restaurar estado do botão
+            // Restaura o botão para o estado normal, independentemente do resultado
             submitButton.disabled = false;
             submitText.textContent = "Finalizar Cadastro";
             submitIcon.classList.remove("hidden");
             submitLoading.classList.add("hidden");
         }
     }
+    // ===================================================================
+    // FIM DA FUNÇÃO CORRIGIDA
+    // ===================================================================
 
-    // Menu lateral
     function closeMenu() {
         document.getElementById("side-menu").classList.add("-translate-x-full");
         document.getElementById("menu-overlay").classList.add("hidden");
     }
 
-    // Carregar contador do carrinho
+    // Esta função é um exemplo, substitua pela sua lógica real de carrinho
     function loadCartCount() {
-        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-        const totalItems = cartItems.reduce(
-            (sum, item) => sum + item.quantity,
-            0,
-        );
-        document.getElementById("cart-count").textContent = totalItems;
+        // Você precisará de uma view no Django para fornecer esse número via AJAX
+        // ou passá-lo no contexto inicial da página.
+        // Por enquanto, deixaremos como 0.
+        // const cartCount = "{{ cart.total_items|default:0 }}";
+        // document.getElementById("cart-count").textContent = cartCount;
     }
 
-    // Inicializar contador do carrinho
     loadCartCount();
 </script>
 {% endblock content %}

@@ -3,29 +3,22 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 class CustomerProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cpf = models.CharField(max_length=14, unique=True)
-    telefone = models.CharField(max_length=20)
-    data_nascimento = models.DateField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    cpf = models.CharField(max_length=14, unique=True, null=True, blank=True)
+    telefone = models.CharField(max_length=20, null=True, blank=True)
+    data_nascimento = models.DateField(null=True, blank=True)
     genero = models.CharField(max_length=20, blank=True)
-    username = models.CharField(max_length=100)
-    email = models.EmailField(max_length=254)
-    genero = models.CharField(max_length=20, blank=True)
-    password1 = models.CharField(max_length=128)
-    password2 = models.CharField(max_length=128)
-
-    cep = models.CharField(max_length=9)
-    endereco = models.CharField(max_length=255)
-    numero = models.CharField(max_length=10)
-    complemento = models.CharField(max_length=50, blank=True)
-    bairro = models.CharField(max_length=100)
-    cidade = models.CharField(max_length=100)
-    estado = models.CharField(max_length=2)
-
-    receber_newsletter = models.BooleanField(default=False)
+    cep = models.CharField(max_length=9, blank=True)
+    endereco = models.CharField(max_length=255, blank=True)
+    numero = models.CharField(max_length=20, blank=True)
+    complemento = models.CharField(max_length=100, blank=True)
+    bairro = models.CharField(max_length=100, blank=True)
+    cidade = models.CharField(max_length=100, blank=True)
+    estado = models.CharField(max_length=2, blank=True)
 
     def __str__(self):
-        return self.user.get_full_name()
+        return self.user.username
+
 
 
 class Category(models.Model):

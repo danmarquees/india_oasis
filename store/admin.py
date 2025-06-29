@@ -3,7 +3,7 @@ from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlis
 
 @admin.register(CustomerProfile)
 class CustomerProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'cpf', 'telefone', 'data_nascimento', 'genero', 'cidade', 'estado', 'receber_newsletter']
+    list_display = ['user', 'cpf', 'telefone', 'data_nascimento', 'genero', 'cidade', 'estado',]
     search_fields = ['user__username', 'cpf', 'telefone']
 
 @admin.register(Category)
