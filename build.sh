@@ -25,6 +25,7 @@ else
 fi
 
 echo "--- Collecting static files ---"
+cp -r media/* static/media/ # Copia arquivos de mídia para o diretório estático
 python manage.py collectstatic --noinput
 
 echo "--- Build process completed successfully ---"
