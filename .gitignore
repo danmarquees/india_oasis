@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / dll files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Environments
+.env
+venv/
+env/
+/bin/
+/include/
+/lib/
+/lib64/
+/share/
+
+# Database
+db.sqlite3
+
+# Media and Static files
+/media/
+/staticfiles/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS generated files
+.DS_Store
+.Trashes
+Thumbs.db
