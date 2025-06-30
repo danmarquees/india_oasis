@@ -6,7 +6,9 @@
     <nav class="mb-6">
         <ol class="flex space-x-2 text-sm">
             <li>
-                <a href="index.html" class="text-primary hover:underline"
+                <a
+                    href="{% url 'store:home' %}"
+                    class="text-primary hover:underline"
                     >Início</a
                 >
             </li>
@@ -311,11 +313,17 @@
             culinária com nossos temperos premium.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="products.html" class="btn btn-primary text-lg">
+            <a
+                href="{% url 'store:products' %}"
+                class="btn btn-primary text-lg"
+            >
                 <i class="fas fa-shopping-bag mr-2"></i>
                 Explorar Produtos
             </a>
-            <a href="contact.html" class="btn btn-secondary text-lg">
+            <a
+                href="{% url 'store:contact' %}"
+                class="btn btn-secondary text-lg"
+            >
                 <i class="fas fa-envelope mr-2"></i>
                 Entre em Contato
             </a>

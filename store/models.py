@@ -139,3 +139,17 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return f'Wishlist of {self.user.username}'
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    rating = models.PositiveIntegerField(choices=[(i, str(i)) for i in range(1, 6)], default=5)
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        unique_together = ('product', 'user') # Garante que um usuário só pode avaliar um produto uma vez
+
+    def __str__(self):
+        return f'Review by {self.user.username} for {self.product.name} ({self.rating} stars)'

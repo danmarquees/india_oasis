@@ -220,14 +220,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Renderiza estrelas de avaliação
-  function renderStars(rating, isInteractive = false) {
-    let starsHtml = "";
-    for (let i = 1; i <= 5; i++) {
-      const starClass = i <= rating ? "text-accent" : "";
-      const interactiveAttr = isInteractive ? `data-value="${i}"` : "";
-      starsHtml += `<i class="fa-solid fa-star ${starClass}" ${interactiveAttr}></i>`;
+  function renderStars(containerElement, ratingValue) {
+    if (!containerElement) {
+      console.warn("Container element not found for star rendering.");
+      return;
     }
-    return starsHtml;
+    containerElement.innerHTML = "";
+    const roundedRating = Math.round(ratingValue * 2) / 2; // Round to nearest 0.5 for half stars
+
+    for (let i = 1; i <= 5; i++) {
+      let starClass = "far fa-star"; // Empty star
+      if (i - 0.5 === roundedRating) {
+        starClass = "fas fa-star-half-alt"; // Half star
+      } else if (i <= roundedRating) {
+        starClass = "fas fa-star"; // Full star
+      }
+      containerElement.innerHTML += `<i class="${starClass} text-accent"></i>`;
+    }
   }
 
   // Renderiza a página de detalhes do produto
@@ -500,11 +509,29 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Modal de feedback
-  function showFeedback(title, message) {
-    const modal = document.getElementById("feedback-modal");
-    document.getElementById("modal-title").textContent = title;
-    document.getElementById("modal-message").textContent = message;
-    modal.classList.remove("hidden");
+  function showFeedback(title, message, type = "success") {
+    if (window.actionFeedback) {
+      if (type === "success") {
+        window.actionFeedback.formSubmitted(
+          title.toLowerCase().includes("sucesso") ? "checkout" : "general",
+          message,
+        );
+      } else if (type === "error") {
+        window.actionFeedback.formError(message);
+      } else if (type === "info") {
+        window.toastSystem.info(title, message);
+      } else if (type === "warning") {
+        window.toastSystem.warning(title, message);
+      }
+    } else {
+      console.warn(
+        "ActionFeedback system not initialized. Displaying fallback modal.",
+      );
+      const modal = document.getElementById("feedback-modal");
+      document.getElementById("modal-title").textContent = title;
+      document.getElementById("modal-message").textContent = message;
+      modal.classList.remove("hidden");
+    }
   }
 
   // Controle do menu lateral
@@ -848,47 +875,219 @@ document.addEventListener("DOMContentLoaded", () => {
   // Listeners para o formulário de avaliação
   function addReviewFormListeners() {
     const reviewForm = document.getElementById("review-form");
-    if (reviewForm) {
-      reviewForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const productId = parseInt(reviewForm.dataset.id);
-        const product = products.find((p) => p.id === productId);
-        const author = document.getElementById("author-name").value;
-        const text = document.getElementById("review-text").value;
-        const rating = parseInt(document.getElementById("rating-value").value);
+    if (!reviewForm) {
+      // If the review form element is not found, exit the function early.
+      // This prevents attempts to add event listeners or interact with a null element.
+      return;
+    }
+    // Handle interactive stars for the review form
+    const starRatingRadioContainer =
+      reviewForm.querySelector(".star-rating-radio");
+    const radioButtons = starRatingRadioContainer
+      ? starRatingRadioContainer.querySelectorAll('input[type="radio"]')
+      : [];
+    const starLabels = starRatingRadioContainer
+      ? starRatingRadioContainer.querySelectorAll("label i")
+      : [];
 
-        if (rating === 0) {
-          alert("Por favor, selecione uma nota.");
-          return;
-        }
-
-        product.reviews.push({ author, text, rating });
-
-        // Recalcula a média de rating do produto
-        const totalRating = product.reviews.reduce(
-          (sum, r) => sum + r.rating,
-          0,
-        );
-        product.rating = totalRating / product.reviews.length;
-
-        showFeedback("Obrigado!", "Sua avaliação foi enviada com sucesso.");
-        renderProductDetail(productId); // Re-renderiza a página para mostrar a nova avaliação
-      });
-
-      const stars = document.querySelectorAll("#new-review-rating .fa-star");
-      stars.forEach((star) => {
-        star.addEventListener("click", () => {
-          const value = parseInt(star.dataset.value);
-          document.getElementById("rating-value").value = value;
-          stars.forEach((s) => {
-            s.classList.toggle(
-              "text-accent",
-              parseInt(s.dataset.value) <= value,
-            );
-          });
+    starLabels.forEach((starIcon) => {
+      starIcon.addEventListener("click", function () {
+        const value = parseInt(this.parentNode.previousElementSibling.value); // Get value from hidden radio
+        // Visually update stars
+        starLabels.forEach((s, index) => {
+          if (index < value) {
+            s.classList.remove("far", "text-gray-400");
+            s.classList.add("fas", "text-accent");
+          } else {
+            s.classList.remove("fas", "text-accent");
+            s.classList.add("far", "text-gray-400");
+          }
+        });
+        // Check the corresponding radio button
+        radioButtons.forEach((radio) => {
+          if (parseInt(radio.value) === value) {
+            radio.checked = true;
+          }
         });
       });
-    }
+
+      // Initialize star visual based on pre-selected radio (if any)
+      const initialRatingInput = Array.from(radioButtons).find(
+        (radio) => radio.checked,
+      );
+      if (initialRatingInput) {
+        const initialRating = parseInt(initialRatingInput.value);
+        if (starLabels.length > 0) {
+          // Add null check for starLabels
+          starLabels.forEach((s, index) => {
+            if (index < initialRating) {
+              s.classList.remove("far", "text-gray-400");
+              s.classList.add("fas", "text-accent");
+            } else {
+              s.classList.remove("fas", "text-accent");
+              s.classList.add("far", "text-gray-400");
+            }
+          });
+        }
+      }
+    });
+
+    reviewForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(reviewForm);
+      const rating = formData.get("rating");
+      const comment = formData.get("comment");
+
+      if (!rating) {
+        showFeedback(
+          "Erro",
+          "Por favor, selecione uma nota para a sua avaliação.",
+          "error",
+        );
+        return;
+      }
+
+      try {
+        const response = await fetch(reviewForm.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-Requested-With": "XMLHttpRequest", // Important for Django\'s JsonResponse check
+          },
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Check for successful HTTP status (200-299)
+          showFeedback("Sucesso!", data.message, "success");
+          reviewForm.reset(); // Clear the form
+
+          // Visually reset stars in the form
+          starLabels.forEach((s) => {
+            s.classList.remove("fas", "text-accent");
+            s.classList.add("far", "text-gray-400");
+          });
+          radioButtons.forEach((radio) => (radio.checked = false));
+
+          // Append new review to the list
+          const productReviewsContainer =
+            document.getElementById("product-reviews");
+          if (productReviewsContainer) {
+            const newReviewHtml = `
+              <div class="border-b border-gray-200 pb-6 review-item">
+                <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold">
+                    ${data.username.charAt(0).toUpperCase()}
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-2">
+                      <div>
+                        <h4 class="font-semibold text-gray-800">${data.username}</h4>
+                        <div class="flex items-center space-x-2">
+                          <div class="rating flex items-center star-rating" data-rating="${data.rating}">
+                            <!-- Stars will be rendered by JS function renderStars -->
+                          </div>
+                          <span class="text-sm text-gray-500">${data.created_at}</span>
+                        </div>
+                      </div>
+                      <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
+                        <i class="fas fa-check mr-1"></i>
+                        Compra Verificada
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+            // Insert new review at the top of the list
+            productReviewsContainer.insertAdjacentHTML(
+              "afterbegin",
+              newReviewHtml,
+            );
+
+            // Render stars for the newly added review
+            const newReviewElement =
+              productReviewsContainer.firstElementChild;
+            const newReviewStarContainer = newReviewElement
+              ? newReviewElement.querySelector(".star-rating")
+              : null;
+            if (newReviewStarContainer) {
+              renderStars(newReviewStarContainer, data.rating);
+            }
+          }
+
+          // Update average rating display in two locations
+          const mainProductRatingStarsContainer = document.querySelector(
+            "#product-rating .star-rating",
+          );
+          const reviewSummaryAverageRatingSpan = document.querySelector(
+            ".mt-12.bg-white .text-4xl.font-bold.text-primary",
+          );
+          const reviewSummaryStarsContainer = document.querySelector(
+            ".mt-12.bg-white .star-rating",
+          );
+          const productReviewsCountSpans = document.querySelectorAll(
+            "#product-reviews-count",
+          ); // Select all elements with this ID
+
+          if (reviewSummaryAverageRatingSpan) {
+            reviewSummaryAverageRatingSpan.textContent =
+              data.average_rating.toFixed(1);
+          }
+          if (reviewSummaryStarsContainer) {
+            renderStars(reviewSummaryStarsContainer, data.average_rating);
+          }
+          if (mainProductRatingStarsContainer) {
+            renderStars(mainProductRatingStarsContainer, data.average_rating);
+          }
+          productReviewsCountSpans.forEach((span) => {
+            span.textContent = `(${data.total_reviews} avaliações)`;
+          });
+
+          // Hide the form as the user has now submitted a review
+          reviewForm.style.display = "none";
+          // Show the "You already reviewed this product" message
+          const alreadyReviewedMessageDiv =
+            document.querySelector(".mt-8 .bg-blue-100");
+          if (alreadyReviewedMessageDiv) {
+            alreadyReviewedMessageDiv.style.display = "block";
+          }
+        } else {
+          // Handle non-2xx responses
+          showFeedback(
+            "Erro",
+            data.message || "Ocorreu um erro ao enviar sua avaliação.",
+            "error",
+          );
+          if (data.errors) {
+            console.error("Form errors:", data.errors);
+            // In a real app, you might parse data.errors and display them next to fields
+          }
+          // If the error message indicates a duplicate review, hide the form
+          if (
+            data.message &&
+            data.message.includes("Você já avaliou este produto")
+          ) {
+            reviewForm.style.display = "none";
+            const alreadyReviewedMessageDiv =
+              document.querySelector(".mt-8 .bg-blue-100");
+            if (alreadyReviewedMessageDiv) {
+              alreadyReviewedMessageDiv.style.display = "block";
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Erro ao enviar avaliação:", error);
+        showFeedback(
+          "Erro",
+          "Não foi possível conectar ao servidor. Tente novamente mais tarde.",
+          "error",
+        );
+      }
+    });
+  }
   }
 
   // Delegação de eventos no corpo do documento
@@ -1317,6 +1516,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
+      // Initialize star ratings on product detail page
+      // This will render stars for existing average ratings and individual reviews
+      document.querySelectorAll(".star-rating").forEach((starContainer) => {
+        const rating = parseFloat(starContainer.dataset.rating);
+        if (!isNaN(rating)) {
+          renderStars(starContainer, rating);
+        }
+      });
+
+      // Setup review form listeners for the product detail page
+      addReviewFormListeners();
+
       // Pausar carrossel quando não está visível (Intersection Observer)
       if ("IntersectionObserver" in window && carouselContainer) {
         try {
@@ -1392,7 +1603,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log("👆 Swipe direito - slide anterior");
           }
           resetCarouselAutoplay();
-        }, 100);
+        });
       } else {
         console.log("👆 Swipe insuficiente, ignorando");
       }
@@ -1437,7 +1648,16 @@ document.addEventListener("DOMContentLoaded", () => {
         // Delay para garantir que o DOM esteja completamente carregado
         setTimeout(() => {
           startCarouselAutoplay();
-        }, 100);
+        }, 1000); // Adiciona um pequeno delay para a inicialização do carrossel
+
+        // Listener para o botão fechar do modal de feedback (fallback)
+        const feedbackModal = document.getElementById("feedback-modal");
+        const modalCloseBtn = document.getElementById("modal-close-btn");
+        if (feedbackModal && modalCloseBtn) {
+          modalCloseBtn.addEventListener("click", () => {
+            feedbackModal.classList.add("hidden");
+          });
+        }
 
         console.log("🎠 Carrossel inicializado com sucesso");
       } else {

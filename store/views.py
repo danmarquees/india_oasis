@@ -7,10 +7,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import JsonResponse
 from django.urls import reverse
-from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile
+from django.db import IntegrityError, models # Import IntegrityError for handling duplicate reviews, and models for Avg
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import JsonResponse
+from django.urls import reverse
+from decimal import Decimal # Import Decimal
+from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, Review
 from django.conf import settings
 import uuid
-from .forms import CustomUserCreationForm # <<< IMPORTAÇÃO CORRETA
+from .forms import CustomUserCreationForm, ReviewForm # <<< IMPORTAÇÃO CORRETA
 
 # ... (home, about, contact, etc. não mudam) ...
 def home(request):
@@ -39,7 +48,24 @@ def product_list(request, category_slug=None):
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, available=True)
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id)[:4]
-    return render(request, 'store/product-detail.html', {'product': product, 'related_products': related_products, 'STATIC_URL': settings.STATIC_URL,})
+    reviews = product.reviews.all() # Get all reviews for this product
+    user_has_reviewed = reviews.filter(user=request.user).exists() if request.user.is_authenticated else False
+    form = ReviewForm() # Instantiate the review form
+
+    # Calculate average rating
+    average_rating = reviews.aggregate(models.Avg('rating'))['rating__avg']
+    if average_rating is None:
+        average_rating = 0
+
+    return render(request, 'store/product-detail.html', {
+        'product': product,
+        'related_products': related_products,
+        'reviews': reviews,
+        'form': form,
+        'user_has_reviewed': user_has_reviewed,
+        'average_rating': average_rating,
+        'STATIC_URL': settings.STATIC_URL,
+    })
 
 def get_cart(request):
     if request.user.is_authenticated:
@@ -89,16 +115,64 @@ def cart_remove(request, product_id):
         return JsonResponse({'success': True, 'cart_total': cart.total_price, 'cart_count': cart.total_items, 'product_name': product_name, 'removed_completely': removed_completely, 'message': f'{product_name} foi removido do carrinho' if removed_completely else f'Quantidade de {product_name} foi atualizada'})
     return redirect('store:cart')
 
+# Placeholder function for shipping calculation
+def calculate_shipping_cost(total_cart_price, cep=None):
+    # This is a simplified placeholder.
+    # In a real application, you would integrate with a shipping API (e.g., Correios, FedEx, etc.)
+    # and calculate based on weight, dimensions, destination (CEP), and service type.
+    if total_cart_price > 200:
+        return Decimal('0.00')  # Frete grátis para compras acima de R$200
+    return Decimal('25.00') # Custo fixo de frete
+
 @login_required
 def checkout(request):
     cart = get_cart(request)
+    customer_profile = None
+    if request.user.is_authenticated:
+        try:
+            customer_profile = CustomerProfile.objects.get(user=request.user)
+        except CustomerProfile.DoesNotExist:
+            customer_profile = None
+
+    shipping_cost = calculate_shipping_cost(cart.total_price, customer_profile.cep if customer_profile else None)
+    total_with_shipping = cart.total_price + shipping_cost
+
     if request.method == 'POST':
-        order = Order.objects.create(user=request.user, first_name=request.POST.get('first_name'), last_name=request.POST.get('last_name'), email=request.POST.get('email'), address=request.POST.get('address'), postal_code=request.POST.get('postal_code'), city=request.POST.get('city'), state=request.POST.get('state'), total_price=cart.total_price)
+        # Retrieve form data
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        address = request.POST.get('address')
+        postal_code = request.POST.get('postal_code')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+
+        # Create the order with updated total price including shipping
+        order = Order.objects.create(
+            user=request.user,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            address=address,
+            postal_code=postal_code,
+            city=city,
+            state=state,
+            total_price=total_with_shipping  # Use the total price with shipping
+        )
+
         for item in cart.items.all():
             OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
         cart.items.all().delete()
-        return redirect('store:order_success')
-    return render(request, 'store/checkout.html', {'cart': cart, 'STATIC_URL': settings.STATIC_URL,})
+        return JsonResponse({'success': True, 'redirect_url': reverse('store:order_success')})
+
+    context = {
+        'cart': cart,
+        'STATIC_URL': settings.STATIC_URL,
+        'customer_profile': customer_profile,
+        'shipping_cost': shipping_cost,
+        'total_with_shipping': total_with_shipping,
+    }
+    return render(request, 'store/checkout.html', context)
 
 def order_success(request):
     return render(request, 'store/order-success.html', {'STATIC_URL': settings.STATIC_URL,})
@@ -135,6 +209,44 @@ def wishlist_remove(request, product_id):
 def profile(request):
     orders = Order.objects.filter(user=request.user)
     return render(request, 'store/profile.html', {'orders': orders, 'STATIC_URL': settings.STATIC_URL,})
+
+@login_required
+def add_review(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            try:
+                review = form.save(commit=False)
+                review.product = product
+                review.user = request.user
+                review.save()
+                messages.success(request, 'Sua avaliação foi enviada com sucesso!')
+
+                # Recalculate average rating for immediate update on frontend
+                reviews = product.reviews.all()
+                average_rating = reviews.aggregate(models.Avg('rating'))['rating__avg']
+                if average_rating is None:
+                    average_rating = 0
+
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Avaliação enviada com sucesso!',
+                    'rating': review.rating,
+                    'comment': review.comment,
+                    'username': request.user.username,
+                    'created_at': review.created_at.strftime('%Y-%m-%d %H:%M'), # Format datetime for JSON
+                    'average_rating': round(average_rating, 1), # Round for display
+                    'total_reviews': reviews.count(),
+                })
+            except IntegrityError:
+                messages.error(request, 'Você já avaliou este produto.')
+                return JsonResponse({'success': False, 'message': 'Você já avaliou este produto.'}, status=400)
+        else:
+            errors = form.errors.as_json()
+            messages.error(request, 'Por favor, corrija os erros no formulário.')
+            return JsonResponse({'success': False, 'errors': errors}, status=400)
+    return JsonResponse({'success': False, 'message': 'Método não permitido.'}, status=405)
 
 
 # --- VIEW SIGNUP CORRIGIDA ---

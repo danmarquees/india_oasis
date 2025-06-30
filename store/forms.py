@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import CustomerProfile
+from .models import CustomerProfile, Review
 
 class CustomUserCreationForm(UserCreationForm):
     nome = forms.CharField(max_length=150, required=True, label="Nome Completo")
@@ -70,3 +70,29 @@ class CustomUserCreationForm(UserCreationForm):
                 estado=self.cleaned_data.get('estado'),
             )
         return user
+
+class ReviewForm(forms.ModelForm):
+    # Rating field will be rendered as radio buttons for star selection
+    rating = forms.ChoiceField(
+        choices=[(i, str(i)) for i in range(1, 6)],
+        widget=forms.RadioSelect,
+        label="Sua Avaliação (Estrelas)"
+    )
+    comment = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': 4, 'placeholder': 'Deixe seu comentário sobre o produto...'}),
+        required=False,
+        label="Comentário"
+    )
+
+    class Meta:
+        model = Review
+        fields = ['rating', 'comment']
+        # Excluímos product e user pois eles serão preenchidos na view
+        # O campo 'rating' já é um PositiveIntegerField no modelo, o ChoiceField o converte corretamente.
+        labels = {
+            'rating': 'Avaliação',
+            'comment': 'Comentário',
+        }
+        widgets = {
+            'rating': forms.RadioSelect(attrs={'class': 'star-rating-input'}),
+        }

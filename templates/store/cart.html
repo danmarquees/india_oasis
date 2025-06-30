@@ -1,799 +1,333 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
-<!doctype html>
+```html india_oasis/templates/store/cart.html {% extends 'base.html' %} {% load
+static %} {% block content %}
 
-
-        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
-        <main class="container mx-auto p-4 sm:p-6 lg:p-8">
-            <!-- Breadcrumb -->
-            <nav class="mb-6">
-                <ol class="flex space-x-2 text-sm">
-                    <li>
-                        <a
-                            href="index.html"
-                            class="text-primary hover:underline"
-                            >Início</a
-                        >
-                    </li>
-                    <li class="text-gray-500">/</li>
-                    <li class="text-gray-700">Carrinho de Compras</li>
-                </ol>
-            </nav>
-
-            <!-- Título da Página com Indicador de Progresso -->
-            <div class="text-center mb-8">
-                <h1 class="text-5xl font-teko text-secondary mb-4">
-                    <i class="fas fa-shopping-cart text-primary mr-3"></i>
-                    Carrinho de Compras
-                </h1>
-                <p class="text-gray-600 mb-6">
-                    Revise seus itens antes de finalizar a compra
-                </p>
-
-                <!-- Barra de Progresso -->
-                <div class="max-w-lg mx-auto">
-                    <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm font-medium text-primary"
-                            >Carrinho</span
-                        >
-                        <span class="text-sm font-medium text-gray-400"
-                            >Pagamento</span
-                        >
-                        <span class="text-sm font-medium text-gray-400"
-                            >Confirmação</span
-                        >
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                            class="bg-primary h-2 rounded-full transition-all duration-300"
-                            style="width: 33%"
-                        ></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Conteúdo do Carrinho -->
-            <div id="cart-container">
-                <!-- Quando há itens no carrinho -->
-                <div
-                    id="cart-content"
-                    class="grid grid-cols-1 lg:grid-cols-3 gap-8"
+<!-- ==== CONTEÚDO PRINCIPAL CARRINHO ==== -->
+<main class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6">
+        <ol class="flex space-x-2 text-sm">
+            <li>
+                <a
+                    href="{% url 'store:home' %}"
+                    class="text-primary hover:underline"
+                    >Início</a
                 >
-                    {% csrf_token %}
-                    <!-- Itens do Carrinho -->
-                    <div class="lg:col-span-2">
-                        <div class="bg-white p-6 rounded-lg shadow-md">
-                            <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-3xl font-teko text-secondary">
-                                    Seus Itens
-                                    <span
-                                        id="cart-items-count"
-                                        class="text-lg text-gray-500 ml-2"
-                                        >({{ cart.total_items }} itens)</span
-                                    >
-                                </h2>
-                                <div class="flex space-x-2">
-                                    <button
-                                        id="save-for-later"
-                                        class="text-blue-500 hover:text-blue-700 text-sm px-3 py-1 border border-blue-300 rounded-md hover:bg-blue-50 transition-colors"
-                                    >
-                                        <i class="fas fa-bookmark mr-1"></i>
-                                        Salvar Lista
-                                    </button>
-                                    <button
-                                        id="clear-cart"
-                                        class="text-red-500 hover:text-red-700 text-sm px-3 py-1 border border-red-300 rounded-md hover:bg-red-50 transition-colors"
-                                    >
-                                        <i class="fas fa-trash mr-1"></i>
-                                        Limpar Carrinho
-                                    </button>
-                                </div>
-                            </div>
+            </li>
+            <li class="text-gray-500">/</li>
+            <li class="text-gray-700">Carrinho de Compras</li>
+        </ol>
+    </nav>
 
-                            <!-- Filtros e Ordenação -->
-                            <div
-                                class="flex justify-between items-center mb-4 p-3 bg-gray-50 rounded-lg"
-                            >
-                                <div class="flex items-center space-x-4">
-                                    <span class="text-sm text-gray-600"
-                                        >Ordenar por:</span
-                                    >
-                                    <select
-                                        id="sort-items"
-                                        class="text-sm border-none bg-transparent focus:outline-none"
-                                    >
-                                        <option value="default">Padrão</option>
-                                        <option value="price-low">
-                                            Menor preço
-                                        </option>
-                                        <option value="price-high">
-                                            Maior preço
-                                        </option>
-                                        <option value="name">Nome A-Z</option>
-                                    </select>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                    <span class="text-sm text-gray-600"
-                                        >Visualização:</span
-                                    >
-                                    <button
-                                        id="view-grid"
-                                        class="p-1 text-gray-400 hover:text-primary"
-                                    >
-                                        <i class="fas fa-th"></i>
-                                    </button>
-                                    <button
-                                        id="view-list"
-                                        class="p-1 text-primary"
-                                    >
-                                        <i class="fas fa-list"></i>
-                                    </button>
-                                </div>
-                            </div>
+    <h1 class="text-4xl font-teko text-secondary text-center mb-8">
+        <i class="fas fa-shopping-cart text-primary mr-3"></i>
+        Seu Carrinho
+    </h1>
 
-                            <div id="cart-items" class="space-y-4">
-                                {% if cart.items.all %} {% for item in cart.items.all %}
-                                <div
-                                    class="cart-item flex items-center justify-between bg-gray-50 p-4 rounded-lg shadow-sm animate-fade-in"
-                                >
-                                    <div class="flex items-center space-x-4">
-                                        <img
-                                            src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
-                                            alt="{{ item.product.name }}"
-                                            class="w-20 h-20 object-cover rounded-md"
-                                        />
-                                        <div>
-                                            <a
-                                                href="{% url 'store:product_detail' item.product.slug %}"
-                                                class="font-semibold text-gray-800 hover:text-primary transition-colors block"
-                                                >{{ item.product.name }}</a
-                                            >
-                                            <p class="text-sm text-gray-600">
-                                                R$ {{ item.product.price|floatformat:2 }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-4">
-                                        <div
-                                            class="flex items-center border rounded-lg"
-                                        >
-                                            <button
-                                                class="px-3 py-2 hover:bg-gray-100 decrease-qty-btn"
-                                                data-item-id="{{ item.id }}"
-                                            >
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-                                            <span class="w-8 text-center"
-                                                >{{ item.quantity }}</span
-                                            >
-                                            <button
-                                                class="px-3 py-2 hover:bg-gray-100 increase-qty-btn"
-                                                data-item-id="{{ item.id }}"
-                                            >
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                        <span class="font-semibold text-primary"
-                                            >R$ {{ item.total_price|floatformat:2 }}</span
-                                        >
-                                        <button
-                                            class="text-red-500 hover:text-red-700 remove-item-btn"
-                                            data-item-id="{{ item.id }}"
-                                        >
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                {% endfor %} {% else %}
-                                <!-- Quando o carrinho está vazio -->
-                                <div id="empty-cart" class="text-center py-16">
-                                    <div class="mb-8 animate-bounce">
-                                        <div
-                                            class="relative mx-auto w-24 h-24"
-                                        >
-                                            <i
-                                                class="fas fa-shopping-cart text-6xl text-gray-300 absolute inset-0"
-                                            ></i>
-                                            <div
-                                                class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center"
-                                            >
-                                                <span
-                                                    class="text-white text-xs font-bold"
-                                                    >0</span
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h2
-                                        class="text-4xl font-teko text-gray-500 mb-4 animate-fade-in"
-                                    >
-                                        Seu carrinho está vazio
-                                    </h2>
-                                    <p
-                                        class="text-gray-400 mb-8 max-w-md mx-auto animate-fade-in-delay"
-                                    >
-                                        Que tal começar explorando nossos
-                                        temperos autênticos da Índia? Temos
-                                        especiarias incríveis esperando por você!
-                                    </p>
-                                </div> {# <!-- Fecha #empty-cart --> #}
-                                {% endif %} {# <!-- Fecha o {% if cart.items.all %} --> #}
-
-                                    <!-- Cards de Sugestões -->
-                                    <div
-                                        class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
-                                    >
-                                        <div
-                                            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-slide-up"
-                                        >
-                                            <i
-                                                class="fas fa-pepper-hot text-3xl text-orange-500 mb-3"
-                                            ></i>
-                                            <h3
-                                                class="font-teko text-xl text-secondary mb-2"
-                                            >
-                                                Temperos Premium
-                                            </h3>
-                                            <p
-                                                class="text-sm text-gray-600 mb-4"
-                                            >
-                                                Especiarias autênticas direto da
-                                                Índia
-                                            </p>
-                                            <a
-                                                href="{% url 'store:product_list' %}?category=temperos"
-                                                class="text-primary hover:underline text-sm font-semibold"
-                                            >
-                                                Ver Temperos →
-                                            </a>
-                                        </div>
-
-                                        <div
-                                            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-slide-up-delay"
-                                        >
-                                            <i
-                                                class="fas fa-mug-hot text-3xl text-green-500 mb-3"
-                                            ></i>
-                                            <h3
-                                                class="font-teko text-xl text-secondary mb-2"
-                                            >
-                                                Chás Especiais
-                                            </h3>
-                                            <p class="text-sm text-gray-600 mb-4">
-                                Masala chai e infusões ayurvédicas
-                            </p>
-                            <a
-                                href="products.html?category=chas"
-                                class="text-primary hover:underline text-sm font-semibold"
-                            >
-                                Ver Chás →
-                            </a>
-                        </div>
-
-                        <div
-                            class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-slide-up-delay-2"
-                        >
-                            <i
-                                class="fas fa-gift text-3xl text-purple-500 mb-3"
-                            ></i>
-                            <h3 class="font-teko text-xl text-secondary mb-2">
-                                Kits Especiais
-                            </h3>
-                            <p class="text-sm text-gray-600 mb-4">
-                                Combinações perfeitas para iniciantes
-                            </p>
-                            <a
-                                href="products.html?category=kits"
-                                class="text-primary hover:underline text-sm font-semibold"
-                            >
-                                Ver Kits →
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="space-y-4">
-                        <a
-                            href="products.html"
-                            class="btn btn-primary text-lg inline-block animate-pulse-subtle"
-                        >
-                            <i class="fas fa-shopping-bag mr-2"></i>
-                            Descobrir Todos os Produtos
-                        </a>
-
-                        <div class="flex justify-center space-x-4 text-sm">
-                            <button
-                                id="load-saved-cart"
-                                class="text-blue-500 hover:underline"
-                            >
-                                <i class="fas fa-bookmark mr-1"></i>
-                                Carregar Lista Salva
-                            </button>
-                            <button
-                                id="view-wishlist"
-                                class="text-red-500 hover:underline"
-                            >
-                                <i class="fas fa-heart mr-1"></i>
-                                Ver Favoritos
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Loading State -->
-                <div id="cart-loading" class="hidden text-center py-16">
-                    <div class="mb-4">
-                        <div
-                            class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"
-                        ></div>
-                    </div>
-                    <p class="text-gray-600">Carregando seu carrinho...</p>
-                </div>
-            </div>
-
-            <!-- Produtos Recomendados -->
-            <div id="recommended-section" class="mt-16">
-                <h2 class="text-3xl font-teko text-secondary text-center mb-8">
-                    Você Também Pode Gostar
-                </h2>
-                <div
-                    id="recommended-products"
-                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-                >
-                    <!-- Produtos recomendados serão inseridos aqui pelo JavaScript -->
-                </div>
-            </div>
-        </main>
-
-        <!-- ==== MODAL DE CHECKOUT ==== -->
-        <div
-            id="checkout-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+    <!-- Empty Cart Message -->
+    <div
+        id="emptyCartDiv"
+        class="text-center p-8 bg-white rounded-lg shadow-md mb-8 {% if cart.total_items > 0 %}hidden{% endif %}"
+    >
+        <i class="fas fa-box-open text-6xl text-gray-400 mb-4"></i>
+        <p class="text-xl text-gray-600 mb-4">Seu carrinho está vazio.</p>
+        <a
+            href="{% url 'store:product_list' %}"
+            class="btn btn-primary text-lg"
         >
-            <div
-                class="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-screen overflow-y-auto"
-            >
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-3xl font-teko text-secondary">
-                            Finalizar Compra
-                        </h2>
-                        <button
-                            id="close-checkout"
-                            class="text-gray-500 hover:text-gray-700 text-2xl"
+            <i class="fas fa-shopping-bag mr-2"></i> Explorar Produtos
+        </a>
+    </div>
+
+    <!-- Cart Items Container -->
+    <div
+        id="cartItemsContainer"
+        class="bg-white p-6 rounded-lg shadow-md mb-8 {% if cart.total_items == 0 %}hidden{% endif %}"
+    >
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th
+                            scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
-                            &times;
-                        </button>
-                    </div>
-
-                    <form id="checkout-form">
-                        <!-- Informações de Entrega -->
-                        <div class="mb-6">
-                            <h3 class="text-xl font-teko text-secondary mb-4">
-                                Informações de Entrega
-                            </h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label
-                                        for="name"
-                                        class="block mb-1 font-semibold"
-                                        >Nome Completo *</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        required
+                            Produto
+                        </th>
+                        <th
+                            scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                            Preço
+                        </th>
+                        <th
+                            scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                            Quantidade
+                        </th>
+                        <th
+                            scope="col"
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                            Total
+                        </th>
+                        <th scope="col" class="relative px-6 py-3">
+                            <span class="sr-only">Remover</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for item in cart.items.all %}
+                    <tr
+                        class="cart-item"
+                        data-product-id="{{ item.product.id }}"
+                    >
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-16 w-16">
+                                    <img
+                                        class="h-16 w-16 rounded-md object-cover"
+                                        src="{{ item.product.image.url }}"
+                                        alt="{{ item.product.name }}"
                                     />
                                 </div>
-                                <div>
-                                    <label
-                                        for="email"
-                                        class="block mb-1 font-semibold"
-                                        >E-mail *</label
+                                <div class="ml-4">
+                                    <div
+                                        class="text-sm font-medium text-gray-900"
                                     >
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        for="phone"
-                                        class="block mb-1 font-semibold"
-                                        >Telefone *</label
-                                    >
-                                    <input
-                                        type="tel"
-                                        id="phone"
-                                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        for="cep"
-                                        class="block mb-1 font-semibold"
-                                        >CEP *</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="cep"
-                                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        required
-                                    />
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label
-                                        for="address"
-                                        class="block mb-1 font-semibold"
-                                        >Endereço *</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="address"
-                                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        for="city"
-                                        class="block mb-1 font-semibold"
-                                        >Cidade *</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="city"
-                                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        for="state"
-                                        class="block mb-1 font-semibold"
-                                        >Estado *</label
-                                    >
-                                    <select
-                                        id="state"
-                                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                                        required
-                                    >
-                                        <option value="">
-                                            Selecione o estado
-                                        </option>
-                                        <option value="SP">São Paulo</option>
-                                        <option value="RJ">
-                                            Rio de Janeiro
-                                        </option>
-                                        <option value="MG">Minas Gerais</option>
-                                        <!-- Adicionar mais estados conforme necessário -->
-                                    </select>
+                                        {{ item.product.name }}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Método de Pagamento -->
-                        <div class="mb-6">
-                            <h3 class="text-xl font-teko text-secondary mb-4">
-                                Método de Pagamento
-                            </h3>
-                            <div class="space-y-3">
-                                <label
-                                    class="flex items-center p-4 border rounded-lg hover:bg-yellow-50 cursor-pointer"
-                                >
-                                    <input
-                                        type="radio"
-                                        name="payment"
-                                        value="card"
-                                        class="form-radio text-primary"
-                                        checked
-                                    />
-                                    <div class="ml-3">
-                                        <div class="flex items-center">
-                                            <i
-                                                class="fas fa-credit-card mr-2 text-primary"
-                                            ></i>
-                                            <span class="font-semibold"
-                                                >Cartão de Crédito</span
-                                            >
-                                        </div>
-                                        <p class="text-sm text-gray-600">
-                                            Visa, Mastercard, Elo
-                                        </p>
-                                    </div>
-                                </label>
-                                <label
-                                    class="flex items-center p-4 border rounded-lg hover:bg-yellow-50 cursor-pointer"
-                                >
-                                    <input
-                                        type="radio"
-                                        name="payment"
-                                        value="pix"
-                                        class="form-radio text-primary"
-                                    />
-                                    <div class="ml-3">
-                                        <div class="flex items-center">
-                                            <i
-                                                class="fa-brands fa-pix mr-2 text-primary"
-                                            ></i>
-                                            <span class="font-semibold"
-                                                >PIX</span
-                                            >
-                                        </div>
-                                        <p class="text-sm text-gray-600">
-                                            Aprovação imediata
-                                        </p>
-                                    </div>
-                                </label>
-                                <label
-                                    class="flex items-center p-4 border rounded-lg hover:bg-yellow-50 cursor-pointer"
-                                >
-                                    <input
-                                        type="radio"
-                                        name="payment"
-                                        value="boleto"
-                                        class="form-radio text-primary"
-                                    />
-                                    <div class="ml-3">
-                                        <div class="flex items-center">
-                                            <i
-                                                class="fas fa-barcode mr-2 text-primary"
-                                            ></i>
-                                            <span class="font-semibold"
-                                                >Boleto Bancário</span
-                                            >
-                                        </div>
-                                        <p class="text-sm text-gray-600">
-                                            Vencimento em 3 dias úteis
-                                        </p>
-                                    </div>
-                                </label>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="text-sm text-gray-900 item-price">
+                                R$ {{ item.product.price|floatformat:2 }}
                             </div>
-                        </div>
-
-                        <!-- Resumo Final -->
-                        <div class="bg-gray-50 p-4 rounded-lg mb-6">
-                            <h3 class="font-teko text-xl text-secondary mb-3">
-                                Resumo do Pedido
-                            </h3>
-                            <div class="space-y-2 text-sm">
-                                <div class="flex justify-between">
-                                    <span>Subtotal:</span>
-                                    <span id="modal-subtotal">R$ 0,00</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span>Frete:</span>
-                                    <span id="modal-shipping">R$ 15,00</span>
-                                </div>
-                                <div
-                                    id="modal-discount-row"
-                                    class="flex justify-between text-green-600 hidden"
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center space-x-2">
+                                <button
+                                    class="btn-sm btn-outline-primary update-cart-quantity"
+                                    data-product-id="{{ item.product.id }}"
+                                    data-action="remove"
                                 >
-                                    <span>Desconto:</span>
-                                    <span id="modal-discount">- R$ 0,00</span>
-                                </div>
-                                <hr class="my-2" />
-                                <div
-                                    class="flex justify-between text-lg font-bold"
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span
+                                    class="text-sm text-gray-900 quantity-display"
+                                    >{{ item.quantity }}</span
                                 >
-                                    <span>Total:</span>
-                                    <span id="modal-total" class="text-primary"
-                                        >R$ 0,00</span
-                                    >
-                                </div>
+                                <button
+                                    class="btn-sm btn-outline-primary update-cart-quantity"
+                                    data-product-id="{{ item.product.id }}"
+                                    data-action="add"
+                                >
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
-                        </div>
-
-                        <div class="flex gap-3">
+                        </td>
+                        <td
+                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 item-total-price"
+                        >
+                            R$ {{ item.total_price|floatformat:2 }}
+                        </td>
+                        <td
+                            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                        >
                             <button
-                                type="button"
-                                id="cancel-checkout"
-                                class="btn flex-1 border border-gray-300 text-gray-700 hover:bg-gray-100"
+                                class="text-red-600 hover:text-red-900 remove-item"
+                                data-product-id="{{ item.product.id }}"
                             >
-                                Cancelar
+                                Remover
                             </button>
-                            <button
-                                type="submit"
-                                class="btn btn-primary flex-1 text-lg"
-                            >
-                                <i class="fas fa-check mr-2"></i>
-                                Finalizar Pedido
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+    </div>
 
-        <!-- Sistema de Notificações Toast -->
-        <script>
-            // CSRF Token para requisições AJAX
-            const csrftoken = "{{ csrf_token }}";
+    <!-- Cart Summary and Checkout -->
+    <div
+        id="cartSummarySection"
+        class="bg-white p-6 rounded-lg shadow-md {% if cart.total_items == 0 %}hidden{% endif %}"
+    >
+        <div class="flex justify-end items-center mb-4">
+            <span class="text-lg font-bold text-gray-700 mr-4">Total:</span>
+            <span id="cartTotalSpan" class="text-2xl font-bold text-secondary"
+                >R$ {{ cart.total_price|floatformat:2 }}</span
+            >
+            <span id="cartCountSpan" class="hidden"
+                >{{ cart.total_items }}</span
+            >
+            {# Hidden span for total items, updated by JS #}
+        </div>
+        <div class="flex justify-end">
+            <a
+                href="{% url 'store:checkout' %}"
+                id="checkoutButton"
+                class="btn btn-primary text-lg"
+            >
+                <i class="fas fa-credit-card mr-2"></i> Finalizar Compra
+            </a>
+        </div>
+    </div>
+</main>
 
-            // Adiciona um listener para o carregamento do DOM para configurar o token CSRF em requisições AJAX
-            document.addEventListener('DOMContentLoaded', function() {
-                function getCookie(name) {
-                    let cookieValue = null;
-                    if (document.cookie && document.cookie !== '') {
-                        const cookies = document.cookie.split(';');
-                        for (let i = 0; i < cookies.length; i++) {
-                            const cookie = cookies[i].trim();
-                            // Does this cookie string begin with the name we want?
-                            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                break;
-                            }
-                        }
+<script>
+    const csrftoken = "{{ csrf_token }}";
+
+    document.addEventListener("DOMContentLoaded", function () {
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === name + "=") {
+                        cookieValue = decodeURIComponent(
+                            cookie.substring(name.length + 1),
+                        );
+                        break;
                     }
-                    return cookieValue;
                 }
+            }
+            return cookieValue;
+        }
 
-                // Configura o cabeçalho X-CSRFToken para todas as requisições AJAX
-                const originalFetch = window.fetch;
-                window.fetch = function(...args) {
-                    let [resource, config = {}] = args;
-                    if (typeof resource === 'string' && config.method && !/^(GET|HEAD|OPTIONS|TRACE)$/i.test(config.method)) {
-                        config.headers = {
-                            ...config.headers,
-                            'X-CSRFToken': csrftoken,
-                        };
-                    }
-                    return originalFetch(resource, config);
-                };
+        const cartTotalSpan = document.getElementById("cartTotalSpan");
+        const cartCountSpan = document.getElementById("cartCountSpan");
+        const emptyCartDiv = document.getElementById("emptyCartDiv");
+        const cartItemsContainer =
+            document.getElementById("cartItemsContainer");
+        const checkoutButton = document.getElementById("checkoutButton");
+        const cartSummarySection =
+            document.getElementById("cartSummarySection");
 
-                // Para jQuery (se estiver usando)
-                if (typeof jQuery !== 'undefined') {
-                    $.ajaxSetup({
-                        beforeSend: function(xhr, settings) {
-                            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                            }
-                        }
-                    });
-                }
+        function updateCartTotals(totalPrice, totalItems) {
+            if (cartTotalSpan) {
+                cartTotalSpan.textContent = `R$ ${totalPrice.toFixed(2).replace(".", ",")}`;
+            }
+            if (cartCountSpan) {
+                cartCountSpan.textContent = totalItems;
+            }
+
+            if (totalItems === 0) {
+                if (emptyCartDiv) emptyCartDiv.classList.remove("hidden");
+                if (cartItemsContainer)
+                    cartItemsContainer.classList.add("hidden");
+                if (checkoutButton) checkoutButton.classList.add("hidden");
+                if (cartSummarySection)
+                    cartSummarySection.classList.add("hidden");
+            } else {
+                if (emptyCartDiv) emptyCartDiv.classList.add("hidden");
+                if (cartItemsContainer)
+                    cartItemsContainer.classList.remove("hidden");
+                if (checkoutButton) checkoutButton.classList.remove("hidden");
+                if (cartSummarySection)
+                    cartSummarySection.classList.remove("hidden");
+            }
+        }
+
+        document.querySelectorAll(".update-cart-quantity").forEach((button) => {
+            button.addEventListener("click", function () {
+                const productId = this.dataset.productId;
+                const action = this.dataset.action;
+                updateCartItem(productId, action);
             });
-        </script>
-        <script src="{% static 'js/toast-system.js' %}"></script>
+        });
 
-        <!-- Link para o arquivo JavaScript externo -->
-        <script src="{% static 'js/script.js' %}" defer></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const cartItemsContainer = document.getElementById('cart-items');
-                const cartTotalSpan = document.getElementById('cart-total-price');
-                const cartCountSpan = document.getElementById('cart-total-items');
-                const emptyCartDiv = document.getElementById('empty-cart');
-                const checkoutButton = document.getElementById('checkout-button');
-                const cartSummarySection = document.getElementById('cart-summary-section');
+        document.querySelectorAll(".remove-item").forEach((button) => {
+            button.addEventListener("click", function () {
+                const productId = this.dataset.productId;
+                updateCartItem(productId, "delete");
+            });
+        });
 
-                // Função para atualizar os totais do carrinho na interface do usuário
-                function updateCartTotals(totalPrice, totalItems) {
-                    if (cartTotalSpan) {
-                        cartTotalSpan.textContent = `R$ ${totalPrice.toFixed(2)}`;
+        function updateCartItem(productId, action) {
+            let url = "";
+
+            if (action === "add") {
+                url = "{% url 'store:cart_add' 0 %}".replace("0", productId);
+            } else if (action === "remove" || action === "delete") {
+                url = "{% url 'store:cart_remove' 0 %}".replace("0", productId);
+            }
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrftoken,
+                    "X-Requested-With": "XMLHttpRequest",
+                },
+                body: JSON.stringify({ product_id: productId, action: action }),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
                     }
-                    if (cartCountSpan) {
-                        cartCountSpan.textContent = totalItems;
-                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Success:", data);
+                    updateCartTotals(data.cart_total, data.cart_count);
 
-                    // Exibir/ocultar mensagem de carrinho vazio e botão de checkout
-                    if (totalItems === 0) {
-                        if (emptyCartDiv) emptyCartDiv.classList.remove('hidden');
-                        if (cartItemsContainer) cartItemsContainer.classList.add('hidden');
-                        if (checkoutButton) checkoutButton.classList.add('hidden');
-                        if (cartSummarySection) cartSummarySection.classList.add('hidden');
+                    const cartItemRow = document.querySelector(
+                        `.cart-item[data-product-id="${productId}"]`,
+                    );
+                    if (cartItemRow) {
+                        const quantityDisplay =
+                            cartItemRow.querySelector(".quantity-display");
+                        const itemTotalPriceSpan =
+                            cartItemRow.querySelector(".item-total-price");
+                        const itemPriceSpan =
+                            cartItemRow.querySelector(".item-price");
+                        const productPrice = parseFloat(
+                            itemPriceSpan.textContent
+                                .replace("R$", "")
+                                .replace(",", ".")
+                                .trim(),
+                        );
+
+                        if (data.removed_completely) {
+                            cartItemRow.remove();
+                        } else if (action === "add") {
+                            let currentQuantity = parseInt(
+                                quantityDisplay.textContent,
+                            );
+                            quantityDisplay.textContent = currentQuantity + 1;
+                            itemTotalPriceSpan.textContent = `R$ ${((currentQuantity + 1) * productPrice).toFixed(2).replace(".", ",")}`;
+                        } else if (action === "remove") {
+                            let currentQuantity = parseInt(
+                                quantityDisplay.textContent,
+                            );
+                            if (currentQuantity > 1) {
+                                // Only decrement if quantity is more than 1
+                                quantityDisplay.textContent =
+                                    currentQuantity - 1;
+                                itemTotalPriceSpan.textContent = `R$ ${((currentQuantity - 1) * productPrice).toFixed(2).replace(".", ",")}`;
+                            } else {
+                                // This case should ideally be covered by data.removed_completely if backend sends it.
+                                // If quantity is 1 and 'remove' is clicked, it becomes 0, so remove the row.
+                                cartItemRow.remove();
+                            }
+                        }
                     } else {
-                        if (emptyCartDiv) emptyCartDiv.classList.add('hidden');
-                        if (cartItemsContainer) cartItemsContainer.classList.remove('hidden');
-                        if (checkoutButton) checkoutButton.classList.remove('hidden');
-                        if (cartSummarySection) cartSummarySection.classList.remove('hidden');
+                        // Fallback for cases where row might not be found or a fresh state is needed
+                        location.reload();
                     }
-                }
-
-                // Delegação de eventos para ações dos itens do carrinho (aumentar, diminuir, remover)
-                document.body.addEventListener('click', function(event) {
-                    let itemId = null;
-                    let action = '';
-
-                    if (event.target.closest('.increase-qty-btn')) {
-                        itemId = event.target.closest('.increase-qty-btn').dataset.itemId;
-                        action = 'add'; // Reutiliza lógica de adição para incrementar
-                    } else if (event.target.closest('.decrease-qty-btn')) {
-                        itemId = event.target.closest('.decrease-qty-btn').dataset.itemId;
-                        action = 'remove_one'; // Ação personalizada para decrementar
-                    } else if (event.target.closest('.remove-item-btn')) {
-                        itemId = event.target.closest('.remove-item-btn').dataset.itemId;
-                        action = 'remove_all'; // Ação personalizada para remover completamente
-                    }
-
-                    if (itemId) {
-                        const cartItemDiv = event.target.closest('.cart-item');
-                        const quantitySpan = cartItemDiv ? cartItemDiv.querySelector('.w-8.text-center') : null;
-                        const itemTotalPriceSpan = cartItemDiv ? cartItemDiv.querySelector('.font-semibold.text-primary') : null;
-
-                        let url = '';
-                        const method = 'POST'; // Todas essas ações são POST
-
-                        if (action === 'add') {
-                            url = `{% url 'store:cart_add' 0 %}`.replace('0', itemId);
-                        } else if (action === 'remove_one') {
-                            // Para decrementar, ainda usamos cart_remove, mas o backend precisa lidar com a lógica da quantidade
-                            url = `{% url 'store:cart_remove' 0 %}`.replace('0', itemId);
-                        } else if (action === 'remove_all') {
-                            url = `{% url 'store:cart_remove' 0 %}`.replace('0', itemId);
-                            // Adiciona uma classe para animação antes da remoção
-                            if (cartItemDiv) {
-                                cartItemDiv.classList.add('removing');
-                                // Remove o elemento após a animação
-                                cartItemDiv.addEventListener('animationend', () => {
-                                    cartItemDiv.remove();
-                                    // Se for o último item, atualiza a UI
-                                    if (document.querySelectorAll('.cart-item').length === 0) {
-                                        updateCartTotals(0, 0); // Força atualização se não houver mais itens
-                                    }
-                                });
-                            }
-                        }
-
-                        if (url) {
-                            fetch(url, { method: method })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        // Assume showToast existe e está disponível globalmente
-                                        if (data.message && typeof showToast === 'function') {
-                                            showToast(data.message, 'success');
-                                        }
-
-                                        updateCartTotals(data.cart_total, data.cart_count);
-
-                                        if (action === 'add' || action === 'remove_one') {
-                                            // Assegura que o backend envia new_quantity e item_total_price
-                                            if (quantitySpan && data.new_quantity !== undefined) {
-                                                quantitySpan.textContent = data.new_quantity;
-                                            }
-                                            if (itemTotalPriceSpan && data.item_total_price !== undefined) {
-                                                itemTotalPriceSpan.textContent = `R$ ${data.item_total_price.toFixed(2)}`;
-                                            }
-                                        }
-                                        // Se o item foi completamente removido (ou quantidade reduzida a 0), remove o elemento
-                                        if (action === 'remove_all' || (action === 'remove_one' && data.removed_completely)) {
-                                            if (cartItemDiv && !cartItemDiv.classList.contains('removing')) { // Apenas remove se não estiver animando para fora
-                                                cartItemDiv.classList.add('removing'); // Garante a animação
-                                                cartItemDiv.addEventListener('animationend', () => {
-                                                    cartItemDiv.remove();
-                                                    if (document.querySelectorAll('.cart-item').length === 0) {
-                                                        updateCartTotals(0, 0);
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    } else {
-                                        // Assume showToast existe e está disponível globalmente
-                                        if (data.message && typeof showToast === 'function') {
-                                            showToast(data.message, 'error');
-                                        } else if (typeof showToast === 'function') {
-                                            showToast('Erro ao atualizar o carrinho.', 'error');
-                                        }
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Erro na requisição AJAX:', error);
-                                    // Assume showToast existe e está disponível globalmente
-                                    if (typeof showToast === 'function') {
-                                        showToast('Ocorreu um erro ao processar sua requisição.', 'error');
-                                    }
-                                });
-                        }
-                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    alert(
+                        "Ocorreu um erro ao atualizar o carrinho. Por favor, tente novamente.",
+                    );
+                    location.reload();
                 });
+        }
+    });
+</script>
 
-                // Verificação inicial para carrinho vazio no carregamento da página
-                // Garante que a exibição esteja correta se o carrinho estiver inicialmente vazio
-                if (cartCountSpan && parseInt(cartCountSpan.textContent) === 0) {
-                     updateCartTotals(0, 0);
-                }
-            });
-        </script>
-{% endblock content%}
+{% endblock content %}

@@ -128,25 +128,13 @@
                         >R$ {{ product.price|floatformat:2 }}</span
                     >
                     <!-- Botão Adicionar ao Carrinho -->
-                    <form
-                        action="{% url 'store:cart_add' product.id %}"
-                        method="post"
-                        class="mt-4"
-                    >
-                        {% csrf_token %}
-                        <button
-                            type="submit"
-                            class="bg-primary text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-primary-dark transition duration-300 w-full"
-                        >
-                            Adicionar ao Carrinho
-                        </button>
-                    </form>
                     <button
-                        class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
-                        data-product-id="{{ product.id }}"
+                        type="button"
+                        class="bg-primary text-white py-2 px-4 rounded-lg text-sm font-semibold hover:bg-primary-dark transition duration-300 w-full add-to-cart-btn"
+                        data-id="{{ product.id }}"
+                        data-product-name="{{ product.name }}"
                     >
-                        <i class="fas fa-cart-plus mr-1"></i>
-                        Adicionar
+                        Adicionar ao Carrinho
                     </button>
                 </div>
             </div>
