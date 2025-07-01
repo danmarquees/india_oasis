@@ -1674,6 +1674,13 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(
       "Funcionalidades ativas: busca, categorias expandíveis, contadores",
     );
+      document.body.addEventListener('click', function(event) {
+          const button = event.target.closest('.add-to-cart-btn');
+          if (button) {
+              event.preventDefault();
+              addToCart(button);
+          }
+      });
   }
 
   // Configurar recursos de demonstração

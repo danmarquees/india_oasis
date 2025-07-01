@@ -1,5 +1,4 @@
-```html india_oasis/templates/store/cart.html {% extends 'base.html' %} {% load
-static %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <!-- ==== CONTEÚDO PRINCIPAL CARRINHO ==== -->
 <main class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -18,160 +17,580 @@ static %} {% block content %}
         </ol>
     </nav>
 
-    <h1 class="text-4xl font-teko text-secondary text-center mb-8">
-        <i class="fas fa-shopping-cart text-primary mr-3"></i>
-        Seu Carrinho
-    </h1>
+    <!-- Título da Página com Indicador de Progresso -->
+    <div class="text-center mb-8">
+        <h1 class="text-5xl font-teko text-secondary mb-4">
+            <i class="fas fa-shopping-cart text-primary mr-3"></i>
+            Carrinho de Compras
+        </h1>
+        <p class="text-gray-600 mb-6">
+            Revise seus itens antes de finalizar a compra
+        </p>
 
-    <!-- Empty Cart Message -->
-    <div
-        id="emptyCartDiv"
-        class="text-center p-8 bg-white rounded-lg shadow-md mb-8 {% if cart.total_items > 0 %}hidden{% endif %}"
-    >
-        <i class="fas fa-box-open text-6xl text-gray-400 mb-4"></i>
-        <p class="text-xl text-gray-600 mb-4">Seu carrinho está vazio.</p>
-        <a
-            href="{% url 'store:product_list' %}"
-            class="btn btn-primary text-lg"
-        >
-            <i class="fas fa-shopping-bag mr-2"></i> Explorar Produtos
-        </a>
+        <!-- Barra de Progresso -->
+        <div class="max-w-lg mx-auto">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium text-primary">Carrinho</span>
+                <span class="text-sm font-medium text-gray-400">Pagamento</span>
+                <span class="text-sm font-medium text-gray-400"
+                    >Confirmação</span
+                >
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div
+                    class="bg-primary h-2 rounded-full transition-all duration-300"
+                    style="width: 33%"
+                ></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Cart Items Container -->
-    <div
-        id="cartItemsContainer"
-        class="bg-white p-6 rounded-lg shadow-md mb-8 {% if cart.total_items == 0 %}hidden{% endif %}"
-    >
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th
-                            scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Produto
-                        </th>
-                        <th
-                            scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Preço
-                        </th>
-                        <th
-                            scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Quantidade
-                        </th>
-                        <th
-                            scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Total
-                        </th>
-                        <th scope="col" class="relative px-6 py-3">
-                            <span class="sr-only">Remover</span>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    {% for item in cart.items.all %}
-                    <tr
-                        class="cart-item"
-                        data-product-id="{{ item.product.id }}"
+    <!-- Conteúdo do Carrinho -->
+    <div id="cart-container">
+        <!-- Quando há itens no carrinho -->
+        <div id="cart-content" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Itens do Carrinho -->
+            <div class="lg:col-span-2">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-center mb-6"
                     >
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-16 w-16">
-                                    <img
-                                        class="h-16 w-16 rounded-md object-cover"
-                                        src="{{ item.product.image.url }}"
-                                        alt="{{ item.product.name }}"
-                                    />
-                                </div>
-                                <div class="ml-4">
-                                    <div
-                                        class="text-sm font-medium text-gray-900"
+                        <h2
+                            class="text-3xl font-teko text-secondary mb-2 sm:mb-0"
+                        >
+                            Seus Itens
+                            <span
+                                id="cart-items-count"
+                                class="text-lg text-gray-500 ml-2"
+                                >({{ cart.total_items }} itens)</span
+                            >
+                        </h2>
+                        <div class="flex space-x-2">
+                            <button
+                                id="save-for-later"
+                                class="text-blue-500 hover:text-blue-700 text-sm px-3 py-1 border border-blue-300 rounded-md hover:bg-blue-50 transition-colors"
+                            >
+                                <i class="fas fa-bookmark mr-1"></i>
+                                Salvar Lista
+                            </button>
+                            <button
+                                id="clear-cart"
+                                class="text-red-500 hover:text-red-700 text-sm px-3 py-1 border border-red-300 rounded-md hover:bg-red-50 transition-colors"
+                            >
+                                <i class="fas fa-trash mr-1"></i>
+                                Limpar Carrinho
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filtros e Ordenação -->
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-center mb-4 p-3 bg-gray-50 rounded-lg"
+                    >
+                        <div class="flex items-center space-x-4 mb-2 sm:mb-0">
+                            <span class="text-sm text-gray-600"
+                                >Ordenar por:</span
+                            >
+                            <select
+                                id="sort-items"
+                                class="text-sm border-none bg-transparent focus:outline-none"
+                            >
+                                <option value="default">Padrão</option>
+                                <option value="price-low">Menor preço</option>
+                                <option value="price-high">Maior preço</option>
+                                <option value="name">Nome A-Z</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-gray-600"
+                                >Visualização:</span
+                            >
+                            <button
+                                id="view-grid"
+                                class="p-1 text-gray-400 hover:text-primary"
+                            >
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button id="view-list" class="p-1 text-primary">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="cart-items" class="space-y-4">
+                        {% for item in cart.items.all %}
+                        <div
+                            class="flex flex-col sm:flex-row items-center justify-between p-4 bg-white rounded-lg shadow mb-4 cart-item"
+                            data-product-id="{{ item.product.id }}"
+                        >
+                            <div
+                                class="flex items-center space-x-4 mb-2 sm:mb-0 w-full sm:w-auto"
+                            >
+                                <img
+                                    src="{{ item.product.image.url }}"
+                                    alt="{{ item.product.name }}"
+                                    class="w-16 h-16 rounded-md object-cover"
+                                />
+                                <div class="flex-1">
+                                    <h3
+                                        class="text-lg font-medium text-gray-800"
                                     >
                                         {{ item.product.name }}
+                                    </h3>
+                                    <p class="text-sm text-gray-500">
+                                        SKU: {{ item.product.sku }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6 w-full sm:w-auto"
+                            >
+                                <div class="text-right w-full sm:w-auto">
+                                    <p
+                                        class="text-lg font-semibold text-secondary item-price"
+                                    >
+                                        R${{ item.product.price|floatformat:2}}
+                                    </p>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button
+                                        class="btn-sm btn-outline-primary update-cart-quantity"
+                                        data-product-id="{{ item.product.id }}"
+                                        data-action="remove"
+                                    >
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span
+                                        class="text-base font-medium text-gray-900 quantity-display"
+                                        >{{ item.quantity }}</span
+                                    >
+                                    <button
+                                        class="btn-sm btn-outline-primary update-cart-quantity"
+                                        data-product-id="{{ item.product.id }}"
+                                        data-action="add"
+                                    >
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="text-right w-full sm:w-auto">
+                                    <p
+                                        class="text-lg font-semibold text-secondary item-total-price"
+                                    >
+                                        R$ {{ item.total_price|floatformat:2 }}
+                                    </p>
+                                </div>
+                                <button
+                                    class="text-red-500 hover:text-red-700 remove-item w-full sm:w-auto mt-2 sm:mt-0"
+                                    data-product-id="{{ item.product.id }}"
+                                >
+                                    <i class="fas fa-times text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Cupom de Desconto e Calculadora de Frete -->
+                <div class="mt-6 bg-white p-6 rounded-lg shadow-md">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Cupom de Desconto -->
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-teko text-secondary mb-4">
+                                <i class="fas fa-tag mr-2 text-primary"></i>
+                                Cupom de Desconto
+                            </h3>
+                            <div class="flex flex-col sm:flex-row gap-3 mb-3">
+                                <input
+                                    type="text"
+                                    id="coupon-input"
+                                    placeholder="Digite seu cupom"
+                                    class="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full sm:w-auto"
+                                />
+                                <button
+                                    id="apply-coupon"
+                                    class="btn btn-secondary w-full sm:w-auto"
+                                >
+                                    Aplicar
+                                </button>
+                            </div>
+                            <div
+                                id="coupon-message"
+                                class="text-sm hidden"
+                            ></div>
+
+                            <!-- Cupons Disponíveis -->
+                            <div class="mt-3">
+                                <p class="text-sm text-gray-600 mb-2">
+                                    Cupons disponíveis:
+                                </p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button
+                                        class="coupon-suggestion text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200 transition-colors mb-2 sm:mb-0"
+                                        data-coupon="PRIMEIRA10"
+                                    >
+                                        PRIMEIRA10 - 10% OFF
+                                    </button>
+                                    <button
+                                        class="coupon-suggestion text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full hover:bg-green-200 transition-colors"
+                                        data-coupon="FRETE15"
+                                    >
+                                        FRETE15 - Frete Grátis
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calculadora de Frete -->
+                        <div class="flex flex-col">
+                            <h3 class="text-xl font-teko text-secondary mb-4">
+                                <i class="fas fa-truck mr-2 text-primary"></i>
+                                Calcular Frete
+                            </h3>
+                            <div class="flex flex-col sm:flex-row gap-3 mb-3">
+                                <input
+                                    type="text"
+                                    id="cep-input"
+                                    placeholder="Digite seu CEP"
+                                    maxlength="9"
+                                    class="flex-1 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full sm:w-auto"
+                                />
+                                <button
+                                    id="calculate-shipping"
+                                    class="btn btn-primary w-full sm:w-auto"
+                                >
+                                    Calcular
+                                </button>
+                            </div>
+                            <div id="shipping-options" class="space-y-2">
+                                <!-- Opções de frete aparecerão aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumo do Pedido -->
+            <div class="lg:col-span-1">
+                <div class="bg-white p-6 rounded-lg shadow-md sticky top-24">
+                    <h2 class="text-3xl font-teko text-secondary mb-6">
+                        <i class="fas fa-receipt mr-2 text-primary"></i>
+                        Resumo do Pedido
+                    </h2>
+
+                    <!-- Indicador de Economia -->
+                    <div
+                        id="savings-indicator"
+                        class="bg-green-50 border border-green-200 rounded-lg p-3 mb-4 hidden"
+                    >
+                        <div class="flex items-center text-green-700">
+                            <i class="fas fa-piggy-bank mr-2"></i>
+                            <span class="text-sm font-medium"
+                                >Você está economizando
+                                <span id="total-savings">R$ 0,00</span>!</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span
+                                >Subtotal (<span id="item-count"
+                                    >{{ cart.total_items }}</span
+                                >
+                                itens):</span
+                            >
+                            <span id="subtotal"
+                                >R$ {{ cart.total_price|floatformat:2 }}</span
+                            >
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Frete:</span>
+                            <div class="text-right">
+                                <span id="shipping-cost">R$ 15,00</span>
+                                <div
+                                    id="free-shipping-progress"
+                                    class="hidden mt-1"
+                                >
+                                    <div class="text-xs text-gray-500">
+                                        Faltam
+                                        <span id="remaining-for-free"
+                                            >R$ 0,00</span
+                                        >
+                                        para frete grátis
+                                    </div>
+                                    <div
+                                        class="w-20 bg-gray-200 rounded-full h-1 mt-1"
+                                    >
+                                        <div
+                                            id="free-shipping-bar"
+                                            class="bg-green-500 h-1 rounded-full transition-all duration-300"
+                                            style="width: 0%"
+                                        ></div>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900 item-price">
-                                R$ {{ item.product.price|floatformat:2 }}
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center space-x-2">
-                                <button
-                                    class="btn-sm btn-outline-primary update-cart-quantity"
-                                    data-product-id="{{ item.product.id }}"
-                                    data-action="remove"
-                                >
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <span
-                                    class="text-sm text-gray-900 quantity-display"
-                                    >{{ item.quantity }}</span
-                                >
-                                <button
-                                    class="btn-sm btn-outline-primary update-cart-quantity"
-                                    data-product-id="{{ item.product.id }}"
-                                    data-action="add"
-                                >
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td
-                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 item-total-price"
+                        </div>
+                        <div
+                            id="discount-row"
+                            class="flex justify-between text-green-600 hidden"
                         >
-                            R$ {{ item.total_price|floatformat:2 }}
-                        </td>
-                        <td
-                            class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                            <span>Desconto:</span>
+                            <span id="discount-amount">- R$ 0,00</span>
+                        </div>
+                        <div
+                            id="tax-row"
+                            class="flex justify-between text-sm text-gray-600"
                         >
-                            <button
-                                class="text-red-600 hover:text-red-900 remove-item"
-                                data-product-id="{{ item.product.id }}"
+                            <span>Impostos:</span>
+                            <span id="tax-amount">Inclusos</span>
+                        </div>
+                        <hr class="my-4" />
+                        <div class="flex justify-between text-xl font-bold">
+                            <span>Total:</span>
+                            <span id="cart-total" class="text-primary"
+                                >R$ {{ cart.total_price|floatformat:2 }}</span
                             >
-                                Remover
-                            </button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                        </div>
+                    </div>
+
+                    <!-- Informações de Entrega -->
+                    <div
+                        class="mb-6 p-4 bg-yellow-50 rounded-lg border border-yellow-200"
+                    >
+                        <h4 class="font-semibold text-yellow-800 mb-2">
+                            <i class="fas fa-shipping-fast mr-2"></i>
+                            Informações de Entrega
+                        </h4>
+                        <div class="space-y-2 text-sm text-yellow-700">
+                            <p class="flex items-center">
+                                <i
+                                    class="fas fa-truck mr-2 text-primary w-4"
+                                ></i>
+                                Frete grátis para pedidos acima de R$ 150
+                            </p>
+                            <p class="flex items-center">
+                                <i
+                                    class="fas fa-clock mr-2 text-primary w-4"
+                                ></i>
+                                Entrega em 5-7 dias úteis
+                            </p>
+                            <p class="flex items-center">
+                                <i
+                                    class="fas fa-shield-alt mr-2 text-primary w-4"
+                                ></i>
+                                Compra 100% segura e garantida
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Métodos de Pagamento Aceitos -->
+                    <div class="mb-6">
+                        <h4 class="text-sm font-semibold text-gray-700 mb-2">
+                            Formas de Pagamento:
+                        </h4>
+                        <div class="flex space-x-2">
+                            <div
+                                class="flex items-center justify-center w-8 h-6 bg-blue-100 rounded text-xs font-bold text-blue-600"
+                            >
+                                VISA
+                            </div>
+                            <div
+                                class="flex items-center justify-center w-8 h-6 bg-red-100 rounded text-xs font-bold text-red-600"
+                            >
+                                MC
+                            </div>
+                            <div
+                                class="flex items-center justify-center w-8 h-6 bg-yellow-100 rounded text-xs font-bold text-yellow-600"
+                            >
+                                ELO
+                            </div>
+                            <div
+                                class="flex items-center justify-center w-8 h-6 bg-green-100 rounded text-xs font-bold text-green-600"
+                            >
+                                PIX
+                            </div>
+                        </div>
+                    </div>
+
+                    <a
+                        href="{% url 'store:checkout' %}"
+                        class="btn btn-primary w-full text-lg mb-3 relative overflow-hidden block text-center"
+                    >
+                        <span class="relative z-10">
+                            <i class="fas fa-lock mr-2"></i>
+                            Finalizar Compra Segura
+                        </span>
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 -translate-x-full animate-pulse"
+                        ></div>
+                    </a>
+
+                    <div class="grid grid-cols-2 gap-2 mb-3">
+                        <button
+                            id="save-cart"
+                            class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
+                        >
+                            <i class="fas fa-save mr-1"></i>
+                            Salvar
+                        </button>
+                        <button
+                            id="share-cart"
+                            class="btn text-sm border border-gray-300 text-gray-700 hover:bg-gray-100"
+                        >
+                            <i class="fas fa-share mr-1"></i>
+                            Compartilhar
+                        </button>
+                    </div>
+
+                    <button
+                        id="continue-shopping"
+                        class="btn w-full border border-gray-300 text-gray-700 hover:bg-gray-100"
+                    >
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Continuar Comprando
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quando o carrinho está vazio -->
+        <div
+            id="empty-cart"
+            class="{% if cart.total_items > 0 %}hidden{% endif %} text-center py-16"
+        >
+            <div class="mb-8 animate-bounce">
+                <div class="relative mx-auto w-24 h-24">
+                    <i
+                        class="fas fa-shopping-cart text-6xl text-gray-300 absolute inset-0"
+                    ></i>
+                    <div
+                        class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center"
+                    >
+                        <span class="text-white text-xs font-bold">0</span>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-4xl font-teko text-gray-500 mb-4 animate-fade-in">
+                Seu carrinho está vazio
+            </h2>
+            <p
+                class="text-gray-400 mb-8 max-w-md mx-auto animate-fade-in-delay"
+            >
+                Que tal começar explorando nossos temperos autênticos da Índia?
+                Temos especiarias incríveis esperando por você!
+            </p>
+
+            <!-- Cards de Sugestões -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
+            >
+                <div
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-slide-up"
+                >
+                    <i
+                        class="fas fa-pepper-hot text-3xl text-orange-500 mb-3"
+                    ></i>
+                    <h3 class="font-teko text-xl text-secondary mb-2">
+                        Temperos Premium
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Especiarias autênticas direto da Índia
+                    </p>
+                    <a
+                        href="{% url 'store:product_list' %}?category=temperos"
+                        class="text-primary hover:underline text-sm font-semibold"
+                    >
+                        Ver Temperos →
+                    </a>
+                </div>
+
+                <div
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-slide-up-delay"
+                >
+                    <i class="fas fa-mug-hot text-3xl text-green-500 mb-3"></i>
+                    <h3 class="font-teko text-xl text-secondary mb-2">
+                        Chás Especiais
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Masala chai e infusões ayurvédicas
+                    </p>
+                    <a
+                        href="{% url 'store:product_list' %}?category=chas"
+                        class="text-primary hover:underline text-sm font-semibold"
+                    >
+                        Ver Chás →
+                    </a>
+                </div>
+
+                <div
+                    class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow animate-slide-up-delay-2"
+                >
+                    <i class="fas fa-gift text-3xl text-purple-500 mb-3"></i>
+                    <h3 class="font-teko text-xl text-secondary mb-2">
+                        Kits Especiais
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Combinações perfeitas para iniciantes
+                    </p>
+                    <a
+                        href="{% url 'store:product_list' %}?category=kits"
+                        class="text-primary hover:underline text-sm font-semibold"
+                    >
+                        Ver Kits →
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <a
+                    href="{% url 'store:product_list' %}"
+                    class="btn btn-primary text-lg inline-block animate-pulse-subtle"
+                >
+                    <i class="fas fa-shopping-bag mr-2"></i>
+                    Descobrir Todos os Produtos
+                </a>
+
+                <div class="flex justify-center space-x-4 text-sm">
+                    <button
+                        id="load-saved-cart"
+                        class="text-blue-500 hover:underline"
+                    >
+                        <i class="fas fa-bookmark mr-1"></i>
+                        Carregar Lista Salva
+                    </button>
+                    <button
+                        id="view-wishlist"
+                        class="text-red-500 hover:underline"
+                    >
+                        <i class="fas fa-heart mr-1"></i>
+                        Ver Favoritos
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="cart-loading" class="hidden text-center py-16">
+            <div class="mb-4">
+                <div
+                    class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"
+                ></div>
+            </div>
+            <p class="text-gray-600">Carregando seu carrinho...</p>
         </div>
     </div>
 
-    <!-- Cart Summary and Checkout -->
-    <div
-        id="cartSummarySection"
-        class="bg-white p-6 rounded-lg shadow-md {% if cart.total_items == 0 %}hidden{% endif %}"
-    >
-        <div class="flex justify-end items-center mb-4">
-            <span class="text-lg font-bold text-gray-700 mr-4">Total:</span>
-            <span id="cartTotalSpan" class="text-2xl font-bold text-secondary"
-                >R$ {{ cart.total_price|floatformat:2 }}</span
-            >
-            <span id="cartCountSpan" class="hidden"
-                >{{ cart.total_items }}</span
-            >
-            {# Hidden span for total items, updated by JS #}
-        </div>
-        <div class="flex justify-end">
-            <a
-                href="{% url 'store:checkout' %}"
-                id="checkoutButton"
-                class="btn btn-primary text-lg"
-            >
-                <i class="fas fa-credit-card mr-2"></i> Finalizar Compra
-            </a>
+    <!-- Produtos Recomendados -->
+    <div id="recommended-section" class="mt-16">
+        <h2 class="text-3xl font-teko text-secondary text-center mb-8">
+            Você Também Pode Gostar
+        </h2>
+        <div
+            id="recommended-products"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        >
+            <!-- Produtos recomendados serão inseridos aqui pelo JavaScript -->
         </div>
     </div>
 </main>
@@ -205,13 +624,40 @@ static %} {% block content %}
         const checkoutButton = document.getElementById("checkoutButton");
         const cartSummarySection =
             document.getElementById("cartSummarySection");
+        const summarySubtotal = document.getElementById("summary-subtotal");
+        const summaryShipping = document.getElementById("summary-shipping");
+        const summaryTotal = document.getElementById("summary-total");
 
         function updateCartTotals(totalPrice, totalItems) {
+            // Update cart icon in navbar
             if (cartTotalSpan) {
                 cartTotalSpan.textContent = `R$ ${totalPrice.toFixed(2).replace(".", ",")}`;
             }
             if (cartCountSpan) {
                 cartCountSpan.textContent = totalItems;
+            }
+
+            // Update order summary details
+            if (summarySubtotal) {
+                summarySubtotal.textContent = `R$ ${totalPrice.toFixed(2).replace(".", ",")}`;
+            }
+
+            let shippingCost = 0;
+            if (totalPrice > 0) {
+                // Free shipping for orders over R$200
+                shippingCost = totalPrice > 200 ? 0 : 15.0;
+            }
+
+            if (summaryShipping) {
+                summaryShipping.textContent =
+                    shippingCost === 0
+                        ? "Grátis"
+                        : `R$ ${shippingCost.toFixed(2).replace(".", ",")}`;
+            }
+
+            if (summaryTotal) {
+                const finalTotal = totalPrice + shippingCost;
+                summaryTotal.textContent = `R$ ${finalTotal.toFixed(2).replace(".", ",")}`;
             }
 
             if (totalItems === 0) {

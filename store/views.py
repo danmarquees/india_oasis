@@ -13,8 +13,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
+import mercadopago
+import json
 from decimal import Decimal # Import Decimal
 from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, Review
 from django.conf import settings
@@ -23,7 +26,10 @@ from .forms import CustomUserCreationForm, ReviewForm # <<< IMPORTAÇÃO CORRETA
 
 # ... (home, about, contact, etc. não mudam) ...
 def home(request):
-    products = Product.objects.filter(available=True)[:8]
+    products = Product.objects.filter(available=True).annotate(
+        average_rating=models.Avg('reviews__rating'),
+        review_count=models.Count('reviews')
+    )[:8]
     categories = Category.objects.all()
     return render(request, 'store/index.html', {'products': products,'categories': categories,'STATIC_URL': settings.STATIC_URL,})
 
@@ -40,6 +46,15 @@ def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
+
+    # Sorting logic
+    sort_option = request.GET.get('sort')
+    allowed_sort_options = ['name', 'price', '-price', '-created_at']
+    if sort_option in allowed_sort_options:
+        products = products.order_by(sort_option)
+    else:
+        products = products.order_by('name')  # Default sort by name
+
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
@@ -127,6 +142,10 @@ def calculate_shipping_cost(total_cart_price, cep=None):
 @login_required
 def checkout(request):
     cart = get_cart(request)
+    if cart.items.count() == 0:
+        messages.info(request, "Seu carrinho está vazio.")
+        return redirect("store:home")
+
     customer_profile = None
     if request.user.is_authenticated:
         try:
@@ -137,42 +156,131 @@ def checkout(request):
     shipping_cost = calculate_shipping_cost(cart.total_price, customer_profile.cep if customer_profile else None)
     total_with_shipping = cart.total_price + shipping_cost
 
-    if request.method == 'POST':
-        # Retrieve form data
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        email = request.POST.get('email')
-        address = request.POST.get('address')
-        postal_code = request.POST.get('postal_code')
-        city = request.POST.get('city')
-        state = request.POST.get('state')
-
-        # Create the order with updated total price including shipping
-        order = Order.objects.create(
-            user=request.user,
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            address=address,
-            postal_code=postal_code,
-            city=city,
-            state=state,
-            total_price=total_with_shipping  # Use the total price with shipping
-        )
-
-        for item in cart.items.all():
-            OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
-        cart.items.all().delete()
-        return JsonResponse({'success': True, 'redirect_url': reverse('store:order_success')})
-
     context = {
         'cart': cart,
         'STATIC_URL': settings.STATIC_URL,
         'customer_profile': customer_profile,
         'shipping_cost': shipping_cost,
         'total_with_shipping': total_with_shipping,
+        'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY,
     }
     return render(request, 'store/checkout.html', context)
+
+
+@login_required
+def process_payment(request):
+    if request.method == 'POST':
+        cart = get_cart(request)
+        form_data = json.loads(request.body)
+
+        shipping_cost = calculate_shipping_cost(cart.total_price, form_data.get('postal_code'))
+        total_with_shipping = cart.total_price + shipping_cost
+
+        # Create Order first
+        order = Order.objects.create(
+            user=request.user,
+            first_name=form_data['first_name'],
+            last_name=form_data['last_name'],
+            email=form_data['email'],
+            address=form_data['address'],
+            postal_code=form_data['postal_code'],
+            city=form_data['city'],
+            state=form_data['state'],
+            total_price=total_with_shipping
+        )
+        for item in cart.items.all():
+            OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
+
+        # Now create payment preference
+        sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+
+        items = []
+        for item in order.items.all():
+            items.append({
+                "title": item.product.name,
+                "quantity": item.quantity,
+                "unit_price": float(item.price),
+                "currency_id": "BRL",
+            })
+
+        if shipping_cost > 0:
+            items.append({
+                "title": "Frete",
+                "quantity": 1,
+                "unit_price": float(shipping_cost),
+                "currency_id": "BRL",
+            })
+
+        back_urls = {
+            "success": request.build_absolute_uri(reverse('store:payment_success')),
+            "failure": request.build_absolute_uri(reverse('store:payment_failure')),
+            "pending": request.build_absolute_uri(reverse('store:payment_pending'))
+        }
+
+        preference_data = {
+            "items": items,
+            "payer": {
+                "email": request.user.email,
+            },
+            "back_urls": back_urls,
+            "auto_return": "approved",
+            "notification_url": request.build_absolute_uri(reverse('store:mp_webhook')),
+            "external_reference": order.id
+        }
+
+        try:
+            preference_response = sdk.preference().create(preference_data)
+            preference = preference_response["response"]
+            return JsonResponse({'preference_id': preference['id']})
+        except Exception as e:
+            order.delete() # Rollback
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@csrf_exempt
+def mp_webhook(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if data.get("type") == "payment":
+            payment_id = data["data"]["id"]
+            sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+            payment_info = sdk.payment().get(payment_id)["response"]
+
+            if payment_info and payment_info.get("status") == "approved":
+                order_id = payment_info.get("external_reference")
+                try:
+                    order = Order.objects.get(id=order_id)
+                    if order.user:
+                        try:
+                            cart = Cart.objects.get(user=order.user)
+                            cart.items.all().delete()
+                        except Cart.DoesNotExist:
+                            pass
+
+                    print(f"Payment for order {order_id} approved.")
+
+                except Order.DoesNotExist:
+                    print(f"Webhook error: Order with id {order_id} not found.")
+    return HttpResponse(status=200)
+
+def payment_success(request):
+    cart = get_cart(request)
+    if cart.items.count() > 0:
+        cart.items.all().delete()
+    messages.success(request, "Seu pagamento foi aprovado! Obrigado pela sua compra.")
+    return redirect('store:order_success')
+
+def payment_failure(request):
+    messages.error(request, "Ocorreu uma falha no pagamento. Por favor, tente novamente.")
+    return redirect('store:checkout')
+
+def payment_pending(request):
+    cart = get_cart(request)
+    if cart.items.count() > 0:
+        cart.items.all().delete()
+    messages.info(request, "Seu pagamento está pendente. Você será notificado por e-mail quando for aprovado.")
+    return redirect('store:profile')
 
 def order_success(request):
     return render(request, 'store/order-success.html', {'STATIC_URL': settings.STATIC_URL,})
@@ -307,3 +415,58 @@ def terms(request):
 
 def privacy(request):
     return render(request, 'store/privacy.html', {'STATIC_URL': settings.STATIC_URL,})
+
+
+@csrf_exempt
+def mp_webhook(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        if data.get("type") == "payment":
+            payment_id = data["data"]["id"]
+            sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+            payment_info = sdk.payment().get(payment_id)["response"]
+
+            if payment_info and payment_info.get("status") == "approved":
+                order_id = payment_info.get("external_reference")
+                try:
+                    order = Order.objects.get(id=order_id)
+                    # Opcional: Adicione um campo 'paid' ao seu modelo Order
+                    # e descomente as linhas abaixo para marcar o pedido como pago.
+                    order.paid = True
+                    order.save()
+
+                    # Limpa o carrinho do usuário após o pagamento ser confirmado.
+                    if order.user:
+                        try:
+                            cart = Cart.objects.get(user=order.user)
+                            cart.items.all().delete()
+                        except Cart.DoesNotExist:
+                            pass # O carrinho pode já ter sido limpo ou não existir.
+
+                    print(f"Pagamento para o pedido {order_id} foi aprovado via webhook.")
+
+                except Order.DoesNotExist:
+                    print(f"ERRO no Webhook: Pedido com id {order_id} não foi encontrado.")
+
+    return HttpResponse(status=200)
+
+
+def payment_success(request):
+    cart = get_cart(request)
+    if cart.items.count() > 0:
+        cart.items.all().delete()
+    messages.success(request, "Seu pagamento foi aprovado! Obrigado pela sua compra.")
+    return redirect('store:order_success')
+
+
+def payment_failure(request):
+    messages.error(request, "Ocorreu uma falha no pagamento. Por favor, tente novamente.")
+    return redirect('store:checkout')
+
+
+def payment_pending(request):
+    cart = get_cart(request)
+    if cart.items.count() > 0:
+        cart.items.all().delete()
+    messages.info(request, "Seu pagamento está pendente. Você será notificado por e-mail quando for aprovado.")
+    return redirect('store:profile')

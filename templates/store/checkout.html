@@ -1,371 +1,573 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <!-- ==== CONTEÚDO PRINCIPAL CHECKOUT ==== -->
-<main class="container mx-auto p-4 sm:p-6 lg:p-8">
-    <!-- Breadcrumb -->
-    <nav class="mb-6">
-        <ol class="flex space-x-2 text-sm">
-            <li>
-                <a
-                    href="{% url 'store:home' %}"
-                    class="text-primary hover:underline"
-                    >Início</a
-                >
-            </li>
-            <li class="text-gray-500">/</li>
-            <li>
-                <a
-                    href="{% url 'store:cart' %}"
-                    class="text-primary hover:underline"
-                    >Carrinho</a
-                >
-            </li>
-            <li class="text-gray-500">/</li>
-            <li class="text-gray-700">Finalizar Compra</li>
-        </ol>
-    </nav>
-
-    <!-- Título da Página com Indicador de Progresso -->
-    <div class="text-center mb-10">
-        <h1 class="text-5xl font-teko text-secondary mb-4">
-            <i class="fas fa-credit-card text-primary mr-3"></i>
-            Finalizar Compra
-        </h1>
-        <p class="text-gray-600 mb-6">
-            Preencha seus dados para concluir o pedido
-        </p>
-
-        <!-- Barra de Progresso -->
-        <div
-            class="max-w-xl mx-auto flex justify-between items-center relative after:absolute after:w-full after:h-0.5 after:bg-gray-200 after:top-1/2 after:left-0 after:-translate-y-1/2"
-        >
-            <div
-                class="checkout-step completed relative z-10 text-center flex-1"
-            >
-                <div
-                    class="step-circle bg-primary text-white text-xs font-bold flex items-center justify-center mx-auto rounded-full w-8 h-8 mb-2"
-                >
-                    1
-                </div>
-                <span class="text-xs font-medium text-primary">Carrinho</span>
-            </div>
-            <div class="checkout-step active relative z-10 text-center flex-1">
-                <div
-                    class="step-circle bg-secondary text-white text-xs font-bold flex items-center justify-center mx-auto rounded-full w-8 h-8 mb-2"
-                >
-                    2
-                </div>
-                <span class="text-xs font-medium text-secondary"
-                    >Pagamento</span
-                >
-            </div>
-            <div class="checkout-step relative z-10 text-center flex-1">
-                <div
-                    class="step-circle bg-gray-300 text-gray-700 text-xs font-bold flex items-center justify-center mx-auto rounded-full w-8 h-8 mb-2"
-                >
-                    3
-                </div>
-                <span class="text-xs font-medium text-gray-500"
-                    >Confirmação</span
-                >
-            </div>
-        </div>
-    </div>
-
-    <!-- Layout principal do Checkout -->
+<main class="container mx-auto px-4 py-8">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Detalhes de Envio e Pagamento -->
+        <!-- Checkout Form -->
         <div class="lg:col-span-2">
-            <form
-                id="checkout-form"
-                method="post"
-                action="{% url 'store:checkout' %}"
-                class="bg-white p-6 rounded-lg shadow-md mb-8"
-            >
-                {% csrf_token %}
-                <!-- Informações de Entrega -->
-                <div class="mb-8">
-                    <h2 class="text-3xl font-teko text-secondary mb-6">
-                        Informações de Entrega
+            <!-- Dados de Entrega -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2
+                        class="text-2xl font-rajdhani font-bold text-cinnamon-brown"
+                    >
+                        <i class="fas fa-shipping-fast mr-3 text-primary"></i>
+                        Dados de Entrega
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="form-group">
-                            <label for="first_name" class="form-label"
-                                >Nome *</label
-                            >
-                            <input
-                                type="text"
-                                id="first_name"
-                                name="first_name"
-                                class="form-input"
-                                placeholder=" "
-                                value="{{ request.user.first_name|default_if_none:'' }}"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="last_name" class="form-label"
-                                >Sobrenome *</label
-                            >
-                            <input
-                                type="text"
-                                id="last_name"
-                                name="last_name"
-                                class="form-input"
-                                placeholder=" "
-                                value="{{ request.user.last_name|default_if_none:'' }}"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label"
-                                >E-mail *</label
-                            >
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                class="form-input"
-                                placeholder=" "
-                                value="{{ request.user.email|default_if_none:'' }}"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="address" class="form-label"
-                                >Endereço *</label
-                            >
-                            <input
-                                type="text"
-                                id="address"
-                                name="address"
-                                class="form-input"
-                                placeholder=" "
-                                value="{{ customer_profile.endereco|default_if_none:'' }}"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="postal_code" class="form-label"
-                                >CEP *</label
-                            >
-                            <input
-                                type="text"
-                                id="postal_code"
-                                name="postal_code"
-                                class="form-input"
-                                placeholder=" "
-                                value="{{ customer_profile.cep|default_if_none:'' }}"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="city" class="form-label"
-                                >Cidade *</label
-                            >
-                            <input
-                                type="text"
-                                id="city"
-                                name="city"
-                                class="form-input"
-                                placeholder=" "
-                                value="{{ customer_profile.cidade|default_if_none:'' }}"
-                                required
-                            />
-                        </div>
-                        <div class="form-group">
-                            <label for="state" class="form-label"
-                                >Estado *</label
-                            >
-                            <input
-                                type="text"
-                                id="state"
-                                name="state"
-                                class="form-input"
-                                placeholder=" "
-                                value="{{ customer_profile.estado|default_if_none:'' }}"
-                                required
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Método de Pagamento -->
-                <div class="mb-8">
-                    <h2 class="text-3xl font-teko text-secondary mb-6">
-                        Método de Pagamento
-                    </h2>
-                    <div class="space-y-4">
-                        <label
-                            class="payment-method border p-4 rounded-lg flex items-center cursor-pointer transition-all duration-200"
-                            data-payment="credit_card"
-                        >
-                            <input
-                                type="radio"
-                                name="payment_method"
-                                value="credit_card"
-                                class="form-radio text-primary mr-3"
-                                checked
-                            />
-                            <i
-                                class="fas fa-credit-card text-2xl text-primary mr-3"
-                            ></i>
-                            <span class="font-semibold text-lg text-gray-800"
-                                >Cartão de Crédito</span
-                            >
-                            <span
-                                class="ml-auto text-sm text-gray-500 hidden md:inline-block"
-                                >Visa, Mastercard, Elo</span
-                            >
-                        </label>
-
-                        <label
-                            class="payment-method border p-4 rounded-lg flex items-center cursor-pointer transition-all duration-200"
-                            data-payment="pix"
-                        >
-                            <input
-                                type="radio"
-                                name="payment_method"
-                                value="pix"
-                                class="form-radio text-primary mr-3"
-                            />
-                            <i
-                                class="fa-brands fa-pix text-2xl text-green-500 mr-3"
-                            ></i>
-                            <span class="font-semibold text-lg text-gray-800"
-                                >PIX
-                                <span class="text-green-600 font-bold ml-2">
-                                    (5% de desconto!)</span
-                                ></span
-                            >
-                            <span
-                                class="ml-auto text-sm text-gray-500 hidden md:inline-block"
-                                >Aprovação imediata</span
-                            >
-                        </label>
-
-                        <label
-                            class="payment-method border p-4 rounded-lg flex items-center cursor-pointer transition-all duration-200"
-                            data-payment="boleto"
-                        >
-                            <input
-                                type="radio"
-                                name="payment_method"
-                                value="boleto"
-                                class="form-radio text-primary mr-3"
-                            />
-                            <i
-                                class="fas fa-barcode text-2xl text-orange-500 mr-3"
-                            ></i>
-                            <span class="font-semibold text-lg text-gray-800"
-                                >Boleto Bancário
-                                <span class="text-green-600 font-bold ml-2">
-                                    (3% de desconto!)</span
-                                ></span
-                            >
-                            <span
-                                class="ml-auto text-sm text-gray-500 hidden md:inline-block"
-                                >Vencimento em 3 dias úteis</span
-                            >
-                        </label>
-                    </div>
-                </div>
-
-                <div class="text-center">
                     <button
-                        type="submit"
-                        id="finalize-order-button"
-                        class="btn btn-primary text-xl w-full py-3"
-                        disabled
+                        class="text-primary hover:text-orange-600 font-medium"
                     >
-                        <i class="fas fa-check-circle mr-3"></i>
-                        Finalizar Pedido
+                        <i class="fas fa-edit mr-1"></i>Editar
                     </button>
-                    <div
-                        class="security-badge mt-4 mx-auto text-gray-600 text-sm flex items-center justify-center p-3 border border-gray-200 rounded-lg max-w-sm"
-                    >
-                        <i
-                            class="fas fa-lock text-green-500 mr-2 text-base"
-                        ></i>
-                        Seus dados estão 100% seguros.
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">
+                                João Silva Santos
+                            </p>
+                            <p class="text-gray-600">joao.silva@email.com</p>
+                            <p class="text-gray-600">(11) 99999-9999</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-800">
+                                Rua das Especiarias, 123
+                            </p>
+                            <p class="text-gray-600">Apt 45 - Vila Madalena</p>
+                            <p class="text-gray-600">
+                                São Paulo - SP, 05435-000
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
 
-        <!-- Resumo do Pedido (Sticky) -->
-        <div class="lg:col-span-1">
-            <div class="order-summary-sticky bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-3xl font-teko text-secondary mb-6">
-                    Seu Pedido
+            <!-- Método de Pagamento -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2
+                    class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
+                >
+                    <i class="fas fa-credit-card mr-3 text-primary"></i>
+                    Método de Pagamento
                 </h2>
-                <div class="space-y-4 mb-6">
-                    {% for item in cart.items.all %}
+
+                <!-- Payment Methods Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <!-- PIX -->
                     <div
-                        class="flex items-center justify-between pb-3 border-b border-gray-100 last:border-b-0 last:pb-0"
+                        class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                        data-method="pix"
                     >
-                        <div class="flex items-center">
-                            <img
-                                src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{% static 'images/default-product.png' %}{% endif %}"
-                                alt="{{ item.product.name }}"
-                                class="w-16 h-16 object-cover rounded-md mr-3"
-                            />
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center"
+                            >
+                                <i class="fas fa-qrcode text-white text-xl"></i>
+                            </div>
                             <div>
-                                <h3 class="text-gray-900 font-medium text-sm">
-                                    {{ item.product.name }}
+                                <h3 class="font-semibold text-gray-800">PIX</h3>
+                                <p class="text-sm text-gray-600">
+                                    Aprovação instantânea
+                                </p>
+                                <div class="ingredient-badge mt-1">
+                                    5% de desconto
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                <div
+                                    class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cartão de Crédito -->
+                    <div
+                        class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                        data-method="credit"
+                    >
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center"
+                            >
+                                <i
+                                    class="fas fa-credit-card text-white text-xl"
+                                ></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">
+                                    Cartão de Crédito
                                 </h3>
-                                <p class="text-gray-500 text-xs">
-                                    Quantidade: {{ item.quantity }}
+                                <p class="text-sm text-gray-600">
+                                    Até 12x sem juros
+                                </p>
+                                <div class="flex space-x-1 mt-1">
+                                    <i class="fab fa-cc-visa text-blue-600"></i>
+                                    <i
+                                        class="fab fa-cc-mastercard text-red-500"
+                                    ></i>
+                                    <i class="fab fa-cc-amex text-blue-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                <div
+                                    class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cartão de Débito -->
+                    <div
+                        class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                        data-method="debit"
+                    >
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-lg flex items-center justify-center"
+                            >
+                                <i
+                                    class="fas fa-credit-card text-white text-xl"
+                                ></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">
+                                    Cartão de Débito
+                                </h3>
+                                <p class="text-sm text-gray-600">
+                                    Débito em conta
+                                </p>
+                                <div class="flex space-x-1 mt-1">
+                                    <i class="fab fa-cc-visa text-blue-600"></i>
+                                    <i
+                                        class="fab fa-cc-mastercard text-red-500"
+                                    ></i>
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                <div
+                                    class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boleto -->
+                    <div
+                        class="payment-method border-2 border-gray-200 rounded-lg p-4"
+                        data-method="boleto"
+                    >
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center"
+                            >
+                                <i
+                                    class="fas fa-barcode text-white text-xl"
+                                ></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">
+                                    Boleto Bancário
+                                </h3>
+                                <p class="text-sm text-gray-600">
+                                    Vencimento em 3 dias
+                                </p>
+                                <div class="ingredient-badge mt-1">
+                                    3% de desconto
+                                </div>
+                            </div>
+                            <div class="ml-auto">
+                                <div
+                                    class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Forms -->
+                <div id="payment-forms">
+                    <!-- PIX Form -->
+                    <div id="pix-form" class="payment-form hidden">
+                        <div
+                            class="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg"
+                        >
+                            <h3 class="font-semibold text-gray-800 mb-4">
+                                <i
+                                    class="fas fa-qrcode mr-2 text-green-600"
+                                ></i>
+                                Pagamento via PIX
+                            </h3>
+                            <div class="text-center">
+                                <div
+                                    class="w-48 h-48 bg-white border-2 border-gray-200 rounded-lg mx-auto mb-4 flex items-center justify-center"
+                                >
+                                    <div class="text-center">
+                                        <i
+                                            class="fas fa-qrcode text-6xl text-gray-400 mb-2"
+                                        ></i>
+                                        <p class="text-sm text-gray-600">
+                                            QR Code será gerado<br />após
+                                            confirmação
+                                        </p>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-2">
+                                    <i
+                                        class="fas fa-info-circle text-blue-500 mr-1"
+                                    ></i>
+                                    Escaneie o QR Code com o app do seu banco
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    O pagamento é processado instantaneamente
                                 </p>
                             </div>
                         </div>
-                        <span class="text-gray-800 font-semibold text-sm"
-                            >R$ {{ item.total_price|floatformat:2 }}</span
-                        >
                     </div>
-                    {% endfor %}
+
+                    <!-- Credit Card Form -->
+                    <div id="credit-form" class="payment-form hidden">
+                        <div class="space-y-4">
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="card-number"
+                                    class="form-input"
+                                    placeholder=" "
+                                    maxlength="19"
+                                />
+                                <label for="card-number" class="form-label"
+                                    >Número do Cartão</label
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="card-name"
+                                    class="form-input"
+                                    placeholder=" "
+                                />
+                                <label for="card-name" class="form-label"
+                                    >Nome no Cartão</label
+                                >
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        id="card-expiry"
+                                        class="form-input"
+                                        placeholder=" "
+                                        maxlength="5"
+                                    />
+                                    <label for="card-expiry" class="form-label"
+                                        >MM/AA</label
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        id="card-cvv"
+                                        class="form-input"
+                                        placeholder=" "
+                                        maxlength="4"
+                                    />
+                                    <label for="card-cvv" class="form-label"
+                                        >CVV</label
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-gray-800 mb-3">
+                                    Parcelas
+                                </h4>
+                                <select
+                                    class="w-full p-3 border border-gray-200 rounded-lg"
+                                >
+                                    <option>1x de R$ 156,90 à vista</option>
+                                    <option>2x de R$ 78,45 sem juros</option>
+                                    <option>3x de R$ 52,30 sem juros</option>
+                                    <option>4x de R$ 39,23 sem juros</option>
+                                    <option>5x de R$ 31,38 sem juros</option>
+                                    <option>6x de R$ 26,15 sem juros</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Debit Card Form -->
+                    <div id="debit-form" class="payment-form hidden">
+                        <div class="space-y-4">
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="debit-number"
+                                    class="form-input"
+                                    placeholder=" "
+                                    maxlength="19"
+                                />
+                                <label for="debit-number" class="form-label"
+                                    >Número do Cartão</label
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <input
+                                    type="text"
+                                    id="debit-name"
+                                    class="form-input"
+                                    placeholder=" "
+                                />
+                                <label for="debit-name" class="form-label"
+                                    >Nome no Cartão</label
+                                >
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        id="debit-expiry"
+                                        class="form-input"
+                                        placeholder=" "
+                                        maxlength="5"
+                                    />
+                                    <label for="debit-expiry" class="form-label"
+                                        >MM/AA</label
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <input
+                                        type="text"
+                                        id="debit-cvv"
+                                        class="form-input"
+                                        placeholder=" "
+                                        maxlength="4"
+                                    />
+                                    <label for="debit-cvv" class="form-label"
+                                        >CVV</label
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="bg-indigo-50 p-4 rounded-lg">
+                                <p class="text-sm text-gray-700">
+                                    <i
+                                        class="fas fa-info-circle text-indigo-500 mr-2"
+                                    ></i>
+                                    O valor será debitado diretamente da sua
+                                    conta bancária
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Boleto Form -->
+                    <div id="boleto-form" class="payment-form hidden">
+                        <div
+                            class="bg-gradient-to-r from-orange-50 to-red-50 p-6 rounded-lg"
+                        >
+                            <h3 class="font-semibold text-gray-800 mb-4">
+                                <i
+                                    class="fas fa-barcode mr-2 text-orange-600"
+                                ></i>
+                                Pagamento via Boleto
+                            </h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700"
+                                        >Vencimento:</span
+                                    >
+                                    <span
+                                        class="font-semibold"
+                                        id="boleto-due-date"
+                                    ></span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700"
+                                        >Valor com desconto:</span
+                                    >
+                                    <span class="font-semibold text-green-600"
+                                        >R$ 152,19</span
+                                    >
+                                </div>
+                                <hr class="border-gray-200" />
+                                <p class="text-sm text-gray-600">
+                                    <i
+                                        class="fas fa-exclamation-triangle text-orange-500 mr-1"
+                                    ></i>
+                                    O boleto será enviado por email após a
+                                    confirmação do pedido
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    Prazo de processamento: até 2 dias úteis
+                                    após o pagamento
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
 
-                <div class="border-t border-gray-200 pt-4 mt-4 space-y-3">
-                    <div class="text-gray-700 text-lg">
-                        <ul>
-                            <li
-                                class="flex justify-between py-2 border-b border-gray-200"
-                            >
-                                <span>Subtotal:</span>
-                                <span id="subtotal-display"
-                                    >R$ {{ cart.total_price|floatformat:2
-                                    }}</span
-                                >
-                            </li>
-                            <li
-                                class="flex justify-between py-2 border-b border-gray-200"
-                            >
-                                <span class="text-gray-600">Frete</span>
-                                <span id="shipping-display"
-                                    >R$ {{ shipping_cost|floatformat:2 }}</span
-                                >
-                            </li>
-                        </ul>
-                    </div>
+        <!-- Order Summary -->
+        <div class="lg:col-span-1">
+            <div class="order-summary-sticky">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2
+                        class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
+                    >
+                        <i class="fas fa-shopping-bag mr-3 text-primary"></i>
+                        Resumo do Pedido
+                    </h2>
 
-                    <div
-                        id="discount-display"
-                        class="flex justify-between text-green-600 text-lg hidden"
-                    >
-                        <span>Desconto:</span>
-                        <span id="discount-amount">- R$ 0,00</span>
-                    </div>
-                    <div
-                        class="flex justify-between font-bold text-xl py-2 border-t border-gray-200 mt-4"
-                    >
-                        <span>Total:</span>
-                        <span
-                            id="final-total-display"
-                            class="text-primary text-2xl font-teko"
-                            >R$ {{ total_with_shipping|floatformat:2 }}</span
+                    <!-- Order Items -->
+                    <div class="space-y-4 mb-6">
+                        <div
+                            class="flex items-center space-x-3 pb-3 border-b border-gray-100"
                         >
+                            <img
+                                src="https://placehold.co/60x60/D84315/FFFFFF?text=Garam"
+                                alt="Garam Masala"
+                                class="w-12 h-12 rounded-lg"
+                            />
+                            <div class="flex-1">
+                                <h4 class="font-medium text-gray-800">
+                                    Garam Masala Premium
+                                </h4>
+                                <p class="text-sm text-gray-600">Qtd: 2</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold">R$ 50,00</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center space-x-3 pb-3 border-b border-gray-100"
+                        >
+                            <img
+                                src="https://placehold.co/60x60/FFC107/333333?text=Curcuma"
+                                alt="Cúrcuma"
+                                class="w-12 h-12 rounded-lg"
+                            />
+                            <div class="flex-1">
+                                <h4 class="font-medium text-gray-800">
+                                    Cúrcuma Pura
+                                </h4>
+                                <p class="text-sm text-gray-600">Qtd: 1</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold">R$ 18,00</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="flex items-center space-x-3 pb-3 border-b border-gray-100"
+                        >
+                            <img
+                                src="https://placehold.co/60x60/8D6E63/FFFFFF?text=Chai"
+                                alt="Chai"
+                                class="w-12 h-12 rounded-lg"
+                            />
+                            <div class="flex-1">
+                                <h4 class="font-medium text-gray-800">
+                                    Chá Masala Chai
+                                </h4>
+                                <p class="text-sm text-gray-600">Qtd: 3</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold">R$ 96,00</p>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Coupon -->
+                    <div class="mb-6">
+                        <div class="flex space-x-2">
+                            <input
+                                type="text"
+                                placeholder="Cupom de desconto"
+                                class="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                            />
+                            <button class="btn btn-secondary px-4 py-2 text-sm">
+                                Aplicar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Price Breakdown -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal:</span>
+                            <span class="font-medium">R$ 164,00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Frete:</span>
+                            <span class="font-medium text-green-600"
+                                >Grátis</span
+                            >
+                        </div>
+                        <div class="flex justify-between discount-row hidden">
+                            <span class="text-gray-600"
+                                >Desconto PIX (5%):</span
+                            >
+                            <span class="font-medium text-green-600"
+                                >-R$ 8,20</span
+                            >
+                        </div>
+                        <div
+                            class="flex justify-between discount-row-boleto hidden"
+                        >
+                            <span class="text-gray-600"
+                                >Desconto Boleto (3%):</span
+                            >
+                            <span class="font-medium text-green-600"
+                                >-R$ 4,92</span
+                            >
+                        </div>
+                        <hr class="border-gray-200" />
+                        <div class="flex justify-between text-lg font-bold">
+                            <span>Total:</span>
+                            <span class="price-highlight" id="total-price"
+                                >R$ 164,00</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Security Info -->
+                    <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                        <div class="flex items-center space-x-2 mb-2">
+                            <i class="fas fa-shield-alt text-green-600"></i>
+                            <span class="font-semibold text-gray-800"
+                                >Compra Protegida</span
+                            >
+                        </div>
+                        <p class="text-xs text-gray-600">
+                            Seus dados estão protegidos com criptografia SSL de
+                            256 bits
+                        </p>
+                    </div>
+
+                    <!-- Finalize Button -->
+                    <button
+                        id="finalize-order"
+                        class="btn btn-primary w-full text-lg py-4 font-rajdhani"
+                        disabled
+                    >
+                        <i class="fas fa-lock mr-2"></i>
+                        Finalizar Compra
+                    </button>
+
+                    <p class="text-xs text-gray-500 text-center mt-3">
+                        Ao finalizar, você concorda com nossos
+                        <a href="#" class="text-primary hover:underline"
+                            >Termos de Uso</a
+                        >
+                    </p>
                 </div>
             </div>
         </div>
@@ -655,47 +857,101 @@
         updatePricing(); // Calculate initial total
         enableFinalizeButton(); // Check form validity on load
 
-        // Handle form submission
-        checkoutForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // Prevent default form submission
+        // --- Início: Lógica do Mercado Pago ---
 
-            processingOverlay.classList.remove("hidden"); // Show loading overlay
+        // Injeta o SDK do Mercado Pago dinamicamente no <head>
+        const mpScript = document.createElement('script');
+        mpScript.src = "https://sdk.mercadopago.com/js/v2";
+        document.head.appendChild(mpScript);
 
-            const formData = new FormData(checkoutForm);
-            const data = {};
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
-            }
+        // A lógica de pagamento só é configurada após o carregamento completo do SDK
+        mpScript.onload = () => {
+            // Inicializa o Mercado Pago com a Chave Pública
+            const mp = new mercadopago.MercadoPago("{{ MERCADO_PAGO_PUBLIC_KEY }}", {
+                locale: 'pt-BR'
+            });
 
-            // Remove CSRF token from data object if it's already in headers
-            delete data["csrfmiddlewaretoken"];
+            // Função para renderizar o Botão de Pagamento (Wallet Brick)
+            const renderWalletBrick = async (preferenceId) => {
+                const bricksBuilder = mp.bricks();
 
-            fetch(checkoutForm.action, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": "{{ csrf_token }}",
-                    "X-Requested-With": "XMLHttpRequest",
-                },
-                body: JSON.stringify(data),
-            })
-                .then((response) => {
-                    // processingOverlay.classList.add("hidden"); // Hide loading overlay - moved to finally
-                    if (!response.ok) {
-                        console.error("HTTP error! Status:", response.status);
-                        return response.json().then((errorData) => {
-                            console.error("Submission error data:", errorData);
-                            alert(
-                                "Erro ao finalizar o pedido. Por favor, verifique os dados e tente novamente.",
-                            );
-                            // Optionally display specific errors from errorData
-                            throw new Error("Form submission failed");
-                        });
+                // Cria um container para o botão se ele ainda não existir
+                let walletContainer = document.getElementById("wallet_container");
+                if (!walletContainer) {
+                    walletContainer = document.createElement("div");
+                    walletContainer.id = "wallet_container";
+                    const finalizeBtn = document.getElementById('finalize-button');
+                    if (finalizeBtn) {
+                        // Insere o container do botão de pagamento logo após o botão original
+                        finalizeBtn.parentNode.insertBefore(walletContainer, finalizeBtn.nextSibling);
+                    } else {
+                        // Se não encontrar o botão, adiciona ao final do formulário
+                        checkoutForm.appendChild(walletContainer);
                     }
-                    console.log("Response OK, parsing JSON...");
+                }
+
+                // Esconde o botão de finalizar original para evitar confusão
+                const finalizeBtn = document.getElementById('finalize-button');
+                if (finalizeBtn) {
+                    finalizeBtn.style.display = 'none';
+                }
+
+                // Renderiza o botão de pagamento do Mercado Pago
+                await bricksBuilder.create("wallet", "wallet_container", {
+                    initialization: {
+                        preferenceId: preferenceId,
+                    },
+                    customization: {
+                        texts: { valueProp: 'smart_option' }, // Texto customizável
+                    },
+                });
+
+                // Esconde o overlay de "processando"
+                processingOverlay.classList.add("hidden");
+            };
+
+            // Adiciona o listener de evento para o envio do formulário de checkout
+            checkoutForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // Previne o envio padrão do formulário
+                processingOverlay.classList.remove("hidden"); // Mostra o overlay de "processando"
+
+                const formData = new FormData(checkoutForm);
+                const data = Object.fromEntries(formData.entries());
+
+                // Faz a requisição para o backend para criar a preferência de pagamento
+                fetch("{% url 'store:process_payment' %}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}",
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => {
+                    // Verifica se a resposta do servidor foi bem sucedida
+                    if (!response.ok) {
+                        return response.json().then(err => { throw new Error(err.error || 'Erro desconhecido no servidor.') });
+                    }
                     return response.json();
                 })
-                .then((data) => {
+                .then(data => {
+                    // Se o backend retornou um ID de preferência, renderiza o botão de pagamento
+                    if (data.preference_id) {
+                        renderWalletBrick(data.preference_id);
+                    } else {
+                        // Caso contrário, lança um erro
+                        throw new Error(data.error || "Não foi possível obter a preferência de pagamento.");
+                    }
+                })
+                .catch(error => {
+                    // Em caso de erro, esconde o overlay e exibe um alerta
+                    processingOverlay.classList.add("hidden");
+                    console.error("Erro no processo de pagamento:", error);
+                    alert("Ocorreu um erro: " + error.message);
+                });
+            });
+        };
+        // --- Fim: Lógica do Mercado Pago ---
                     console.log("Success response data:", data);
                     if (data.success) {
                         window.location.href = data.redirect_url; // Redirect to success page

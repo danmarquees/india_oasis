@@ -461,9 +461,15 @@
                     </button>
                     <a
                         href="{% url 'store:home' %}"
-                        class="text-3xl font-teko text-primary"
-                        >India Oasis</a
+                        class="flex items-center"
                     >
+                        <img
+                            src="{% static 'images/logo.png' %}"
+                            alt="India Oasis Logo"
+                            class="h-16 mr-4"
+                        />
+
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
                     <a
