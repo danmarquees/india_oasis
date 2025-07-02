@@ -22,7 +22,9 @@ from decimal import Decimal # Import Decimal
 from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, Review, ContactMessage
 from django.conf import settings
 import uuid
-from .forms import CustomUserCreationForm, ReviewForm # <<< IMPORTAÇÃO CORRETA
+from .forms import CustomUserCreationForm, ReviewForm
+from django.views.decorators.http import require_POST
+
 
 # ... (home, about, contact, etc. não mudam) ...
 def home(request):
@@ -97,6 +99,9 @@ def cart(request):
     cart = get_cart(request)
     return render(request, 'store/cart.html', {'cart': cart, 'STATIC_URL': settings.STATIC_URL,})
 
+
+@require_POST
+@csrf_exempt
 def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart = get_cart(request)

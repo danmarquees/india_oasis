@@ -207,7 +207,7 @@ class CartNotifications {
             label: "Ver Carrinho",
             icon: "fa-shopping-cart",
             style: "btn-primary",
-            handler: () => (window.location.href = '{% url "store:cart" %}'),
+            handler: () => (window.location.href = "cart.html"),
           },
         ],
       },
