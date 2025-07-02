@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import CustomerProfile, Review
+from .models import CustomerProfile, Review, ContactMessage
 
 class CustomUserCreationForm(UserCreationForm):
     nome = forms.CharField(max_length=150, required=True, label="Nome Completo")
@@ -96,3 +96,65 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             'rating': forms.RadioSelect(attrs={'class': 'star-rating-input'}),
         }
+
+# ---- NOVO FORMULÁRIO DE CONTATO ----
+class ContactForm(forms.Form):
+    nome = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'id': 'contact-name',
+            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
+            'placeholder': 'Seu nome completo'
+        }),
+        label="Seu Nome *"
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            'id': 'contact-email',
+            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
+            'placeholder': 'seuemail@exemplo.com'
+        }),
+        label="Seu E-mail *"
+    )
+    telefone = forms.CharField(
+        max_length=20,
+        widget=forms.TextInput(attrs={
+            'id': 'contact-phone',
+            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
+            'placeholder': '(XX) XXXXX-XXXX'
+        }),
+        required=False,
+        label="Telefone"
+    )
+    assunto = forms.ChoiceField(
+        choices=[
+            ('duvida-produto', 'Dúvida sobre produto'),
+            ('pedido', 'Informações sobre pedido'),
+            ('sugestao', 'Sugestão'),
+            ('reclamacao', 'Reclamação'),
+            ('parceria', 'Parceria comercial'),
+            ('outro', 'Outro'),
+        ],
+        widget=forms.Select(attrs={
+            'id': 'contact-subject',
+            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
+        }),
+        label="Assunto *"
+    )
+    mensagem = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'id': 'contact-message',
+            'rows': 6,
+            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-vertical',
+            'placeholder': 'Conte-nos como podemos ajudá-lo...'
+        }),
+        label="Sua Mensagem *"
+    )
+    newsletter = forms.BooleanField(
+        required=False,
+        label="Quero receber novidades e ofertas especiais por e-mail",
+        widget=forms.CheckboxInput(attrs={
+            'id': 'newsletter',
+            'class': 'mr-3 text-primary focus:ring-2 focus:ring-primary'
+        })
+    )

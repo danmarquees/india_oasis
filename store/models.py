@@ -155,3 +155,20 @@ class Review(models.Model):
 
     def __str__(self):
         return f'Review by {self.user.username} for {self.product.name} ({self.rating} stars)'
+
+# ---- NOVO MODELO PARA MENSAGENS DE CONTATO ----
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    subject = models.CharField(max_length=150)
+    message = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True)
+    # Opcional: campo para indicar se o usuário quer receber newsletter
+    newsletter_opt_in = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-sent_at',)
+
+    def __str__(self):
+        return f'Mensagem de {self.name} ({self.subject})'

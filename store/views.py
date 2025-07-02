@@ -19,7 +19,7 @@ from django.urls import reverse
 import mercadopago
 import json
 from decimal import Decimal # Import Decimal
-from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, Review
+from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, Review, ContactMessage
 from django.conf import settings
 import uuid
 from .forms import CustomUserCreationForm, ReviewForm # <<< IMPORTAÇÃO CORRETA
@@ -470,3 +470,78 @@ def payment_pending(request):
         cart.items.all().delete()
     messages.info(request, "Seu pagamento está pendente. Você será notificado por e-mail quando for aprovado.")
     return redirect('store:profile')
+
+def contact(request):
+    if request.method == 'POST':
+        # Import ContactForm and send_mail here, or ensure they are imported at the top of the file.
+        # Assuming ContactForm is imported and send_mail is imported from django.core.mail
+        from .forms import ContactForm
+        from django.core.mail import send_mail
+
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Processar os dados do formulário
+            name = form.cleaned_data['nome']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data.get('telefone') # Opcional
+            subject = form.cleaned_data['assunto']
+            message = form.cleaned_data['mensagem']
+            newsletter_opt_in = form.cleaned_data['newsletter']
+
+            # Salvar a mensagem no banco de dados
+            contact_message = ContactMessage.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                subject=subject,
+                message=message,
+                newsletter_opt_in=newsletter_opt_in
+            )
+
+            # --- Aqui você pode adicionar a lógica de envio de e-mail ---
+            # Por exemplo, enviar um e-mail para o administrador do site
+            try:
+                subject_email_admin = f"Nova Mensagem de Contato: {subject} - {name}"
+                message_email_admin = f"De: {name} <{email}>\n"
+                if phone:
+                    message_email_admin += f"Telefone: {phone}\n"
+                message_email_admin += f"Assunto: {subject}\n"
+                message_email_admin += f"Mensagem:\n{message}\n\n"
+                if newsletter_opt_in:
+                    message_email_admin += "O cliente optou por receber novidades.\n"
+                else:
+                    message_email_admin += "O cliente NÃO optou por receber novidades.\n"
+
+                # Configurar o remetente (use um e-mail configurado no settings.py)
+                # O 'DEFAULT_FROM_EMAIL' deve estar definido em settings.py
+                send_mail(
+                    subject_email_admin,
+                    message_email_admin,
+                    settings.DEFAULT_FROM_EMAIL, # Remetente
+                    [settings.ADMIN_EMAIL],     # Destinatário (coloque o e-mail do admin em settings.py)
+                    fail_silently=False,
+                )
+                # Você também pode querer enviar um e-mail de confirmação para o usuário
+                # send_mail(...) aqui para o email do usuário.
+
+            except Exception as e:
+                print(f"Erro ao enviar e-mail: {e}") # Logar o erro para depuração
+
+
+            # Redirecionar para uma página de sucesso ou mostrar uma mensagem
+            # return redirect('store:contact_success') # Exemplo: criar uma URL de sucesso
+            # Ou apenas renderizar a mesma página com uma mensagem de sucesso
+            context = {
+                'form': ContactForm(), # Limpa o formulário após o envio
+                'success_message': 'Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.'
+            }
+            return render(request, 'store/contact.html', context)
+
+    else:
+        # Se o método for GET, apenas renderiza o formulário
+        # Import ContactForm here as well for the GET request
+        from .forms import ContactForm
+        form = ContactForm()
+
+    context = {'form': form}
+    return render(request, 'store/contact.html', context)
