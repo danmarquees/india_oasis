@@ -39,7 +39,7 @@
                   {{ user.profile.complemento }} - {{ user.profile.bairro }}
                 </p>
                 <p class="text-gray-600">
-                  {{ user.profile.cidade }} - {{ user.profile.estado }}, 
+                  {{ user.profile.cidade }} - {{ user.profile.estado }},
                   {{user.profile.cep }}
                 </p>
               </div>
@@ -150,6 +150,18 @@
             <div
               class="flex items-center space-x-3 pb-3 mb-3 border-b border-gray-100"
             >
+              <!-- Campos ocultos para enviar os dados do carrinho -->
+              <input
+                type="hidden"
+                name="product_ids"
+                value="{{ item.product.id }}"
+              />
+              <input
+                type="hidden"
+                name="quantities"
+                value="{{ item.quantity }}"
+              />
+
               <img
                 src="{{ item.product.image.url }}"
                 alt="{{ item.product.name }}"
@@ -179,8 +191,8 @@
               <div class="flex justify-between">
                 <span class="text-gray-600">Frete:</span>
                 <span class="font-medium text-green-600"
-                  >{% if shipping_cost == 0 %}Grátis{% else %}R$ 
-                  {{shipping_cost|floatformat:2 }}{% endif %}</span
+                  >{% if shipping_cost == 0 %}Grátis {% else%} R$
+                  {{shipping_cost|floatformat:2 }} {% endif%}</span
                 >
               </div>
               <hr class="border-gray-200" />
@@ -294,7 +306,9 @@
 
       const settings = {
         initialization: {
-          amount: parseFloat("{{ total_with_shipping|floatformat:2 }}"),
+          amount: parseFloat(
+            "{{ total_with_shipping|floatformat:2 }}".replace(",", ".")
+          ),
           payer: {
             email: "{{ user.email }}",
           },
@@ -408,4 +422,6 @@
   });
 </script>
 
-{% endblock content %}
+{% endblock content %} {% block custom_js %} {# On the checkout page, we don't
+run the global init() script to avoid conflicts. #} {# The checkout-specific JS
+is already included in this template. #} {% endblock custom_js %}

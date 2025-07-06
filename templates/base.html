@@ -1755,6 +1755,7 @@
             });
         </script>
 
+        {% block custom_js %}
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 if (typeof init === "function") {
@@ -1762,5 +1763,6 @@
                 }
             });
         </script>
+        {% endblock custom_js %}
     </body>
 </html>

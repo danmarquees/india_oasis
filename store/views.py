@@ -137,12 +137,37 @@ def cart_remove(request, product_id):
 
 # Placeholder function for shipping calculation
 def calculate_shipping_cost(total_cart_price, cep=None):
-    # This is a simplified placeholder.
-    # In a real application, you would integrate with a shipping API (e.g., Correios, FedEx, etc.)
-    # and calculate based on weight, dimensions, destination (CEP), and service type.
-    if total_cart_price > 200:
-        return Decimal('0.00')  # Frete grátis para compras acima de R$200
-    return Decimal('25.00') # Custo fixo de frete
+    # This is a placeholder for Correios shipping calculation.
+    # In a real application, you would integrate with the Correios API
+    # using libraries like 'python-correios' or by making direct HTTP requests.
+    # This example uses a simplified logic and does not call the actual API.
+
+    # Placeholder for shipping parameters (replace with actual data from your products)
+    # For simplicity, we'll assume a default weight and dimensions.
+    product_weight_grams = 500  # Example weight in grams
+    product_dimensions_cm = {'length': 20, 'width': 15, 'height': 10} # Example dimensions
+
+    # Default shipping parameters from Correios' default services
+    # You'd typically fetch these or have them configured.
+    # These are illustrative values for PAC and SEDEX.
+    # Refer to Correios' API documentation for accurate service codes and pricing.
+    correios_services = {
+        'PAC': {'code': '41106', 'base_price': Decimal('30.00'), 'free_threshold': Decimal('200.00')},
+        'SEDEX': {'code': '40010', 'base_price': Decimal('50.00'), 'free_threshold': Decimal('200.00')},
+    }
+
+    if total_cart_price >= correios_services['PAC']['free_threshold']:
+        return Decimal('0.00') # Frete grátis
+
+    # This is a highly simplified simulation. A real implementation would:
+    # 1. Calculate total weight and dimensions of all items in the cart.
+    # 2. Package these into a format accepted by the Correios API.
+    # 3. Make an HTTP request to the Correios API.
+    # 4. Parse the API response to get the shipping cost for requested services (e.g., PAC, SEDEX).
+
+    # For this example, we'll just return the base price for PAC if not free shipping.
+    # The 'cep' parameter is present for future integration but not used in this placeholder.
+    return correios_services['PAC']['base_price']
 
 @login_required
 def checkout(request):
@@ -176,23 +201,30 @@ def checkout(request):
 def process_payment(request):
     if request.method == 'POST':
         cart = get_cart(request)
-        form_data = json.loads(request.body)
+        if not cart.items.exists():
+            return JsonResponse({'error': 'Adicione itens ao carrinho antes de finalizar a compra.'}, status=400)
 
-        shipping_cost = calculate_shipping_cost(cart.total_price, form_data.get('postal_code'))
+        user_profile = request.user.profile
+
+        shipping_cost = calculate_shipping_cost(cart.total_price)
         total_with_shipping = cart.total_price + shipping_cost
 
         # Create Order first
-        order = Order.objects.create(
-            user=request.user,
-            first_name=form_data['first_name'],
-            last_name=form_data['last_name'],
-            email=form_data['email'],
-            address=form_data['address'],
-            postal_code=form_data['postal_code'],
-            city=form_data['city'],
-            state=form_data['state'],
-            total_price=total_with_shipping
-        )
+        try:
+            order = Order.objects.create(
+                user=request.user,
+                first_name=request.user.first_name,
+                last_name=request.user.last_name,
+                email=request.user.email,
+                address=f"{user_profile.endereco}, {user_profile.numero}",
+                postal_code=user_profile.cep,
+                city=user_profile.cidade,
+                state=user_profile.estado,
+                total_price=total_with_shipping
+            )
+        except AttributeError:
+             return JsonResponse({'error': 'Perfil incompleto. Por favor, preencha seu endereço.'}, status=400)
+
         for item in cart.items.all():
             OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
 
@@ -230,13 +262,14 @@ def process_payment(request):
             "back_urls": back_urls,
             "auto_return": "approved",
             "notification_url": request.build_absolute_uri(reverse('store:mp_webhook')),
-            "external_reference": order.id
+            "external_reference": str(order.id) # MP requires external_reference to be a string
         }
 
         try:
             preference_response = sdk.preference().create(preference_data)
             preference = preference_response["response"]
-            return JsonResponse({'preference_id': preference['id']})
+            request.session['cart_id'] = None # Clear cart
+            return JsonResponse({'redirect_url': preference['init_point']})
         except Exception as e:
             order.delete() # Rollback
             return JsonResponse({'error': str(e)}, status=500)
