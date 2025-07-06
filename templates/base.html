@@ -26,6 +26,47 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
+        <style>
+            /* Custom styles for toast notifications */
+            #toast-container {
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem;
+                z-index: 9999;
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .toast {
+                display: flex;
+                align-items: center;
+                padding: 1rem;
+                border-radius: 0.5rem;
+                box-shadow:
+                    0 4px 6px -1px rgb(0 0 0 / 0.1),
+                    0 2px 4px -2px rgb(0 0 0 / 0.1);
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            .toast.show {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            .toast.success {
+                background-color: #f0fdf4; /* green-50 */
+                color: #166534; /* green-800 */
+            }
+            .toast.error {
+                background-color: #fef2f2; /* red-50 */
+                color: #991b1b; /* red-800 */
+            }
+            .toast-icon {
+                margin-right: 0.75rem;
+                font-size: 1.25rem;
+            }
+        </style>
+
         {% block custom_css %}{% endblock custom_css %}
 
         <script>
@@ -49,9 +90,10 @@
         </script>
     </head>
     <body class="bg-gray-50 font-sans">
-        <!--
-        ==== MENU LATERAL RETRÁTIL ====
-        -->
+        <!-- Toast Notification Container -->
+        <div id="toast-container"></div>
+
+        <!-- Menu Lateral Retrátil -->
         <div
             id="menu-overlay"
             class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300"
@@ -68,21 +110,6 @@
                     &times;
                 </button>
                 <h2 class="text-3xl font-teko text-primary mb-6">Menu</h2>
-
-                <!-- Barra de Busca -->
-                <div class="relative mb-6">
-                    <input
-                        type="text"
-                        id="search-input-menu"
-                        placeholder="Buscar produtos..."
-                        class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                    <i
-                        class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    ></i>
-                </div>
-
-                <!-- Categorias Dinâmicas -->
                 <h3 class="font-teko text-2xl text-secondary mb-4">
                     <i class="fas fa-tags mr-2 text-primary"></i>
                     Categorias
@@ -111,28 +138,12 @@
                     </li>
                     {% endfor %}
                 </ul>
-
-                <!-- Links Rápidos com Mini Contadores -->
                 <div class="mt-8 pt-6 border-t border-gray-200">
                     <div class="flex items-center justify-between mb-3">
                         <h3 class="font-teko text-xl text-secondary">
                             <i class="fas fa-star mr-2 text-accent"></i>
                             Acesso Rápido
                         </h3>
-                        <div class="flex space-x-1">
-                            <a
-                                href="{% url 'store:wishlist' %}"
-                                class="menu-counter bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
-                                id="wishlist-mini-count"
-                                >{{ wishlist_count }}</a
-                            >
-                            <a
-                                href="{% url 'store:cart' %}"
-                                class="menu-counter bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
-                                id="cart-mini-count"
-                                >{{ cart_count }}</a
-                            >
-                        </div>
                     </div>
                     <ul class="space-y-2">
                         <li>
@@ -144,6 +155,11 @@
                                     class="fas fa-heart mr-3 text-red-500 w-5"
                                 ></i>
                                 <span>Meus Favoritos</span>
+                                <span
+                                    class="ml-auto bg-gray-200 text-gray-700 text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+                                    id="wishlist-mini-count"
+                                    >{{ wishlist_count }}</span
+                                >
                             </a>
                         </li>
                         <li>
@@ -155,6 +171,11 @@
                                     class="fas fa-shopping-cart mr-3 text-blue-500 w-5"
                                 ></i>
                                 <span>Meu Carrinho</span>
+                                <span
+                                    class="ml-auto bg-gray-200 text-gray-700 text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+                                    id="cart-mini-count"
+                                    >{{ cart_count }}</span
+                                >
                             </a>
                         </li>
                     </ul>
@@ -162,12 +183,11 @@
             </div>
         </aside>
 
-        <!-- ==== CABEÇALHO ==== -->
+        <!-- Cabeçalho -->
         <header class="bg-white shadow-md sticky top-0 z-40">
             <nav
                 class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
             >
-                <!-- Lado Esquerdo: Botão Menu e Logo -->
                 <div class="flex items-center space-x-4">
                     <button
                         id="open-menu-btn"
@@ -184,8 +204,6 @@
                         />
                     </a>
                 </div>
-
-                <!-- Navegação Central (Desktop) -->
                 <div class="hidden md:flex items-center space-x-6">
                     <a
                         href="{% url 'store:home' %}"
@@ -208,10 +226,7 @@
                         >Sobre Nós</a
                     >
                 </div>
-
-                <!-- Lado Direito: Ícones e Autenticação -->
                 <div class="flex items-center space-x-4">
-                    <!-- Ícones -->
                     <a
                         href="{% url 'store:wishlist' %}"
                         class="relative text-xl hover:text-primary"
@@ -220,6 +235,7 @@
                         <i class="fas fa-heart"></i>
                         {% if wishlist_count > 0 %}
                         <span
+                            id="wishlist-count"
                             class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
                             >{{ wishlist_count }}</span
                         >
@@ -231,20 +247,15 @@
                         title="Meu Carrinho"
                     >
                         <i class="fas fa-shopping-cart"></i>
-                        {% if cart_count > 0 %}
                         <span
-                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+                            id="cart-count"
+                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold {% if cart_count == 0 %}hidden{% endif %}"
                             >{{ cart_count }}</span
                         >
-                        {% endif %}
                     </a>
-
-                    <!-- Separador Vertical -->
                     <div
                         class="w-px h-6 bg-gray-200 mx-2 hidden sm:block"
                     ></div>
-
-                    <!-- Bloco de Autenticação -->
                     {% if user.is_authenticated %}
                     <div class="hidden sm:flex items-center space-x-4">
                         <a
@@ -285,7 +296,7 @@
             </nav>
         </header>
 
-        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
+        <!-- Conteúdo Principal -->
         <main>
             {% if messages %}
             <div class="container mx-auto px-4 mt-4">
@@ -301,731 +312,95 @@
             {% endif %} {% block content %}{% endblock content %}
         </main>
 
-        <!-- ==== RODAPÉ ==== -->
-        <footer
-            class="bg-gradient-to-br from-orange-900 via-amber-900 to-red-900 text-white mt-16 relative overflow-hidden shadow-2xl"
-            style="
-                background: linear-gradient(
-                    135deg,
-                    #8b4513 0%,
-                    #a0522d 25%,
-                    #cd853f 50%,
-                    #d2691e 75%,
-                    #cc2936 100%
-                );
-            "
-        >
-            <!-- Background Pattern -->
-            <div class="absolute inset-0 opacity-10">
-                <div class="paisley-decoration h-full w-full"></div>
-            </div>
-            <!-- Spice-themed Background Overlay -->
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-amber-900/30 via-transparent to-orange-800/20"
-            ></div>
-            <!-- Indian Pattern Overlay -->
-            <div
-                class="absolute inset-0 opacity-5"
-                style="
-                    background-image:
-                        radial-gradient(
-                            circle at 25% 25%,
-                            #f7931e 2px,
-                            transparent 2px
-                        ),
-                        radial-gradient(
-                            circle at 75% 75%,
-                            #ff6b35 1px,
-                            transparent 1px
-                        );
-                    background-size: 20px 20px;
-                    background-position:
-                        0 0,
-                        10px 10px;
-                "
-            ></div>
-
-            <div
-                class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10"
-            >
-                <!-- Main Footer Content -->
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8"
-                >
-                    <!-- Company Info -->
-                    <div class="lg:col-span-1">
-                        <div class="flex items-center mb-4">
-                            <i
-                                class="fas fa-seedling text-3xl text-accent mr-3"
-                            ></i>
-                            <h3 class="font-teko text-3xl text-accent">
-                                India Oasis
-                            </h3>
-                        </div>
-                        <p class="text-gray-200 mb-4 leading-relaxed">
-                            Trazendo os autênticos sabores e aromas da Índia
-                            diretamente para sua mesa. Especiarias premium, chás
-                            tradicionais e ingredientes selecionados com amor e
-                            tradição milenar.
-                        </p>
-                        <div class="flex items-center text-sm text-gray-300">
-                            <i class="fas fa-shield-alt text-accent mr-2"></i>
-                            <span>Produtos 100% naturais e certificados</span>
-                        </div>
-                    </div>
-
-                    <!-- Quick Links -->
+        <!-- Rodapé -->
+        <footer class="bg-white border-t mt-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <h4
-                            class="font-rajdhani text-xl font-semibold mb-4 text-accent"
-                        >
-                            <i class="fas fa-compass mr-2"></i>
+                        <h3 class="font-teko text-2xl text-primary mb-4">
+                            India Oasis
+                        </h3>
+                        <p class="text-sm text-gray-600">
+                            Sua jornada para o bem-estar começa aqui.
+                            Especiarias autênticas, chás e produtos indianos
+                            para uma vida equilibrada.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-teko text-xl text-secondary mb-4">
                             Navegação
-                        </h4>
-                        <ul class="space-y-2">
+                        </h3>
+                        <ul class="space-y-2 text-sm">
                             <li>
                                 <a
-                                    href="index.html"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                    href="{% url 'store:about' %}"
+                                    class="hover:text-primary"
+                                    >Sobre Nós</a
                                 >
-                                    <i class="fas fa-home w-4 mr-2"></i>
-                                    Início
-                                </a>
                             </li>
                             <li>
                                 <a
-                                    href="products.html"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                    href="{% url 'store:contact' %}"
+                                    class="hover:text-primary"
+                                    >Contato</a
                                 >
-                                    <i class="fas fa-box w-4 mr-2"></i>
-                                    Produtos
-                                </a>
                             </li>
                             <li>
                                 <a
-                                    href="about.html"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                    href="{% url 'store:product_list' %}"
+                                    class="hover:text-primary"
+                                    >Todos os Produtos</a
                                 >
-                                    <i class="fas fa-heart w-4 mr-2"></i>
-                                    Sobre Nós
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="contact.html"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
-                                >
-                                    <i class="fas fa-envelope w-4 mr-2"></i>
-                                    Contato
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="cart.html"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
-                                >
-                                    <i
-                                        class="fas fa-shopping-cart w-4 mr-2"
-                                    ></i>
-                                    Carrinho
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="wishlist.html"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
-                                >
-                                    <i class="fas fa-star w-4 mr-2"></i>
-                                    Lista de Desejos
-                                </a>
                             </li>
                         </ul>
                     </div>
-
-                    <!-- Categories -->
                     <div>
-                        <h4
-                            class="font-rajdhani text-xl font-semibold mb-4 text-accent"
-                        >
-                            <i class="fas fa-tags mr-2"></i>
-                            Categorias
-                        </h4>
-                        <ul class="space-y-2">
+                        <h3 class="font-teko text-xl text-secondary mb-4">
+                            Informações
+                        </h3>
+                        <ul class="space-y-2 text-sm">
                             <li>
                                 <a
-                                    href="products.html?category=temperos"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                    href="{% url 'store:terms' %}"
+                                    class="hover:text-primary"
+                                    >Termos de Uso</a
                                 >
-                                    <i class="fas fa-pepper-hot w-4 mr-2"></i>
-                                    Temperos
-                                </a>
                             </li>
                             <li>
                                 <a
-                                    href="products.html?category=chas"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
+                                    href="{% url 'store:privacy' %}"
+                                    class="hover:text-primary"
+                                    >Política de Privacidade</a
                                 >
-                                    <i class="fas fa-mug-hot w-4 mr-2"></i>
-                                    Chás
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="products.html?category=graos"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
-                                >
-                                    <i class="fas fa-seedling w-4 mr-2"></i>
-                                    Grãos
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="products.html?category=oleos"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
-                                >
-                                    <i class="fas fa-tint w-4 mr-2"></i>
-                                    Óleos
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                    href="products.html?category=combos"
-                                    class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
-                                >
-                                    <i class="fas fa-gift w-4 mr-2"></i>
-                                    Combos
-                                </a>
                             </li>
                         </ul>
                     </div>
-
-                    <!-- Contact Info -->
-                    <div class="lg:col-span-5">
-                        <h4
-                            class="font-rajdhani text-xl font-semibold mb-6 text-yellow-300 border-b border-yellow-300/40 pb-3 text-center"
-                        >
-                            <i class="fas fa-headset mr-2 text-yellow-400"></i>
-                            Central de Atendimento
-                        </h4>
-
-                        <!-- Canais de Atendimento em Linha -->
-                        <div
-                            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6"
-                        >
-                            <!-- WhatsApp -->
-                            <a
-                                href="https://wa.me/5511987654321"
-                                target="_blank"
-                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-green-700/20 p-4 rounded-lg border border-green-500/30 hover:border-green-400/50 hover:scale-105"
-                            >
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
-                                >
-                                    <i
-                                        class="fab fa-whatsapp text-white text-2xl"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="font-semibold text-white text-sm text-center"
-                                >
-                                    (11) 98765-4321
-                                </p>
-                                <p
-                                    class="text-xs text-green-200 text-center mt-1"
-                                >
-                                    WhatsApp 24h
-                                </p>
-                            </a>
-
-                            <!-- SAC -->
-                            <a
-                                href="tel:+55114003-2024"
-                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-blue-700/20 p-4 rounded-lg border border-blue-500/30 hover:border-blue-400/50 hover:scale-105"
-                            >
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
-                                >
-                                    <i
-                                        class="fas fa-phone text-white text-xl"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="font-semibold text-white text-sm text-center"
-                                >
-                                    4003-2024
-                                </p>
-                                <p
-                                    class="text-xs text-blue-200 text-center mt-1"
-                                >
-                                    SAC 8h-20h
-                                </p>
-                            </a>
-
-                            <!-- Email Geral -->
-                            <a
-                                href="mailto:contato@indiaoasis.com.br"
-                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-red-700/20 p-4 rounded-lg border border-red-500/30 hover:border-red-400/50 hover:scale-105"
-                            >
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
-                                >
-                                    <i
-                                        class="fas fa-envelope text-white text-xl"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="font-semibold text-white text-xs text-center"
-                                >
-                                    contato@indiaoasis.com.br
-                                </p>
-                                <p
-                                    class="text-xs text-red-200 text-center mt-1"
-                                >
-                                    Geral 2h
-                                </p>
-                            </a>
-
-                            <!-- Email Vendas -->
-                            <a
-                                href="mailto:vendas@indiaoasis.com.br"
-                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-orange-700/20 p-4 rounded-lg border border-orange-500/30 hover:border-orange-400/50 hover:scale-105"
-                            >
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
-                                >
-                                    <i
-                                        class="fas fa-shopping-bag text-white text-xl"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="font-semibold text-white text-xs text-center"
-                                >
-                                    vendas@indiaoasis.com.br
-                                </p>
-                                <p
-                                    class="text-xs text-orange-200 text-center mt-1"
-                                >
-                                    Vendas
-                                </p>
-                            </a>
-
-                            <!-- Telefone Vendas -->
-                            <a
-                                href="tel:+55113456-7890"
-                                class="flex flex-col items-center text-orange-100 hover:text-yellow-300 transition-all duration-300 group bg-purple-700/20 p-4 rounded-lg border border-purple-500/30 hover:border-purple-400/50 hover:scale-105"
-                            >
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform shadow-lg"
-                                >
-                                    <i
-                                        class="fas fa-phone-volume text-white text-xl"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="font-semibold text-white text-sm text-center"
-                                >
-                                    (11) 3456-7890
-                                </p>
-                                <p
-                                    class="text-xs text-purple-200 text-center mt-1"
-                                >
-                                    Vendas 9h-17h
-                                </p>
-                            </a>
-
-                            <!-- Endereço -->
-                            <div
-                                class="flex flex-col items-center text-orange-100 bg-teal-700/20 p-4 rounded-lg border border-teal-500/30"
-                            >
-                                <div
-                                    class="w-16 h-16 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full flex items-center justify-center mb-3 shadow-lg"
-                                >
-                                    <i
-                                        class="fas fa-map-marker-alt text-white text-xl"
-                                    ></i>
-                                </div>
-                                <p
-                                    class="font-semibold text-white text-xs text-center"
-                                >
-                                    Rua Antônio de Godói, 122 - Sala 31
-                                </p>
-                                <p
-                                    class="text-xs text-teal-200 text-center mt-1"
-                                >
-                                    República - SP
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Horário de Funcionamento -->
-                        <div
-                            class="p-4 bg-amber-800/30 rounded-lg border border-yellow-400/30 backdrop-blur-sm"
-                        >
-                            <h5
-                                class="font-semibold text-yellow-300 mb-3 flex items-center justify-center"
-                            >
-                                <i
-                                    class="fas fa-clock mr-2 text-yellow-400"
-                                ></i>
-                                Horário de Funcionamento
-                            </h5>
-                            <div
-                                class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs"
-                            >
-                                <div class="text-center">
-                                    <span class="text-orange-200 block"
-                                        >Segunda à Sexta</span
-                                    >
-                                    <span class="text-white font-semibold"
-                                        >9h às 17h</span
-                                    >
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-orange-200 block"
-                                        >Sábado</span
-                                    >
-                                    <span class="text-white font-semibold"
-                                        >Fechado</span
-                                    >
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-orange-200 block"
-                                        >Domingo</span
-                                    >
-                                    <span class="text-white font-semibold"
-                                        >Fechado</span
-                                    >
-                                </div>
-                                <div
-                                    class="text-center border-l border-yellow-400/30"
-                                >
-                                    <span class="text-orange-200 block"
-                                        >WhatsApp</span
-                                    >
-                                    <span class="text-green-300 font-bold"
-                                        >24h</span
-                                    >
-                                </div>
-                            </div>
+                    <div>
+                        <h3 class="font-teko text-xl text-secondary mb-4">
+                            Siga-nos
+                        </h3>
+                        <div class="flex space-x-4 text-lg">
+                            <a href="#" class="text-gray-500 hover:text-primary"
+                                ><i class="fab fa-facebook-f"></i
+                            ></a>
+                            <a href="#" class="text-gray-500 hover:text-primary"
+                                ><i class="fab fa-instagram"></i
+                            ></a>
+                            <a href="#" class="text-gray-500 hover:text-primary"
+                                ><i class="fab fa-whatsapp"></i
+                            ></a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Services & Newsletter -->
-                <div class="border-t border-orange-300/40 pt-8 mb-8">
-                    <!-- Services Info -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div
-                            class="text-center p-4 bg-white/5 rounded-lg border border-accent/20"
-                        >
-                            <div
-                                class="w-12 h-12 bg-gradient-to-r from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3"
-                            >
-                                <i
-                                    class="fas fa-shipping-fast text-white text-xl"
-                                ></i>
-                            </div>
-                            <h5 class="font-semibold text-white mb-2">
-                                Entrega Rápida
-                            </h5>
-                            <p class="text-xs text-gray-300">
-                                Receba em até 24h na Grande SP
-                            </p>
-                        </div>
-                        <div
-                            class="text-center p-4 bg-white/5 rounded-lg border border-accent/20"
-                        >
-                            <div
-                                class="w-12 h-12 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3"
-                            >
-                                <i
-                                    class="fas fa-shield-alt text-white text-xl"
-                                ></i>
-                            </div>
-                            <h5 class="font-semibold text-white mb-2">
-                                Compra Segura
-                            </h5>
-                            <p class="text-xs text-gray-300">
-                                SSL e pagamentos protegidos
-                            </p>
-                        </div>
-                        <div
-                            class="text-center p-4 bg-white/5 rounded-lg border border-accent/20"
-                        >
-                            <div
-                                class="w-12 h-12 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3"
-                            >
-                                <i class="fas fa-award text-white text-xl"></i>
-                            </div>
-                            <h5 class="font-semibold text-white mb-2">
-                                Qualidade Premium
-                            </h5>
-                            <p class="text-xs text-gray-300">
-                                Produtos certificados e frescos
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Newsletter -->
-                    <div
-                        class="max-w-2xl mx-auto text-center bg-gradient-to-r from-yellow-600/20 to-orange-600/20 p-6 rounded-lg border border-yellow-400/40 backdrop-blur-sm"
-                    >
-                        <h4
-                            class="font-rajdhani text-2xl font-semibold mb-3 text-yellow-300"
-                        >
-                            <i class="fas fa-bell mr-2"></i>
-                            Receba Ofertas Especiais
-                        </h4>
-                        <p class="text-gray-200 mb-4">
-                            Cadastre-se e seja o primeiro a saber sobre novos
-                            produtos, receitas exclusivas e promoções
-                            imperdíveis!
-                        </p>
-                        <div
-                            class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-                        >
-                            <input
-                                type="email"
-                                placeholder="Seu melhor email"
-                                class="flex-1 px-4 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-accent bg-white shadow-lg"
-                            />
-                            <button
-                                class="btn bg-yellow-500 text-black hover:bg-yellow-400 px-1 py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-                            >
-                                <i class="fas fa-paper-plane mr-2"></i>
-                                Cadastrar
-                            </button>
-                        </div>
-                        <p
-                            class="text-xs text-orange-200 mt-3 flex items-center justify-center"
-                        >
-                            <i class="fas fa-lock mr-1 text-yellow-400"></i>
-                            Seus dados estão seguros conosco • Sem spam
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Social Media & Payment -->
-                <div class="border-t border-orange-300/40 pt-8 mb-8">
-                    <div
-                        class="flex flex-col lg:flex-row justify-between items-center gap-6"
-                    >
-                        <!-- Social Media -->
-                        <div class="text-center lg:text-left">
-                            <h5
-                                class="font-rajdhani text-lg font-semibold mb-3 text-accent"
-                            >
-                                <i class="fas fa-share-alt mr-2"></i>
-                                Siga-nos nas Redes
-                            </h5>
-                            <div
-                                class="flex justify-center lg:justify-start space-x-4"
-                            >
-                                <a
-                                    href="https://instagram.com/indiaoasis"
-                                    target="_blank"
-                                    class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-                                >
-                                    <i class="fab fa-instagram text-white"></i>
-                                </a>
-                                <a
-                                    href="https://facebook.com/indiaoasis"
-                                    target="_blank"
-                                    class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-                                >
-                                    <i class="fab fa-facebook-f text-white"></i>
-                                </a>
-                                <a
-                                    href="https://youtube.com/indiaoasis"
-                                    target="_blank"
-                                    class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-                                >
-                                    <i class="fab fa-youtube text-white"></i>
-                                </a>
-                                <a
-                                    href="https://tiktok.com/@indiaoasis"
-                                    target="_blank"
-                                    class="w-10 h-10 bg-black rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-                                >
-                                    <i class="fab fa-tiktok text-white"></i>
-                                </a>
-                                <a
-                                    href="https://pinterest.com/indiaoasis"
-                                    target="_blank"
-                                    class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform"
-                                >
-                                    <i class="fab fa-pinterest text-white"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Payment Methods -->
-                        <div class="text-center lg:text-right">
-                            <h5
-                                class="font-rajdhani text-lg font-semibold mb-3 text-yellow-300 border-b border-yellow-300/40 pb-2"
-                            >
-                                <i class="fas fa-credit-card mr-2"></i>
-                                Formas de Pagamento
-                            </h5>
-                            <div
-                                class="flex justify-center lg:justify-end items-center space-x-2 flex-wrap gap-2 mb-3"
-                            >
-                                <div
-                                    class="bg-white rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
-                                >
-                                    <i
-                                        class="fab fa-cc-visa text-blue-600 text-xl"
-                                    ></i>
-                                </div>
-                                <div
-                                    class="bg-white rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
-                                >
-                                    <i
-                                        class="fab fa-cc-mastercard text-red-500 text-xl"
-                                    ></i>
-                                </div>
-                                <div
-                                    class="bg-white rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
-                                >
-                                    <i
-                                        class="fab fa-cc-amex text-blue-500 text-xl"
-                                    ></i>
-                                </div>
-                                <div
-                                    class="bg-gradient-to-r from-green-400 to-green-600 rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
-                                >
-                                    <span class="text-white font-bold text-sm"
-                                        >PIX</span
-                                    >
-                                </div>
-                                <div
-                                    class="bg-gradient-to-r from-orange-400 to-orange-600 rounded-lg px-3 py-2 shadow-md hover:shadow-lg transition-shadow"
-                                >
-                                    <i class="fas fa-barcode text-white"></i>
-                                </div>
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-xs text-orange-200">
-                                    <i
-                                        class="fas fa-shield-alt mr-1 text-green-400"
-                                    ></i>
-                                    Pagamentos 100% seguros
-                                </p>
-                                <p class="text-xs text-orange-200">
-                                    <i
-                                        class="fas fa-percentage mr-1 text-yellow-400"
-                                    ></i>
-                                    Parcelamento em até 12x sem juros
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Certifications -->
-                        <div class="text-center">
-                            <h5
-                                class="font-rajdhani text-lg font-semibold mb-3 text-accent"
-                            >
-                                <i class="fas fa-certificate mr-2"></i>
-                                Certificações
-                            </h5>
-                            <div class="flex justify-center space-x-3">
-                                <div
-                                    class="bg-white rounded-full w-12 h-12 flex items-center justify-center"
-                                >
-                                    <i class="fas fa-leaf text-green-600"></i>
-                                </div>
-                                <div
-                                    class="bg-white rounded-full w-12 h-12 flex items-center justify-center"
-                                >
-                                    <i class="fas fa-award text-yellow-600"></i>
-                                </div>
-                                <div
-                                    class="bg-white rounded-full w-12 h-12 flex items-center justify-center"
-                                >
-                                    <i
-                                        class="fas fa-shield-alt text-blue-600"
-                                    ></i>
-                                </div>
-                            </div>
-                            <p class="text-xs text-gray-300 mt-2">
-                                Qualidade Certificada
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bottom Footer -->
                 <div
-                    class="border-t border-orange-300/40 pt-6 bg-amber-900/30 -mx-8 px-8 -mb-12 pb-6"
+                    class="mt-8 pt-8 border-t border-gray-100 text-center text-sm text-gray-500"
                 >
-                    <div
-                        class="flex flex-col lg:flex-row justify-between items-center gap-4"
-                    >
-                        <div class="text-center lg:text-left">
-                            <p class="text-sm text-orange-100">
-                                &copy; 2023
-                                <strong class="text-yellow-300"
-                                    >India Oasis Brasil</strong
-                                >
-                                - Todos os direitos reservados.
-                            </p>
-                            <div class="text-xs text-orange-300 mt-2 space-y-1">
-                                <p>CNPJ: 39.588.327/0001-61</p>
-                                <p>
-                                    Razão Social: India Oasis Comercio de
-                                    Especiarias Ltda.
-                                </p>
-                                <p class="flex items-center">
-                                    <i
-                                        class="fas fa-award mr-1 text-yellow-400"
-                                    ></i>
-                                    Empresa certificada pela ANVISA
-                                </p>
-                            </div>
-                        </div>
-
-                        <div
-                            class="flex flex-wrap justify-center gap-4 text-xs"
-                        >
-                            <a
-                                href="#"
-                                class="text-gray-300 hover:text-accent transition-colors"
-                                >Política de Privacidade</a
-                            >
-                            <span class="text-gray-500">|</span>
-                            <a
-                                href="#"
-                                class="text-gray-300 hover:text-accent transition-colors"
-                                >Termos de Uso</a
-                            >
-                            <span class="text-gray-500">|</span>
-                            <a
-                                href="#"
-                                class="text-gray-300 hover:text-accent transition-colors"
-                                >Política de Entrega</a
-                            >
-                            <span class="text-gray-500">|</span>
-                            <a
-                                href="#"
-                                class="text-gray-300 hover:text-accent transition-colors"
-                                >Trocas e Devoluções</a
-                            >
-                        </div>
-                    </div>
+                    <p>
+                        &copy; {% now "Y" %} India Oasis. Todos os direitos
+                        reservados.
+                    </p>
                 </div>
             </div>
-
-            <div
-                class="absolute top-20 left-20 w-2 h-2 bg-accent rounded-full opacity-30 animate-ping"
-            ></div>
-            <div
-                class="absolute bottom-32 right-32 w-1 h-1 bg-accent rounded-full opacity-40 animate-ping"
-                style="animation-delay: 1s"
-            ></div>
-            <div
-                class="absolute top-1/3 right-20 w-1.5 h-1.5 bg-accent rounded-full opacity-25 animate-ping"
-                style="animation-delay: 2s"
-            ></div>
         </footer>
 
         <script>
@@ -1046,11 +421,13 @@
                     menuOverlay.classList.add("hidden");
                 };
 
-                openMenuBtn.addEventListener("click", openMenu);
-                closeMenuBtn.addEventListener("click", closeMenu);
-                menuOverlay.addEventListener("click", closeMenu);
+                if (openMenuBtn)
+                    openMenuBtn.addEventListener("click", openMenu);
+                if (closeMenuBtn)
+                    closeMenuBtn.addEventListener("click", closeMenu);
+                if (menuOverlay)
+                    menuOverlay.addEventListener("click", closeMenu);
 
-                // Fechar menu com a tecla ESC
                 document.addEventListener("keydown", (e) => {
                     if (
                         e.key === "Escape" &&
@@ -1060,8 +437,105 @@
                     }
                 });
             });
-        </script>
 
+            // Função para buscar o CSRF token dos cookies
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== "") {
+                    const cookies = document.cookie.split(";");
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (
+                            cookie.substring(0, name.length + 1) ===
+                            name + "="
+                        ) {
+                            cookieValue = decodeURIComponent(
+                                cookie.substring(name.length + 1),
+                            );
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            const csrftoken = getCookie("csrftoken");
+
+            // Função para exibir notificações "toast"
+            function showToast(message, type = "success") {
+                const container = document.getElementById("toast-container");
+                const toast = document.createElement("div");
+                const iconClass =
+                    type === "success"
+                        ? "fa-check-circle"
+                        : "fa-exclamation-circle";
+
+                toast.className = `toast ${type}`;
+                toast.innerHTML = `<i class="fas ${iconClass} toast-icon"></i><span>${message}</span>`;
+
+                container.appendChild(toast);
+
+                // Forçar o navegador a renderizar o elemento antes de adicionar a classe 'show'
+                setTimeout(() => {
+                    toast.classList.add("show");
+                }, 10);
+
+                // Remover o toast após 4 segundos
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                    toast.addEventListener("transitionend", () =>
+                        toast.remove(),
+                    );
+                }, 4000);
+            }
+
+            // Lógica para adicionar item ao carrinho via AJAX
+            document.addEventListener("DOMContentLoaded", () => {
+                document
+                    .querySelectorAll(".add-to-cart-btn")
+                    .forEach((button) => {
+                        button.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            const productId = this.dataset.id;
+                            const url = `/cart/add/${productId}/`;
+
+                            fetch(url, {
+                                method: "POST",
+                                headers: {
+                                    "X-CSRFToken": csrftoken,
+                                    "X-Requested-With": "XMLHttpRequest", // Identifica a requisição como AJAX para o Django
+                                    "Content-Type": "application/json",
+                                },
+                            })
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    if (data.success) {
+                                        // Atualiza os contadores
+                                        const cartCountElements =
+                                            document.querySelectorAll(
+                                                "#cart-count, #cart-mini-count",
+                                            );
+                                        cartCountElements.forEach((el) => {
+                                            el.textContent = data.cart_count;
+                                            if (data.cart_count > 0) {
+                                                el.classList.remove("hidden");
+                                            }
+                                        });
+                                        showToast(data.message, "success");
+                                    } else {
+                                        showToast(data.message, "error");
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.error("Error:", error);
+                                    showToast(
+                                        "Ocorreu um erro. Por favor, tente novamente.",
+                                        "error",
+                                    );
+                                });
+                        });
+                    });
+            });
+        </script>
         {% block custom_js %}{% endblock custom_js %}
     </body>
 </html>

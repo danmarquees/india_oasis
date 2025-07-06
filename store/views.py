@@ -113,12 +113,34 @@ def cart(request):
 
 def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    cart_instance = get_cart(request)
-    cart_item, created = CartItem.objects.get_or_create(cart=cart_instance, product=product)
-    if not created:
-        cart_item.quantity += 1
-    cart_item.save()
-    return redirect('store:cart')
+    cart = get_cart(request)
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+    # Check stock before adding
+    if cart_item.quantity < product.stock:
+        if not created:
+            cart_item.quantity += 1
+        cart_item.save()
+        message = f"'{product.name}' foi adicionado ao carrinho."
+        success = True
+    else:
+        message = f"Desculpe, não há mais estoque disponível para '{product.name}'."
+        success = False
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({
+            'success': success,
+            'message': message,
+            'cart_count': cart.total_items,
+        })
+
+    # Fallback for non-AJAX requests
+    if success:
+        messages.success(request, message)
+    else:
+        messages.error(request, message)
+
+    return redirect('store:product_list')
 
 def cart_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
