@@ -47,66 +47,83 @@
                 <form
                     method="get"
                     action="{{ request.path }}"
-                    class="flex items-center space-x-2"
+                    class="flex flex-wrap items-center gap-4"
                 >
-                    <label for="sort-select" class="text-sm font-semibold"
-                        >Ordenar por:</label
-                    >
-                    <select
-                        name="sort"
-                        id="sort-select"
-                        class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                        onchange="this.form.submit()"
-                    >
-                        <option
-                            value="name"
-                            {%
-                            if
-                            request.GET.sort=""
-                            ="name"
-                            %}selected{%
-                            endif
-                            %}
+                    <!-- Campo de Busca -->
+                    <div class="flex-grow sm:flex-grow-0">
+                        <input
+                            type="text"
+                            name="q"
+                            placeholder="Buscar produtos..."
+                            class="p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-primary"
+                            value="{{ request.GET.q|default_if_none:'' }}"
+                        />
+                    </div>
+                    <!-- Campo de Ordenação -->
+                    <div class="flex items-center space-x-2">
+                        <label for="sort-select" class="text-sm font-semibold"
+                            >Ordenar por:</label
                         >
-                            Nome
-                        </option>
-                        <option
-                            value="price"
-                            {%
-                            if
-                            request.GET.sort=""
-                            ="price"
-                            %}selected{%
-                            endif
-                            %}
+                        <select
+                            name="sort"
+                            id="sort-select"
+                            class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
                         >
-                            Menor preço
-                        </option>
-                        <option
-                            value="-price"
-                            {%
-                            if
-                            request.GET.sort=""
-                            ="-price"
-                            %}selected{%
-                            endif
-                            %}
-                        >
-                            Maior preço
-                        </option>
-                        <option
-                            value="-created_at"
-                            {%
-                            if
-                            request.GET.sort=""
-                            ="-created_at"
-                            %}selected{%
-                            endif
-                            %}
-                        >
-                            Avaliação
-                        </option>
-                    </select>
+                            <option
+                                value="name"
+                                {%
+                                if
+                                request.GET.sort=""
+                                ="name"
+                                %}selected{%
+                                endif
+                                %}
+                            >
+                                Nome
+                            </option>
+                            <option
+                                value="price"
+                                {%
+                                if
+                                request.GET.sort=""
+                                ="price"
+                                %}selected{%
+                                endif
+                                %}
+                            >
+                                Menor preço
+                            </option>
+                            <option
+                                value="-price"
+                                {%
+                                if
+                                request.GET.sort=""
+                                ="-price"
+                                %}selected{%
+                                endif
+                                %}
+                            >
+                                Maior preço
+                            </option>
+                            <option
+                                value="-created_at"
+                                {%
+                                if
+                                request.GET.sort=""
+                                ="-created_at"
+                                %}selected{%
+                                endif
+                                %}
+                            >
+                                Avaliação
+                            </option>
+                        </select>
+                    </div>
+                    <!-- Botão de Submissão -->
+                    <button type="submit" class="btn btn-primary px-4 py-2">
+                        <i class="fas fa-search mr-1"></i>
+                        Buscar
+                    </button>
                 </form>
             </div>
         </div>
@@ -195,12 +212,21 @@
         <!-- Mensagem de produtos não encontrados -->
         <div id="no-products" class="col-span-full text-center py-12">
             <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+            {% if request.GET.q %}
+            <h3 class="text-2xl font-teko text-gray-500 mb-2">
+                Nenhum resultado para "{{ request.GET.q }}"
+            </h3>
+            <p class="text-gray-400">
+                Tente usar termos de busca diferentes ou verifique a ortografia.
+            </p>
+            {% else %}
             <h3 class="text-2xl font-teko text-gray-500 mb-2">
                 Nenhum produto encontrado
             </h3>
             <p class="text-gray-400">
-                Tente ajustar os filtros ou termos de busca
+                Não há produtos disponíveis nesta categoria no momento.
             </p>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

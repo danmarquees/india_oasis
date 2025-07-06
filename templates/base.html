@@ -1,172 +1,64 @@
 {% load static %}
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-BR">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>India Oasis - Temperos e Sabores da Índia</title>
+        <title>{% block title %}India Oasis{% endblock title %}</title>
 
-        <!-- Tailwind CSS -->
+        <!-- Tailwind CSS (via Play CDN for rapid development) -->
         <script src="https://cdn.tailwindcss.com"></script>
 
-        <!-- Fontes do Google -->
+        <!-- Font Awesome -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <!-- Google Fonts: Teko, Rajdhani, Montserrat -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Teko:wght@400;700&family=Rajdhani:wght@400;700&family=Montserrat:wght@400;700&display=swap"
             rel="stylesheet"
         />
 
-        <!-- Font Awesome (Ícones) -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
-
-        <!-- Link para o arquivo CSS externo -->
+        <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+
+        {% block custom_css %}{% endblock custom_css %}
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#D97706", // Amber-600
+                            secondary: "#6B7280", // Gray-500
+                            accent: "#FBBF24", // Amber-400
+                            "cinnamon-brown": "#8B4513",
+                        },
+                        fontFamily: {
+                            teko: ["Teko", "sans-serif"],
+                            rajdhani: ["Rajdhani", "sans-serif"],
+                            sans: ["Montserrat", "sans-serif"],
+                        },
+                    },
+                },
+            };
+        </script>
     </head>
-    <style>
-        /* Menu lateral - animações de slide */
-        #side-menu {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 288px !important;
-            height: 100vh !important;
-            background: white !important;
-            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1) !important;
-            z-index: 9999 !important;
-            overflow-y: auto !important;
-            transform: translateX(-100%) !important;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        }
-
-        #side-menu.open {
-            transform: translateX(0) !important;
-        }
-
-        #menu-overlay {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background: rgba(0, 0, 0, 0.5) !important;
-            z-index: 9998 !important;
-            transition: opacity 0.3s ease-in-out !important;
-            opacity: 0 !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-        }
-
-        #menu-overlay:not(.hidden) {
-            opacity: 1 !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
-        }
-
-        /* Animações específicas para subcategorias */
-        .subcategory-list {
-            max-height: 0;
-            overflow: hidden;
-            transition:
-                max-height 0.4s ease-out,
-                opacity 0.3s ease-out,
-                padding 0.3s ease-out,
-                margin 0.3s ease-out;
-            opacity: 0;
-            padding: 0;
-            margin: 0;
-        }
-
-        .subcategory-list.show {
-            max-height: 300px;
-            opacity: 1;
-            padding: 0.5rem 0;
-            margin: 0.5rem 0;
-        }
-
-        .category-toggle.active .fa-chevron-down {
-            transform: rotate(180deg);
-        }
-
-        /* Efeito hover melhorado */
-        .category-link:hover,
-        .category-toggle:hover {
-            transform: translateX(4px);
-        }
-
-        .subcategory-link:hover {
-            transform: translateX(2px);
-        }
-
-        /* Prevenir scroll quando menu estiver aberto */
-        body.menu-open {
-            overflow: hidden;
-        }
-
-        /* Animação de pulso para demonstração */
-        @keyframes pulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        /* Tooltip de demonstração */
-        .demo-tooltip {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff6b35;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
-            pointer-events: none;
-        }
-
-        .demo-tooltip::before {
-            content: "";
-            position: absolute;
-            top: -4px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: 4px solid transparent;
-            border-right: 4px solid transparent;
-            border-bottom: 4px solid #ff6b35;
-        }
-    </style>
-    <body class="text-gray-800">
-
+    <body class="bg-gray-50 font-sans">
         <!--
         ==== MENU LATERAL RETRÁTIL ====
-        Funcionalidades implementadas:
-        - Menu lateral deslizante com overlay
-        - Barra de busca em tempo real
-        - Categorias principais com subcategorias expandíveis
-        - Contador de resultados de busca
-        - Botão para limpar filtros
-        - Links de acesso rápido com mini contadores
-        - Animações suaves e responsivo
         -->
         <div
             id="menu-overlay"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300"
         ></div>
         <aside
             id="side-menu"
-            class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg overflow-y-auto"
+            class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto"
         >
             <div class="p-4">
                 <button
@@ -177,47 +69,29 @@
                 </button>
                 <h2 class="text-3xl font-teko text-primary mb-6">Menu</h2>
 
-                <!-- Barra de Busca com Contador de Resultados -->
+                <!-- Barra de Busca -->
                 <div class="relative mb-6">
                     <input
                         type="text"
-                        id="search-input"
+                        id="search-input-menu"
                         placeholder="Buscar produtos..."
                         class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                     <i
                         class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
                     ></i>
-                    <!-- Contador de Resultados -->
-                    <div
-                        id="search-results-counter"
-                        class="hidden mt-2 text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full"
-                    >
-                        <i class="fas fa-info-circle mr-1 text-primary"></i>
-                        <span id="results-count">0</span> resultados encontrados
-                    </div>
                 </div>
 
-                <!-- Categorias com Subcategorias Expandíveis -->
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-teko text-2xl text-secondary">
-                        <i class="fas fa-tags mr-2 text-primary"></i>
-                        Categorias
-                    </h3>
-                    <button
-                        id="reset-filters-btn"
-                        class="hidden text-xs text-primary hover:text-secondary transition-colors px-2 py-1 rounded-md border border-primary hover:bg-primary hover:text-white"
-                    >
-                        <i class="fas fa-times mr-1"></i>
-                        Limpar
-                    </button>
-                </div>
+                <!-- Categorias Dinâmicas -->
+                <h3 class="font-teko text-2xl text-secondary mb-4">
+                    <i class="fas fa-tags mr-2 text-primary"></i>
+                    Categorias
+                </h3>
                 <ul class="space-y-2">
                     <li>
                         <a
                             href="{% url 'store:product_list' %}"
                             class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                            data-category="all"
                         >
                             <i
                                 class="fas fa-th-large mr-3 text-primary w-5"
@@ -225,160 +99,17 @@
                             <span>Todos os Produtos</span>
                         </a>
                     </li>
-
                     {% for category in categories %}
                     <li>
                         <a
                             href="{% url 'store:product_list_by_category' category.slug %}"
                             class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                            data-category="{{ category.slug }}"
                         >
                             <i class="fas fa-tag mr-3 text-primary w-5"></i>
                             <span>{{ category.name }}</span>
                         </a>
                     </li>
                     {% endfor %}
-                                    <a
-                                        href="products.html?subcategory=misturas"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-orange-400 text-xs"
-                                        ></i>
-                                        <span>Misturas Especiais</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- Chás e Infusões com Subcategorias -->
-                    <li class="category-section">
-                        <div class="category-parent">
-                            <button
-                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                                data-category="Chás"
-                            >
-                                <div class="flex items-center">
-                                    <i
-                                        class="fas fa-mug-hot mr-3 text-green-600 w-5"
-                                    ></i>
-                                    <span>Chás e Infusões</span>
-                                </div>
-                                <i
-                                    class="fas fa-chevron-down transform transition-transform duration-200"
-                                ></i>
-                            </button>
-                            <ul
-                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
-                            >
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=chai"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-green-400 text-xs"
-                                        ></i>
-                                        <span>Masala Chai</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=cha-verde"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-green-400 text-xs"
-                                        ></i>
-                                        <span>Chás Verdes</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=infusoes"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-green-400 text-xs"
-                                        ></i>
-                                        <span>Infusões Ayurvédicas</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- Grãos e Lentilhas com Subcategorias -->
-                    <li class="category-section">
-                        <div class="category-parent">
-                            <button
-                                class="category-toggle w-full flex items-center justify-between p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                                data-category="Grãos"
-                            >
-                                <div class="flex items-center">
-                                    <i
-                                        class="fas fa-seedling mr-3 text-yellow-600 w-5"
-                                    ></i>
-                                    <span>Grãos e Lentilhas</span>
-                                </div>
-                                <i
-                                    class="fas fa-chevron-down transform transition-transform duration-200"
-                                ></i>
-                            </button>
-                            <ul
-                                class="subcategory-list hidden ml-8 mt-2 space-y-1"
-                            >
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=lentilhas"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
-                                        ></i>
-                                        <span>Lentilhas (Dal)</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=arroz"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
-                                        ></i>
-                                        <span>Arroz Basmati</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="products.html?subcategory=graos-especiais"
-                                        class="subcategory-link flex items-center p-2 rounded-md hover:bg-yellow-50 hover:text-primary transition-colors text-sm"
-                                    >
-                                        <i
-                                            class="fas fa-circle mr-2 text-yellow-400 text-xs"
-                                        ></i>
-                                        <span>Grãos Especiais</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- Acompanhamentos -->
-                    <li>
-                        <a
-                            href="products.html?category=acompanhamentos"
-                            class="category-link flex items-center p-3 rounded-lg hover:bg-yellow-50 hover:text-primary transition-all duration-200 hover:shadow-md"
-                            data-category="Acompanhamentos"
-                        >
-                            <i
-                                class="fas fa-utensils mr-3 text-purple-600 w-5"
-                            ></i>
-                            <span>Acompanhamentos</span>
-                        </a>
-                    </li>
                 </ul>
 
                 <!-- Links Rápidos com Mini Contadores -->
@@ -389,15 +120,17 @@
                             Acesso Rápido
                         </h3>
                         <div class="flex space-x-1">
-                            <span
-                                class="menu-counter bg-accent text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold"
+                            <a
+                                href="{% url 'store:wishlist' %}"
+                                class="menu-counter bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
                                 id="wishlist-mini-count"
-                                >0</span
+                                >{{ wishlist_count }}</a
                             >
-                            <span
-                                class="menu-counter bg-accent text-black text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold"
+                            <a
+                                href="{% url 'store:cart' %}"
+                                class="menu-counter bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
                                 id="cart-mini-count"
-                                >0</span
+                                >{{ cart_count }}</a
                             >
                         </div>
                     </div>
@@ -424,17 +157,6 @@
                                 <span>Meu Carrinho</span>
                             </a>
                         </li>
-                        <li>
-                            <a
-                                href="#ofertas"
-                                class="flex items-center p-2 rounded-lg hover:bg-yellow-50 hover:text-primary transition-colors"
-                            >
-                                <i
-                                    class="fas fa-percentage mr-3 text-green-500 w-5"
-                                ></i>
-                                <span>Ofertas Especiais</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -445,115 +167,138 @@
             <nav
                 class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
             >
+                <!-- Lado Esquerdo: Botão Menu e Logo -->
                 <div class="flex items-center space-x-4">
                     <button
                         id="open-menu-btn"
-                        class="relative text-xl hover:text-primary bg-gradient-to-r from-primary to-secondary text-white p-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                        title="Clique aqui para abrir o menu lateral!"
+                        class="text-xl hover:text-primary"
+                        title="Abrir menu"
                     >
                         <i class="fas fa-bars"></i>
-                        <span
-                            class="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full animate-ping"
-                        ></span>
-                        <span
-                            class="absolute -top-1 -right-1 w-3 h-3 bg-accent rounded-full"
-                        ></span>
                     </button>
-                    <a
-                        href="{% url 'store:home' %}"
-                        class="flex items-center"
-                    >
+                    <a href="{% url 'store:home' %}" class="flex items-center">
                         <img
                             src="{% static 'images/logo.png' %}"
                             alt="India Oasis Logo"
-                            class="h-16 mr-4"
+                            class="h-14"
                         />
-
                     </a>
                 </div>
+
+                <!-- Navegação Central (Desktop) -->
                 <div class="hidden md:flex items-center space-x-6">
                     <a
                         href="{% url 'store:home' %}"
-                        class="text-lg text-primary font-bold"
+                        class="text-lg text-gray-700 hover:text-primary font-semibold"
                         >Início</a
                     >
                     <a
                         href="{% url 'store:product_list' %}"
-                        class="text-lg hover:text-primary"
+                        class="text-lg text-gray-700 hover:text-primary"
                         >Produtos</a
                     >
                     <a
                         href="{% url 'store:contact' %}"
-                        class="text-lg hover:text-primary"
+                        class="text-lg text-gray-700 hover:text-primary"
                         >Contato</a
                     >
                     <a
                         href="{% url 'store:about' %}"
-                        class="text-lg hover:text-primary"
+                        class="text-lg text-gray-700 hover:text-primary"
                         >Sobre Nós</a
                     >
                 </div>
-                <div class="flex items-center space-x-4">
-                    <!-- Botão de Login / Perfil do Usuário -->
-                    {% if not user.is_authenticated %}
-                    <a
-                        href="{% url 'store:login' %}"
-                        class="hidden md:flex items-center space-x-2 text-sm hover:text-primary transition-colors"
-                        id="login-btn" {# Mantém o ID para compatibilidade com JS #}
-                    >
-                        <i class="fas fa-user-circle text-lg"></i>
-                        <span>Entrar</span>
-                    </a>
-                    {% else %}
-                    <div class="hidden md:flex items-center space-x-2 relative group">
-                        <a href="{% url 'store:profile' %}" class="text-sm hover:text-primary transition-colors">
-                            <i class="fas fa-user-circle text-lg"></i> Olá, {{ user.first_name }}
-                        </a>
-                        <div class="absolute right-0 top-full mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
-                            <a href="{% url 'store:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-user-alt mr-2"></i> Meu Perfil
-                            </a>
-                            <a href="{% url 'store:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                <i class="fas fa-sign-out-alt mr-2"></i> Sair
-                            </a>
-                        </div>
-                    </div>
-                    {% endif %}
 
+                <!-- Lado Direito: Ícones e Autenticação -->
+                <div class="flex items-center space-x-4">
+                    <!-- Ícones -->
                     <a
                         href="{% url 'store:wishlist' %}"
-                        class="relative hover:text-primary"
+                        class="relative text-xl hover:text-primary"
+                        title="Meus Favoritos"
                     >
-                        <i class="fas fa-heart text-xl"></i>
+                        <i class="fas fa-heart"></i>
+                        {% if wishlist_count > 0 %}
                         <span
-                            id="wishlist-count"
                             class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
-                            >0</span
+                            >{{ wishlist_count }}</span
                         >
+                        {% endif %}
                     </a>
                     <a
                         href="{% url 'store:cart' %}"
-                        class="relative hover:text-primary"
+                        class="relative text-xl hover:text-primary"
+                        title="Meu Carrinho"
                     >
-                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <i class="fas fa-shopping-cart"></i>
+                        {% if cart_count > 0 %}
                         <span
-                            id="cart-count"
                             class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
-                            >0</span
+                            >{{ cart_count }}</span
                         >
+                        {% endif %}
                     </a>
+
+                    <!-- Separador Vertical -->
+                    <div
+                        class="w-px h-6 bg-gray-200 mx-2 hidden sm:block"
+                    ></div>
+
+                    <!-- Bloco de Autenticação -->
+                    {% if user.is_authenticated %}
+                    <div class="hidden sm:flex items-center space-x-4">
+                        <a
+                            href="{% url 'store:profile' %}"
+                            class="font-semibold hover:text-primary"
+                            >Olá,
+                            {{user.first_name|default:user.username|truncatechars:15}}</a
+                        >
+                        <a
+                            href="{% url 'store:logout' %}"
+                            class="btn bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-4 py-2 rounded-lg"
+                            >Sair</a
+                        >
+                    </div>
+                    <a
+                        href="{% url 'store:profile' %}"
+                        class="sm:hidden text-xl hover:text-primary"
+                        ><i class="fas fa-user-circle"></i
+                    ></a>
+                    {% else %}
+                    <a
+                        href="{% url 'store:login' %}"
+                        class="btn bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm px-4 py-2 rounded-lg hidden sm:flex"
+                        >Login</a
+                    >
+                    <a
+                        href="{% url 'store:signup' %}"
+                        class="btn bg-primary hover:bg-amber-700 text-white text-sm px-4 py-2 rounded-lg hidden sm:flex"
+                        >Cadastro</a
+                    >
+                    <a
+                        href="{% url 'store:login' %}"
+                        class="sm:hidden text-xl hover:text-primary"
+                        ><i class="fas fa-user-circle"></i
+                    ></a>
+                    {% endif %}
                 </div>
             </nav>
         </header>
 
+        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
         <main>
             {% if messages %}
-            <div class="messages-container">
+            <div class="container mx-auto px-4 mt-4">
                 {% for message in messages %}
-                <div class="message {{ message.tags }}">{{ message }}</div>
+                <div
+                    class="p-4 mb-4 text-sm rounded-lg {% if message.tags == 'success' %} bg-green-100 text-green-800 {% elif message.tags == 'error' %} bg-red-100 text-red-800 {% else %} bg-blue-100 text-blue-800 {% endif %}"
+                    role="alert"
+                >
+                    {{ message }}
+                </div>
                 {% endfor %}
             </div>
-            {% endif %} {% block content %}{% endblock %}
+            {% endif %} {% block content %}{% endblock content %}
         </main>
 
         <!-- ==== RODAPÉ ==== -->
@@ -640,7 +385,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="{% url 'store:home' %}"
+                                    href="index.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-home w-4 mr-2"></i>
@@ -649,7 +394,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:product_list' %}"
+                                    href="products.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-box w-4 mr-2"></i>
@@ -658,7 +403,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:about' %}"
+                                    href="about.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-heart w-4 mr-2"></i>
@@ -667,7 +412,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:contact' %}"
+                                    href="contact.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-envelope w-4 mr-2"></i>
@@ -676,7 +421,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:cart' %}"
+                                    href="cart.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i
@@ -687,7 +432,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="{% url 'store:wishlist' %}"
+                                    href="wishlist.html"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-star w-4 mr-2"></i>
@@ -1243,13 +988,13 @@
                             class="flex flex-wrap justify-center gap-4 text-xs"
                         >
                             <a
-                                href="{% url 'store:privacy' %}"
+                                href="#"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Política de Privacidade</a
                             >
                             <span class="text-gray-500">|</span>
                             <a
-                                href="{% url 'store:terms' %}"
+                                href="#"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Termos de Uso</a
                             >
@@ -1283,486 +1028,40 @@
             ></div>
         </footer>
 
-        <!-- ==== MODAL DE FEEDBACK ==== -->
-        <div
-            id="feedback-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-        >
-            <div
-                class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto"
-            >
-                <h3 id="modal-title" class="text-2xl font-teko mb-4"></h3>
-                <p id="modal-message" class="mb-6"></p>
-                <button id="modal-close-btn" class="btn btn-primary">
-                    Fechar
-                </button>
-            </div>
-        </div>
-
-        <!-- ==== MODAL DE LOGIN ==== -->
-        <div
-            id="login-modal"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-        >
-            <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
-                <div class="p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-teko text-secondary">
-                            Entrar na sua Conta
-                        </h2>
-                        <button
-                            id="close-login"
-                            class="text-gray-500 hover:text-gray-700 text-2xl"
-                        >
-                            &times;
-                        </button>
-                    </div>
-
-                    <form id="login-form">
-                        <div class="mb-4">
-                            <label
-                                for="login-email"
-                                class="block mb-2 font-semibold text-gray-700"
-                            >
-                                E-mail
-                            </label>
-                            <input
-                                type="email"
-                                id="login-email"
-                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                required
-                            />
-                        </div>
-
-                        <div class="mb-6">
-                            <label
-                                for="login-password"
-                                class="block mb-2 font-semibold text-gray-700"
-                            >
-                                Senha
-                            </label>
-                            <input
-                                type="password"
-                                id="login-password"
-                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                                required
-                            />
-                        </div>
-
-                        <div class="flex items-center justify-between mb-6">
-                            <label class="flex items-center">
-                                <input
-                                    type="checkbox"
-                                    class="mr-2 text-primary focus:ring-2 focus:ring-primary"
-                                />
-                                <span class="text-sm text-gray-600"
-                                    >Lembrar de mim</span
-                                >
-                            </label>
-                            <a
-                                href="#"
-                                class="text-sm text-primary hover:underline"
-                                >Esqueci minha senha</a
-                            >
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="btn btn-primary w-full text-lg py-3 mb-4"
-                        >
-                            <i class="fas fa-sign-in-alt mr-2"></i>
-                            Entrar
-                        </button>
-
-                        <div class="text-center">
-                            <p class="text-sm text-gray-600 mb-4">
-                                Não tem uma conta?
-                            </p>
-                            <a
-                                href="{% url 'store:signup' %}"
-                                class="btn btn-secondary w-full text-lg py-3 inline-block text-center"
-                            >
-                                <i class="fas fa-user-plus mr-2"></i>
-                                Criar Conta
-                            </a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="{% static 'js/script.js' %}"></script>
-        <script src="{% static 'js/toast-system.js' %}" defer></script>
-        {% block extra_js %}{% endblock %}
-
         <script>
-            // Modal de Login
-            document
-                .getElementById("login-btn")
-                .addEventListener("click", function () {
-                    document
-                        .getElementById("login-modal")
-                        .classList.remove("hidden");
-                });
-
-            document
-                .getElementById("close-login")
-                .addEventListener("click", function () {
-                    document
-                        .getElementById("login-modal")
-                        .classList.add("hidden");
-                });
-
-            // Fechar modal clicando fora
-            document
-                .getElementById("login-modal")
-                .addEventListener("click", function (e) {
-                    if (e.target === this) {
-                        this.classList.add("hidden");
-                    }
-                });
-
-            // Form de login
-            document
-                .getElementById("login-form")
-                .addEventListener("submit", function (e) {
-                    e.preventDefault();
-                    // Aqui você pode adicionar a lógica de autenticação
-                    alert("Funcionalidade de login em desenvolvimento!");
-                    document
-                        .getElementById("login-modal")
-                        .classList.add("hidden");
-                });
-
-            // ========================================
-            // FUNCIONALIDADE DO MENU LATERAL PARA DEMONSTRAÇÃO
-            // ========================================
-
+            // Lógica para o menu lateral
             document.addEventListener("DOMContentLoaded", function () {
-                console.log("🎯 Inicializando demonstração do menu lateral...");
-
-                // Elementos do menu
-                const sideMenu = document.getElementById("side-menu");
-                const menuOverlay = document.getElementById("menu-overlay");
                 const openMenuBtn = document.getElementById("open-menu-btn");
                 const closeMenuBtn = document.getElementById("close-menu-btn");
-                const searchInput = document.getElementById("search-input");
+                const sideMenu = document.getElementById("side-menu");
+                const menuOverlay = document.getElementById("menu-overlay");
 
-                // Debug detalhado dos elementos
-                console.log("🔍 Verificando elementos:", {
-                    sideMenu: !!sideMenu,
-                    menuOverlay: !!menuOverlay,
-                    openMenuBtn: !!openMenuBtn,
-                    closeMenuBtn: !!closeMenuBtn,
-                    searchInput: !!searchInput,
-                });
-
-                // Verificar se todos os elementos existem
-                if (
-                    !sideMenu ||
-                    !menuOverlay ||
-                    !openMenuBtn ||
-                    !closeMenuBtn
-                ) {
-                    console.error("❌ Elementos do menu não encontrados!");
-                    console.error("Missing elements:", {
-                        sideMenu: !sideMenu ? "MISSING" : "OK",
-                        menuOverlay: !menuOverlay ? "MISSING" : "OK",
-                        openMenuBtn: !openMenuBtn ? "MISSING" : "OK",
-                        closeMenuBtn: !closeMenuBtn ? "MISSING" : "OK",
-                    });
-                    return;
-                }
-
-                console.log("✅ Elementos do menu encontrados!");
-
-                // Função para abrir o menu
-                function openMenu() {
-                    console.log("🔓 Abrindo menu...");
-                    console.log("Estado antes:", {
-                        menuOpen: sideMenu.classList.contains("open"),
-                        overlayHidden: menuOverlay.classList.contains("hidden"),
-                        bodyMenuOpen:
-                            document.body.classList.contains("menu-open"),
-                    });
-
-                    sideMenu.classList.add("open");
+                const openMenu = () => {
+                    sideMenu.classList.remove("-translate-x-full");
                     menuOverlay.classList.remove("hidden");
-                    document.body.classList.add("menu-open");
+                };
 
-                    console.log("Estado depois:", {
-                        menuOpen: sideMenu.classList.contains("open"),
-                        overlayHidden: menuOverlay.classList.contains("hidden"),
-                        bodyMenuOpen:
-                            document.body.classList.contains("menu-open"),
-                    });
-
-                    // Foco no campo de busca quando menu abrir
-                    setTimeout(() => {
-                        if (searchInput) {
-                            searchInput.focus();
-                        }
-                    }, 300);
-                }
-
-                // Função para fechar o menu
-                function closeMenu() {
-                    console.log("🔒 Fechando menu...");
-                    console.log("Estado antes:", {
-                        menuOpen: sideMenu.classList.contains("open"),
-                        overlayHidden: menuOverlay.classList.contains("hidden"),
-                        bodyMenuOpen:
-                            document.body.classList.contains("menu-open"),
-                    });
-
-                    sideMenu.classList.remove("open");
+                const closeMenu = () => {
+                    sideMenu.classList.add("-translate-x-full");
                     menuOverlay.classList.add("hidden");
-                    document.body.classList.remove("menu-open");
+                };
 
-                    console.log("Estado depois:", {
-                        menuOpen: sideMenu.classList.contains("open"),
-                        overlayHidden: menuOverlay.classList.contains("hidden"),
-                        bodyMenuOpen:
-                            document.body.classList.contains("menu-open"),
-                    });
-                }
+                openMenuBtn.addEventListener("click", openMenu);
+                closeMenuBtn.addEventListener("click", closeMenu);
+                menuOverlay.addEventListener("click", closeMenu);
 
-                // Event listeners
-                openMenuBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    console.log("👆 Botão abrir menu clicado");
-                    console.log("Elemento botão:", openMenuBtn);
-                    openMenu();
-                });
-
-                closeMenuBtn.addEventListener("click", function (e) {
-                    e.preventDefault();
-                    console.log("👆 Botão fechar menu clicado");
-                    console.log("Elemento botão:", closeMenuBtn);
-                    closeMenu();
-                });
-
-                // Fechar menu clicando no overlay
-                menuOverlay.addEventListener("click", function (e) {
-                    if (e.target === menuOverlay) {
-                        console.log("👆 Overlay clicado - fechando menu");
-                        closeMenu();
-                    }
-                });
-
-                // Fechar menu com tecla ESC
-                document.addEventListener("keydown", function (e) {
+                // Fechar menu com a tecla ESC
+                document.addEventListener("keydown", (e) => {
                     if (
                         e.key === "Escape" &&
-                        sideMenu.classList.contains("open")
+                        !sideMenu.classList.contains("-translate-x-full")
                     ) {
-                        console.log("⌨️ ESC pressionado - fechando menu");
                         closeMenu();
                     }
                 });
-
-                // ========================================
-                // FUNCIONALIDADES DE DEMONSTRAÇÃO
-                // ========================================
-
-                // Animar botão do menu para chamar atenção
-                function animateMenuButton() {
-                    openMenuBtn.style.animation = "pulse 2s infinite";
-
-                    // Parar animação após 10 segundos
-                    setTimeout(() => {
-                        openMenuBtn.style.animation = "";
-                    }, 10000);
-                }
-
-                // Adicionar tooltip de demonstração
-                function addDemoTooltip() {
-                    const tooltip = document.createElement("div");
-                    tooltip.className = "demo-tooltip";
-                    tooltip.textContent = "👈 Clique aqui para ver o menu!";
-                    tooltip.style.cssText = `
-                        position: absolute;
-                        top: 100%;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        background: #ff6b35;
-                        color: white;
-                        padding: 0.5rem 0.75rem;
-                        border-radius: 6px;
-                        font-size: 0.75rem;
-                        white-space: nowrap;
-                        opacity: 0;
-                        transition: opacity 0.3s ease;
-                        z-index: 1000;
-                        pointer-events: none;
-                        margin-top: 5px;
-                    `;
-
-                    // Adicionar seta do tooltip
-                    const arrow = document.createElement("div");
-                    arrow.style.cssText = `
-                        position: absolute;
-                        top: -4px;
-                        left: 50%;
-                        transform: translateX(-50%);
-                        width: 0;
-                        height: 0;
-                        border-left: 4px solid transparent;
-                        border-right: 4px solid transparent;
-                        border-bottom: 4px solid #ff6b35;
-                    `;
-                    tooltip.appendChild(arrow);
-
-                    openMenuBtn.style.position = "relative";
-                    openMenuBtn.appendChild(tooltip);
-
-                    // Mostrar tooltip no hover
-                    openMenuBtn.addEventListener("mouseenter", () => {
-                        tooltip.style.opacity = "1";
-                    });
-
-                    openMenuBtn.addEventListener("mouseleave", () => {
-                        tooltip.style.opacity = "0";
-                    });
-
-                    // Mostrar tooltip automaticamente
-                    setTimeout(() => {
-                        tooltip.style.opacity = "1";
-                        setTimeout(() => {
-                            tooltip.style.opacity = "0";
-                        }, 3000);
-                    }, 2000);
-                }
-
-                // ========================================
-                // FUNCIONALIDADES DO MENU
-                // ========================================
-
-                // Expansão de categorias
-                const categoryToggles =
-                    document.querySelectorAll(".category-toggle");
-                categoryToggles.forEach((toggle) => {
-                    toggle.addEventListener("click", function (e) {
-                        e.preventDefault();
-                        const subcategoryList =
-                            this.parentElement.querySelector(
-                                ".subcategory-list",
-                            );
-
-                        if (subcategoryList) {
-                            // Toggle classe show
-                            subcategoryList.classList.toggle("show");
-
-                            // Toggle classe hidden
-                            if (subcategoryList.classList.contains("show")) {
-                                subcategoryList.classList.remove("hidden");
-                            } else {
-                                setTimeout(() => {
-                                    subcategoryList.classList.add("hidden");
-                                }, 300);
-                            }
-
-                            // Rotacionar seta
-                            const icon = this.querySelector(".fa-chevron-down");
-                            if (icon) {
-                                icon.style.transform =
-                                    subcategoryList.classList.contains("show")
-                                        ? "rotate(180deg)"
-                                        : "rotate(0deg)";
-                            }
-
-                            console.log(
-                                "📂 Categoria expandida:",
-                                this.dataset.category,
-                            );
-                        }
-                    });
-                });
-
-                // Busca em tempo real (simulada)
-                if (searchInput) {
-                    const searchCounter = document.getElementById(
-                        "search-results-counter",
-                    );
-                    const resultsCount =
-                        document.getElementById("results-count");
-
-                    searchInput.addEventListener("input", function (e) {
-                        const query = e.target.value.trim();
-
-                        if (query.length > 0) {
-                            // Simular busca
-                            const fakeResults =
-                                Math.floor(Math.random() * 20) + 1;
-                            if (resultsCount)
-                                resultsCount.textContent = fakeResults;
-                            if (searchCounter)
-                                searchCounter.classList.remove("hidden");
-
-                            console.log(
-                                "🔍 Buscando por:",
-                                query,
-                                "- Resultados:",
-                                fakeResults,
-                            );
-                        } else {
-                            if (searchCounter)
-                                searchCounter.classList.add("hidden");
-                        }
-                    });
-                }
-
-                // Atualizar contadores do carrinho e wishlist
-                function updateCounters() {
-                    const cartCount =
-                        document.getElementById("cart-mini-count");
-                    const wishlistCount = document.getElementById(
-                        "wishlist-mini-count",
-                    );
-
-                    if (cartCount)
-                        cartCount.textContent = Math.floor(Math.random() * 10);
-                    if (wishlistCount)
-                        wishlistCount.textContent = Math.floor(
-                            Math.random() * 15,
-                        );
-                }
-
-                // Inicializar demonstração
-                setTimeout(() => {
-                    animateMenuButton();
-                    addDemoTooltip();
-                    updateCounters();
-                    console.log("🎉 Menu lateral pronto para demonstração!");
-
-                    // Teste adicional para garantir funcionamento
-                    console.log("🧪 Teste final dos elementos:", {
-                        menuExists:
-                            document.getElementById("side-menu") !== null,
-                        overlayExists:
-                            document.getElementById("menu-overlay") !== null,
-                        buttonExists:
-                            document.getElementById("open-menu-btn") !== null,
-                        menuStyle: window.getComputedStyle(sideMenu).transform,
-                        overlayStyle:
-                            window.getComputedStyle(menuOverlay).display,
-                    });
-                }, 1000);
-
-                // Simular atividade nos contadores a cada 5 segundos
-                setInterval(updateCounters, 5000);
             });
         </script>
 
-        {% block custom_js %}
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                if (typeof init === "function") {
-                    init();
-                }
-            });
-        </script>
-        {% endblock custom_js %}
+        {% block custom_js %}{% endblock custom_js %}
     </body>
 </html>

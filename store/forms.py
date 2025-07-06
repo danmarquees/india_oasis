@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import CustomerProfile, Review, ContactMessage
 
@@ -157,4 +157,24 @@ class ContactForm(forms.Form):
             'id': 'newsletter',
             'class': 'mr-3 text-primary focus:ring-2 focus:ring-primary'
         })
+    )
+
+# ---- NOVO FORMULÁRIO DE LOGIN ----
+class LoginForm(AuthenticationForm):
+    username = forms.EmailField(
+        label="E-mail",
+        widget=forms.EmailInput(attrs={
+            'autofocus': True,
+            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
+            'placeholder': 'seuemail@exemplo.com'
+        })
+    )
+    password = forms.CharField(
+        label="Senha",
+        strip=False,
+        widget=forms.PasswordInput(attrs={
+            'autocomplete': 'current-password',
+            'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
+            'placeholder': 'Sua senha'
+        }),
     )
