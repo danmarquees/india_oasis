@@ -3,3 +3,4 @@ Django==5.2.3
 django-environ==0.11.2
 pillow==11.2.1
 sqlparse==0.5.3
+mercadopago

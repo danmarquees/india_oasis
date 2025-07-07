@@ -2,22 +2,25 @@
 
 <!-- ==== CONTEÚDO PRINCIPAL CHECKOUT ==== -->
 <main class="container mx-auto px-4 py-8">
-  <!-- O formulário engloba tanto a seleção de pagamento quanto o resumo do pedido -->
+  <!--
+    Este formulário não lida mais com o pagamento diretamente.
+    Ele envia os dados para o backend criar um objeto 'Order'.
+    Se for bem-sucedido, o backend redirecionará para a página de pagamento real.
+  -->
   <form
     id="checkout-form"
-    action="{% url 'store:process_payment' %}"
+    action="{% url 'store:create_order_and_payment' %}"
     method="POST"
-    novalidate
   >
     {% csrf_token %}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Coluna de Formulário de Checkout -->
+      <!-- Coluna de Informações -->
       <div class="lg:col-span-2">
         <!-- Dados de Entrega -->
         <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
           <h2 class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6">
             <i class="fas fa-shipping-fast mr-3 text-primary"></i>
-            Dados de Entrega
+            Confirmar Dados de Entrega
           </h2>
           <div class="bg-gray-50 p-4 rounded-lg">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -27,7 +30,7 @@
                 </p>
                 <p class="text-gray-600">{{ user.email }}</p>
                 <p class="text-gray-600">
-                  {{user.profile.telefone|default:"Telefone não cadastrado"}}
+                  {{ user.profile.telefone|default:"Telefone não cadastrado" }}
                 </p>
               </div>
               <div>
@@ -39,99 +42,38 @@
                   {{ user.profile.complemento }} - {{ user.profile.bairro }}
                 </p>
                 <p class="text-gray-600">
-                  {{ user.profile.cidade }} - {{ user.profile.estado }},
+                  {{ user.profile.cidade }} - {{ user.profile.estado }}, 
                   {{user.profile.cep }}
                 </p>
               </div>
             </div>
+            <div class="mt-4 text-right">
+              <a
+                href="{% url 'store:profile' %}"
+                class="text-sm text-primary hover:underline font-semibold"
+              >
+                Editar Endereço
+                <i class="fas fa-edit ml-1"></i>
+              </a>
+            </div>
           </div>
         </div>
 
-        <!-- Método de Pagamento -->
         <div class="bg-white rounded-lg shadow-lg p-6">
           <h2 class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6">
             <i class="fas fa-credit-card mr-3 text-primary"></i>
-            Método de Pagamento
+            Próximo Passo: Pagamento
           </h2>
-
-          <!-- Seleção de Método -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <label
-              for="credit-method-radio"
-              class="payment-method border-2 border-gray-200 rounded-lg p-4 cursor-pointer"
-              data-method="credit"
-            >
-              <input
-                type="radio"
-                id="credit-method-radio"
-                name="payment_method"
-                value="credit_card"
-                class="hidden"
-                checked
-              />
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center"
-                >
-                  <i class="fas fa-credit-card text-white text-xl"></i>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-800">Cartão de Crédito</h3>
-                  <p class="text-sm text-gray-600">Até 12x sem juros</p>
-                </div>
-                <div class="ml-auto">
-                  <div
-                    class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
-                  ></div>
-                </div>
-              </div>
-            </label>
-            <label
-              for="pix-method-radio"
-              class="payment-method border-2 border-gray-200 rounded-lg p-4 cursor-pointer"
-              data-method="pix"
-            >
-              <input
-                type="radio"
-                id="pix-method-radio"
-                name="payment_method"
-                value="pix"
-                class="hidden"
-              />
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center"
-                >
-                  <i class="fas fa-qrcode text-white text-xl"></i>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-gray-800">PIX</h3>
-                  <p class="text-sm text-gray-600">Aprovação instantânea</p>
-                </div>
-                <div class="ml-auto">
-                  <div
-                    class="w-6 h-6 border-2 border-gray-300 rounded-full payment-radio"
-                  ></div>
-                </div>
-              </div>
-            </label>
-          </div>
-
-          <!-- Formulários de Pagamento -->
-          <div id="payment-forms">
-            <div id="credit-form" class="payment-form">
-              <!-- O Brick do Mercado Pago será montado aqui -->
-              <div id="card-form-container"></div>
-            </div>
-            <div id="pix-form" class="payment-form hidden">
-              <div class="bg-green-50 p-4 rounded-lg text-center">
-                <p class="text-gray-700">
-                  O QR Code para pagamento PIX será gerado ao finalizar a
-                  compra.
-                </p>
-              </div>
-            </div>
-          </div>
+          <p class="text-gray-600">
+            Após confirmar os detalhes do seu pedido abaixo, você será
+            redirecionado para o ambiente seguro do Mercado Pago para finalizar
+            sua compra.
+          </p>
+          <p class="mt-4 text-gray-600">
+            Você poderá escolher pagar com
+            <strong>Cartão de Crédito</strong> ou <strong>PIX</strong> na
+            próxima etapa.
+          </p>
         </div>
       </div>
 
@@ -150,18 +92,6 @@
             <div
               class="flex items-center space-x-3 pb-3 mb-3 border-b border-gray-100"
             >
-              <!-- Campos ocultos para enviar os dados do carrinho -->
-              <input
-                type="hidden"
-                name="product_ids"
-                value="{{ item.product.id }}"
-              />
-              <input
-                type="hidden"
-                name="quantities"
-                value="{{ item.quantity }}"
-              />
-
               <img
                 src="{{ item.product.image.url }}"
                 alt="{{ item.product.name }}"
@@ -190,10 +120,10 @@
               </div>
               <div class="flex justify-between">
                 <span class="text-gray-600">Frete:</span>
-                <span class="font-medium text-green-600"
-                  >{% if shipping_cost == 0 %}Grátis {% else%} R$
-                  {{shipping_cost|floatformat:2 }} {% endif%}</span
-                >
+                <span class="font-medium text-green-600">
+                  {% if shipping_cost == 0 %}Grátis{% else %}R$
+                  {{shipping_cost|floatformat:2}}{% endif %}
+                </span>
               </div>
               <hr class="border-gray-200" />
               <div class="flex justify-between text-lg font-bold">
@@ -204,23 +134,23 @@
               </div>
             </div>
 
-            <!-- O botão de submit está dentro do form -->
+            <!-- O botão de submit agora apenas cria o pedido e redireciona -->
             <button
               type="submit"
               id="finalize-order"
               class="btn btn-primary w-full text-lg py-4 font-rajdhani"
             >
               <i class="fas fa-lock mr-2"></i>
-              Finalizar Compra
+              Finalizar e Ir para Pagamento
             </button>
 
             <p class="text-xs text-gray-500 text-center mt-3">
-              Ao finalizar, você concorda com nossos
+              Ao continuar, você concorda com nossos
               <a
                 href="{% url 'store:terms' %}"
                 class="text-primary hover:underline"
                 >Termos de Uso</a
-              >
+              >.
             </p>
           </div>
         </div>
@@ -229,199 +159,11 @@
   </form>
 </main>
 
-<!-- Overlay de Processamento -->
-<div id="processing-overlay" class="processing-overlay hidden">
-  <div class="processing-spinner"></div>
-  <p class="text-white text-lg mt-4">Processando seu pagamento...</p>
-</div>
-
 <style>
-  .payment-method.selected {
-    border-color: theme("colors.primary");
-    box-shadow: 0 0 0 2px rgba(theme("colors.primary"), 0.2);
-    background-color: theme("colors.yellow.50");
-  }
-  .payment-method.selected .payment-radio {
-    background-color: theme("colors.primary");
-    border-color: theme("colors.primary");
-  }
   .order-summary-sticky {
     position: sticky;
     top: 2rem;
   }
-  .processing-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  .processing-spinner {
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid theme("colors.primary");
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 </style>
 
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const publicKey = "{{ MERCADOPAGO_PUBLIC_KEY }}";
-    if (!publicKey) {
-      console.error("Mercado Pago Public Key is not set.");
-      return;
-    }
-    const mp = new MercadoPago(publicKey);
-
-    const checkoutForm = document.getElementById("checkout-form");
-    const processingOverlay = document.getElementById("processing-overlay");
-    const paymentMethodLabels = document.querySelectorAll(".payment-method");
-    const pixForm = document.getElementById("pix-form");
-    const creditForm = document.getElementById("credit-form");
-
-    let cardForm; // Variável para manter a instância do Card Form Brick
-
-    // Função para inicializar o Card Form Brick do Mercado Pago
-    const initializeCardForm = async () => {
-      if (cardForm) {
-        await cardForm.unmount(); // Destrói a instância anterior se existir
-      }
-
-      const settings = {
-        initialization: {
-          amount: parseFloat(
-            "{{ total_with_shipping|floatformat:2 }}".replace(",", ".")
-          ),
-          payer: {
-            email: "{{ user.email }}",
-          },
-        },
-        customization: {
-          visual: {
-            style: { theme: "bootstrap" },
-          },
-          paymentMethods: {
-            maxInstallments: 12,
-          },
-        },
-        callbacks: {
-          onReady: () => console.log("Card Form Brick is ready."),
-          onError: (error) => {
-            console.error("Card Form Brick error:", error);
-            alert(
-              "Ocorreu um erro ao carregar o formulário de pagamento. Por favor, recarregue a página."
-            );
-          },
-        },
-      };
-      cardForm = await mp.cardForm(settings).mount("#card-form-container");
-    };
-
-    // Lógica para alternar entre métodos de pagamento
-    paymentMethodLabels.forEach((label) => {
-      label.addEventListener("click", () => {
-        paymentMethodLabels.forEach((l) => l.classList.remove("selected"));
-        label.classList.add("selected");
-
-        const radio = label.querySelector('input[type="radio"]');
-        radio.checked = true;
-
-        const selectedMethod = label.dataset.method;
-        if (selectedMethod === "credit") {
-          pixForm.classList.add("hidden");
-          creditForm.classList.remove("hidden");
-          initializeCardForm(); // Garante que o formulário de cartão seja (re)inicializado
-        } else {
-          creditForm.classList.add("hidden");
-          pixForm.classList.remove("hidden");
-        }
-      });
-    });
-
-    // Manipulador central de submissão do formulário
-    checkoutForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
-      processingOverlay.classList.remove("hidden");
-
-      const selectedMethod = document.querySelector(
-        'input[name="payment_method"]:checked'
-      ).value;
-
-      try {
-        const formData = new FormData(checkoutForm);
-
-        if (selectedMethod === "credit_card") {
-          if (!cardForm) {
-            throw new Error("Formulário de cartão não foi inicializado.");
-          }
-          const cardTokenResponse = await cardForm.createCardToken();
-          if (!cardTokenResponse) {
-            throw new Error(
-              "Não foi possível gerar o token do cartão. Verifique os dados."
-            );
-          }
-          formData.append("token", cardTokenResponse);
-        }
-        // Para 'pix', não precisamos fazer nada extra, o 'payment_method' já está no formData.
-
-        const response = await fetch("{% url 'store:process_payment' %}", {
-          method: "POST",
-          headers: {
-            "X-CSRFToken": "{{ csrf_token }}",
-          },
-          body: new URLSearchParams(formData), // Envia como 'application/x-www-form-urlencoded'
-        });
-
-        const result = await response.json();
-
-        if (response.ok && result.redirect_url) {
-          window.location.href = result.redirect_url;
-        } else {
-          throw new Error(
-            result.error || "Ocorreu um erro ao processar seu pagamento."
-          );
-        }
-      } catch (error) {
-        console.error("Payment submission error:", error);
-        alert(
-          error.message ||
-            "Não foi possível processar seu pagamento. Tente novamente."
-        );
-        processingOverlay.classList.add("hidden");
-      }
-    });
-
-    // Inicialização da página
-    const initialSelectedLabel = document
-      .querySelector(".payment-method input:checked")
-      .closest("label");
-    initialSelectedLabel.classList.add("selected");
-    if (initialSelectedLabel.dataset.method === "credit") {
-      initializeCardForm();
-    } else {
-      creditForm.classList.add("hidden");
-      pixForm.classList.remove("hidden");
-    }
-  });
-</script>
-
-{% endblock content %} {% block custom_js %} {# On the checkout page, we don't
-run the global init() script to avoid conflicts. #} {# The checkout-specific JS
-is already included in this template. #} {% endblock custom_js %}
+{% endblock content %}

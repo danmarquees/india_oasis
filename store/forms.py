@@ -178,3 +178,24 @@ class LoginForm(AuthenticationForm):
             'placeholder': 'Sua senha'
         }),
     )
+
+# ---- FORMULÁRIO DE PERFIL DO USUÁRIO ----
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomerProfile
+        # Exclui o campo 'user' pois ele não deve ser editado pelo usuário
+        exclude = ['user']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-input'}),
+            'cpf': forms.TextInput(attrs={'class': 'form-input'}),
+            'telefone': forms.TextInput(attrs={'class': 'form-input'}),
+            'data_nascimento': forms.DateInput(attrs={'class': 'form-input', 'type': 'date'}),
+            'genero': forms.TextInput(attrs={'class': 'form-input'}),
+            'cep': forms.TextInput(attrs={'class': 'form-input'}),
+            'endereco': forms.TextInput(attrs={'class': 'form-input'}),
+            'numero': forms.TextInput(attrs={'class': 'form-input'}),
+            'complemento': forms.TextInput(attrs={'class': 'form-input'}),
+            'bairro': forms.TextInput(attrs={'class': 'form-input'}),
+            'cidade': forms.TextInput(attrs={'class': 'form-input'}),
+            'estado': forms.TextInput(attrs={'class': 'form-input'}),
+        }

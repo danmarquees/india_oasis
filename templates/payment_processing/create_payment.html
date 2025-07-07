@@ -1,0 +1,107 @@
+```<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pagamento</title>
+    <!-- Você pode adicionar seu CSS aqui -->
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f4; }
+        .container { text-align: center; padding: 40px; border: 1px solid #ccc; border-radius: 8px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h2 { color: #333; }
+        p { color: #666; }
+        .btn { padding: 12px 24px; font-size: 16px; cursor: pointer; border-radius: 5px; border: none; font-weight: bold; }
+        .btn-primary { background-color: #009ee3; color: white; }
+        .btn-primary:hover { background-color: #0089cc; }
+        .btn:disabled { background-color: #ccc; cursor: not-allowed; }
+        #error-message { color: #d9534f; margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Finalizar Pagamento</h2>
+    <p>Clique no botão abaixo para ser redirecionado ao Mercado Pago e concluir sua compra com segurança.</p>
+
+    <!-- O botão que iniciará o processo de pagamento -->
+    <button id="checkout-btn" class="btn btn-primary">Pagar com Mercado Pago</button>
+
+    <!-- Div para exibir mensagens de erro -->
+    <div id="error-message"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const checkoutButton = document.getElementById('checkout-btn');
+    const errorMessageDiv = document.getElementById('error-message');
+
+    checkoutButton.addEventListener('click', function() {
+        // Desabilita o botão e mostra um feedback visual para o usuário
+        checkoutButton.disabled = true;
+        checkoutButton.textContent = 'Processando...';
+        errorMessageDiv.textContent = ''; // Limpa erros anteriores
+
+        // Função para obter o token CSRF dos cookies do navegador
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // O cookie se parece com "csrftoken=ASDF..."?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        // Faz a requisição POST para a view 'create_payment' no backend
+        fetch("{% url 'payment_processing:create_payment' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Inclui o token CSRF para segurança
+                'X-CSRFToken': csrftoken
+            },
+            // Você pode enviar dados no corpo da requisição, como os itens do carrinho.
+            // Por enquanto, a view de exemplo não espera nenhum dado.
+            // body: JSON.stringify({ cart_id: 123 }),
+        })
+        .then(response => {
+            // Se a resposta do servidor não for 'ok' (status 2xx),
+            // tentamos extrair o erro do corpo da resposta.
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.error || 'Ocorreu um erro no servidor.');
+                });
+            }
+            // Se for 'ok', passamos o JSON adiante.
+            return response.json();
+        })
+        .then(data => {
+            // Se a resposta contém a URL de pagamento, redirecionamos o usuário.
+            if (data.payment_url) {
+                window.location.href = data.payment_url;
+            } else {
+                // Caso contrário, lançamos um erro.
+                throw new Error(data.error || 'URL de pagamento não recebida.');
+            }
+        })
+        .catch(error => {
+            // Captura qualquer erro que tenha ocorrido no processo
+            console.error('Erro ao criar o pagamento:', error);
+            errorMessageDiv.textContent = 'Erro ao iniciar o pagamento: ' + error.message;
+            // Reabilita o botão para que o usuário possa tentar novamente.
+            checkoutButton.disabled = false;
+            checkoutButton.textContent = 'Pagar com Mercado Pago';
+        });
+    });
+});
+</script>
+
+</body>
+</html>

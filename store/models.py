@@ -91,11 +91,13 @@ class CartItem(models.Model):
 
 class Order(models.Model):
     STATUS_CHOICES = (
-        ('pending', 'Pending'),
-        ('processing', 'Processing'),
-        ('shipped', 'Shipped'),
-        ('delivered', 'Delivered'),
-        ('cancelled', 'Cancelled'),
+        ('awaiting_payment', 'Aguardando Pagamento'),
+        ('payment_rejected', 'Pagamento Recusado'),
+        ('payment_approved', 'Pagamento Aprovado'),
+        ('processing', 'Em Processamento'),
+        ('shipped', 'Enviado'),
+        ('delivered', 'Entregue'),
+        ('cancelled', 'Cancelado'),
     )
 
     # Adicionado related_name para clareza
@@ -109,9 +111,13 @@ class Order(models.Model):
     state = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='awaiting_payment')
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     paid = models.BooleanField(default=False)
+
+    # Novos campos para integração com Mercado Pago
+    preference_id = models.CharField(max_length=255, null=True, blank=True, help_text="ID da preferência de pagamento do Mercado Pago")
+    payment_id = models.CharField(max_length=255, null=True, blank=True, help_text="ID do pagamento no Mercado Pago")
 
     class Meta:
         ordering = ('-created',)
