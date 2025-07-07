@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falha no Pagamento</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f4f4f4; text-align: center; }
+        .container { padding: 40px; border-radius: 8px; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #dc3545; }
+        p { color: #333; }
+        .action-links a { display: inline-block; margin: 10px; padding: 10px 20px; text-decoration: none; border-radius: 5px; }
+        .try-again-link { background-color: #007bff; color: white; }
+        .try-again-link:hover { background-color: #0056b3; }
+        .home-link { background-color: #6c757d; color: white; }
+        .home-link:hover { background-color: #5a6268; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Falha no Pagamento</h1>
+        <p>Houve um problema ao processar seu pagamento.</p>
+        <p>Por favor, verifique os dados informados ou tente usar um método de pagamento diferente.</p>
+        <div class="action-links">
+            <a href="{% url 'payment_processing:create_payment' %}" class="try-again-link">Tentar Novamente</a>
+            <a href="/" class="home-link">Voltar para a Loja</a>
+        </div>
+    </div>
+</body>
+</html>

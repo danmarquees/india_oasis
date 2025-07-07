@@ -1,0 +1,109 @@
+/* =============================================== */
+/*  Estilos Responsivos para a Página de Perfil
+/*  Abordagem: Mobile First
+/* =============================================== */
+
+/* Por padrão (mobile), o layout principal é de coluna única */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Esconde a sidebar de desktop em telas menores */
+.profile-sidebar {
+    display: none;
+}
+
+/* Garante que o conteúdo principal ocupe toda a largura */
+.profile-content {
+    width: 100%;
+    padding: 1rem; /* Reduz o padding em telas menores */
+}
+
+/* Adiciona um espaçamento inferior para não ser sobreposto pelo menu */
+main.profile-content {
+    padding-bottom: 100px;
+}
+
+/* Ajusta o tamanho da fonte dos títulos */
+.profile-section h1 {
+    font-size: 1.75rem; /* Equivalente a text-2xl do Tailwind */
+}
+
+
+/* ==== MENU DE NAVEGAÇÃO INFERIOR (MOBILE) ==== */
+.bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    border-top: 1px solid #e5e7eb; /* gray-200 */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
+    justify-content: space-around;
+    padding: 0.5rem 0;
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 0.25rem 0.5rem;
+    color: #4b5563; /* gray-600 */
+    text-decoration: none;
+    font-size: 0.75rem; /* text-xs */
+    line-height: 1rem;
+    transition: color 0.2s ease-in-out, transform 0.1s ease;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.bottom-nav-item:active {
+    transform: scale(0.95);
+}
+
+.bottom-nav-item .icon {
+    font-size: 1.25rem; /* text-xl */
+    margin-bottom: 0.25rem;
+    width: 28px; /* Fornece um tamanho consistente */
+    text-align: center;
+}
+
+.bottom-nav-item .label {
+    letter-spacing: 0.5px;
+}
+
+.bottom-nav-item.active {
+    color: #f97316; /* orange-500, usando uma cor primária do Tailwind */
+    font-weight: 600;
+}
+
+
+/* ==== AJUSTES DE RESPONSIVIDADE PARA TELAS MAIORES ==== */
+@media (min-width: 1024px) { /* A partir de 'lg' no Tailwind */
+    /* Esconde o menu inferior em telas maiores */
+    .bottom-nav {
+        display: none;
+    }
+
+    /* Restaura o layout flexível de desktop */
+    .profile-container {
+        flex-direction: row;
+    }
+
+    /* Reexibe a sidebar lateral */
+    .profile-sidebar {
+        display: block; /* Ou 'flex' se for um container flex */
+    }
+
+    /* Restaura o padding original do conteúdo principal */
+    main.profile-content {
+        padding: 1.5rem; /* p-6 */
+        padding-bottom: 1.5rem;
+    }
+}

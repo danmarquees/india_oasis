@@ -270,6 +270,10 @@
                 font-weight: 600;
             }
         </style>
+
+        <!-- CSS Responsivo -->
+        <link rel="stylesheet" href="/static/css/profile-responsive.css" />
+        <link rel="stylesheet" href="/static/css/skeleton.css" />
     </head>
     <body class="text-gray-800 bg-gray-50">
         <!-- ==== MENU LATERAL RETRÁTIL ==== -->
@@ -399,8 +403,55 @@
             </nav>
         </header>
 
+        <!-- ==== ESQUELETO DE CARREGAMENTO ==== -->
+        <div id="skeleton-loader">
+            <div class="skeleton-container">
+                <!-- Sidebar do Esqueleto (Apenas Desktop) -->
+                <aside class="skeleton-sidebar">
+                    <div class="skeleton skeleton-avatar"></div>
+                    <div
+                        class="skeleton skeleton-line"
+                        style="width: 60%; margin: 1rem auto 0.5rem"
+                    ></div>
+                    <div
+                        class="skeleton skeleton-line"
+                        style="width: 80%; margin: 0 auto 1.5rem"
+                    ></div>
+                    <div
+                        class="skeleton skeleton-line"
+                        style="height: 3rem; margin-bottom: 1rem"
+                    ></div>
+                    <div
+                        class="skeleton skeleton-line"
+                        style="height: 2.5rem; margin-bottom: 0.75rem"
+                    ></div>
+                    <div
+                        class="skeleton skeleton-line"
+                        style="height: 2.5rem; margin-bottom: 0.75rem"
+                    ></div>
+                    <div
+                        class="skeleton skeleton-line"
+                        style="height: 2.5rem; margin-bottom: 0.75rem"
+                    ></div>
+                </aside>
+                <!-- Conteúdo do Esqueleto -->
+                <main class="skeleton-content">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-subtitle"></div>
+                    <div class="skeleton-grid">
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                        <div class="skeleton skeleton-card"></div>
+                    </div>
+                    <div class="skeleton skeleton-list-item"></div>
+                    <div class="skeleton skeleton-list-item"></div>
+                </main>
+            </div>
+        </div>
+
         <!-- ==== CONTEÚDO PRINCIPAL ==== -->
-        <div class="flex">
+        <div class="profile-container" id="main-content" style="display: none">
             <!-- Sidebar do Perfil -->
             <aside class="profile-sidebar w-80 p-6" id="profile-sidebar">
                 <div class="text-center mb-8">
@@ -1523,6 +1574,49 @@
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                         />
                     </div>
+
+                    <!-- ==== MENU DE NAVEGAÇÃO INFERIOR (MOBILE) ==== -->
+                    <nav class="bottom-nav">
+                        <button
+                            class="bottom-nav-item active"
+                            onclick="handleBottomNavClick('dashboard', this)"
+                        >
+                            <i class="icon fas fa-tachometer-alt"></i>
+                            <span class="label">Dashboard</span>
+                        </button>
+                        <button
+                            class="bottom-nav-item"
+                            onclick="handleBottomNavClick('orders', this)"
+                        >
+                            <i class="icon fas fa-shopping-bag"></i>
+                            <span class="label">Pedidos</span>
+                        </button>
+                        <button
+                            class="bottom-nav-item"
+                            onclick="handleBottomNavClick('personal-info', this)"
+                        >
+                            <i class="icon fas fa-user"></i>
+                            <span class="label">Conta</span>
+                        </button>
+                        <button
+                            class="bottom-nav-item"
+                            onclick="handleBottomNavClick('support', this)"
+                        >
+                            <i class="icon fas fa-headset"></i>
+                            <span class="label">Suporte</span>
+                        </button>
+                        <button class="bottom-nav-item" onclick="logout()">
+                            <i class="icon fas fa-sign-out-alt"></i>
+                            <span class="label">Sair</span>
+                        </button>
+                    </nav>
+
+                    <script>
+                        function handleBottomNavClick(sectionId, element) {
+                            // Apenas chama a função principal que centraliza a lógica
+                            showSection(sectionId);
+                        }
+                    </script>
                     <div>
                         <label
                             class="block text-sm font-medium text-gray-700 mb-2"
@@ -1591,8 +1685,7 @@
         <script>
             // Inicialização
             document.addEventListener("DOMContentLoaded", function () {
-                setupEventListeners();
-                loadCartCount();
+                // Inicia o processo de carregamento que irá exibir o esqueleto
                 loadUserData();
             });
 
@@ -1635,6 +1728,23 @@
                                 showSection(item.dataset.section);
                                 setActiveMenuItem(item);
                             });
+                        }
+
+                        function setActiveBottomNavItem(sectionId) {
+                            document
+                                .querySelectorAll(".bottom-nav-item")
+                                .forEach((item) => {
+                                    item.classList.remove("active");
+                                    const onclickAttr =
+                                        item.getAttribute("onclick");
+                                    // Ativa o item se o seu onclick contiver o ID da seção
+                                    if (
+                                        onclickAttr &&
+                                        onclickAttr.includes(`'${sectionId}'`)
+                                    ) {
+                                        item.classList.add("active");
+                                    }
+                                });
                         }
                     });
 
@@ -1785,18 +1895,32 @@
 
             // Carregar dados do usuário
             function loadUserData() {
-                // Simular carregamento de dados do usuário
-                const userData = {
-                    name: "Maria Silva Santos",
-                    email: "maria.silva@email.com",
-                    avatar: "https://images.unsplash.com/photo-1494790108755-2616b79bd74c?w=150&h=150&fit=crop&crop=face",
-                };
+                // Exibe o skeleton e oculta o conteúdo principal
+                document.getElementById("main-content").style.display = "none";
+                document.getElementById("skeleton-loader").style.display =
+                    "block";
 
-                document.getElementById("user-name").textContent =
-                    userData.name;
-                document.getElementById("user-email").textContent =
-                    userData.email;
-                document.getElementById("avatar-preview").src = userData.avatar;
+                // Simula o carregamento de dados do usuário com um atraso
+                setTimeout(() => {
+                    const userData = {
+                        name: "Maria Silva Santos",
+                        email: "maria.silva@email.com",
+                        avatar: "https://images.unsplash.com/photo-1494790108755-2616b79bd74c?w=150&h=150&fit=crop&crop=face",
+                    };
+
+                    document.getElementById("user-name").textContent =
+                        userData.name;
+                    document.getElementById("user-email").textContent =
+                        userData.email;
+                    document.getElementById("avatar-preview").src =
+                        userData.avatar;
+
+                    // Oculta o skeleton e exibe o conteúdo principal
+                    document.getElementById("skeleton-loader").style.display =
+                        "none";
+                    document.getElementById("main-content").style.display =
+                        "block";
+                }, 2000); // Simula um atraso de 2 segundos
             }
 
             // Carregar contador do carrinho

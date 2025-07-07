@@ -23,6 +23,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
+    path('payment/', include('payment_processing.urls')),
 ]
 
 # Serve static files during development

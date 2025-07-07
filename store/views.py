@@ -1,26 +1,65 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q, Avg, Count
 from django.contrib import messages
 from django.urls import reverse
+from django.db import transaction
 from decimal import Decimal
 import json
-# Note: You need to have the 'mercadopago' library installed
 import mercadopago
 
 # Models
 from .models import Product, Category, Cart, CartItem, Order, OrderItem, Wishlist, Review, ContactMessage, CustomerProfile
 
 # Forms
-from .forms import CustomUserCreationForm, ReviewForm, ContactForm, LoginForm
-from django.contrib.auth.forms import AuthenticationForm
+from .forms import CustomUserCreationForm, ReviewForm, ContactForm, LoginForm, ProfileForm
+
+# --- Helper Functions ---
+
+def get_cart(request):
+    """Helper function to get cart for a logged-in user or a session."""
+    if request.user.is_authenticated:
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        # Check for a session cart and merge it if it exists
+        session_cart_id = request.session.get('cart_id')
+        if session_cart_id:
+            try:
+                old_cart = Cart.objects.get(id=session_cart_id, user=None)
+                for item in old_cart.items.all():
+                    # Transfer items to the user's permanent cart
+                    existing_item, item_created = CartItem.objects.get_or_create(cart=cart, product=item.product, defaults={'quantity': 0})
+                    existing_item.quantity += item.quantity
+                    existing_item.save()
+                old_cart.delete()
+                del request.session['cart_id']
+            except Cart.DoesNotExist:
+                pass # No session cart to merge
+        return cart
+    else:
+        # Handle anonymous users
+        cart_id = request.session.get('cart_id')
+        if cart_id:
+            try:
+                return Cart.objects.get(id=cart_id)
+            except Cart.DoesNotExist:
+                pass # Invalid session cart_id, create a new one
+        cart = Cart.objects.create() # user=None
+        request.session['cart_id'] = cart.id
+        return cart
+
+def calculate_shipping_cost(total_cart_price):
+    """Placeholder for shipping calculation logic."""
+    if total_cart_price >= Decimal('250.00'):
+        return Decimal('0.00')
+    return Decimal('25.00')
 
 
-# Basic Views
+# --- Core Store Views ---
+
 def home(request):
     products = Product.objects.filter(available=True).annotate(
         average_rating=Avg('reviews__rating'),
@@ -37,24 +76,22 @@ def terms(request):
 def privacy(request):
     return render(request, 'store/privacy.html')
 
-# Product Views
+# --- Product Views ---
+
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
 
-    # Search logic
     query = request.GET.get('q')
     if query:
         products = products.filter(Q(name__icontains=query) | Q(description__icontains=query))
 
-    # Sorting logic
     sort_option = request.GET.get('sort')
-    allowed_sort_options = ['name', 'price', '-price', '-created_at']
-    if sort_option in allowed_sort_options:
+    if sort_option in ['name', 'price', '-price', '-created']:
         products = products.order_by(sort_option)
     else:
-        products = products.order_by('name')  # Default sort by name
+        products = products.order_by('name')
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -76,50 +113,21 @@ def product_detail(request, slug):
         'review_form': review_form
     })
 
-# Cart Views
-def get_cart(request):
-    """Helper function to get cart for user or session."""
-    if request.user.is_authenticated:
-        cart, created = Cart.objects.get_or_create(user=request.user)
-        session_cart_id = request.session.get('cart_id')
-        if session_cart_id:
-            try:
-                old_cart = Cart.objects.get(id=session_cart_id, user=None)
-                for item in old_cart.items.all():
-                    # Transfer items to user's cart
-                    existing_item, item_created = CartItem.objects.get_or_create(cart=cart, product=item.product)
-                    if not item_created:
-                        existing_item.quantity += item.quantity
-                    existing_item.save()
-                old_cart.delete()
-                del request.session['cart_id']
-            except Cart.DoesNotExist:
-                pass
-        return cart
-    else:
-        cart_id = request.session.get('cart_id')
-        if cart_id:
-            try:
-                return Cart.objects.get(id=cart_id)
-            except Cart.DoesNotExist:
-                pass  # Fall through to create a new one
-        cart = Cart.objects.create(user=None)
-        request.session['cart_id'] = cart.id
-        return cart
 
-def cart(request):
+# --- Cart Views ---
+
+def cart_detail(request):
     cart_instance = get_cart(request)
     return render(request, 'store/cart.html', {'cart': cart_instance})
 
 def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
-    cart = get_cart(request)
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cart_instance = get_cart(request)
+    # Use defaults to prevent race conditions
+    cart_item, created = CartItem.objects.get_or_create(cart=cart_instance, product=product, defaults={'quantity': 0})
 
-    # Check stock before adding
     if cart_item.quantity < product.stock:
-        if not created:
-            cart_item.quantity += 1
+        cart_item.quantity += 1
         cart_item.save()
         message = f"'{product.name}' foi adicionado ao carrinho."
         success = True
@@ -131,20 +139,19 @@ def cart_add(request, product_id):
         return JsonResponse({
             'success': success,
             'message': message,
-            'cart_count': cart.total_items,
+            'cart_count': cart_instance.total_items,
         })
 
-    # Fallback for non-AJAX requests
     if success:
         messages.success(request, message)
     else:
         messages.error(request, message)
-
     return redirect('store:product_list')
 
 def cart_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart_instance = get_cart(request)
+    removed_completely = False
     try:
         cart_item = CartItem.objects.get(cart=cart_instance, product=product)
         if cart_item.quantity > 1:
@@ -152,30 +159,31 @@ def cart_remove(request, product_id):
             cart_item.save()
         else:
             cart_item.delete()
+            removed_completely = True
     except CartItem.DoesNotExist:
         pass
-    return redirect('store:cart')
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({
+            'cart_total': cart_instance.total_price,
+            'cart_count': cart_instance.total_items,
+            'removed_completely': removed_completely,
+        })
+    return redirect('store:cart_detail')
 
 
-# Checkout and Payment Views
-def calculate_shipping_cost(total_cart_price):
-    """Placeholder for shipping calculation."""
-    # Free shipping above a certain threshold
-    if total_cart_price >= Decimal('250.00'):
-        return Decimal('0.00')
-    # Fixed shipping cost otherwise
-    return Decimal('25.00')
+# --- Checkout and Payment Views ---
 
 @login_required
 def checkout(request):
     cart = get_cart(request)
-    if cart.items.count() == 0:
-        messages.info(request, "Seu carrinho está vazio. Adicione produtos para continuar.")
+    if not cart.items.exists():
+        messages.info(request, "Seu carrinho está vazio.")
         return redirect("store:product_list")
 
+    # This view now only displays the checkout page.
+    # The actual order creation and payment initiation happens in a separate view.
     customer_profile = get_object_or_404(CustomerProfile, user=request.user)
-
-    # Recalculate totals on server side
     shipping_cost = calculate_shipping_cost(cart.total_price)
     total_with_shipping = cart.total_price + shipping_cost
 
@@ -184,179 +192,86 @@ def checkout(request):
         'customer_profile': customer_profile,
         'shipping_cost': shipping_cost,
         'total_with_shipping': total_with_shipping,
-        'MERCADO_PAGO_PUBLIC_KEY': settings.MERCADO_PAGO_PUBLIC_KEY,
     }
     return render(request, 'store/checkout.html', context)
 
 @login_required
-def process_payment(request):
+@transaction.atomic # Ensures that stock updates and order creation are all-or-nothing
+def create_order_and_redirect_to_payment(request):
     if request.method != 'POST':
-        return JsonResponse({'error': 'Método de requisição inválido'}, status=405)
+        return redirect('store:checkout')
 
     cart = get_cart(request)
     if not cart.items.exists():
-        return JsonResponse({'error': 'Seu carrinho está vazio.'}, status=400)
+        messages.error(request, "Seu carrinho está vazio.")
+        return redirect('store:product_list')
 
-    # Stock validation
+    # 1. Validate stock before creating the order
     for item in cart.items.all():
         if item.quantity > item.product.stock:
-            return JsonResponse({
-                'error': f'Estoque insuficiente para o produto: {item.product.name}. Disponível: {item.product.stock}'
-            }, status=400)
+            messages.error(request, f'Estoque insuficiente para {item.product.name}. Disponível: {item.product.stock}')
+            return redirect('store:cart_detail')
 
-    # Recalculate totals on the server to ensure data integrity
+    # 2. Create the Order
     shipping_cost = calculate_shipping_cost(cart.total_price)
     total_price = cart.total_price + shipping_cost
-
     user_profile = get_object_or_404(CustomerProfile, user=request.user)
 
-    # Create the Order object
     order = Order.objects.create(
         user=request.user,
-        first_name=request.user.first_name,
-        last_name=request.user.last_name,
+        first_name=request.user.first_name or user_profile.nome.split(' ')[0],
+        last_name=request.user.last_name or ' '.join(user_profile.nome.split(' ')[1:]),
         email=request.user.email,
         address=f"{user_profile.endereco}, {user_profile.numero}",
         postal_code=user_profile.cep,
         city=user_profile.cidade,
         state=user_profile.estado,
-        total_price=total_price
+        total_price=total_price,
+        status='awaiting_payment', # New status
+        paid=False
     )
 
-    # Create OrderItems and decrease stock
+    # 3. Create OrderItems and decrease stock
     for item in cart.items.all():
         OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
-        item.product.stock -= item.quantity
-        item.product.save()
+        # Decrease stock
+        product = item.product
+        product.stock -= item.quantity
+        product.save()
 
-    # Mercado Pago SDK initialization
-    sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
+    # 4. Clear the cart
+    cart.items.all().delete()
 
-    # Create payment preference items
-    preference_items = []
-    for item in order.items.all():
-        preference_items.append({
-            "title": item.product.name,
-            "quantity": item.quantity,
-            "unit_price": float(item.price),
-            "currency_id": "BRL",
-        })
+    # 5. Store order_id in session to be used by payment views
+    request.session['order_id'] = order.id
 
-    if shipping_cost > 0:
-        preference_items.append({
-            "title": "Frete",
-            "quantity": 1,
-            "unit_price": float(shipping_cost),
-            "currency_id": "BRL",
-        })
-
-    # Set up back URLs for redirection
-    back_urls = {
-        "success": request.build_absolute_uri(reverse('store:payment_success')),
-        "failure": request.build_absolute_uri(reverse('store:payment_failure')),
-        "pending": request.build_absolute_uri(reverse('store:payment_pending'))
-    }
-
-    preference_data = {
-        "items": preference_items,
-        "payer": {
-            "email": request.user.email,
-        },
-        "back_urls": back_urls,
-        "auto_return": "approved",
-        "notification_url": request.build_absolute_uri(reverse('store:mp_webhook')),
-        "external_reference": str(order.id)
-    }
-
-    try:
-        preference_response = sdk.preference().create(preference_data)
-        preference = preference_response["response"]
-
-        # Clear the cart and save order_id to session
-        cart.items.all().delete()
-        request.session['order_id'] = order.id
-
-        return JsonResponse({'redirect_url': preference['init_point']})
-    except Exception as e:
-        # If payment preference fails, roll back the order creation
-        order.delete()
-        # Note: Stock was already decreased. A more robust solution would use transactions.
-        return JsonResponse({'error': str(e)}, status=500)
-
-def order_success(request):
-    return render(request, 'store/order-success.html')
-
-def payment_success(request):
-    order_id = request.session.get('order_id')
-    if order_id:
-        order = get_object_or_404(Order, id=order_id)
-        order.paid = True
-        order.save()
-        del request.session['order_id']
-        return render(request, 'store/payment-success.html', {'order': order})
-    return redirect('store:home')
-
-def payment_failure(request):
-    return render(request, 'store/payment-failure.html')
-
-def payment_pending(request):
-    order_id = request.session.get('order_id')
-    if order_id:
-        order = get_object_or_404(Order, id=order_id)
-        return render(request, 'store/payment-pending.html', {'order': order})
-    return redirect('store:home')
+    # 6. Redirect to the payment processing page
+    # This page will handle the interaction with Mercado Pago's SDK
+    return redirect('payment_processing:create_payment')
 
 
-@csrf_exempt
-def mp_webhook(request):
-    if request.method == 'POST':
-        # Logic to handle Mercado Pago notifications
-        pass
-    return HttpResponse(status=200)
+# --- User Account Views ---
 
-# Wishlist Views
-@login_required
-def wishlist(request):
-    wishlist_instance, created = Wishlist.objects.get_or_create(user=request.user)
-    return render(request, 'store/wishlist.html', {'wishlist': wishlist_instance})
-
-@login_required
-def wishlist_add(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    wishlist_instance, created = Wishlist.objects.get_or_create(user=request.user)
-    wishlist_instance.products.add(product)
-    return redirect('store:wishlist')
-
-@login_required
-def wishlist_remove(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-    try:
-        wishlist_instance = Wishlist.objects.get(user=request.user)
-        wishlist_instance.products.remove(product)
-    except Wishlist.DoesNotExist:
-        pass
-    return redirect('store:wishlist')
-
-# User Account Views
 @login_required
 def profile(request):
-    # Pass user's orders and profile to the template
-    orders = Order.objects.filter(user=request.user)
     customer_profile = get_object_or_404(CustomerProfile, user=request.user)
-    return render(request, 'store/profile.html', {'orders': orders, 'profile': customer_profile})
+    orders = Order.objects.filter(user=request.user).order_by('-created')
 
-@login_required
-def add_review(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
+        form = ProfileForm(request.POST, instance=customer_profile)
         if form.is_valid():
-            if not Review.objects.filter(product=product, user=request.user).exists():
-                review = form.save(commit=False)
-                review.product = product
-                review.user = request.user
-                review.save()
-    return redirect('store:product_detail', slug=product.slug)
+            form.save()
+            messages.success(request, 'Seu perfil foi atualizado com sucesso!')
+            return redirect('store:profile')
+    else:
+        form = ProfileForm(instance=customer_profile)
+
+    context = {
+        'form': form,
+        'orders': orders,
+        'profile': customer_profile
+    }
+    return render(request, 'store/profile.html', context)
 
 def signup(request):
     if request.user.is_authenticated:
@@ -365,7 +280,10 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            # Create a customer profile automatically
+            CustomerProfile.objects.create(user=user, nome=user.get_full_name())
             login(request, user)
+            messages.success(request, "Cadastro realizado com sucesso!")
             return redirect('store:home')
     else:
         form = CustomUserCreationForm()
@@ -374,7 +292,6 @@ def signup(request):
 def user_login(request):
     if request.user.is_authenticated:
         return redirect('store:profile')
-
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
@@ -384,28 +301,67 @@ def user_login(request):
             return redirect(next_url or 'store:home')
     else:
         form = LoginForm()
-
     return render(request, 'store/login.html', {'form': form})
 
+@login_required
 def user_logout(request):
     logout(request)
+    messages.info(request, "Você saiu da sua conta.")
     return redirect('store:home')
 
-# Contact Form View
+
+# --- Other Views ---
+
+@login_required
+def add_review(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            if Review.objects.filter(product=product, user=request.user).exists():
+                messages.error(request, "Você já avaliou este produto.")
+            else:
+                review = form.save(commit=False)
+                review.product = product
+                review.user = request.user
+                review.save()
+                messages.success(request, "Obrigado pela sua avaliação!")
+    return redirect('store:product_detail', slug=product.slug)
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            ContactMessage.objects.create(
-                name=form.cleaned_data['nome'],
-                email=form.cleaned_data['email'],
-                phone=form.cleaned_data['telefone'],
-                subject=form.cleaned_data['assunto'],
-                message=form.cleaned_data['mensagem'],
-                newsletter_opt_in=form.cleaned_data['newsletter']
-            )
-            # You can add a success message using Django's messages framework
+            form.save()
+            messages.success(request, "Sua mensagem foi enviada. Entraremos em contato em breve.")
             return redirect('store:contact')
     else:
         form = ContactForm()
     return render(request, 'store/contact.html', {'form': form})
+
+@login_required
+def wishlist(request):
+    wishlist_instance, created = Wishlist.objects.get_or_create(user=request.user)
+    return render(request, 'store/wishlist.html', {'wishlist': wishlist_instance})
+
+@login_required
+def wishlist_add(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    wishlist_instance, created = Wishlist.objects.get_or_create(user=request.user)
+    if product not in wishlist_instance.products.all():
+        wishlist_instance.products.add(product)
+        messages.success(request, f"'{product.name}' foi adicionado à sua lista de desejos.")
+    else:
+        messages.info(request, f"'{product.name}' já está na sua lista de desejos.")
+    return redirect(request.META.get('HTTP_REFERER', 'store:product_list'))
+
+@login_required
+def wishlist_remove(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    try:
+        wishlist_instance = Wishlist.objects.get(user=request.user)
+        wishlist_instance.products.remove(product)
+        messages.success(request, f"'{product.name}' foi removido da sua lista de desejos.")
+    except Wishlist.DoesNotExist:
+        pass
+    return redirect('store:wishlist')
