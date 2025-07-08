@@ -15,6 +15,17 @@ import mercadopago
 # Models
 from .models import Product, Category, Cart, CartItem, Order, OrderItem, Wishlist, Review, ContactMessage, CustomerProfile
 
+def restore_cart_from_session(request):
+    cart_items_data = request.session.pop('cart_backup', None)
+    if cart_items_data:
+        cart = get_cart(request)
+        for item_data in cart_items_data:
+            product = Product.objects.filter(id=item_data["product_id"]).first()
+            if product:
+                cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+                cart_item.quantity = item_data["quantity"]
+                cart_item.save()
+
 # Forms
 from .forms import CustomUserCreationForm, ReviewForm, ContactForm, LoginForm, ProfileForm
 
@@ -239,7 +250,16 @@ def create_order_and_redirect_to_payment(request):
         product.stock -= item.quantity
         product.save()
 
-    # 4. Clear the cart
+    # 4. Salva o carrinho na sessão antes de limpar
+    cart_items_data = []
+    for item in cart.items.all():
+        cart_items_data.append({
+            "product_id": item.product.id,
+            "quantity": item.quantity,
+        })
+    request.session['cart_backup'] = cart_items_data
+
+    # Agora limpa o carrinho
     cart.items.all().delete()
 
     # 5. Store order_id in session to be used by payment views

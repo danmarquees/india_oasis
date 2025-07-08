@@ -2,168 +2,299 @@
 
 <!-- ==== CONTEÚDO PRINCIPAL CHECKOUT ==== -->
 <main class="container mx-auto px-4 py-8">
-  <!--
-    Este formulário não lida mais com o pagamento diretamente.
-    Ele envia os dados para o backend criar um objeto 'Order'.
-    Se for bem-sucedido, o backend redirecionará para a página de pagamento real.
-  -->
-  <form
-    id="checkout-form"
-    action="{% url 'store:create_order_and_payment' %}"
-    method="POST"
-  >
-    {% csrf_token %}
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Coluna de Informações -->
-      <div class="lg:col-span-2">
-        <!-- Dados de Entrega -->
-        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6">
-            <i class="fas fa-shipping-fast mr-3 text-primary"></i>
-            Confirmar Dados de Entrega
-          </h2>
-          <div class="bg-gray-50 p-4 rounded-lg">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <p class="font-semibold text-gray-800">
-                  {{user.profile.nome|default:user.get_full_name|default:user.username}}
-                </p>
-                <p class="text-gray-600">{{ user.email }}</p>
-                <p class="text-gray-600">
-                  {{ user.profile.telefone|default:"Telefone não cadastrado" }}
-                </p>
-              </div>
-              <div>
-                <p class="text-gray-800">
-                  {{ user.profile.endereco|default:"Endereço não cadastrado" }},
-                  {{ user.profile.numero }}
-                </p>
-                <p class="text-gray-600">
-                  {{ user.profile.complemento }} - {{ user.profile.bairro }}
-                </p>
-                <p class="text-gray-600">
-                  {{ user.profile.cidade }} - {{ user.profile.estado }}, 
-                  {{user.profile.cep }}
-                </p>
-              </div>
-            </div>
-            <div class="mt-4 text-right">
-              <a
-                href="{% url 'store:profile' %}"
-                class="text-sm text-primary hover:underline font-semibold"
-              >
-                Editar Endereço
-                <i class="fas fa-edit ml-1"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-white rounded-lg shadow-lg p-6">
-          <h2 class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6">
-            <i class="fas fa-credit-card mr-3 text-primary"></i>
-            Próximo Passo: Pagamento
-          </h2>
-          <p class="text-gray-600">
-            Após confirmar os detalhes do seu pedido abaixo, você será
-            redirecionado para o ambiente seguro do Mercado Pago para finalizar
-            sua compra.
-          </p>
-          <p class="mt-4 text-gray-600">
-            Você poderá escolher pagar com
-            <strong>Cartão de Crédito</strong> ou <strong>PIX</strong> na
-            próxima etapa.
-          </p>
-        </div>
-      </div>
-
-      <!-- Resumo do Pedido -->
-      <div class="lg:col-span-1">
-        <div class="order-summary-sticky">
-          <div class="bg-white rounded-lg shadow-lg p-6">
-            <h2
-              class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
-            >
-              <i class="fas fa-shopping-bag mr-3 text-primary"></i>
-              Resumo do Pedido
-            </h2>
-
-            {% for item in cart.items.all %}
-            <div
-              class="flex items-center space-x-3 pb-3 mb-3 border-b border-gray-100"
-            >
-              <img
-                src="{{ item.product.image.url }}"
-                alt="{{ item.product.name }}"
-                class="w-12 h-12 rounded-lg object-cover"
-              />
-              <div class="flex-1">
-                <h4 class="font-medium text-gray-800">
-                  {{ item.product.name }}
-                </h4>
-                <p class="text-sm text-gray-600">Qtd: {{ item.quantity }}</p>
-              </div>
-              <div class="text-right">
-                <p class="font-semibold">
-                  R$ {{ item.total_price|floatformat:2 }}
-                </p>
-              </div>
-            </div>
-            {% endfor %}
-
-            <div class="space-y-3 mb-6">
-              <div class="flex justify-between">
-                <span class="text-gray-600">Subtotal:</span>
-                <span class="font-medium"
-                  >R$ {{ cart.total_price|floatformat:2 }}</span
+        <!-- Coluna de Informações -->
+        <div class="lg:col-span-2">
+            <!-- Dados de Entrega -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+                <h2
+                    class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
                 >
-              </div>
-              <div class="flex justify-between">
-                <span class="text-gray-600">Frete:</span>
-                <span class="font-medium text-green-600">
-                  {% if shipping_cost == 0 %}Grátis{% else %}R$
-                  {{shipping_cost|floatformat:2}}{% endif %}
-                </span>
-              </div>
-              <hr class="border-gray-200" />
-              <div class="flex justify-between text-lg font-bold">
-                <span>Total:</span>
-                <span class="price-highlight"
-                  >R$ {{ total_with_shipping|floatformat:2 }}</span
-                >
-              </div>
+                    <i class="fas fa-shipping-fast mr-3 text-primary"></i>
+                    Confirmar Dados de Entrega
+                </h2>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p class="font-semibold text-gray-800">
+                                {{user.profile.nome|default:user.get_full_name|default:user.username}}
+                            </p>
+                            <p class="text-gray-600">{{ user.email }}</p>
+                            <p class="text-gray-600">
+                                {{user.profile.telefone|default:"Telefone não
+                                cadastrado" }}
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-gray-800">
+                                {{ user.profile.endereco|default:"Endereço não
+                                cadastrado" }}, {{ user.profile.numero }}
+                            </p>
+                            <p class="text-gray-600">
+                                {{ user.profile.complemento }} - {{
+                                user.profile.bairro }}
+                            </p>
+                            <p class="text-gray-600">
+                                {{ user.profile.cidade }} - {{
+                                user.profile.estado }}, {{user.profile.cep }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-right">
+                        <a
+                            href="{% url 'store:profile' %}"
+                            class="text-sm text-primary hover:underline font-semibold"
+                        >
+                            Editar Endereço
+                            <i class="fas fa-edit ml-1"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
 
-            <!-- O botão de submit agora apenas cria o pedido e redireciona -->
-            <button
-              type="submit"
-              id="finalize-order"
-              class="btn btn-primary w-full text-lg py-4 font-rajdhani"
-            >
-              <i class="fas fa-lock mr-2"></i>
-              Finalizar e Ir para Pagamento
-            </button>
-
-            <p class="text-xs text-gray-500 text-center mt-3">
-              Ao continuar, você concorda com nossos
-              <a
-                href="{% url 'store:terms' %}"
-                class="text-primary hover:underline"
-                >Termos de Uso</a
-              >.
-            </p>
-          </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2
+                    class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
+                >
+                    <i class="fas fa-credit-card mr-3 text-primary"></i>
+                    Próximo Passo: Pagamento
+                </h2>
+                <p class="text-gray-600">
+                    Após confirmar os detalhes do seu pedido abaixo, você será
+                    redirecionado para o ambiente seguro do Mercado Pago para
+                    finalizar sua compra.
+                </p>
+                <p class="mt-4 text-gray-600">
+                    Você poderá escolher pagar com
+                    <strong>Cartão de Crédito</strong> ou
+                    <strong>PIX</strong> na próxima etapa.
+                </p>
+            </div>
         </div>
-      </div>
+
+        <!-- Resumo do Pedido -->
+        <div class="lg:col-span-1">
+            <div class="order-summary-sticky">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2
+                        class="text-2xl font-rajdhani font-bold text-cinnamon-brown mb-6"
+                    >
+                        <i class="fas fa-shopping-bag mr-3 text-primary"></i>
+                        Resumo do Pedido
+                    </h2>
+
+                    {% for item in cart.items.all %}
+                    <div
+                        class="flex items-center space-x-3 pb-3 mb-3 border-b border-gray-100"
+                    >
+                        <img
+                            src="{{ item.product.image.url }}"
+                            alt="{{ item.product.name }}"
+                            class="w-12 h-12 rounded-lg object-cover"
+                        />
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-800">
+                                {{ item.product.name }}
+                            </h4>
+                            <p class="text-sm text-gray-600">
+                                Qtd: {{ item.quantity }}
+                            </p>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-semibold">
+                                R$ {{ item.total_price|floatformat:2 }}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Subtotal:</span>
+                            <span class="font-medium"
+                                >R$ {{ cart.total_price|floatformat:2 }}</span
+                            >
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Frete:</span>
+                            <span class="font-medium text-green-600">
+                                {% if shipping_cost == 0 %}Grátis{% else %}R$
+                                {{shipping_cost|floatformat:2}}{% endif %}
+                            </span>
+                        </div>
+                        <hr class="border-gray-200" />
+                        <div class="flex justify-between text-lg font-bold">
+                            <span>Total:</span>
+                            <span class="price-highlight"
+                                >R$ {{total_with_shipping|floatformat:2}}</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- O botão de submit agora cria a preferência Mercado Pago e redireciona -->
+                    <button
+                        type="button"
+                        id="finalize-order"
+                        class="btn btn-primary w-full text-lg py-4 font-rajdhani"
+                    >
+                        <i class="fas fa-lock mr-2"></i>
+                        Finalizar e Ir para Pagamento
+                    </button>
+
+                    <p class="text-xs text-gray-500 text-center mt-3">
+                        Ao continuar, você concorda com nossos
+                        <a
+                            href="{% url 'store:terms' %}"
+                            class="text-primary hover:underline"
+                            >Termos de Uso</a
+                        >.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-  </form>
 </main>
 
 <style>
-  .order-summary-sticky {
-    position: sticky;
-    top: 2rem;
-  }
+    .order-summary-sticky {
+        position: sticky;
+        top: 2rem;
+    }
 </style>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var btn = document.getElementById("finalize-order");
+        if (!btn) {
+            console.error("Botão finalize-order não encontrado!");
+            return;
+        }
+        btn.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            // Captura os dados dos itens do carrinho do template Django
+            const items = [];
+            {% for item in cart.items.all %}
+            items.push({
+                id: "{{ item.product.id }}",
+                title: "{{ item.product.name|escapejs }}",
+                description: "{{ item.product.description|truncatechars:100|escapejs }}",
+                picture_url: "{{ item.product.image.url|default_if_none:'' }}",
+                category_id: "{{ item.product.category.slug|default:'default' }}",
+                quantity: {{ item.quantity }},
+                currency_id: "BRL",
+                unit_price: {{ item.product.price|floatformat:2|default:"0.00" }},
+            });
+            {% endfor %}
+
+            // Adiciona o frete como item, se houver
+            {% if shipping_cost and shipping_cost > 0 %}
+            items.push({
+                id: "frete",
+                title: "Frete",
+                description: "Entrega para o endereço informado",
+                quantity: 1,
+                currency_id: "BRL",
+                unit_price: {{ shipping_cost|floatformat:2 }},
+            });
+            {% endif %}
+
+            // Dados do usuário e endereço
+            const payer = {
+                name: "{{ user.profile.nome|default:user.get_full_name|default:user.username }}",
+                surname: "",
+                email: "{{ user.email }}",
+                phone: {
+                    area_code: "{{ user.profile.telefone|default:'11'|slice:':2' }}",
+                    number: "{{ user.profile.telefone|default:'99999999'|slice:'2:' }}",
+                },
+                identification: {
+                    type: "CPF",
+                    number: "{{ user.profile.cpf|default:'19119119100' }}",
+                },
+                address: {
+                    zip_code: "{{ user.profile.cep|default:'06233200' }}",
+                    street_name: "{{ user.profile.endereco|default:'Rua Exemplo' }}",
+                    street_number: "{{ user.profile.numero|default:'123' }}",
+                },
+            };
+
+            // Endereço de entrega detalhado (shipments)
+            const shipments = {
+                mode: "custom",
+                cost: {% if shipping_cost %}{{ shipping_cost|floatformat:2 }}{% else %}0{% endif %},
+                receiver_address: {
+                    zip_code: "{{ user.profile.cep|default:'06233200' }}",
+                    street_name: "{{ user.profile.endereco|default:'Rua Exemplo' }}",
+                    street_number: "{{ user.profile.numero|default:'123' }}",
+                    floor: "",
+                    apartment: "",
+                    city_name: "{{ user.profile.cidade|default:'' }}",
+                    state_name: "{{ user.profile.estado|default:'' }}",
+                }
+            };
+
+            // URLs de retorno e notificação
+            const back_urls = {
+                success: window.location.origin + "/payment/success/",
+                failure: window.location.origin + "/payment/failure/",
+                pending: window.location.origin + "/payment/pending/",
+            };
+
+            // Monta o payload completo
+            const payload = {
+                items: items,
+                payer: payer,
+                shipments: shipments,
+                back_urls: back_urls,
+                notification_url: window.location.origin + "/payment/webhook/",
+                external_reference: "checkout-{{ user.id }}-{{ cart.id }}",
+                auto_return: "all",
+                binary_mode: true,
+                additional_info: "Pedido realizado em {{ user.profile.cidade|default:'Cidade' }} - {{ user.profile.estado|default:'UF' }}",
+            };
+
+            fetch("/payment/custom_create/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify(payload),
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Erro HTTP: " + response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.init_point) {
+                    window.location.href = data.init_point;
+                } else {
+                    alert("Erro ao criar preferência: " + (data.error || "Desconhecido"));
+                }
+            })
+            .catch((err) => {
+                alert("Erro na requisição: " + err.message);
+            });
+        });
+
+        // Função utilitária para pegar o CSRF token do cookie (Django)
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== "") {
+                const cookies = document.cookie.split(";");
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === name + "=") {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
+</script>
 {% endblock content %}
