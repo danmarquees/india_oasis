@@ -224,50 +224,74 @@ def create_order_and_redirect_to_payment(request):
             return redirect('store:cart_detail')
 
     # 2. Create the Order
-    shipping_cost = calculate_shipping_cost(cart.total_price)
-    total_price = cart.total_price + shipping_cost
-    user_profile = get_object_or_404(CustomerProfile, user=request.user)
+    try:
+        shipping_cost = calculate_shipping_cost(cart.total_price)
+        total_price = cart.total_price + shipping_cost
+        user_profile = get_object_or_404(CustomerProfile, user=request.user)
 
-    order = Order.objects.create(
-        user=request.user,
-        first_name=request.user.first_name or user_profile.nome.split(' ')[0],
-        last_name=request.user.last_name or ' '.join(user_profile.nome.split(' ')[1:]),
-        email=request.user.email,
-        address=f"{user_profile.endereco}, {user_profile.numero}",
-        postal_code=user_profile.cep,
-        city=user_profile.cidade,
-        state=user_profile.estado,
-        total_price=total_price,
-        status='awaiting_payment', # New status
-        paid=False
-    )
+        # Verificar se há dados suficientes de endereço
+        if not all([
+            user_profile.endereco,
+            user_profile.numero,
+            user_profile.cep,
+            user_profile.cidade,
+            user_profile.estado
+        ]):
+            messages.error(request, "Por favor, complete seus dados de endereço antes de finalizar a compra.")
+            return redirect('store:profile')
 
-    # 3. Create OrderItems and decrease stock
-    for item in cart.items.all():
-        OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
-        # Decrease stock
-        product = item.product
-        product.stock -= item.quantity
-        product.save()
+        order = Order.objects.create(
+            user=request.user,
+            first_name=request.user.first_name or user_profile.nome.split(' ')[0] if user_profile.nome else 'Usuário',
+            last_name=request.user.last_name or ' '.join(user_profile.nome.split(' ')[1:]) if user_profile.nome and ' ' in user_profile.nome else 'Anônimo',
+            email=request.user.email,
+            address=f"{user_profile.endereco}, {user_profile.numero}",
+            postal_code=user_profile.cep,
+            city=user_profile.cidade,
+            state=user_profile.estado,
+            total_price=total_price,
+            status='awaiting_payment', # New status
+            paid=False
+        )
 
-    # 4. Salva o carrinho na sessão antes de limpar
-    cart_items_data = []
-    for item in cart.items.all():
-        cart_items_data.append({
-            "product_id": item.product.id,
-            "quantity": item.quantity,
-        })
-    request.session['cart_backup'] = cart_items_data
+        # 3. Create OrderItems and decrease stock
+        for item in cart.items.all():
+            OrderItem.objects.create(order=order, product=item.product, price=item.product.price, quantity=item.quantity)
+            # Decrease stock
+            product = item.product
+            product.stock -= item.quantity
+            product.save()
 
-    # Agora limpa o carrinho
-    cart.items.all().delete()
+        # 4. Salva o carrinho na sessão antes de limpar
+        cart_items_data = []
+        for item in cart.items.all():
+            cart_items_data.append({
+                "product_id": item.product.id,
+                "quantity": item.quantity,
+            })
+        request.session['cart_backup'] = cart_items_data
 
-    # 5. Store order_id in session to be used by payment views
-    request.session['order_id'] = order.id
+        # Agora limpa o carrinho
+        cart.items.all().delete()
 
-    # 6. Redirect to the payment processing page
-    # This page will handle the interaction with Mercado Pago's SDK
-    return redirect('payment_processing:create_payment')
+        # 5. Store order_id in session to be used by payment views
+        request.session['order_id'] = order.id
+
+        # 6. Redirect to the payment processing page
+        # This page will handle the interaction with Mercado Pago's SDK
+        return redirect('payment_processing:create_payment')
+
+    except Exception as e:
+        # Log o erro
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Erro ao criar pedido: {str(e)}")
+
+        # Adiciona mensagem de erro para o usuário
+        messages.error(request, f"Erro ao processar seu pedido: {str(e)}")
+
+        # Redireciona para checkout com parâmetro de erro
+        return redirect(f"{reverse('store:checkout')}?error={str(e)}")
 
 
 # --- User Account Views ---

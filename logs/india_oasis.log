@@ -1,0 +1,190 @@
+INFO 2025-07-10 17:45:53,740 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 17:46:04,029 basehttp "GET / HTTP/1.1" 200 118460
+INFO 2025-07-10 17:46:04,302 basehttp "GET /static/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-10 17:46:04,354 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 304 0
+INFO 2025-07-10 17:46:04,367 basehttp "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-07-10 17:46:05,286 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 304 0
+INFO 2025-07-10 17:46:05,380 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 304 0
+INFO 2025-07-10 17:46:13,296 basehttp "GET /accounts/login/ HTTP/1.1" 200 58163
+INFO 2025-07-10 17:46:20,513 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:46:20,772 basehttp "GET / HTTP/1.1" 200 118557
+INFO 2025-07-10 17:46:29,072 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+INFO 2025-07-10 17:46:34,759 basehttp "GET /cart/ HTTP/1.1" 200 95586
+INFO 2025-07-10 17:46:38,888 basehttp "GET /checkout/ HTTP/1.1" 200 65653
+INFO 2025-07-10 17:46:42,703 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:46:43,595 basehttp "GET /payment/create/ HTTP/1.1" 200 5273
+INFO 2025-07-10 17:46:57,018 basehttp "GET /payment/create/ HTTP/1.1" 200 5273
+INFO 2025-07-10 17:48:13,541 basehttp "GET /checkout/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:48:13,679 basehttp "GET /products/ HTTP/1.1" 200 69237
+INFO 2025-07-10 17:48:18,207 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-10 17:48:23,241 basehttp "GET /cart/ HTTP/1.1" 200 91774
+INFO 2025-07-10 17:48:28,892 basehttp "GET /checkout/ HTTP/1.1" 200 64647
+INFO 2025-07-10 17:48:31,450 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:48:31,941 basehttp "GET /payment/create/ HTTP/1.1" 200 5273
+INFO 2025-07-10 17:50:06,322 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 17:50:13,921 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 17:53:04,333 basehttp "GET /cart/ HTTP/1.1" 200 87889
+INFO 2025-07-10 17:53:09,720 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-10 17:53:17,082 basehttp "POST /cart/add/9/ HTTP/1.1" 200 92
+INFO 2025-07-10 17:53:23,688 basehttp "GET /cart/ HTTP/1.1" 200 91699
+INFO 2025-07-10 17:53:27,363 basehttp "GET /checkout/ HTTP/1.1" 200 64576
+INFO 2025-07-10 17:53:30,438 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:53:31,407 basehttp "GET /payment/create/ HTTP/1.1" 200 5312
+INFO 2025-07-10 17:55:02,760 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 17:55:11,198 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 17:56:52,365 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:56:53,333 basehttp "GET /products/ HTTP/1.1" 200 69235
+INFO 2025-07-10 17:56:57,858 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-10 17:57:01,318 basehttp "GET /cart/ HTTP/1.1" 200 91774
+INFO 2025-07-10 17:57:03,603 basehttp "GET /checkout/ HTTP/1.1" 200 64647
+INFO 2025-07-10 17:57:06,235 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:57:06,855 basehttp "GET /payment/create/ HTTP/1.1" 200 5312
+INFO 2025-07-10 17:58:24,219 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 17:58:31,269 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-10 17:58:37,648 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-10 17:58:41,367 basehttp "GET /cart/ HTTP/1.1" 200 91774
+INFO 2025-07-10 17:58:44,868 basehttp "GET /checkout/ HTTP/1.1" 200 64647
+INFO 2025-07-10 17:58:48,894 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 17:58:49,772 basehttp "GET /payment/create/ HTTP/1.1" 200 5312
+INFO 2025-07-10 17:59:49,038 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 17:59:57,309 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 18:00:08,408 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 18:00:09,854 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 18:00:35,386 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 18:00:37,183 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 18:00:45,236 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 18:00:46,359 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 18:01:19,184 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-10 18:01:25,029 basehttp "POST /cart/add/9/ HTTP/1.1" 200 92
+INFO 2025-07-10 18:01:28,370 basehttp "GET /cart/ HTTP/1.1" 200 91699
+INFO 2025-07-10 18:01:32,330 basehttp "GET /checkout/ HTTP/1.1" 200 64576
+INFO 2025-07-10 18:01:38,545 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 18:01:46,829 basehttp "GET /payment/create/ HTTP/1.1" 200 5306
+INFO 2025-07-10 18:03:31,384 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 18:03:40,262 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 18:04:02,767 autoreload /home/danmarques/Documentos/Workplace/india_oasis/payment_processing/views.py changed, reloading.
+INFO 2025-07-10 18:04:04,027 autoreload Watching for file changes with StatReloader
+INFO 2025-07-10 18:05:09,473 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-10 18:05:47,254 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-10 18:06:05,532 basehttp "GET /cart/ HTTP/1.1" 200 91774
+INFO 2025-07-10 18:06:08,471 basehttp - Broken pipe from ('127.0.0.1', 59562)
+INFO 2025-07-10 18:06:11,399 basehttp "GET /cart/ HTTP/1.1" 200 91774
+INFO 2025-07-10 18:06:42,185 basehttp "GET /checkout/ HTTP/1.1" 200 64647
+INFO 2025-07-10 18:06:56,579 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-10 18:07:00,681 basehttp "GET /payment/create/ HTTP/1.1" 302 0
+INFO 2025-07-11 11:55:08,101 autoreload Watching for file changes with StatReloader
+INFO 2025-07-11 11:59:52,948 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-11 11:59:53,841 basehttp "GET /static/css/styles.css HTTP/1.1" 304 0
+WARNING 2025-07-11 11:59:57,665 log Not Found: /favicon.ico
+WARNING 2025-07-11 11:59:57,667 basehttp "GET /favicon.ico HTTP/1.1" 404 8548
+INFO 2025-07-11 12:00:17,942 basehttp "POST /cart/add/9/ HTTP/1.1" 200 92
+INFO 2025-07-11 12:00:20,402 basehttp "GET /cart/ HTTP/1.1" 200 91699
+INFO 2025-07-11 12:00:24,118 basehttp "GET /checkout/ HTTP/1.1" 200 64576
+INFO 2025-07-11 12:00:28,373 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:00:29,521 basehttp "GET /payment/create/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:00:57,954 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-11 12:01:00,310 basehttp "GET /admin/ HTTP/1.1" 200 11453
+INFO 2025-07-11 12:01:00,714 basehttp "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:00,714 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:00,718 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:00,733 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:00,719 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:00,743 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:00,967 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:01,061 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:01,062 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:53,612 basehttp "GET /admin/store/order/ HTTP/1.1" 200 34524
+INFO 2025-07-11 12:01:53,887 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:53,890 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:53,929 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:53,933 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,035 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,038 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-11 12:01:54,044 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,047 basehttp "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,109 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,144 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,335 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,453 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,509 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+INFO 2025-07-11 12:01:54,511 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+INFO 2025-07-11 12:03:41,704 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-11 12:03:44,132 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-11 12:03:44,376 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-11 12:03:44,380 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-11 12:03:44,402 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-11 12:03:44,535 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+WARNING 2025-07-11 12:03:53,842 log Not Found: /favicon.ico
+WARNING 2025-07-11 12:03:53,843 basehttp "GET /favicon.ico HTTP/1.1" 404 8548
+INFO 2025-07-11 12:04:17,427 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+INFO 2025-07-11 12:04:51,564 basehttp "GET /cart/ HTTP/1.1" 200 91778
+INFO 2025-07-11 12:04:56,273 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+INFO 2025-07-11 12:04:58,635 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+INFO 2025-07-11 12:05:05,110 basehttp "GET /checkout/ HTTP/1.1" 200 64652
+INFO 2025-07-11 12:05:14,572 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:05:16,815 basehttp "GET /payment/create/ HTTP/1.1" 302 0
+WARNING 2025-07-11 12:05:41,278 log Not Found: /favicon.ico
+INFO 2025-07-11 12:05:47,150 basehttp "GET /accounts/profile/ HTTP/1.1" 200 93033
+WARNING 2025-07-11 12:05:47,415 log Not Found: /accounts/profile/assets/css/styles.css
+WARNING 2025-07-11 12:05:47,420 basehttp "GET /accounts/profile/assets/css/styles.css HTTP/1.1" 404 8629
+INFO 2025-07-11 12:05:47,547 basehttp "GET /static/css/profile-responsive.css HTTP/1.1" 304 0
+INFO 2025-07-11 12:05:47,554 basehttp "GET /static/css/skeleton.css HTTP/1.1" 304 0
+WARNING 2025-07-11 12:05:47,697 log Not Found: /accounts/profile/assets/css/styles.css
+WARNING 2025-07-11 12:05:47,701 basehttp "GET /accounts/profile/assets/css/styles.css HTTP/1.1" 404 8629
+INFO 2025-07-11 12:09:01,484 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-11 12:09:08,158 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 71456
+INFO 2025-07-11 12:09:20,874 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:09:21,053 basehttp "GET /products/ HTTP/1.1" 200 69288
+INFO 2025-07-11 12:09:25,613 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 71450
+INFO 2025-07-11 12:17:27,989 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 75804
+INFO 2025-07-11 12:17:28,406 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:17:53,601 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:17:53,795 basehttp "GET /products/ HTTP/1.1" 200 69288
+INFO 2025-07-11 12:17:58,244 basehttp "GET /cart/ HTTP/1.1" 200 91778
+INFO 2025-07-11 12:18:03,007 basehttp "GET /products/ HTTP/1.1" 200 68886
+INFO 2025-07-11 12:18:06,049 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/ HTTP/1.1" 200 75789
+INFO 2025-07-11 12:18:16,186 basehttp "GET /cart/ HTTP/1.1" 200 91778
+INFO 2025-07-11 12:18:27,012 basehttp "GET /cart/ HTTP/1.1" 200 91778
+INFO 2025-07-11 12:18:32,141 basehttp "GET /products/ HTTP/1.1" 200 68886
+INFO 2025-07-11 12:18:34,955 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 75657
+INFO 2025-07-11 12:18:40,716 basehttp "GET / HTTP/1.1" 200 118557
+INFO 2025-07-11 12:18:44,655 basehttp "GET /cart/ HTTP/1.1" 200 91778
+INFO 2025-07-11 12:18:48,466 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 69
+INFO 2025-07-11 12:18:51,494 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 62
+INFO 2025-07-11 12:18:55,985 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-11 12:19:01,697 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 75810
+INFO 2025-07-11 12:19:18,105 basehttp "GET /cart/ HTTP/1.1" 200 87889
+INFO 2025-07-11 12:19:21,250 basehttp "GET / HTTP/1.1" 200 118563
+INFO 2025-07-11 12:22:03,809 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 77789
+INFO 2025-07-11 12:22:11,013 basehttp "POST /cart/add/9/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:22:11,069 basehttp "GET /products/ HTTP/1.1" 200 69261
+INFO 2025-07-11 12:22:17,076 basehttp "GET /wishlist/ HTTP/1.1" 200 96839
+INFO 2025-07-11 12:22:17,335 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+INFO 2025-07-11 12:22:20,187 basehttp "GET /cart/ HTTP/1.1" 200 91699
+INFO 2025-07-11 12:22:28,180 basehttp "GET / HTTP/1.1" 200 118557
+INFO 2025-07-11 12:22:33,995 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 77783
+INFO 2025-07-11 12:22:40,413 basehttp "POST /cart/add/9/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:22:40,447 basehttp "GET /products/ HTTP/1.1" 200 69261
+INFO 2025-07-11 12:22:45,488 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 77783
+INFO 2025-07-11 12:22:48,570 basehttp "GET /cart/ HTTP/1.1" 200 91699
+INFO 2025-07-11 12:22:53,460 basehttp "GET / HTTP/1.1" 200 118557
+INFO 2025-07-11 12:23:01,963 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 77902
+INFO 2025-07-11 12:27:36,328 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 79070
+INFO 2025-07-11 12:27:48,539 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:27:48,722 basehttp "GET /products/ HTTP/1.1" 200 69288
+INFO 2025-07-11 12:27:53,602 basehttp "GET /cart/ HTTP/1.1" 200 95586
+INFO 2025-07-11 12:27:58,587 basehttp "POST /cart/remove/9/ HTTP/1.1" 200 69
+INFO 2025-07-11 12:28:00,996 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 68
+INFO 2025-07-11 12:28:06,806 basehttp "POST /cart/remove/9/ HTTP/1.1" 200 62
+INFO 2025-07-11 12:28:11,480 basehttp "GET /products/ HTTP/1.1" 200 68892
+INFO 2025-07-11 12:28:15,084 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-11 12:28:17,871 basehttp "GET /cart/ HTTP/1.1" 200 91774
+INFO 2025-07-11 12:28:22,988 basehttp "GET /products/ HTTP/1.1" 200 68886
+INFO 2025-07-11 12:28:25,424 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/ HTTP/1.1" 200 79057
+INFO 2025-07-11 12:28:28,872 basehttp "POST /cart/add/16/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:28:28,916 basehttp "GET /products/ HTTP/1.1" 200 69286
+INFO 2025-07-11 12:28:34,828 basehttp "POST /cart/add/16/ HTTP/1.1" 302 0
+INFO 2025-07-11 12:28:34,874 basehttp "GET /products/ HTTP/1.1" 200 69286
+WARNING 2025-07-11 12:28:35,954 log Not Found: /product/arroz-classico-basmati-indiano-5kg/cart.html
+WARNING 2025-07-11 12:28:35,958 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/cart.html HTTP/1.1" 404 8671
+INFO 2025-07-11 12:28:45,479 basehttp "GET /cart/ HTTP/1.1" 200 91774

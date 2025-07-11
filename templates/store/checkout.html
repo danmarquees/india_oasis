@@ -22,7 +22,7 @@
                             <p class="text-gray-600">{{ user.email }}</p>
                             <p class="text-gray-600">
                                 {{user.profile.telefone|default:"Telefone não
-                                cadastrado" }}
+                                cadastrado"}}
                             </p>
                         </div>
                         <div>
@@ -131,15 +131,22 @@
                         </div>
                     </div>
 
-                    <!-- O botão de submit agora cria a preferência Mercado Pago e redireciona -->
-                    <button
-                        type="button"
-                        id="finalize-order"
-                        class="btn btn-primary w-full text-lg py-4 font-rajdhani"
+                    <!-- Botão submete o formulário para criar a ordem -->
+                    <form
+                        method="POST"
+                        action="{% url 'store:create_order_and_payment' %}"
+                        id="checkout-form"
                     >
-                        <i class="fas fa-lock mr-2"></i>
-                        Finalizar e Ir para Pagamento
-                    </button>
+                        {% csrf_token %}
+                        <button
+                            type="submit"
+                            id="finalize-order"
+                            class="btn btn-primary w-full text-lg py-4 font-rajdhani"
+                        >
+                            <i class="fas fa-lock mr-2"></i>
+                            Finalizar e Ir para Pagamento
+                        </button>
+                    </form>
 
                     <p class="text-xs text-gray-500 text-center mt-3">
                         Ao continuar, você concorda com nossos
@@ -163,137 +170,47 @@
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var btn = document.getElementById("finalize-order");
-        if (!btn) {
-            console.error("Botão finalize-order não encontrado!");
-            return;
+    // Removemos o código JavaScript de manipulação personalizada de checkout
+    // Agora estamos usando o fluxo padrão do formulário que vai criar o pedido
+    // e redirecionar para o Mercado Pago
+    document.addEventListener("DOMContentLoaded", function () {
+        // Verificar se há mensagens de erro na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get("error");
+
+        if (error) {
+            alert(
+                "Erro no processamento do pagamento: " +
+                    decodeURIComponent(error),
+            );
         }
-        btn.addEventListener("click", function (event) {
-            event.preventDefault();
 
-            // Captura os dados dos itens do carrinho do template Django
-            const items = [];
-            {% for item in cart.items.all %}
-            items.push({
-                id: "{{ item.product.id }}",
-                title: "{{ item.product.name|escapejs }}",
-                description: "{{ item.product.description|truncatechars:100|escapejs }}",
-                picture_url: "{{ item.product.image.url|default_if_none:'' }}",
-                category_id: "{{ item.product.category.slug|default:'default' }}",
-                quantity: {{ item.quantity }},
-                currency_id: "BRL",
-                unit_price: {{ item.product.price|floatformat:2|default:"0.00" }},
+        // Adicionar validação básica ao formulário
+        const form = document.getElementById("checkout-form");
+        if (form) {
+            form.addEventListener("submit", function (event) {
+                // Validação de dados do endereço
+                const requiredFields = [
+                    "{{ user.profile.nome }}",
+                    "{{ user.profile.endereco }}",
+                    "{{ user.profile.numero }}",
+                    "{{ user.profile.cep }}",
+                    "{{ user.profile.cidade }}",
+                    "{{ user.profile.estado }}",
+                ];
+
+                const missingFields = requiredFields.filter(
+                    (field) => !field || field.trim() === "",
+                );
+
+                if (missingFields.length > 0) {
+                    event.preventDefault();
+                    alert(
+                        "Por favor, complete todos os dados de entrega antes de prosseguir com o pagamento.",
+                    );
+                    window.location.href = "{% url 'store:profile' %}";
+                }
             });
-            {% endfor %}
-
-            // Adiciona o frete como item, se houver
-            {% if shipping_cost and shipping_cost > 0 %}
-            items.push({
-                id: "frete",
-                title: "Frete",
-                description: "Entrega para o endereço informado",
-                quantity: 1,
-                currency_id: "BRL",
-                unit_price: {{ shipping_cost|floatformat:2 }},
-            });
-            {% endif %}
-
-            // Dados do usuário e endereço
-            const payer = {
-                name: "{{ user.profile.nome|default:user.get_full_name|default:user.username }}",
-                surname: "",
-                email: "{{ user.email }}",
-                phone: {
-                    area_code: "{{ user.profile.telefone|default:'11'|slice:':2' }}",
-                    number: "{{ user.profile.telefone|default:'99999999'|slice:'2:' }}",
-                },
-                identification: {
-                    type: "CPF",
-                    number: "{{ user.profile.cpf|default:'19119119100' }}",
-                },
-                address: {
-                    zip_code: "{{ user.profile.cep|default:'06233200' }}",
-                    street_name: "{{ user.profile.endereco|default:'Rua Exemplo' }}",
-                    street_number: "{{ user.profile.numero|default:'123' }}",
-                },
-            };
-
-            // Endereço de entrega detalhado (shipments)
-            const shipments = {
-                mode: "custom",
-                cost: {% if shipping_cost %}{{ shipping_cost|floatformat:2 }}{% else %}0{% endif %},
-                receiver_address: {
-                    zip_code: "{{ user.profile.cep|default:'06233200' }}",
-                    street_name: "{{ user.profile.endereco|default:'Rua Exemplo' }}",
-                    street_number: "{{ user.profile.numero|default:'123' }}",
-                    floor: "",
-                    apartment: "",
-                    city_name: "{{ user.profile.cidade|default:'' }}",
-                    state_name: "{{ user.profile.estado|default:'' }}",
-                }
-            };
-
-            // URLs de retorno e notificação
-            const back_urls = {
-                success: window.location.origin + "/payment/success/",
-                failure: window.location.origin + "/payment/failure/",
-                pending: window.location.origin + "/payment/pending/",
-            };
-
-            // Monta o payload completo
-            const payload = {
-                items: items,
-                payer: payer,
-                shipments: shipments,
-                back_urls: back_urls,
-                notification_url: window.location.origin + "/payment/webhook/",
-                external_reference: "checkout-{{ user.id }}-{{ cart.id }}",
-                auto_return: "all",
-                binary_mode: true,
-                additional_info: "Pedido realizado em {{ user.profile.cidade|default:'Cidade' }} - {{ user.profile.estado|default:'UF' }}",
-            };
-
-            fetch("/payment/custom_create/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken"),
-                },
-                body: JSON.stringify(payload),
-            })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Erro HTTP: " + response.status);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data.init_point) {
-                    window.location.href = data.init_point;
-                } else {
-                    alert("Erro ao criar preferência: " + (data.error || "Desconhecido"));
-                }
-            })
-            .catch((err) => {
-                alert("Erro na requisição: " + err.message);
-            });
-        });
-
-        // Função utilitária para pegar o CSRF token do cookie (Django)
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== "") {
-                const cookies = document.cookie.split(";");
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === name + "=") {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
         }
     });
 </script>

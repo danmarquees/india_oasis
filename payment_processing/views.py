@@ -1,13 +1,17 @@
 import mercadopago
 import json
+import logging
+import traceback
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 from store.models import Order
+
+# Configurar logger
+logger = logging.getLogger(__name__)
 
 # Initialize Mercado Pago SDK with your Access Token
 sdk = mercadopago.SDK(settings.MERCADO_PAGO_ACCESS_TOKEN)
@@ -16,13 +20,20 @@ def create_payment(request):
     """
     Cria uma preferência de pagamento no Mercado Pago e redireciona automaticamente o usuário para o checkout.
     """
+    logger = logging.getLogger(__name__)
+    logger.info("Iniciando criação de pagamento no Mercado Pago")
+
     order_id = request.session.get('order_id')
     if not order_id:
+        logger.error("Nenhum ID de pedido encontrado na sessão")
         return redirect('store:cart')
 
     order = get_object_or_404(Order, id=order_id)
     if order.paid:
+        logger.info(f"Pedido {order_id} já está pago. Redirecionando para perfil.")
         return redirect('store:profile')
+
+    logger.info(f"Criando preferência para o pedido {order_id} no valor de R$ {order.total_price}")
 
     preference_item = {
         "title": f"Pedido #{order.id} - India Oasis",
@@ -30,12 +41,51 @@ def create_payment(request):
         "unit_price": float(order.total_price),
         "currency_id": "BRL",
     }
-    back_urls = {
-        "success": request.build_absolute_uri(reverse('payment_processing:payment_success')),
-        "failure": request.build_absolute_uri(reverse('payment_processing:payment_failure')),
-        "pending": request.build_absolute_uri(reverse('payment_processing:payment_pending')),
-    }
-    notification_url = request.build_absolute_uri(reverse('payment_processing:webhook'))
+    # Definir URLs de retorno com validação
+    try:
+        success_url = request.build_absolute_uri(reverse('payment_processing:payment_success'))
+        failure_url = request.build_absolute_uri(reverse('payment_processing:payment_failure'))
+        pending_url = request.build_absolute_uri(reverse('payment_processing:payment_pending'))
+
+        # Verificar se as URLs são válidas
+        for url_name, url in [("success", success_url), ("failure", failure_url), ("pending", pending_url)]:
+            if not url or not url.startswith('http'):
+                logger.warning(f"URL de retorno inválida para {url_name}: {url}")
+                # Usar URLs absolutas com domínio hardcoded para desenvolvimento se necessário
+                if url_name == "success":
+                    success_url = "https://www.indiaoasis.com.br/payment/success/"
+                elif url_name == "failure":
+                    failure_url = "https://www.indiaoasis.com.br/payment/failure/"
+                elif url_name == "pending":
+                    pending_url = "https://www.indiaoasis.com.br/payment/pending/"
+
+        back_urls = {
+            "success": success_url,
+            "failure": failure_url,
+            "pending": pending_url,
+        }
+
+        logger.info(f"URLs de retorno configuradas: {back_urls}")
+    except Exception as e:
+        logger.error(f"Erro ao configurar URLs de retorno: {str(e)}")
+        # Usar URLs absolutas como fallback
+        back_urls = {
+            "success": "https://www.indiaoasis.com.br/payment/success/",
+            "failure": "https://www.indiaoasis.com.br/payment/failure/",
+            "pending": "https://www.indiaoasis.com.br/payment/pending/",
+        }
+
+    # URL de notificação (webhook)
+    try:
+        # Mercado Pago doesn't accept localhost or 127.0.0.1 URLs for notifications
+        # Always use a production URL for notification_url
+        notification_url = "https://www.indiaoasis.com.br/payment/webhook/"
+        logger.info(f"Usando URL de notificação produção: {notification_url}")
+    except Exception as e:
+        logger.error(f"Erro ao configurar URL de notificação: {str(e)}")
+        notification_url = "https://www.indiaoasis.com.br/payment/webhook/"
+
+    # Remover completamente auto_return para evitar erros com a API
     preference_data = {
         "items": [preference_item],
         "payer": {
@@ -44,25 +94,68 @@ def create_payment(request):
             "email": order.email,
         },
         "back_urls": back_urls,
-        "auto_return": "approved",
+        # Removido auto_return para evitar o erro
+        # Mercado Pago API rejects localhost URLs for notifications
         "notification_url": notification_url,
         "external_reference": str(order.id),
+        "binary_mode": True,  # Modo binário para evitar estados pendentes em alguns casos
     }
+
+    # Auto_return foi removido para evitar erros com a API
     try:
+        logger.info("Enviando dados para API do Mercado Pago")
+        logger.info(f"Payload: {json.dumps(preference_data, indent=2, ensure_ascii=False)}")
         preference_response = sdk.preference().create(preference_data)
-        preference = preference_response["response"]
-        order.preference_id = preference['id']
-        order.save()
-        # Redireciona diretamente para o Mercado Pago
-        return redirect(preference['init_point'])
+
+        # Log detalhado da resposta
+        logger.info(f"Resposta completa da API: {json.dumps(preference_response, indent=2, ensure_ascii=False)}")
+
+        # Verificar se a resposta contém os dados esperados
+        if preference_response["status"] in [200, 201] and "response" in preference_response:
+            preference = preference_response["response"]
+
+            # Verificar se os campos necessários existem
+            if "id" not in preference or "init_point" not in preference:
+                logger.error(f"Resposta do Mercado Pago incompleta: {preference}")
+                return render(request, 'payment_processing/payment_failure.html', {
+                    'order': order,
+                    'error_message': "Resposta da API do Mercado Pago está incompleta. Não foi possível obter ID ou URL de pagamento.",
+                })
+
+            logger.info(f"Preferência criada com sucesso: {preference['id']}")
+
+            order.preference_id = preference['id']
+            order.save()
+
+            # Redireciona diretamente para o Mercado Pago
+            logger.info(f"Redirecionando para: {preference['init_point']}")
+            return redirect(preference['init_point'])
+        else:
+            # Resposta inválida ou erro na API
+            error_message = preference_response.get("response", {}).get("message", "Erro desconhecido na API do Mercado Pago")
+            logger.error(f"Erro na resposta da API: {json.dumps(preference_response, indent=2, ensure_ascii=False)}")
+            return render(request, 'payment_processing/payment_failure.html', {
+                'order': order,
+                'error_message': error_message,
+            })
     except Exception as e:
-        import traceback
-        print("Erro Mercado Pago:", e)
-        traceback.print_exc()
+        logger.error(f"Erro ao criar preferência no Mercado Pago: {str(e)}")
+        logger.error(traceback.format_exc())
+
+        # Se for KeyError, é provavelmente um problema na estrutura da resposta
+        error_message = str(e)
+        if isinstance(e, KeyError):
+            error_message = f"Resposta da API não contém o campo esperado: {str(e)}. Verifique as credenciais do Mercado Pago."
+
+            # Verificar se as credenciais estão corretas
+            if not settings.MERCADO_PAGO_ACCESS_TOKEN or len(settings.MERCADO_PAGO_ACCESS_TOKEN) < 20:
+                error_message += " O token de acesso (MERCADO_PAGO_ACCESS_TOKEN) parece estar incorreto ou ausente."
+
         # Mostra mensagem de erro detalhada na tela para depuração
         return render(request, 'payment_processing/payment_failure.html', {
             'order': order,
-            'error_message': str(e),
+            'error_message': error_message,
+            'traceback': traceback.format_exc() if settings.DEBUG else None,
         })
 
 @csrf_exempt
@@ -102,6 +195,12 @@ def custom_create_preference(request):
 
         preference_response = sdk.preference().create(preference_request)
         preference = preference_response["response"]
+
+        # Log da resposta para debugging
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info(f"Mercado Pago preference created: {preference['id']}")
+
         return JsonResponse({
             "init_point": preference.get("init_point"),
             "id": preference.get("id"),
@@ -109,7 +208,9 @@ def custom_create_preference(request):
             "response": preference,
         })
     except Exception as e:
-        return JsonResponse({"error": str(e)}, status=400)
+        import traceback
+        traceback.print_exc()
+        return JsonResponse({"error": str(e), "traceback": traceback.format_exc()}, status=400)
 
 def payment_success(request):
     """
@@ -219,49 +320,4 @@ def webhook(request):
     # Acknowledge the notification to Mercado Pago
     return HttpResponse(status=200)
 
-@csrf_exempt
-@require_POST
-def custom_create_preference(request):
-    """
-    Cria uma preferência Mercado Pago customizada a partir de dados recebidos via POST (JSON)
-    e retorna a URL de pagamento (init_point) no formato JSON.
-    Espera um payload semelhante ao exemplo fornecido pelo usuário.
-    """
-    try:
-        data = json.loads(request.body.decode("utf-8"))
-        # Use access token from request data if provided, otherwise use Django settings
-        access_token = data.get("access_token") or settings.MERCADO_PAGO_ACCESS_TOKEN
-        sdk = mercadopago.SDK(access_token)
-
-        # Monta o dicionário de requisição conforme o modelo do usuário
-        preference_request = {
-            "items": data.get("items", []),
-            "marketplace_fee": data.get("marketplace_fee", 0),
-            "payer": data.get("payer", {}),
-            "back_urls": data.get("back_urls", {}),
-            "differential_pricing": data.get("differential_pricing"),
-            "expires": data.get("expires", False),
-            "additional_info": data.get("additional_info"),
-            "auto_return": data.get("auto_return", "all"),
-            "binary_mode": data.get("binary_mode", True),
-            "external_reference": data.get("external_reference"),
-            "marketplace": data.get("marketplace"),
-            "notification_url": data.get("notification_url"),
-            "operation_type": data.get("operation_type", "regular_payment"),
-            "payment_methods": data.get("payment_methods"),
-            "shipments": data.get("shipments"),
-            "statement_descriptor": data.get("statement_descriptor"),
-        }
-        # Remove chaves com valor None (opcional)
-        preference_request = {k: v for k, v in preference_request.items() if v is not None}
-
-        preference_response = sdk.preference().create(preference_request)
-        preference = preference_response["response"]
-        return JsonResponse({
-            "init_point": preference.get("init_point"),
-            "id": preference.get("id"),
-            "sandbox_init_point": preference.get("sandbox_init_point"),
-            "response": preference,
-        })
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=400)
+# A função custom_create_preference foi removida daqui pois estava duplicada

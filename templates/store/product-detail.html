@@ -1,4 +1,8 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
+<!-- Certifique-se de incluir o script de notificações -->
+<script src="{% static 'js/toast-system.js' %}"></script>
+<!-- CSRF Token para requisições AJAX -->
+{% csrf_token %}
 
 <title>
     {% block title %} {{ product.name }} - India Oasis - Temperos e Sabores da
@@ -109,21 +113,6 @@
                         >
                             R$ {{ product.price|floatformat:2 }}
                         </p>
-
-                        <!-- Botão Adicionar ao Carrinho -->
-                        <form
-                            action="{% url 'store:cart_add' product.id %}"
-                            method="post"
-                            class="mt-6"
-                        >
-                            {% csrf_token %}
-                            <button
-                                type="submit"
-                                class="bg-primary text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-primary-dark transition duration-300 w-full lg:w-auto"
-                            >
-                                Adicionar ao Carrinho
-                            </button>
-                        </form>
                     </div>
                     <div
                         class="flex items-center space-x-2 text-sm text-gray-600"
@@ -190,6 +179,10 @@
                             id="add-to-cart-btn"
                             class="btn btn-primary flex-1 text-lg"
                             data-product-id="{{ product.id }}"
+                            data-product-name="{{ product.name }}"
+                            data-action="add-to-cart"
+                            data-quantity="1"
+                            type="button"
                         >
                             <i class="fas fa-shopping-cart mr-2"></i>
                             Adicionar ao Carrinho
@@ -198,6 +191,8 @@
                             id="add-to-wishlist-btn"
                             class="btn btn-secondary flex-1 text-lg"
                             data-product-id="{{ product.id }}"
+                            data-product-name="{{ product.name }}"
+                            data-action="add-to-wishlist"
                         >
                             <i class="fas fa-heart mr-2"></i>
                             Adicionar aos Desejos
@@ -326,6 +321,7 @@
                 action="{% url 'store:add_review' product.id %}"
                 method="post"
                 class="space-y-4"
+                onsubmit="showReviewSubmittedNotification(event)"
             >
                 {% csrf_token %}
 
@@ -363,7 +359,11 @@
                     {% endif %}
                 </div>
 
-                <button type="submit" class="btn btn-primary">
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="submit-review-btn"
+                >
                     Enviar Avaliação
                 </button>
             </form>
@@ -472,8 +472,11 @@
                             >R$ {{ p.price|floatformat:2 }}</span
                         >
                         <button
-                            class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                            class="btn btn-primary text-sm px-4 py-2 add-to-cart"
                             data-product-id="{{ p.id }}"
+                            data-product-name="{{ p.name }}"
+                            data-action="add-to-cart"
+                            type="button"
                         >
                             <i class="fas fa-cart-plus mr-1"></i>
                             Adicionar
@@ -497,54 +500,259 @@
 </main>
 
 <script>
+    /**
+     * Sistema de Interação da Página de Produto
+     *
+     * Este script gerencia todas as interações da página de detalhes do produto:
+     * - Controles de quantidade
+     * - Adição ao carrinho com notificações toast
+     * - Lista de desejos
+     * - Sistema de avaliações
+     * - Interação com produtos relacionados
+     */
+
+    // Flag para evitar inicialização duplicada
+    let productDetailInitialized = false;
+
+    // Inicializar quando o documento estiver carregado
+    document.addEventListener("DOMContentLoaded", function () {
+        // Verificar se a inicialização já foi feita
+        if (!productDetailInitialized) {
+            initializeProductDetail();
+            productDetailInitialized = true;
+        }
+    });
+
     // Controles de quantidade
-    document
-        .getElementById("decrease-qty")
-        .addEventListener("click", function () {
-            const input = document.getElementById("quantity");
-            const currentValue = parseInt(input.value);
-            if (currentValue > 1) {
-                input.value = currentValue - 1;
+    function setupQuantityControls() {
+        document
+            .getElementById("decrease-qty")
+            .addEventListener("click", function () {
+                const input = document.getElementById("quantity");
+                const currentValue = parseInt(input.value);
+                if (currentValue > 1) {
+                    input.value = currentValue - 1;
+                    // Atualizar o data-quantity no botão de adicionar ao carrinho
+                    document.getElementById(
+                        "add-to-cart-btn",
+                    ).dataset.quantity = input.value;
+                }
+            });
+
+        document
+            .getElementById("increase-qty")
+            .addEventListener("click", function () {
+                const input = document.getElementById("quantity");
+                const currentValue = parseInt(input.value);
+                if (currentValue < 10) {
+                    input.value = currentValue + 1;
+                    // Atualizar o data-quantity no botão de adicionar ao carrinho
+                    document.getElementById(
+                        "add-to-cart-btn",
+                    ).dataset.quantity = input.value;
+                }
+            });
+    }
+
+    // Configurar botões de carrinho
+    function setupCartButtons() {
+        // Botão principal de adicionar ao carrinho
+        const addToCartBtn = document.getElementById("add-to-cart-btn");
+        if (addToCartBtn) {
+            // Primeiro, clone o botão para remover todos os event listeners
+            const newBtn = addToCartBtn.cloneNode(true);
+            addToCartBtn.parentNode.replaceChild(newBtn, addToCartBtn);
+
+            // Adicionar novo evento no botão clonado
+            newBtn.addEventListener("click", handleAddToCart);
+        }
+    }
+
+    // Handler separado para adicionar ao carrinho
+    function handleAddToCart(e) {
+        e.preventDefault();
+        const quantity = document.getElementById("quantity").value;
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+
+        // Obter token CSRF da página
+        const csrfToken = document.querySelector(
+            'input[name="csrfmiddlewaretoken"]',
+        )?.value;
+        if (!csrfToken) {
+            console.error("CSRF token não encontrado");
+            return;
+        }
+
+        // Criar um FormData para enviar os dados
+        const formData = new FormData();
+        formData.append("quantity", quantity);
+        formData.append("csrfmiddlewaretoken", csrfToken);
+
+        // Fazer requisição AJAX para adicionar ao carrinho
+        fetch(`{% url 'store:cart_add' product.id %}`, {
+            method: "POST",
+            body: formData,
+            credentials: "same-origin",
+        })
+            .then((response) => {
+                if (response.ok) {
+                    // Mostrar notificação de sucesso
+                    if (window.cartNotifications) {
+                        window.cartNotifications.itemAdded(
+                            productName,
+                            parseInt(quantity),
+                        );
+                    }
+                } else {
+                    throw new Error("Erro ao adicionar ao carrinho");
+                }
+            })
+            .catch((error) => {
+                console.error("Erro ao adicionar ao carrinho:", error);
+                // Mostrar notificação de erro se o sistema estiver disponível
+                if (window.toastSystem) {
+                    window.toastSystem.error(
+                        "Erro",
+                        "Não foi possível adicionar o item ao carrinho",
+                    );
+                }
+            });
+    }
+
+    // Configurar botão de wishlist
+    function setupWishlistButton() {
+        // Configurar botão principal da wishlist
+        const wishlistBtn = document.getElementById("add-to-wishlist-btn");
+        if (wishlistBtn) {
+            // Primeiro, clone o botão para remover todos os event listeners
+            const newBtn = wishlistBtn.cloneNode(true);
+            wishlistBtn.parentNode.replaceChild(newBtn, wishlistBtn);
+
+            // Adicionar novo evento no botão clonado
+            newBtn.addEventListener("click", handleAddToWishlist);
+        }
+
+        // Configurar botões de wishlist em produtos relacionados
+        const wishlistButtons = document.querySelectorAll(".fa-heart");
+        wishlistButtons.forEach((button) => {
+            // Clone cada botão para remover todos os event listeners
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+
+            // Adicionar novo evento no botão clonado
+            newButton.addEventListener("click", handleHeartClick);
+        });
+    }
+
+    // Handler separado para wishlist
+    function handleAddToWishlist() {
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+
+        // Usar o sistema de notificações
+        if (window.wishlistNotifications) {
+            window.wishlistNotifications.itemAdded(productName);
+        }
+
+        // Enviar requisição AJAX para adicionar à lista de desejos
+        // fetch(`/wishlist/add/${productId}/`, { method: 'POST' });
+    }
+
+    // Handler para cliques nos ícones de coração
+    function handleHeartClick(e) {
+        // Encontrar o nome do produto relacionado
+        const productCard = this.closest(".bg-white");
+        if (productCard) {
+            const productName = productCard
+                .querySelector("h3")
+                .textContent.trim();
+
+            if (window.wishlistNotifications) {
+                window.wishlistNotifications.itemAdded(productName);
             }
-        });
 
-    document
-        .getElementById("increase-qty")
-        .addEventListener("click", function () {
-            const input = document.getElementById("quantity");
-            const currentValue = parseInt(input.value);
-            // Assuming a max quantity of 10 for demonstration, adjust as needed
-            if (currentValue < 10) {
-                input.value = currentValue + 1;
+            // Mudar a cor do ícone para indicar que foi adicionado
+            this.classList.remove("text-gray-400");
+            this.classList.add("text-red-500");
+        }
+    }
+
+    // Configurar exibição de estrelas de avaliação
+    function setupStarRatings() {
+        const starRatingElements = document.querySelectorAll(".star-rating");
+        starRatingElements.forEach(function (element) {
+            const rating = parseFloat(element.getAttribute("data-rating")) || 0;
+            renderStars(element, rating);
+        });
+    }
+
+    // Função para renderizar as estrelas
+    function renderStars(container, rating) {
+        container.innerHTML = "";
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+
+        for (let i = 0; i < 5; i++) {
+            const star = document.createElement("i");
+            if (i < fullStars) {
+                star.className = "fas fa-star text-yellow-400";
+            } else if (i === fullStars && hasHalfStar) {
+                star.className = "fas fa-star-half-alt text-yellow-400";
+            } else {
+                star.className = "far fa-star text-yellow-400";
             }
-        });
+            container.appendChild(star);
+        }
+    }
 
-    // Formulário de avaliação
-    // Review form submission (AJAX)
-    // The addReviewFormListeners function will be called by init() in script.js
-    // It handles the form submission and updates the UI
+    // Função para mostrar notificação de avaliação enviada
+    function showReviewSubmittedNotification(event) {
+        // Verifica se está fazendo um envio AJAX, caso não, permite o submit normal
+        // Neste caso, vamos apenas mostrar a notificação
+        if (window.actionFeedback) {
+            // Use o sistema de notificações para informar que a avaliação foi enviada
+            setTimeout(() => {
+                window.actionFeedback.formSubmitted("review");
+            }, 300);
+        }
+    }
 
-    // Botões de adicionar ao carrinho e wishlist
-    document
-        .getElementById("add-to-cart-btn")
-        .addEventListener("click", function () {
-            const quantity = document.getElementById("quantity").value;
-            const productId = this.dataset.productId;
-            alert(
-                `${quantity} unidade(s) de {{ product.name }} adicionada(s) ao carrinho!`,
-            );
-            // Em uma aplicação real, você enviaria uma requisição AJAX aqui
-            // para adicionar o item ao carrinho no backend.
-            // Exemplo: fetch(`/cart/add/${productId}/`, { method: 'POST', body: JSON.stringify({ quantity }) });
-        });
+    // Configurar interação com produtos relacionados
+    function setupRelatedProducts() {
+        // Configurar botões de adicionar ao carrinho em produtos relacionados
+        const relatedProductButtons = document.querySelectorAll(".add-to-cart");
+        relatedProductButtons.forEach((button) => {
+            // Clone cada botão para remover todos os event listeners
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
 
-    document
-        .getElementById("add-to-wishlist-btn")
-        .addEventListener("click", function () {
-            const productId = this.dataset.productId;
-            alert("{{ product.name }} adicionado à sua lista de desejos!");
-            // Em uma aplicação real, você enviaria uma requisição AJAX aqui
-            // para adicionar o item à lista de desejos no backend.
+            // Adicionar novo evento no botão clonado
+            newButton.addEventListener("click", handleRelatedProductAdd);
         });
+    }
+
+    // Handler para adicionar produtos relacionados ao carrinho
+    function handleRelatedProductAdd() {
+        const productId = this.dataset.productId;
+        const productName = this.dataset.productName;
+
+        // Mostrar notificação
+        if (window.cartNotifications) {
+            window.cartNotifications.itemAdded(productName, 1);
+        }
+
+        // Aqui você pode adicionar código para enviar uma requisição AJAX
+        // para adicionar o produto relacionado ao carrinho
+    }
+
+    // Função de inicialização do produto
+    function initializeProductDetail() {
+        setupQuantityControls();
+        setupCartButtons();
+        setupWishlistButton();
+        setupStarRatings();
+        setupRelatedProducts();
+    }
 </script>
 {% endblock content %}
