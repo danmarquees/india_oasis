@@ -207,7 +207,10 @@ class CartNotifications {
             label: "Ver Carrinho",
             icon: "fa-shopping-cart",
             style: "btn-primary",
-            handler: () => (window.location.href = "cart.html"),
+            handler: () => {
+              // Usa a URL definida pelo Django
+              window.location.href = URLS.cart;
+            },
           },
         ],
       },
@@ -274,7 +277,10 @@ class WishlistNotifications {
             label: "Ver Lista",
             icon: "fa-heart",
             style: "btn-primary",
-            handler: () => (window.location.href = "wishlist.html"),
+            handler: () => {
+              // Usa a URL definida pelo Django
+              window.location.href = URLS.wishlist;
+            },
           },
         ],
       },
@@ -339,7 +345,8 @@ class WishlistNotifications {
     console.log(`Adicionando ${productName} ao carrinho...`);
     // Redirecionar para o carrinho
     setTimeout(() => {
-      window.location.href = "cart.html";
+      // Usa a URL definida pelo Django
+      window.location.href = URLS.cart;
     }, 500);
   }
 }
@@ -378,11 +385,13 @@ class PromotionNotifications {
             label: "Ver Oferta",
             icon: "fa-fire",
             style: "btn-warning",
-            handler: () =>
+            handler: () => {
+              // Usa a URL definida pelo Django
               window.open(
-                `products.html?flash=${encodeURIComponent(productName)}`,
+                `${URLS.products}?flash=${encodeURIComponent(productName)}`,
                 "_blank",
-              ),
+              );
+            },
           },
         ],
       },
@@ -449,7 +458,19 @@ class ActionFeedback {
 }
 
 // ===== INICIALIZAÇÃO GLOBAL =====
+// Objeto global para URLs do Django - será definido no template
+var URLS = URLS || {
+  cart: "/cart/",
+  wishlist: "/wishlist/",
+  products: "/products/",
+  home: "/",
+  product_detail: (slug) => `/product/${slug}/`,
+};
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Verifique se as URLs foram definidas no template
+  console.log("URLs configuradas:", URLS);
+
   // Criar instâncias globais
   window.toastSystem = new ToastSystem();
   window.cartNotifications = new CartNotifications(window.toastSystem);

@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'store',
     'payment_processing',
+    'email_service',
 ]
 
 MIDDLEWARE = [
@@ -207,3 +208,17 @@ LOGGING = {
 
 # Ativar variável de contexto para templates
 TEMPLATES[0]['OPTIONS']['context_processors'].append('django.template.context_processors.debug')
+
+# Email Settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = env('EMAIL_PORT', default=587)
+EMAIL_USE_TLS = env('EMAIL_USE_TLS', default=True)
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@indiaoasis.com.br')
+EMAIL_TIMEOUT = 30
+
+# Email Configuration for Order Notifications
+ORDER_EMAIL_ENABLED = env('ORDER_EMAIL_ENABLED', default=True)
+ORDER_EMAIL_ADMIN = env('ORDER_EMAIL_ADMIN', default='admin@indiaoasis.com.br')

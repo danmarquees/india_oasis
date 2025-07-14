@@ -487,3 +487,271 @@ INFO 2025-07-11 12:05:16,642 views Resposta completa da API: {
 }
 INFO 2025-07-11 12:05:16,642 views Preferência criada com sucesso: 261719556-f9ebdb16-417a-4d5f-88b0-f2096cc7d11e
 INFO 2025-07-11 12:05:16,814 views Redirecionando para: https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=261719556-f9ebdb16-417a-4d5f-88b0-f2096cc7d11e
+INFO 2025-07-11 16:11:35,114 views Iniciando criação de pagamento no Mercado Pago
+INFO 2025-07-11 16:11:35,195 views Criando preferência para o pedido 24 no valor de R$ 54.90
+INFO 2025-07-11 16:11:35,198 views URLs de retorno configuradas: {'success': 'http://127.0.0.1:8000/payment/success/', 'failure': 'http://127.0.0.1:8000/payment/failure/', 'pending': 'http://127.0.0.1:8000/payment/pending/'}
+INFO 2025-07-11 16:11:35,198 views Usando URL de notificação produção: https://www.indiaoasis.com.br/payment/webhook/
+INFO 2025-07-11 16:11:35,198 views Enviando dados para API do Mercado Pago
+INFO 2025-07-11 16:11:35,198 views Payload: {
+  "items": [
+    {
+      "title": "Pedido #24 - India Oasis",
+      "quantity": 1,
+      "unit_price": 54.9,
+      "currency_id": "BRL"
+    }
+  ],
+  "payer": {
+    "name": "Danilo",
+    "surname": "Silva Marques de Lima",
+    "email": "d.silvamarques@gmail.com"
+  },
+  "back_urls": {
+    "success": "http://127.0.0.1:8000/payment/success/",
+    "failure": "http://127.0.0.1:8000/payment/failure/",
+    "pending": "http://127.0.0.1:8000/payment/pending/"
+  },
+  "notification_url": "https://www.indiaoasis.com.br/payment/webhook/",
+  "external_reference": "24",
+  "binary_mode": true
+}
+INFO 2025-07-11 16:11:36,394 views Resposta completa da API: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": true,
+    "client_id": "5849160746973019",
+    "collector_id": 261719556,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-07-11T12:11:36.272-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "24",
+    "id": "261719556-44573d00-97d9-4213-a77c-63b02e239817",
+    "init_point": "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=261719556-44573d00-97d9-4213-a77c-63b02e239817",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "BRL",
+        "description": "",
+        "title": "Pedido #24 - India Oasis",
+        "quantity": 1,
+        "unit_price": 54.9
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "https://www.indiaoasis.com.br/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "d.silvamarques@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "Danilo",
+      "surname": "Silva Marques de Lima",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.br/checkout/v1/redirect?pref_id=261719556-44573d00-97d9-4213-a77c-63b02e239817",
+    "site_id": "MLB",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null
+      }
+    },
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-07-11 16:11:36,395 views Preferência criada com sucesso: 261719556-44573d00-97d9-4213-a77c-63b02e239817
+INFO 2025-07-11 16:11:36,615 views Redirecionando para: https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=261719556-44573d00-97d9-4213-a77c-63b02e239817
+INFO 2025-07-11 22:12:51,598 views Iniciando criação de pagamento no Mercado Pago
+INFO 2025-07-11 22:12:51,812 views Criando preferência para o pedido 25 no valor de R$ 54.90
+INFO 2025-07-11 22:12:51,817 views URLs de retorno configuradas: {'success': 'http://127.0.0.1:8000/payment/success/', 'failure': 'http://127.0.0.1:8000/payment/failure/', 'pending': 'http://127.0.0.1:8000/payment/pending/'}
+INFO 2025-07-11 22:12:51,818 views Usando URL de notificação produção: https://www.indiaoasis.com.br/payment/webhook/
+INFO 2025-07-11 22:12:51,818 views Enviando dados para API do Mercado Pago
+INFO 2025-07-11 22:12:51,852 views Payload: {
+  "items": [
+    {
+      "title": "Pedido #25 - India Oasis",
+      "quantity": 1,
+      "unit_price": 54.9,
+      "currency_id": "BRL"
+    }
+  ],
+  "payer": {
+    "name": "Danilo",
+    "surname": "Silva Marques de Lima",
+    "email": "d.silvamarques@gmail.com"
+  },
+  "back_urls": {
+    "success": "http://127.0.0.1:8000/payment/success/",
+    "failure": "http://127.0.0.1:8000/payment/failure/",
+    "pending": "http://127.0.0.1:8000/payment/pending/"
+  },
+  "notification_url": "https://www.indiaoasis.com.br/payment/webhook/",
+  "external_reference": "25",
+  "binary_mode": true
+}
+INFO 2025-07-11 22:12:54,316 views Resposta completa da API: {
+  "status": 201,
+  "response": {
+    "additional_info": "",
+    "auto_return": "",
+    "back_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "binary_mode": true,
+    "client_id": "5849160746973019",
+    "collector_id": 261719556,
+    "coupon_code": null,
+    "coupon_labels": null,
+    "date_created": "2025-07-11T18:12:54.166-04:00",
+    "date_of_expiration": null,
+    "expiration_date_from": null,
+    "expiration_date_to": null,
+    "expires": false,
+    "external_reference": "25",
+    "id": "261719556-659d3dfc-e052-4c27-8d22-d4ca05396990",
+    "init_point": "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=261719556-659d3dfc-e052-4c27-8d22-d4ca05396990",
+    "internal_metadata": null,
+    "items": [
+      {
+        "id": "",
+        "category_id": "",
+        "currency_id": "BRL",
+        "description": "",
+        "title": "Pedido #25 - India Oasis",
+        "quantity": 1,
+        "unit_price": 54.9
+      }
+    ],
+    "marketplace": "NONE",
+    "marketplace_fee": 0,
+    "metadata": {},
+    "notification_url": "https://www.indiaoasis.com.br/payment/webhook/",
+    "operation_type": "regular_payment",
+    "payer": {
+      "phone": {
+        "area_code": "",
+        "number": ""
+      },
+      "address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null
+      },
+      "email": "d.silvamarques@gmail.com",
+      "identification": {
+        "number": "",
+        "type": ""
+      },
+      "name": "Danilo",
+      "surname": "Silva Marques de Lima",
+      "date_created": null,
+      "last_purchase": null
+    },
+    "payment_methods": {
+      "default_card_id": null,
+      "default_payment_method_id": null,
+      "excluded_payment_methods": [
+        {
+          "id": ""
+        }
+      ],
+      "excluded_payment_types": [
+        {
+          "id": ""
+        }
+      ],
+      "installments": null,
+      "default_installments": null
+    },
+    "processing_modes": null,
+    "product_id": null,
+    "preference_expired": false,
+    "redirect_urls": {
+      "failure": "",
+      "pending": "",
+      "success": ""
+    },
+    "sandbox_init_point": "https://sandbox.mercadopago.com.br/checkout/v1/redirect?pref_id=261719556-659d3dfc-e052-4c27-8d22-d4ca05396990",
+    "site_id": "MLB",
+    "shipments": {
+      "default_shipping_method": null,
+      "receiver_address": {
+        "zip_code": "",
+        "street_name": "",
+        "street_number": null,
+        "floor": "",
+        "apartment": "",
+        "city_name": null,
+        "state_name": null,
+        "country_name": null
+      }
+    },
+    "total_amount": null,
+    "last_updated": null,
+    "financing_group": ""
+  }
+}
+INFO 2025-07-11 22:12:54,317 views Preferência criada com sucesso: 261719556-659d3dfc-e052-4c27-8d22-d4ca05396990
+INFO 2025-07-11 22:12:54,458 views Redirecionando para: https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=261719556-659d3dfc-e052-4c27-8d22-d4ca05396990

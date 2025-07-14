@@ -1,0 +1,190 @@
+/*
+ * Sistema de Classificação por Estrelas - India Oasis
+ * Este arquivo contém estilos para os componentes de classificação por estrelas
+ * usados em todo o site.
+ */
+
+/* Contêiner principal */
+.star-rating-component {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.star-rating-component:hover {
+    background-color: rgba(255, 186, 8, 0.1);
+}
+
+/* Contêiner para as estrelas */
+.stars-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Estrelas individuais */
+.rating-star {
+    position: relative;
+    cursor: pointer;
+    padding: 0 2px;
+    transition: transform 0.2s ease;
+}
+
+.rating-star i {
+    transition: all 0.2s ease;
+}
+
+.rating-star:hover {
+    transform: scale(1.2);
+}
+
+/* Tamanhos das estrelas */
+.star-rating-small .rating-star i {
+    font-size: 0.875rem;
+}
+
+.star-rating-component .rating-star i {
+    font-size: 1.125rem;
+}
+
+.star-rating-large .rating-star i {
+    font-size: 1.5rem;
+}
+
+/* Display do valor numérico */
+.rating-value-display {
+    margin-left: 6px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    min-width: 24px;
+    text-align: center;
+    color: #666;
+}
+
+.star-rating-large .rating-value-display {
+    font-size: 1rem;
+}
+
+/* Estados das estrelas */
+.rating-star.hovered {
+    transform: scale(1.1);
+}
+
+/* Animações */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.rating-star.pulse i {
+    animation: pulse 0.3s forwards;
+}
+
+/* Classificação somente leitura */
+[data-rating-display] .rating-star {
+    cursor: default;
+}
+
+[data-rating-display] .rating-star:hover {
+    transform: none;
+}
+
+/* Classificações em cards de produtos */
+.product-card .star-rating-component {
+    margin-bottom: 4px;
+}
+
+/* Classificações em detalhes do produto */
+.product-details .star-rating-component {
+    margin-bottom: 8px;
+}
+
+/* Classificações em avaliações */
+.review-item .star-rating-component {
+    margin-bottom: 2px;
+}
+
+/* Modo de avaliação (input) */
+[data-rating-input] .rating-star {
+    position: relative;
+    cursor: pointer;
+}
+
+[data-rating-input] .rating-star::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+[data-rating-input] .rating-star:hover::before {
+    background-color: rgba(255, 186, 8, 0.2);
+}
+
+/* Tooltip personalizado */
+.rating-star-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    margin-bottom: 5px;
+}
+
+.rating-star-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
+.rating-star:hover .rating-star-tooltip {
+    opacity: 1;
+}
+
+/* Versão responsiva */
+@media (max-width: 768px) {
+    .star-rating-component {
+        padding: 1px;
+    }
+
+    .rating-star {
+        padding: 0 1px;
+    }
+
+    .star-rating-small .rating-star i {
+        font-size: 0.75rem;
+    }
+
+    .star-rating-component .rating-star i {
+        font-size: 1rem;
+    }
+
+    .star-rating-large .rating-star i {
+        font-size: 1.25rem;
+    }
+}

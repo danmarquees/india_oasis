@@ -15,6 +15,9 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
 
+        <!-- Sistema de Classificação por Estrelas -->
+        <link rel="stylesheet" href="{% static 'css/star-rating.css' %}" />
+
         <!-- Google Fonts: Teko, Rajdhani, Montserrat -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,47 +28,7 @@
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-
-        <style>
-            /* Custom styles for toast notifications */
-            #toast-container {
-                position: fixed;
-                top: 1.5rem;
-                right: 1.5rem;
-                z-index: 9999;
-                display: flex;
-                flex-direction: column;
-                gap: 0.75rem;
-            }
-            .toast {
-                display: flex;
-                align-items: center;
-                padding: 1rem;
-                border-radius: 0.5rem;
-                box-shadow:
-                    0 4px 6px -1px rgb(0 0 0 / 0.1),
-                    0 2px 4px -2px rgb(0 0 0 / 0.1);
-                opacity: 0;
-                transform: translateX(100%);
-                transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-            }
-            .toast.show {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            .toast.success {
-                background-color: #f0fdf4; /* green-50 */
-                color: #166534; /* green-800 */
-            }
-            .toast.error {
-                background-color: #fef2f2; /* red-50 */
-                color: #991b1b; /* red-800 */
-            }
-            .toast-icon {
-                margin-right: 0.75rem;
-                font-size: 1.25rem;
-            }
-        </style>
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
     </head>
     <body class="bg-gray-50 font-sans">
         <!-- Toast Notification Container -->
@@ -1074,34 +1037,6 @@
             }
             const csrftoken = getCookie("csrftoken");
 
-            // Função para exibir notificações "toast"
-            function showToast(message, type = "success") {
-                const container = document.getElementById("toast-container");
-                const toast = document.createElement("div");
-                const iconClass =
-                    type === "success"
-                        ? "fa-check-circle"
-                        : "fa-exclamation-circle";
-
-                toast.className = `toast ${type}`;
-                toast.innerHTML = `<i class="fas ${iconClass} toast-icon"></i><span>${message}</span>`;
-
-                container.appendChild(toast);
-
-                // Forçar o navegador a renderizar o elemento antes de adicionar a classe 'show'
-                setTimeout(() => {
-                    toast.classList.add("show");
-                }, 10);
-
-                // Remover o toast após 4 segundos
-                setTimeout(() => {
-                    toast.classList.remove("show");
-                    toast.addEventListener("transitionend", () =>
-                        toast.remove(),
-                    );
-                }, 4000);
-            }
-
             // Lógica para adicionar item ao carrinho via AJAX
             document.addEventListener("DOMContentLoaded", () => {
                 document
@@ -1150,6 +1085,10 @@
                     });
             });
         </script>
+
+        <!-- Sistema de Classificação por Estrelas -->
+        <script src="{% static 'js/star-rating.js' %}"></script>
+
         {% block custom_js %}{% endblock custom_js %}
     </body>
 </html>

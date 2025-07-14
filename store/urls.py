@@ -38,4 +38,5 @@ urlpatterns = [
 
     # --- Reviews ---
     path('product/<int:product_id>/add_review/', views.add_review, name='add_review'),
+    path('review/<int:review_id>/helpful/', views.mark_review_helpful, name='mark_review_helpful'),
 ]

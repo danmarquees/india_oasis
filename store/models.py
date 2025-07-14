@@ -59,6 +59,9 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.slug])
 
+    # Estes métodos foram removidos para evitar problemas com o ORM do Django
+    # As anotações serão usadas na view em vez de propriedades no modelo
+
 class Cart(models.Model):
     # Adicionado related_name para clareza
     user = models.ForeignKey(User, related_name='carts', on_delete=models.CASCADE, null=True, blank=True)
@@ -154,6 +157,7 @@ class Review(models.Model):
     rating = models.PositiveIntegerField(choices=[(i, str(i)) for i in range(1, 6)], default=5)
     comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    helpful_votes = models.ManyToManyField(User, related_name='helpful_reviews', blank=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -161,6 +165,26 @@ class Review(models.Model):
 
     def __str__(self):
         return f'Review by {self.user.username} for {self.product.name} ({self.rating} stars)'
+
+    @property
+    def helpful_count(self):
+        """Retorna o número de votos úteis para esta avaliação"""
+        return self.helpful_votes.count()
+
+    def mark_helpful(self, user):
+        """Marca a avaliação como útil para um usuário"""
+        if user != self.user:  # Impedir que o autor marque sua própria avaliação
+            self.helpful_votes.add(user)
+
+    def unmark_helpful(self, user):
+        """Remove a marcação de útil para um usuário"""
+        self.helpful_votes.remove(user)
+
+    def is_marked_helpful_by(self, user):
+        """Verifica se um usuário marcou esta avaliação como útil"""
+        if not user.is_authenticated:
+            return False
+        return self.helpful_votes.filter(id=user.id).exists()
 
 # ---- NOVO MODELO PARA MENSAGENS DE CONTATO ----
 class ContactMessage(models.Model):

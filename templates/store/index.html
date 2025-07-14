@@ -1,5 +1,28 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
+<!-- Certifique-se de incluir o script de notificações -->
+<script src="{% static 'js/toast-system.js' %}"></script>
+
+<!-- CSRF Token para requisições AJAX -->
+{% csrf_token %}
+
+<!-- Configuração de URLs do Django para o sistema de toast -->
+<script>
+    // Definição global das URLs do Django para uso no JavaScript
+    var URLS = {
+        cart: "{% url 'store:cart' %}",
+        wishlist: "{% url 'store:wishlist' %}",
+        products: "{% url 'store:product_list' %}",
+        home: "{% url 'store:home' %}",
+        product_detail: function (slug) {
+            return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace(
+                "PLACEHOLDER_SLUG",
+                slug,
+            );
+        },
+    };
+</script>
+
 <main id="main-content" class="container mx-auto p-4 sm:p-6 lg:p-8">
     <!-- ==== PÁGINA INICIAL ==== -->
     <div id="home-page" class="page active-page">
@@ -997,6 +1020,114 @@
                 </div>
             </div>
         </section>
+
+        <!-- Teste de Notificações Toast -->
+        <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-teko text-secondary mb-4">
+                <i class="fas fa-bell text-primary mr-2"></i>
+                Demonstração de Notificações
+            </h2>
+            <p class="mb-4">
+                Teste os diferentes tipos de notificações toast disponíveis no
+                sistema:
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <button
+                    onclick="window.toastSystem.success('Sucesso!', 'Operação realizada com sucesso!')"
+                    class="btn bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
+                >
+                    <i class="fas fa-check-circle mr-2"></i>Sucesso
+                </button>
+                <button
+                    onclick="window.toastSystem.info('Informação', 'Atenção! Esta é uma mensagem importante.')"
+                    class="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
+                >
+                    <i class="fas fa-info-circle mr-2"></i>Informação
+                </button>
+                <button
+                    onclick="window.toastSystem.warning('Aviso', 'Cuidado! Esta ação pode ser irreversível.')"
+                    class="btn bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
+                >
+                    <i class="fas fa-exclamation-triangle mr-2"></i>Aviso
+                </button>
+                <button
+                    onclick="window.toastSystem.error('Erro', 'Não foi possível completar a operação.')"
+                    class="btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
+                >
+                    <i class="fas fa-exclamation-circle mr-2"></i>Erro
+                </button>
+                <button
+                    onclick="testMultipleToasts()"
+                    class="btn bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
+                >
+                    <i class="fas fa-layer-group mr-2"></i>Teste de Múltiplos
+                </button>
+                <button
+                    onclick="window.cartNotifications.itemAdded('Produto Teste', 1)"
+                    class="btn bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
+                >
+                    <i class="fas fa-shopping-cart mr-2"></i>Adicionado ao
+                    Carrinho
+                </button>
+                <button
+                    onclick="window.wishlistNotifications.itemAdded('Produto Teste')"
+                    class="btn bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
+                >
+                    <i class="fas fa-heart mr-2"></i>Adicionado aos Favoritos
+                </button>
+            </div>
+        </section>
     </div>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Atualizar os botões "Adicionar ao carrinho" para usar o novo sistema
+        const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+        addToCartButtons.forEach((button) => {
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                const productId = this.getAttribute("data-id");
+                const productName = this.getAttribute("data-product-name");
+
+                // Usar o sistema de notificações global
+                if (window.cartNotifications) {
+                    window.cartNotifications.itemAdded(productName, 1);
+                }
+
+                // Adicionar ao carrinho usando AJAX e a URL definida pelo Django
+                const csrfToken = document.querySelector(
+                    'input[name="csrfmiddlewaretoken"]',
+                )?.value;
+
+                if (csrfToken && productId) {
+                    const formData = new FormData();
+                    formData.append("quantity", 1);
+                    formData.append("csrfmiddlewaretoken", csrfToken);
+
+                    // URL do Django para adicionar ao carrinho
+                    const addToCartUrl =
+                        `{% url 'store:cart_add' 999 %}`.replace(
+                            "999",
+                            productId,
+                        );
+
+                    fetch(addToCartUrl, {
+                        method: "POST",
+                        body: formData,
+                        credentials: "same-origin",
+                    }).catch((error) => {
+                        console.error("Erro ao adicionar ao carrinho:", error);
+                        if (window.toastSystem) {
+                            window.toastSystem.error(
+                                "Erro",
+                                "Não foi possível adicionar o item ao carrinho",
+                            );
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}

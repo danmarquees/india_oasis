@@ -1,5 +1,28 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
+<!-- Certifique-se de incluir o script de notificações -->
+<script src="{% static 'js/toast-system.js' %}"></script>
+
+<!-- CSRF Token para requisições AJAX -->
+{% csrf_token %}
+
+<!-- Configuração de URLs do Django para o sistema de toast -->
+<script>
+    // Definição global das URLs do Django para uso no JavaScript
+    var URLS = {
+        cart: "{% url 'store:cart' %}",
+        wishlist: "{% url 'store:wishlist' %}",
+        products: "{% url 'store:product_list' %}",
+        home: "{% url 'store:home' %}",
+        product_detail: function (slug) {
+            return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace(
+                "PLACEHOLDER_SLUG",
+                slug,
+            );
+        },
+    };
+</script>
+
 <!-- ==== CONTEÚDO PRINCIPAL ==== -->
 <main class="container mx-auto p-4 sm:p-6 lg:p-8">
     <!-- Breadcrumb -->
@@ -231,4 +254,99 @@
         {% endfor %}
     </div>
 </main>
+<!-- Script para inicializar as notificações -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Adicionar event listeners para os botões "Adicionar ao carrinho"
+        const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+
+        addToCartButtons.forEach((button) => {
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                const productId = this.getAttribute("data-id");
+                const productName = this.getAttribute("data-product-name");
+
+                // Usar o sistema de notificações global
+                if (window.cartNotifications) {
+                    window.cartNotifications.itemAdded(productName, 1);
+                }
+
+                // Adicionar ao carrinho usando AJAX e a URL definida pelo Django
+                const csrfToken = document.querySelector(
+                    'input[name="csrfmiddlewaretoken"]',
+                )?.value;
+
+                if (csrfToken && productId) {
+                    const formData = new FormData();
+                    formData.append("quantity", 1);
+                    formData.append("csrfmiddlewaretoken", csrfToken);
+
+                    // URL do Django para adicionar ao carrinho
+                    const addToCartUrl =
+                        `{% url 'store:cart_add' 999 %}`.replace(
+                            "999",
+                            productId,
+                        );
+
+                    fetch(addToCartUrl, {
+                        method: "POST",
+                        body: formData,
+                        credentials: "same-origin",
+                    }).catch((error) => {
+                        console.error("Erro ao adicionar ao carrinho:", error);
+                        if (window.toastSystem) {
+                            window.toastSystem.error(
+                                "Erro",
+                                "Não foi possível adicionar o item ao carrinho",
+                            );
+                        }
+                    });
+                }
+            });
+        });
+
+        // Adicionar event listeners para os botões de favoritos
+        const wishlistButtons = document.querySelectorAll(".fa-heart");
+
+        wishlistButtons.forEach((heartIcon) => {
+            heartIcon.addEventListener("click", function (e) {
+                e.preventDefault();
+                const productCard = this.closest(".bg-white");
+                if (productCard) {
+                    const productName = productCard
+                        .querySelector("h3")
+                        .textContent.trim();
+
+                    // Alterar a cor do ícone para indicar que foi adicionado aos favoritos
+                    this.classList.remove("text-gray-400");
+                    this.classList.add("text-red-500");
+
+                    // Obter o ID do produto
+                    const productCard = this.closest(".bg-white");
+                    const productLink = productCard.querySelector(
+                        "a[href*='product_detail']",
+                    );
+                    let productId = null;
+
+                    if (productLink) {
+                        const url = productLink.getAttribute("href");
+                        const matches = url.match(/\/product\/(.+?)\//);
+                        if (matches && matches[1]) {
+                            // Extrair o slug
+                            const productSlug = matches[1];
+
+                            // Adicionar à lista de desejos usando a URL do Django (se necessário)
+                            // ...
+                        }
+                    }
+
+                    // Usar o sistema de notificações global
+                    if (window.wishlistNotifications) {
+                        window.wishlistNotifications.itemAdded(productName);
+                    }
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}
