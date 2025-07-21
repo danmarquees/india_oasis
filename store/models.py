@@ -44,11 +44,15 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='products/')
+    image_1 = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_2 = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_3 = models.ImageField(upload_to='products/', blank=True, null=True)
     sku = models.CharField(max_length=50, unique=True)
     stock = models.PositiveIntegerField(default=0)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    discount_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Preço promocional (deixe em branco se não houver desconto)")
 
     class Meta:
         ordering = ('name',)
@@ -57,7 +61,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('product_detail', args=[self.slug])
+        return reverse('store:product_detail', args=[self.slug])
 
     # Estes métodos foram removidos para evitar problemas com o ORM do Django
     # As anotações serão usadas na view em vez de propriedades no modelo
@@ -84,6 +88,9 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, related_name='items', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='cart_items', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        unique_together = ('cart', 'product')
 
     def __str__(self):
         return f'{self.quantity} x {self.product.name}'
@@ -161,7 +168,6 @@ class Review(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        unique_together = ('product', 'user') # Garante que um usuário só pode avaliar um produto uma vez
 
     def __str__(self):
         return f'Review by {self.user.username} for {self.product.name} ({self.rating} stars)'

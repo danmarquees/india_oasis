@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, ContactMessage, Review
+from django.utils.html import format_html
 
 @admin.register(CustomerProfile)
 class CustomerProfileAdmin(admin.ModelAdmin):
@@ -17,10 +18,49 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'price', 'stock', 'sku', 'available', 'created', 'updated']
-    list_filter = ['available', 'created', 'updated', 'category']
-    list_editable = ['price', 'stock', 'available']
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name', 'sku', 'price', 'discount_price', 'is_on_sale', 'stock', 'is_low_stock', 'image_tag')
+    search_fields = ('name', 'sku', 'description')
+    list_filter = ('stock', 'discount_price', 'category')
+    readonly_fields = ('image_tag', 'is_on_sale', 'is_low_stock')
+    actions = ['set_promotion', 'remove_promotion']
+    fieldsets = (
+        ('Informações Gerais', {
+            'fields': ('name', 'description', 'category', 'sku')
+        }),
+        ('Preços', {
+            'fields': (('price', 'discount_price'), 'is_on_sale')
+        }),
+        ('Estoque', {
+            'fields': ('stock', 'is_low_stock')
+        }),
+        ('Imagens', {
+            'fields': ('image', 'image_1', 'image_2', 'image_3', 'image_tag')
+        }),
+    )
+
+    def image_tag(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-width: 60px; max-height: 60px;" />', obj.image.url)
+        return "-"
+    image_tag.short_description = 'Miniatura'
+
+    def is_on_sale(self, obj):
+        return bool(obj.discount_price)
+    is_on_sale.boolean = True
+    is_on_sale.short_description = 'Promoção?'
+
+    def is_low_stock(self, obj):
+        return obj.stock is not None and obj.stock < 5
+    is_low_stock.boolean = True
+    is_low_stock.short_description = 'Estoque Baixo?'
+
+    def set_promotion(self, request, queryset):
+        queryset.update(discount_price=1)  # Exemplo: define desconto simbólico
+    set_promotion.short_description = 'Ativar promoção (definir desconto simbólico)'
+
+    def remove_promotion(self, request, queryset):
+        queryset.update(discount_price=None)
+    remove_promotion.short_description = 'Remover promoção'
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):

@@ -169,48 +169,14 @@
     }
 </style>
 
+<!-- Scripts migrados para static/js/script.js -->
+<script src="{% static 'js/script.js' %}"></script>
 <script>
-    // Removemos o código JavaScript de manipulação personalizada de checkout
-    // Agora estamos usando o fluxo padrão do formulário que vai criar o pedido
-    // e redirecionar para o Mercado Pago
-    document.addEventListener("DOMContentLoaded", function () {
-        // Verificar se há mensagens de erro na URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const error = urlParams.get("error");
-
-        if (error) {
-            alert(
-                "Erro no processamento do pagamento: " +
-                    decodeURIComponent(error),
-            );
-        }
-
-        // Adicionar validação básica ao formulário
-        const form = document.getElementById("checkout-form");
-        if (form) {
-            form.addEventListener("submit", function (event) {
-                // Validação de dados do endereço
-                const requiredFields = [
-                    "{{ user.profile.nome }}",
-                    "{{ user.profile.endereco }}",
-                    "{{ user.profile.numero }}",
-                    "{{ user.profile.cep }}",
-                    "{{ user.profile.cidade }}",
-                    "{{ user.profile.estado }}",
-                ];
-
-                const missingFields = requiredFields.filter(
-                    (field) => !field || field.trim() === "",
-                );
-
-                if (missingFields.length > 0) {
-                    event.preventDefault();
-                    alert(
-                        "Por favor, complete todos os dados de entrega antes de prosseguir com o pagamento.",
-                    );
-                    window.location.href = "{% url 'store:profile' %}";
-                }
-            });
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initCheckoutPage === 'function') {
+      initCheckoutPage();
+    } else if (window.initCheckoutPage) {
+      window.initCheckoutPage();
         }
     });
 </script>

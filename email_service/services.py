@@ -477,399 +477,264 @@ class EmailTemplateService:
 
     @staticmethod
     def _get_order_confirmation_html():
-        return """
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #333;">Pedido Confirmado!</h1>
-            <p>Olá {{ customer_name }},</p>
-            <p>Seu pedido #{{ order_number }} foi confirmado com sucesso!</p>
-
-            <div style="background-color: #f5f5f5; padding: 20px; margin: 20px 0;">
-                <h2>Detalhes do Pedido</h2>
-                <p><strong>Número do Pedido:</strong> #{{ order_number }}</p>
-                <p><strong>Data:</strong> {{ order_date }}</p>
-                <p><strong>Status:</strong> {{ order_status }}</p>
-                <p><strong>Total:</strong> R$ {{ order_total }}</p>
-            </div>
-
-            <div style="background-color: #f9f9f9; padding: 20px; margin: 20px 0;">
-                <h3>Itens do Pedido</h3>
-                {% for item in order_items %}
-                <div style="border-bottom: 1px solid #ddd; padding: 10px 0;">
-                    <p><strong>{{ item.product.name }}</strong></p>
-                    <p>Quantidade: {{ item.quantity }} | Preço: R$ {{ item.price }}</p>
-                </div>
-                {% endfor %}
-            </div>
-
-            <div style="background-color: #f9f9f9; padding: 20px; margin: 20px 0;">
-                <h3>Endereço de Entrega</h3>
-                <p>{{ shipping_address.address }}</p>
-                <p>{{ shipping_address.city }}, {{ shipping_address.state }}</p>
-                <p>CEP: {{ shipping_address.postal_code }}</p>
-            </div>
-
-            <p>Obrigado por escolher a India Oasis!</p>
-            <p>Em caso de dúvidas, entre em contato conosco em {{ support_email }}</p>
-
-            <hr style="margin: 30px 0;">
-            <p style="color: #666; font-size: 12px;">
-                © {{ current_year }} India Oasis. Todos os direitos reservados.
-            </p>
+        return '''
+        <div style="font-family: 'Poppins', 'Rajdhani', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #fff8dc; border-radius: 12px; box-shadow: 0 2px 12px #f6e1c5; padding: 32px;">
+          <h1 style="color: #d2691e; font-family: 'Teko', Arial, sans-serif;">Pedido Confirmado!</h1>
+          <p>Olá {{ customer_name }},</p>
+          <p>Seu pedido <strong>#{{ order_number }}</strong> foi confirmado com sucesso.</p>
+          <div style="background: #f9e7c3; border-left: 4px solid #d2691e; padding: 16px; margin: 24px 0;">
+            <strong>Status:</strong> {{ order_status }}<br>
+            <strong>Data:</strong> {{ order_date }}<br>
+            <strong>Total:</strong> R$ {{ order_total }}
+          </div>
+          <p>Confira os detalhes do seu pedido em sua conta ou entre em contato conosco se precisar de ajuda.</p>
+          <p style="color: #a0522d;">Obrigado por escolher a India Oasis!</p>
+          <hr style="margin: 32px 0;">
+          <p style="font-size: 12px; color: #888;">© {{ current_year }} India Oasis. Todos os direitos reservados.</p>
         </div>
-        """
+        '''
 
     @staticmethod
     def _get_order_confirmation_text():
-        return """
-        Pedido Confirmado!
+        return '''
+Pedido Confirmado!
 
-        Olá {{ customer_name }},
+Olá {{ customer_name }},
 
-        Seu pedido #{{ order_number }} foi confirmado com sucesso!
+Seu pedido #{{ order_number }} foi confirmado com sucesso.
 
-        Detalhes do Pedido:
-        - Número do Pedido: #{{ order_number }}
-        - Data: {{ order_date }}
-        - Status: {{ order_status }}
-        - Total: R$ {{ order_total }}
+Status: {{ order_status }}
+Data: {{ order_date }}
+Total: R$ {{ order_total }}
 
-        Itens do Pedido:
-        {% for item in order_items %}
-        - {{ item.product.name }} (Quantidade: {{ item.quantity }}, Preço: R$ {{ item.price }})
-        {% endfor %}
+Confira os detalhes do seu pedido em sua conta ou entre em contato conosco se precisar de ajuda.
 
-        Endereço de Entrega:
-        {{ shipping_address.address }}
-        {{ shipping_address.city }}, {{ shipping_address.state }}
-        CEP: {{ shipping_address.postal_code }}
-
-        Obrigado por escolher a India Oasis!
-        Em caso de dúvidas, entre em contato conosco em {{ support_email }}
-
-        © {{ current_year }} India Oasis. Todos os direitos reservados.
-        """
+Obrigado por escolher a India Oasis!
+© {{ current_year }} India Oasis. Todos os direitos reservados.
+'''
 
     @staticmethod
     def _get_payment_approved_html():
-        return """
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #28a745;">Pagamento Aprovado!</h1>
-            <p>Olá {{ customer_name }},</p>
-            <p>Ótimas notícias! Seu pagamento foi aprovado e seu pedido está sendo processado.</p>
-
-            <div style="background-color: #d4edda; padding: 20px; margin: 20px 0; border-left: 4px solid #28a745;">
-                <h2>Detalhes do Pagamento</h2>
-                <p><strong>Pedido:</strong> #{{ order_number }}</p>
-                <p><strong>Valor:</strong> R$ {{ order_total }}</p>
-                <p><strong>Status:</strong> {{ order_status }}</p>
-            </div>
-
-            <p>Seu pedido será processado e enviado em breve. Você receberá um e-mail quando o produto for enviado.</p>
-
-            <p>Obrigado por escolher a India Oasis!</p>
-            <p>Em caso de dúvidas, entre em contato conosco em {{ support_email }}</p>
-
-            <hr style="margin: 30px 0;">
-            <p style="color: #666; font-size: 12px;">
-                © {{ current_year }} India Oasis. Todos os direitos reservados.
-            </p>
+        return '''
+        <div style="font-family: 'Poppins', 'Rajdhani', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #e6ffe6; border-radius: 12px; box-shadow: 0 2px 12px #c3f9c9; padding: 32px;">
+          <h1 style="color: #4a6741; font-family: 'Teko', Arial, sans-serif;">Pagamento Aprovado!</h1>
+          <p>Olá {{ customer_name }},</p>
+          <p>Recebemos o pagamento do seu pedido <strong>#{{ order_number }}</strong>. Agora é só aguardar, pois logo ele será enviado!</p>
+          <div style="background: #d4f5dd; border-left: 4px solid #4a6741; padding: 16px; margin: 24px 0;">
+            <strong>Status:</strong> {{ order_status }}<br>
+            <strong>Data:</strong> {{ order_date }}<br>
+            <strong>Total:</strong> R$ {{ order_total }}
+          </div>
+          <p>Você receberá um novo e-mail assim que seu pedido for despachado.</p>
+          <p style="color: #4a6741;">Agradecemos a confiança!</p>
+          <hr style="margin: 32px 0;">
+          <p style="font-size: 12px; color: #888;">© {{ current_year }} India Oasis. Todos os direitos reservados.</p>
         </div>
-        """
+        '''
 
     @staticmethod
     def _get_payment_approved_text():
-        return """
-        Pagamento Aprovado!
+        return '''
+Pagamento Aprovado!
 
-        Olá {{ customer_name }},
+Olá {{ customer_name }},
 
-        Ótimas notícias! Seu pagamento foi aprovado e seu pedido está sendo processado.
+Recebemos o pagamento do seu pedido #{{ order_number }}. Agora é só aguardar, pois logo ele será enviado!
 
-        Detalhes do Pagamento:
-        - Pedido: #{{ order_number }}
-        - Valor: R$ {{ order_total }}
-        - Status: {{ order_status }}
+Status: {{ order_status }}
+Data: {{ order_date }}
+Total: R$ {{ order_total }}
 
-        Seu pedido será processado e enviado em breve. Você receberá um e-mail quando o produto for enviado.
+Você receberá um novo e-mail assim que seu pedido for despachado.
 
-        Obrigado por escolher a India Oasis!
-        Em caso de dúvidas, entre em contato conosco em {{ support_email }}
-
-        © {{ current_year }} India Oasis. Todos os direitos reservados.
-        """
+Agradecemos a confiança!
+© {{ current_year }} India Oasis. Todos os direitos reservados.
+'''
 
     @staticmethod
     def _get_payment_rejected_html():
-        return """
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #dc3545;">Problema com Pagamento</h1>
-            <p>Olá {{ customer_name }},</p>
-            <p>Infelizmente, houve um problema com o pagamento do seu pedido #{{ order_number }}.</p>
-
-            <div style="background-color: #f8d7da; padding: 20px; margin: 20px 0; border-left: 4px solid #dc3545;">
-                <h2>Detalhes do Pedido</h2>
-                <p><strong>Pedido:</strong> #{{ order_number }}</p>
-                <p><strong>Valor:</strong> R$ {{ order_total }}</p>
-                <p><strong>Status:</strong> {{ order_status }}</p>
-            </div>
-
-            <p>Você pode tentar realizar o pagamento novamente ou entrar em contato conosco para obter ajuda.</p>
-
-            <p>Para tentar novamente, acesse sua conta em {{ store_url }}</p>
-
-            <p>Em caso de dúvidas, entre em contato conosco em {{ support_email }}</p>
-
-            <hr style="margin: 30px 0;">
-            <p style="color: #666; font-size: 12px;">
-                © {{ current_year }} India Oasis. Todos os direitos reservados.
-            </p>
+        return '''
+        <div style="font-family: 'Poppins', 'Rajdhani', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #fff0f0; border-radius: 12px; box-shadow: 0 2px 12px #f9c3c3; padding: 32px;">
+          <h1 style="color: #cc2936; font-family: 'Teko', Arial, sans-serif;">Pagamento Rejeitado</h1>
+          <p>Olá {{ customer_name }},</p>
+          <p>Houve um problema com o pagamento do seu pedido <strong>#{{ order_number }}</strong>.</p>
+          <div style="background: #fbeaea; border-left: 4px solid #cc2936; padding: 16px; margin: 24px 0;">
+            <strong>Status:</strong> {{ order_status }}<br>
+            <strong>Data:</strong> {{ order_date }}<br>
+            <strong>Total:</strong> R$ {{ order_total }}
+          </div>
+          <p>Por favor, tente novamente ou entre em contato conosco para mais informações.</p>
+          <p style="color: #cc2936;">Estamos à disposição para ajudar!</p>
+          <hr style="margin: 32px 0;">
+          <p style="font-size: 12px; color: #888;">© {{ current_year }} India Oasis. Todos os direitos reservados.</p>
         </div>
-        """
+        '''
 
     @staticmethod
     def _get_payment_rejected_text():
-        return """
-        Problema com Pagamento
+        return '''
+Pagamento Rejeitado
 
-        Olá {{ customer_name }},
+Olá {{ customer_name }},
 
-        Infelizmente, houve um problema com o pagamento do seu pedido #{{ order_number }}.
+Houve um problema com o pagamento do seu pedido #{{ order_number }}.
 
-        Detalhes do Pedido:
-        - Pedido: #{{ order_number }}
-        - Valor: R$ {{ order_total }}
-        - Status: {{ order_status }}
+Status: {{ order_status }}
+Data: {{ order_date }}
+Total: R$ {{ order_total }}
 
-        Você pode tentar realizar o pagamento novamente ou entrar em contato conosco para obter ajuda.
+Por favor, tente novamente ou entre em contato conosco para mais informações.
 
-        Para tentar novamente, acesse sua conta em {{ store_url }}
-
-        Em caso de dúvidas, entre em contato conosco em {{ support_email }}
-
-        © {{ current_year }} India Oasis. Todos os direitos reservados.
-        """
+Estamos à disposição para ajudar!
+© {{ current_year }} India Oasis. Todos os direitos reservados.
+'''
 
     @staticmethod
     def _get_order_shipped_html():
-        return """
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #007bff;">Pedido Enviado!</h1>
-            <p>Olá {{ customer_name }},</p>
-            <p>Seu pedido #{{ order_number }} foi enviado!</p>
-
-            <div style="background-color: #cce5ff; padding: 20px; margin: 20px 0; border-left: 4px solid #007bff;">
-                <h2>Informações de Envio</h2>
-                <p><strong>Pedido:</strong> #{{ order_number }}</p>
-                {% if tracking_code %}
-                <p><strong>Código de Rastreamento:</strong> {{ tracking_code }}</p>
-                {% endif %}
-                <p><strong>Status:</strong> {{ order_status }}</p>
-            </div>
-
-            <p>Seu pedido está a caminho! Você pode acompanhar o envio usando o código de rastreamento acima.</p>
-
-            <p>Obrigado por escolher a India Oasis!</p>
-            <p>Em caso de dúvidas, entre em contato conosco em {{ support_email }}</p>
-
-            <hr style="margin: 30px 0;">
-            <p style="color: #666; font-size: 12px;">
-                © {{ current_year }} India Oasis. Todos os direitos reservados.
-            </p>
+        return '''
+        <div style="font-family: 'Poppins', 'Rajdhani', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #e6f7ff; border-radius: 12px; box-shadow: 0 2px 12px #c3e6f9; padding: 32px;">
+          <h1 style="color: #007bff; font-family: 'Teko', Arial, sans-serif;">Pedido Enviado!</h1>
+          <p>Olá {{ customer_name }},</p>
+          <p>Seu pedido <strong>#{{ order_number }}</strong> foi enviado!</p>
+          <div style="background: #cce5ff; border-left: 4px solid #007bff; padding: 16px; margin: 24px 0;">
+            <strong>Status:</strong> {{ order_status }}<br>
+            {% if tracking_code %}
+            <strong>Código de Rastreamento:</strong> {{ tracking_code }}<br>
+            {% endif %}
+            <strong>Data:</strong> {{ order_date }}
+          </div>
+          <p>Você pode acompanhar o envio usando o código de rastreamento acima.</p>
+          <p style="color: #007bff;">Obrigado por escolher a India Oasis!</p>
+          <hr style="margin: 32px 0;">
+          <p style="font-size: 12px; color: #888;">© {{ current_year }} India Oasis. Todos os direitos reservados.</p>
         </div>
-        """
+        '''
 
     @staticmethod
     def _get_order_shipped_text():
-        return """
-        Pedido Enviado!
+        return '''
+Pedido Enviado!
 
-        Olá {{ customer_name }},
+Olá {{ customer_name }},
 
-        Seu pedido #{{ order_number }} foi enviado!
+Seu pedido #{{ order_number }} foi enviado!
 
-        Informações de Envio:
-        - Pedido: #{{ order_number }}
-        {% if tracking_code %}
-        - Código de Rastreamento: {{ tracking_code }}
-        {% endif %}
-        - Status: {{ order_status }}
+Status: {{ order_status }}
+{% if tracking_code %}
+Código de Rastreamento: {{ tracking_code }}
+{% endif %}
+Data: {{ order_date }}
 
-        Seu pedido está a caminho! Você pode acompanhar o envio usando o código de rastreamento acima.
+Você pode acompanhar o envio usando o código de rastreamento acima.
 
-        Obrigado por escolher a India Oasis!
-        Em caso de dúvidas, entre em contato conosco em {{ support_email }}
-
-        © {{ current_year }} India Oasis. Todos os direitos reservados.
-        """
+Obrigado por escolher a India Oasis!
+© {{ current_year }} India Oasis. Todos os direitos reservados.
+'''
 
     @staticmethod
     def _get_order_delivered_html():
-        return """
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #28a745;">Pedido Entregue!</h1>
-            <p>Olá {{ customer_name }},</p>
-            <p>Seu pedido #{{ order_number }} foi entregue com sucesso!</p>
-
-            <div style="background-color: #d4edda; padding: 20px; margin: 20px 0; border-left: 4px solid #28a745;">
-                <h2>Pedido Finalizado</h2>
-                <p><strong>Pedido:</strong> #{{ order_number }}</p>
-                <p><strong>Status:</strong> {{ order_status }}</p>
-            </div>
-
-            <p>Esperamos que você goste dos produtos! Se tiver alguma dúvida ou problema, não hesite em nos contatar.</p>
-
-            <p>Que tal avaliar sua experiência? Acesse {{ store_url }} e deixe sua avaliação!</p>
-
-            <p>Obrigado por escolher a India Oasis!</p>
-            <p>Em caso de dúvidas, entre em contato conosco em {{ support_email }}</p>
-
-            <hr style="margin: 30px 0;">
-            <p style="color: #666; font-size: 12px;">
-                © {{ current_year }} India Oasis. Todos os direitos reservados.
-            </p>
+        return '''
+        <div style="font-family: 'Poppins', 'Rajdhani', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f6fff6; border-radius: 12px; box-shadow: 0 2px 12px #c3f9c3; padding: 32px;">
+          <h1 style="color: #10b981; font-family: 'Teko', Arial, sans-serif;">Pedido Entregue!</h1>
+          <p>Olá {{ customer_name }},</p>
+          <p>Seu pedido <strong>#{{ order_number }}</strong> foi entregue com sucesso!</p>
+          <div style="background: #e0ffe0; border-left: 4px solid #10b981; padding: 16px; margin: 24px 0;">
+            <strong>Status:</strong> {{ order_status }}<br>
+            <strong>Data:</strong> {{ order_date }}
+          </div>
+          <p>Esperamos que você aproveite muito seus produtos. Qualquer dúvida, estamos à disposição!</p>
+          <p style="color: #10b981;">Agradecemos a preferência!</p>
+          <hr style="margin: 32px 0;">
+          <p style="font-size: 12px; color: #888;">© {{ current_year }} India Oasis. Todos os direitos reservados.</p>
         </div>
-        """
+        '''
 
     @staticmethod
     def _get_order_delivered_text():
-        return """
-        Pedido Entregue!
+        return '''
+Pedido Entregue!
 
-        Olá {{ customer_name }},
+Olá {{ customer_name }},
 
-        Seu pedido #{{ order_number }} foi entregue com sucesso!
+Seu pedido #{{ order_number }} foi entregue com sucesso!
 
-        Pedido Finalizado:
-        - Pedido: #{{ order_number }}
-        - Status: {{ order_status }}
+Status: {{ order_status }}
+Data: {{ order_date }}
 
-        Esperamos que você goste dos produtos! Se tiver alguma dúvida ou problema, não hesite em nos contatar.
+Esperamos que você aproveite muito seus produtos. Qualquer dúvida, estamos à disposição!
 
-        Que tal avaliar sua experiência? Acesse {{ store_url }} e deixe sua avaliação!
-
-        Obrigado por escolher a India Oasis!
-        Em caso de dúvidas, entre em contato conosco em {{ support_email }}
-
-        © {{ current_year }} India Oasis. Todos os direitos reservados.
-        """
+Agradecemos a preferência!
+© {{ current_year }} India Oasis. Todos os direitos reservados.
+'''
 
     @staticmethod
     def _get_order_cancelled_html():
-        return """
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #dc3545;">Pedido Cancelado</h1>
-            <p>Olá {{ customer_name }},</p>
-            <p>Seu pedido #{{ order_number }} foi cancelado.</p>
-
-            <div style="background-color: #f8d7da; padding: 20px; margin: 20px 0; border-left: 4px solid #dc3545;">
-                <h2>Detalhes do Cancelamento</h2>
-                <p><strong>Pedido:</strong> #{{ order_number }}</p>
-                <p><strong>Status:</strong> {{ order_status }}</p>
-                {% if cancellation_reason %}
-                <p><strong>Motivo:</strong> {{ cancellation_reason }}</p>
-                {% endif %}
-            </div>
-
-            <p>Se você cancelou por engano ou deseja fazer um novo pedido, visite nossa loja em {{ store_url }}</p>
-
-            <p>Se o cancelamento não foi solicitado por você, entre em contato conosco imediatamente.</p>
-
-            <p>Em caso de dúvidas, entre em contato conosco em {{ support_email }}</p>
-
-            <hr style="margin: 30px 0;">
-            <p style="color: #666; font-size: 12px;">
-                © {{ current_year }} India Oasis. Todos os direitos reservados.
-            </p>
+        return '''
+        <div style="font-family: 'Poppins', 'Rajdhani', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #fff0e6; border-radius: 12px; box-shadow: 0 2px 12px #f9dcc3; padding: 32px;">
+          <h1 style="color: #cc2936; font-family: 'Teko', Arial, sans-serif;">Pedido Cancelado</h1>
+          <p>Olá {{ customer_name }},</p>
+          <p>Seu pedido <strong>#{{ order_number }}</strong> foi cancelado.</p>
+          {% if cancellation_reason %}
+          <div style="background: #ffe6e6; border-left: 4px solid #cc2936; padding: 16px; margin: 24px 0;">
+            <strong>Motivo:</strong> {{ cancellation_reason }}
+          </div>
+          {% endif %}
+          <p>Se tiver dúvidas ou desejar refazer seu pedido, estamos à disposição para ajudar.</p>
+          <p style="color: #cc2936;">Conte sempre conosco!</p>
+          <hr style="margin: 32px 0;">
+          <p style="font-size: 12px; color: #888;">© {{ current_year }} India Oasis. Todos os direitos reservados.</p>
         </div>
-        """
+        '''
 
     @staticmethod
     def _get_order_cancelled_text():
-        return """
-        Pedido Cancelado
+        return '''
+Pedido Cancelado
 
-        Olá {{ customer_name }},
+Olá {{ customer_name }},
 
-        Seu pedido #{{ order_number }} foi cancelado.
+Seu pedido #{{ order_number }} foi cancelado.
 
-        Detalhes do Cancelamento:
-        - Pedido: #{{ order_number }}
-        - Status: {{ order_status }}
-        {% if cancellation_reason %}
-        - Motivo: {{ cancellation_reason }}
-        {% endif %}
+{% if cancellation_reason %}
+Motivo: {{ cancellation_reason }}
+{% endif %}
 
-        Se você cancelou por engano ou deseja fazer um novo pedido, visite nossa loja em {{ store_url }}
+Se tiver dúvidas ou desejar refazer seu pedido, estamos à disposição para ajudar.
 
-        Se o cancelamento não foi solicitado por você, entre em contato conosco imediatamente.
-
-        Em caso de dúvidas, entre em contato conosco em {{ support_email }}
-
-        © {{ current_year }} India Oasis. Todos os direitos reservados.
-        """
+Conte sempre conosco!
+© {{ current_year }} India Oasis. Todos os direitos reservados.
+'''
 
     @staticmethod
     def _get_welcome_html():
-        return """
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #007bff;">Bem-vindo à India Oasis!</h1>
-            <p>Olá {{ user_name }},</p>
-            <p>Seja muito bem-vindo(a) à India Oasis! Estamos felizes em tê-lo(a) conosco.</p>
-
-            <div style="background-color: #e7f3ff; padding: 20px; margin: 20px 0; border-left: 4px solid #007bff;">
-                <h2>Explore nossa loja</h2>
-                <p>Descubra produtos únicos e de qualidade em nossa coleção especial.</p>
-                <p>Navegue por nossas categorias e encontre exatamente o que você procura.</p>
-            </div>
-
-            <div style="text-align: center; margin: 30px 0;">
-                <a href="{{ store_url }}" style="background-color: #007bff; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px;">
-                    Visitar Loja
-                </a>
-            </div>
-
-            <h3>Vantagens de ser nosso cliente:</h3>
-            <ul>
-                <li>Produtos de alta qualidade</li>
-                <li>Entrega rápida e segura</li>
-                <li>Atendimento personalizado</li>
-                <li>Ofertas exclusivas</li>
-            </ul>
-
-            <p>Se tiver alguma dúvida, não hesite em nos contatar em {{ support_email }}</p>
-
-            <p>Obrigado por escolher a India Oasis!</p>
-
-            <hr style="margin: 30px 0;">
-            <p style="color: #666; font-size: 12px;">
-                © {{ current_year }} India Oasis. Todos os direitos reservados.
-            </p>
+        return '''
+        <div style="font-family: 'Poppins', 'Rajdhani', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #fffbe6; border-radius: 12px; box-shadow: 0 2px 12px #f9f6c3; padding: 32px;">
+          <h1 style="color: #f7931e; font-family: 'Teko', Arial, sans-serif;">Bem-vindo(a) à India Oasis!</h1>
+          <p>Olá {{ user_name }},</p>
+          <p>É um prazer ter você conosco. Prepare-se para uma jornada pelos sabores autênticos da Índia!</p>
+          <div style="background: #fff3cd; border-left: 4px solid #f7931e; padding: 16px; margin: 24px 0;">
+            <strong>Dica:</strong> Explore nossos temperos, chás e receitas exclusivas em nosso site.
+          </div>
+          <p>Qualquer dúvida, conte com nosso suporte: <a href="mailto:{{ support_email }}" style="color: #f7931e;">{{ support_email }}</a></p>
+          <p style="color: #f7931e;">Namastê! 🙏</p>
+          <hr style="margin: 32px 0;">
+          <p style="font-size: 12px; color: #888;">© {{ current_year }} India Oasis. Todos os direitos reservados.</p>
         </div>
-        """
+        '''
 
     @staticmethod
     def _get_welcome_text():
-        return """
-        Bem-vindo à India Oasis!
+        return '''
+Bem-vindo(a) à India Oasis!
 
-        Olá {{ user_name }},
+Olá {{ user_name }},
 
-        Seja muito bem-vindo(a) à India Oasis! Estamos felizes em tê-lo(a) conosco.
+É um prazer ter você conosco. Prepare-se para uma jornada pelos sabores autênticos da Índia!
 
-        Explore nossa loja:
-        Descubra produtos únicos e de qualidade em nossa coleção especial.
-        Navegue por nossas categorias e encontre exatamente o que você procura.
+Dica: Explore nossos temperos, chás e receitas exclusivas em nosso site.
 
-        Visite nossa loja: {{ store_url }}
+Qualquer dúvida, conte com nosso suporte: {{ support_email }}
 
-        Vantagens de ser nosso cliente:
-        - Produtos de alta qualidade
-        - Entrega rápida e segura
-        - Atendimento personalizado
-        - Ofertas exclusivas
-
-        Se tiver alguma dúvida, não hesite em nos contatar em {{ support_email }}
-
-        Obrigado por escolher a India Oasis!
-
-        © {{ current_year }} India Oasis. Todos os direitos reservados.
+Namastê! 🙏
+© {{ current_year }} India Oasis. Todos os direitos reservados.
+'''

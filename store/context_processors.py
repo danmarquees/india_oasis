@@ -1,32 +1,29 @@
 from .models import Cart, Category, Wishlist
 from django.conf import settings
+from .views import get_cart  # Importa o helper correto
+
 
 def cart_processor(request):
     """
-    Context processor to make cart and wishlist counts available to all templates.
+    Context processor para disponibilizar o contador do carrinho e wishlist em todos os templates.
     """
     cart_count = 0
     wishlist_count = 0
 
-    if request.user.is_authenticated:
-        cart, _ = Cart.objects.get_or_create(user=request.user)
-        cart_count = cart.total_items if cart else 0
+    # Sempre usa o helper para garantir consistência
+    cart = get_cart(request)
+    if cart:
+        cart_count = cart.total_items
 
+    if request.user.is_authenticated:
         wishlist, _ = Wishlist.objects.get_or_create(user=request.user)
         wishlist_count = wishlist.products.count() if wishlist else 0
-    else:
-        cart_id = request.session.get('cart_id')
-        if cart_id:
-            try:
-                cart = Cart.objects.get(id=cart_id, user=None)
-                cart_count = cart.total_items
-            except Cart.DoesNotExist:
-                cart_count = 0
 
     return {
         'cart_count': cart_count,
         'wishlist_count': wishlist_count,
     }
+
 
 def static_files_processor(request):
     """

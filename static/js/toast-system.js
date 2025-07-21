@@ -485,13 +485,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Event listeners globais para demonstração
   document.addEventListener("click", (e) => {
-    // Detectar cliques em botões de adicionar ao carrinho
-    if (e.target.matches('.add-to-cart, [data-action="add-to-cart"]')) {
-      const productName =
-        e.target.getAttribute("data-product-name") || "Produto";
-      window.cartNotifications.itemAdded(productName);
-    }
-
     // Detectar cliques em botões de favoritar
     if (e.target.matches('.add-to-wishlist, [data-action="add-to-wishlist"]')) {
       const productName =

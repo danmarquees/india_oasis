@@ -1,8 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-<!-- Certifique-se de incluir o script de notificações -->
-<script src="{% static 'js/toast-system.js' %}"></script>
-
 <!-- CSRF Token para requisições AJAX -->
 {% csrf_token %}
 
@@ -21,6 +18,24 @@
             );
         },
     };
+</script>
+
+<!-- Definição da variável global products para uso no JavaScript -->
+<script>
+var products = [
+{% for product in products %}
+  {
+    "id": {{ product.id|default:"0" }},
+    "name": "{{ product.name|escapejs|default:"" }}",
+    "price": {{ product.price|floatformat:"2"|default:"0.00"|cut:"," }},
+    "image": "{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}",
+    "description": "{{ product.description|escapejs|default:"" }}",
+    "category": "{{ product.category.name|escapejs|default:"" }}",
+    "rating": {{ product.average_rating|default:"0" }},
+    "reviews": []
+  }{% if not forloop.last %},{% endif %}
+{% endfor %}
+];
 </script>
 
 <main id="main-content" class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -298,24 +313,27 @@
                         </p>
                         <div class="flex items-center mb-2">
                             <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                {% for i in "12345"|make_list %}
+                                    {% if product.average_rating|default:0 >= i|add:".0" %}
+                                        <i class="fas fa-star"></i>
+                                    {% elif product.average_rating|default:0 >= i|add:"-.5" %}
+                                        <i class="fas fa-star-half-alt"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
-                            <span class="text-xs text-gray-500 ml-1">(0)</span>
-                            {# Adjust to show actual review count #}
+                            <span class="text-xs text-gray-500 ml-1">
+                                ({{ product.average_rating|floatformat:1 }}/5 - {{ product.review_count }})
+                            </span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-lg font-bold text-primary"
                                 >R$ {{ product.price|floatformat:2 }}</span
                             >
-                            <button
-                                class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                            <button type="button" class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
                                 data-id="{{ product.id }}"
-                                data-product-name="{{ product.name }}"
-                            >
+                                data-product-name="{{ product.name }}">
                                 <i class="fas fa-cart-plus mr-1"></i>
                                 Adicionar
                             </button>
@@ -401,24 +419,27 @@
                         </p>
                         <div class="flex items-center mb-2">
                             <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                {% for i in "12345"|make_list %}
+                                    {% if product.average_rating|default:0 >= i|add:".0" %}
+                                        <i class="fas fa-star"></i>
+                                    {% elif product.average_rating|default:0 >= i|add:"-.5" %}
+                                        <i class="fas fa-star-half-alt"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
-                            <span class="text-xs text-gray-500 ml-1">(0)</span>
-                            {# Adjust to show actual review count #}
+                            <span class="text-xs text-gray-500 ml-1">
+                                ({{ product.average_rating|floatformat:1 }}/5 - {{ product.review_count }})
+                            </span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-lg font-bold text-primary"
                                 >R$ {{ product.price|floatformat:2 }}</span
                             >
-                            <button
-                                class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                            <button type="button" class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
                                 data-id="{{ product.id }}"
-                                data-product-name="{{ product.name }}"
-                            >
+                                data-product-name="{{ product.name }}">
                                 <i class="fas fa-cart-plus mr-1"></i>
                                 Adicionar
                             </button>
@@ -505,24 +526,27 @@
                         </p>
                         <div class="flex items-center mb-2">
                             <div class="flex text-yellow-400 text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                {% for i in "12345"|make_list %}
+                                    {% if product.average_rating|default:0 >= i|add:".0" %}
+                                        <i class="fas fa-star"></i>
+                                    {% elif product.average_rating|default:0 >= i|add:"-.5" %}
+                                        <i class="fas fa-star-half-alt"></i>
+                                    {% else %}
+                                        <i class="far fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
-                            <span class="text-xs text-gray-500 ml-1">(0)</span>
-                            {# Adjust to show actual review count #}
+                            <span class="text-xs text-gray-500 ml-1">
+                                ({{ product.average_rating|floatformat:1 }}/5 - {{ product.review_count }})
+                            </span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-lg font-bold text-primary"
                                 >R$ {{ product.price|floatformat:2 }}</span
                             >
-                            <button
-                                class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+                            <button type="button" class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
                                 data-id="{{ product.id }}"
-                                data-product-name="{{ product.name }}"
-                            >
+                                data-product-name="{{ product.name }}">
                                 <i class="fas fa-cart-plus mr-1"></i>
                                 Adicionar
                             </button>
@@ -561,232 +585,49 @@
                 id="featured-reviews"
                 class="grid grid-cols-1 md:grid-cols-3 gap-8"
             >
-                <!-- Avaliação 1 - Garam Masala -->
+                {% for review in featured_reviews %}
                 <div
                     class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                     <div class="flex items-center mb-4">
                         <img
-                            src="https://placehold.co/60x60/D84315/FFFFFF?text=CM"
-                            alt="Carla Mendes"
+                            src="https://ui-avatars.com/api/?name={{ review.user.first_name|default:review.user.username }}&background=random"
+                            alt="{{ review.user.get_full_name|default:review.user.username }}"
                             class="w-12 h-12 rounded-full mr-4 review-avatar"
                         />
                         <div>
                             <h4
                                 class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
                             >
-                                Carla Mendes
+                                {{
+                                review.user.get_full_name|default:review.user.username
+                                }}
                             </h4>
                             <div class="rating flex">
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
+                                {% for i in '12345' %}
+                                <i
+                                    class="fas {% if review.rating|add:'0' >= i|add:'0' %}fa-star text-accent{% else %}fa-star text-gray-300{% endif %}"
+                                ></i>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                     <div class="ingredient-badge mb-3">
-                        Garam Masala Premium
+                        {{ review.product.name }}
                     </div>
                     <p class="text-gray-700 italic leading-relaxed">
-                        "Simplesmente incrível! O aroma é tão autêntico que me
-                        transporta diretamente para a Índia. Meu curry de frango
-                        nunca ficou tão saboroso. Produto de altíssima
-                        qualidade!"
+                        "{{ review.comment }}"
                     </p>
                     <div class="mt-4 text-sm text-gray-500">
                         <i class="fas fa-calendar mr-1"></i>
-                        Comprou há 2 semanas
+                        {{ review.created_at|timesince }} atrás
                     </div>
                 </div>
-
-                <!-- Avaliação 2 - Cúrcuma -->
-                <div
-                    class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                    <div class="flex items-center mb-4">
-                        <img
-                            src="https://placehold.co/60x60/F7931E/FFFFFF?text=RS"
-                            alt="Ricardo Santos"
-                            class="w-12 h-12 rounded-full mr-4 review-avatar"
-                        />
-                        <div>
-                            <h4
-                                class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
-                            >
-                                Ricardo Santos
-                            </h4>
-                            <div class="rating flex">
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ingredient-badge mb-3">Cúrcuma Pura</div>
-                    <p class="text-gray-700 italic leading-relaxed">
-                        "A cor dourada é impressionante! Uso tanto na culinária
-                        quanto no golden milk matinal. Sinto os benefícios
-                        anti-inflamatórios. Melhor cúrcuma que já comprei!"
-                    </p>
-                    <div class="mt-4 text-sm text-gray-500">
-                        <i class="fas fa-calendar mr-1"></i>
-                        Cliente há 3 meses
-                    </div>
+                {% empty %}
+                <div class="text-center py-8 text-gray-500">
+                    Ainda não há avaliações em destaque.
                 </div>
-
-                <!-- Avaliação 3 - Chai Masala -->
-                <div
-                    class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                    <div class="flex items-center mb-4">
-                        <img
-                            src="https://placehold.co/60x60/4A6741/FFFFFF?text=AL"
-                            alt="Ana Lucia"
-                            class="w-12 h-12 rounded-full mr-4 review-avatar"
-                        />
-                        <div>
-                            <h4
-                                class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
-                            >
-                                Ana Lúcia
-                            </h4>
-                            <div class="rating flex">
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ingredient-badge mb-3">Chá Masala Chai</div>
-                    <p class="text-gray-700 italic leading-relaxed">
-                        "Este chai é puro amor em uma xícara! A mistura de
-                        especiarias é perfeita - nem muito forte, nem muito
-                        suave. Já virou ritual na minha casa. Recomendo demais!"
-                    </p>
-                    <div class="mt-4 text-sm text-gray-500">
-                        <i class="fas fa-calendar mr-1"></i>
-                        Comprou ontem
-                    </div>
-                </div>
-
-                <!-- Avaliação 4 - Cardamomo -->
-                <div
-                    class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                    <div class="flex items-center mb-4">
-                        <img
-                            src="https://placehold.co/60x60/8B4513/FFFFFF?text=MF"
-                            alt="Marcos Ferreira"
-                            class="w-12 h-12 rounded-full mr-4 review-avatar"
-                        />
-                        <div>
-                            <h4
-                                class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
-                            >
-                                Marcos Ferreira
-                            </h4>
-                            <div class="rating flex">
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ingredient-badge mb-3">Cardamomo Verde</div>
-                    <p class="text-gray-700 italic leading-relaxed">
-                        "Cardamomo fresco e aromático! Uso para fazer café árabe
-                        e doces indianos. A qualidade é excepcional, as vagens
-                        chegaram verdinhas e perfumadas. Excelente!"
-                    </p>
-                    <div class="mt-4 text-sm text-gray-500">
-                        <i class="fas fa-calendar mr-1"></i>
-                        Cliente fiel há 1 ano
-                    </div>
-                </div>
-
-                <!-- Avaliação 5 - Lentilhas -->
-                <div
-                    class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                    <div class="flex items-center mb-4">
-                        <img
-                            src="https://placehold.co/60x60/CC2936/FFFFFF?text=JS"
-                            alt="Julia Silva"
-                            class="w-12 h-12 rounded-full mr-4 review-avatar"
-                        />
-                        <div>
-                            <h4
-                                class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
-                            >
-                                Júlia Silva
-                            </h4>
-                            <div class="rating flex">
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ingredient-badge mb-3">Lentilha Vermelha</div>
-                    <p class="text-gray-700 italic leading-relaxed">
-                        "Perfeitas para o dal! Cozinham rapidinho e ficam
-                        cremosas. Minha família toda se apaixonou pelos pratos
-                        indianos que faço com essas lentilhas. Proteína de
-                        qualidade!"
-                    </p>
-                    <div class="mt-4 text-sm text-gray-500">
-                        <i class="fas fa-calendar mr-1"></i>
-                        3ª compra este mês
-                    </div>
-                </div>
-
-                <!-- Avaliação 6 - Pimenta -->
-                <div
-                    class="indian-card review-card p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                    <div class="flex items-center mb-4">
-                        <img
-                            src="https://placehold.co/60x60/2F1B14/FFFFFF?text=PA"
-                            alt="Pedro Almeida"
-                            class="w-12 h-12 rounded-full mr-4 review-avatar"
-                        />
-                        <div>
-                            <h4
-                                class="font-rajdhani font-semibold text-lg text-cinnamon-brown"
-                            >
-                                Pedro Almeida
-                            </h4>
-                            <div class="rating flex">
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                                <i class="fas fa-star text-accent"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ingredient-badge mb-3">Pimenta Caiena</div>
-                    <p class="text-gray-700 italic leading-relaxed">
-                        "Para quem gosta de comida bem temperada, essa pimenta é
-                        sensacional! Ardência na medida certa e um sabor
-                        incrível. Meus convidados sempre perguntam o segredo dos
-                        meus pratos!"
-                    </p>
-                    <div class="mt-4 text-sm text-gray-500">
-                        <i class="fas fa-calendar mr-1"></i>
-                        Recompra garantida!
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </section>
 
@@ -845,43 +686,12 @@
                         nós
                     </p>
                 </div>
-
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
                     <div
                         class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
                     >
                         <div class="text-4xl font-bold text-yellow-300 mb-2">
-                            98%
-                        </div>
-                        <div class="text-lg font-rajdhani text-white">
-                            Satisfação Geral
-                        </div>
-                        <div class="text-sm text-orange-200 mt-2">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            Baseado em 2.847 avaliações
-                        </div>
-                    </div>
-
-                    <div
-                        class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
-                    >
-                        <div class="text-4xl font-bold text-yellow-300 mb-2">
-                            4.9
-                        </div>
-                        <div class="text-lg font-rajdhani text-white">
-                            Nota Média
-                        </div>
-                        <div class="text-sm text-orange-200 mt-2">
-                            <i class="fas fa-thumbs-up text-yellow-400"></i>
-                            Avaliação de 5 estrelas
-                        </div>
-                    </div>
-
-                    <div
-                        class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
-                    >
-                        <div class="text-4xl font-bold text-yellow-300 mb-2">
-                            95%
+                            {{ percent_repeat_buyers }}%
                         </div>
                         <div class="text-lg font-rajdhani text-white">
                             Recompram
@@ -891,12 +701,39 @@
                             Clientes que voltam
                         </div>
                     </div>
-
                     <div
                         class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
                     >
                         <div class="text-4xl font-bold text-yellow-300 mb-2">
-                            24h
+                            {{ avg_rating|floatformat:1 }}
+                        </div>
+                        <div class="text-lg font-rajdhani text-white">
+                            Nota Média
+                        </div>
+                        <div class="text-sm text-orange-200 mt-2">
+                            <i class="fas fa-thumbs-up text-yellow-400"></i>
+                            Avaliação de 5 estrelas
+                        </div>
+                    </div>
+                    <div
+                        class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
+                    >
+                        <div class="text-4xl font-bold text-yellow-300 mb-2">
+                            {{ total_reviews }}
+                        </div>
+                        <div class="text-lg font-rajdhani text-white">
+                            Satisfação Geral
+                        </div>
+                        <div class="text-sm text-orange-200 mt-2">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            Baseado em {{ total_reviews }} avaliações
+                        </div>
+                    </div>
+                    <div
+                        class="spice-container bg-amber-800/30 p-6 rounded-lg backdrop-blur-sm border border-yellow-400/30 hover:border-yellow-300/50 transition-all duration-300 hover:scale-105"
+                    >
+                        <div class="text-4xl font-bold text-yellow-300 mb-2">
+                            {{ avg_response_time }}
                         </div>
                         <div class="text-lg font-rajdhani text-white">
                             Suporte Rápido
@@ -907,7 +744,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="mt-8 text-center">
                     <button
                         class="btn bg-yellow-500 text-black hover:bg-yellow-400 px-8 py-3 text-lg font-rajdhani shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -1021,8 +857,6 @@
             </div>
         </section>
 
-        <!-- Teste de Notificações Toast -->
-        <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-2xl font-teko text-secondary mb-4">
                 <i class="fas fa-bell text-primary mr-2"></i>
                 Demonstração de Notificações
@@ -1076,58 +910,43 @@
                     <i class="fas fa-heart mr-2"></i>Adicionado aos Favoritos
                 </button>
             </div>
-        </section>
+        </section> -->
     </div>
 </main>
 
+<!-- Certifique-se de incluir o script de notificações -->
+<script src="{% static 'js/toast-system.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Atualizar os botões "Adicionar ao carrinho" para usar o novo sistema
-        const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
-        addToCartButtons.forEach((button) => {
-            button.addEventListener("click", function (e) {
-                e.preventDefault();
-                const productId = this.getAttribute("data-id");
-                const productName = this.getAttribute("data-product-name");
-
-                // Usar o sistema de notificações global
-                if (window.cartNotifications) {
-                    window.cartNotifications.itemAdded(productName, 1);
-                }
-
-                // Adicionar ao carrinho usando AJAX e a URL definida pelo Django
-                const csrfToken = document.querySelector(
-                    'input[name="csrfmiddlewaretoken"]',
-                )?.value;
-
-                if (csrfToken && productId) {
-                    const formData = new FormData();
-                    formData.append("quantity", 1);
-                    formData.append("csrfmiddlewaretoken", csrfToken);
-
-                    // URL do Django para adicionar ao carrinho
-                    const addToCartUrl =
-                        `{% url 'store:cart_add' 999 %}`.replace(
-                            "999",
-                            productId,
-                        );
-
-                    fetch(addToCartUrl, {
-                        method: "POST",
-                        body: formData,
-                        credentials: "same-origin",
-                    }).catch((error) => {
-                        console.error("Erro ao adicionar ao carrinho:", error);
-                        if (window.toastSystem) {
-                            window.toastSystem.error(
-                                "Erro",
-                                "Não foi possível adicionar o item ao carrinho",
-                            );
-                        }
-                    });
-                }
-            });
-        });
-    });
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initHomePage === 'function') {
+      initHomePage();
+    } else if (window.initHomePage) {
+      window.initHomePage();
+    }
+  });
 </script>
 {% endblock content %}
+
+{% block extra_js %}
+<script>
+  function renderStars(container, rating) {
+    container.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        container.innerHTML += '<i class="fas fa-star"></i>';
+      } else if (rating >= i - 0.5) {
+        container.innerHTML += '<i class="fas fa-star-half-alt"></i>';
+      } else {
+        container.innerHTML += '<i class="far fa-star"></i>';
+      }
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.star-rating').forEach(function(el) {
+      const rating = parseFloat(el.getAttribute('data-rating')) || 0;
+      renderStars(el, rating);
+    });
+  });
+</script>
+{% endblock %}

@@ -1094,5 +1094,14 @@
 <script src="{% static 'js/toast-system.js' %}"></script>
 
 <!-- Link para o arquivo JavaScript externo -->
-<script src="{% static 'js/script.js' %}" defer></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initWishlistPage === 'function') {
+      initWishlistPage();
+    } else if (window.initWishlistPage) {
+      window.initWishlistPage();
+    }
+  });
+</script>
 {% endblock content %}
