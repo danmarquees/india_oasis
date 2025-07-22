@@ -9,6 +9,9 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from store.models import Order
+from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Count
+from .models import Notification
 
 # Configurar logger
 logger = logging.getLogger(__name__)
@@ -321,3 +324,76 @@ def webhook(request):
     return HttpResponse(status=200)
 
 # A função custom_create_preference foi removida daqui pois estava duplicada
+
+@staff_member_required
+def painel_pagamentos(request):
+    # Filtro de status
+    status_filtro = request.GET.get('status', '')
+    pedidos_qs = Order.objects.all()
+    if status_filtro:
+        pedidos_qs = pedidos_qs.filter(status=status_filtro)
+    ultimos_pedidos = pedidos_qs.order_by('-created')[:10]
+    # Contar pedidos por status
+    status_counts = (
+        Order.objects.values('status')
+        .annotate(total=Count('id'))
+        .order_by()
+    )
+    status_labels = [s['status'] for s in status_counts]
+    status_data = [s['total'] for s in status_counts]
+    # Alertas
+    pedidos_pendentes = Order.objects.filter(status__icontains='pending').count()
+    pedidos_erro = Order.objects.filter(status__icontains='erro').count()
+    alertas = []
+    if pedidos_pendentes > 0:
+        alertas.append(f"Há {pedidos_pendentes} pagamento(s) pendente(s) aguardando ação.")
+    if pedidos_erro > 0:
+        alertas.append(f"Há {pedidos_erro} pagamento(s) com erro!")
+    # Status únicos para filtro
+    status_unicos = Order.objects.values_list('status', flat=True).distinct()
+    return render(request, "admin/payment_processing/painel_pagamentos.html", {
+        'ultimos_pedidos': ultimos_pedidos,
+        'status_labels': status_labels,
+        'status_data': status_data,
+        'alertas': alertas,
+        'status_filtro': status_filtro,
+        'status_unicos': status_unicos,
+    })
+
+@staff_member_required
+def notificacoes_recentes(request):
+    notificacoes = Notification.objects.order_by('-created_at')[:10]
+    data = [
+        {
+            'id': n.id,
+            'event_type': n.get_event_type_display(),
+            'message': n.message,
+            'created_at': n.created_at.strftime('%d/%m/%Y %H:%M'),
+            'is_read': n.is_read,
+        }
+        for n in notificacoes
+    ]
+    return JsonResponse({'notificacoes': data, 'nao_lidas': Notification.objects.filter(is_read=False).count()})
+
+@staff_member_required
+def reprocessar_pedido(request, pedido_id):
+    pedido = get_object_or_404(Order, id=pedido_id)
+    # Aqui você pode colocar a lógica real de reprocessamento
+    pedido.status = 'processing'
+    pedido.save()
+    return JsonResponse({'success': True, 'msg': f'Pedido {pedido.id} reprocessado!'})
+
+@staff_member_required
+def cancelar_pedido(request, pedido_id):
+    pedido = get_object_or_404(Order, id=pedido_id)
+    pedido.status = 'cancelled'
+    pedido.save()
+    return JsonResponse({'success': True, 'msg': f'Pedido {pedido.id} cancelado!'})
+
+@staff_member_required
+def reprocessar_todos_pendentes(request):
+    pendentes = Order.objects.filter(status__icontains='pending')
+    for pedido in pendentes:
+        pedido.status = 'processing'
+        pedido.save()
+    return JsonResponse({'success': True, 'msg': f'{pendentes.count()} pedidos reprocessados!'})

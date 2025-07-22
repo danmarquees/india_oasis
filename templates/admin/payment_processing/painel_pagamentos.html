@@ -1,0 +1,260 @@
+{% extends 'admin/base_site.html' %}
+{% block content %}
+<style>
+#notificacoes-bell {
+    position: fixed;
+    top: 24px;
+    right: 36px;
+    z-index: 1000;
+    cursor: pointer;
+    font-size: 1.7em;
+    color: #f59e0b;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px #0001;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.2s;
+}
+#notificacoes-bell:hover {
+    box-shadow: 0 4px 16px #0002;
+}
+#notificacoes-badge {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    background: #ef4444;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.8em;
+    padding: 2px 6px;
+    font-weight: bold;
+    min-width: 18px;
+    text-align: center;
+}
+#notificacoes-dropdown {
+    display: none;
+    position: fixed;
+    top: 70px;
+    right: 36px;
+    width: 340px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px #0002;
+    z-index: 1100;
+    padding: 0.5em 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+#notificacoes-dropdown.active {
+    display: block;
+}
+.notificacao-item {
+    padding: 0.7em 1.2em;
+    border-bottom: 1px solid #f3f3f3;
+    font-size: 0.98em;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+}
+.notificacao-item:last-child {
+    border-bottom: none;
+}
+.notificacao-item.unread {
+    background: #fffbe6;
+    font-weight: 600;
+}
+.notificacao-item .icon {
+    font-size: 1.2em;
+    color: #f59e0b;
+}
+</style>
+<div id="notificacoes-bell">
+    <i class="fas fa-bell"></i>
+    <span id="notificacoes-badge" style="display:none;">0</span>
+</div>
+<div id="notificacoes-dropdown"></div>
+
+<h1>Painel de Pagamentos</h1>
+<p>Bem-vindo ao painel de pagamentos do India Oasis.</p>
+
+{% if alertas %}
+    <div style="display: flex; flex-direction: column; gap: 1em; margin-bottom: 2em;">
+        {% for alerta in alertas %}
+            <div style="background: #fffbe6; border-left: 6px solid #f59e0b; color: #b45309; padding: 1em 1.5em; border-radius: 6px; box-shadow: 0 1px 4px #0001; font-weight: 500;">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 0.5em;"></i> {{ alerta }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<!-- Filtro de status -->
+<div style="margin-bottom: 1.5em; display: flex; align-items: center; gap: 1em; flex-wrap: wrap;">
+    <form method="get" style="display: flex; align-items: center; gap: 0.5em;">
+        <label for="status_filtro"><strong>Filtrar por status:</strong></label>
+        <select name="status" id="status_filtro" onchange="this.form.submit()" style="padding: 0.3em 0.7em; border-radius: 4px; border: 1px solid #ccc;">
+            <option value="">Todos</option>
+            {% for status in status_unicos %}
+                <option value="{{ status }}" {% if status == status_filtro %}selected{% endif %}>{{ status|title }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    {% if status_filtro %}
+        <a href="?" style="margin-left: 1em; color: #3b82f6; text-decoration: underline;">Limpar filtro</a>
+    {% endif %}
+    <button id="btn-reprocessar-todos" style="margin-left:auto; background:#10b981; color:white; border:none; border-radius:4px; padding:0.5em 1.2em; font-weight:600; cursor:pointer;" onclick="reprocessarTodos()">
+        <i class="fas fa-sync-alt"></i> Reprocessar todos os pendentes
+    </button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 2em; margin-bottom: 2em;">
+    <!-- Card do Gráfico -->
+    <div style="background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 1.5em; min-width: 260px; max-width: 340px; flex: 1 1 320px; display: flex; flex-direction: column; align-items: center;">
+        <h2 style="font-size: 1.1em; margin-bottom: 1em;">Resumo dos Pagamentos</h2>
+        <canvas id="statusChart" width="220" height="220"></canvas>
+    </div>
+    <!-- Card da Tabela -->
+    <div style="background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 1.5em; min-width: 320px; max-width: 600px; flex: 2 1 400px;">
+        <h2 style="font-size: 1.1em; margin-bottom: 1em;">Últimos 10 Pagamentos</h2>
+        <div style="overflow-x:auto;">
+            <table class="admin-table" style="width:100%; border-collapse:collapse; font-size: 0.95em;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Valor Total</th>
+                        <th>Status</th>
+                        <th>Pago?</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pedido in ultimos_pedidos %}
+                    <tr>
+                        <td>{{ pedido.id }}</td>
+                        <td>{{ pedido.user }}</td>
+                        <td>R$ {{ pedido.total_price }}</td>
+                        <td>{{ pedido.status }}</td>
+                        <td>{% if pedido.paid %}Sim{% else %}Não{% endif %}</td>
+                        <td>{{ pedido.created|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            {% if pedido.status == 'pending' or pedido.status == 'aguardando_pagamento' %}
+                                <button onclick="reprocessarPedido({{ pedido.id }})" style="background:#3b82f6; color:white; border:none; border-radius:4px; padding:0.3em 0.7em; font-size:0.95em; cursor:pointer; margin-right:0.3em;">
+                                    <i class="fas fa-sync-alt"></i> Reprocessar
+                                </button>
+                                <button onclick="cancelarPedido({{ pedido.id }})" style="background:#ef4444; color:white; border:none; border-radius:4px; padding:0.3em 0.7em; font-size:0.95em; cursor:pointer;">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                            {% else %}
+                                <span style="color:#888;">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="7">Nenhum pagamento encontrado.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Gráfico de status dos pagamentos -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('statusChart').getContext('2d');
+    const statusChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: {{ status_labels|safe }},
+            datasets: [{
+                label: 'Pagamentos por Status',
+                data: {{ status_data|safe }},
+                backgroundColor: [
+                    '#10b981', '#f59e0b', '#ef4444', '#3b82f6', '#a78bfa', '#f472b6', '#f87171'
+                ],
+            }]
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    function reprocessarPedido(id) {
+        if (!confirm('Deseja reprocessar o pedido #' + id + '?')) return;
+        fetch('{% url 'payment_processing:reprocessar_pedido' 0 %}'.replace('/0/', '/' + id + '/'), {
+            method: 'POST',
+            headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+        })
+        .then(r => r.json())
+        .then(data => { alert(data.msg); location.reload(); });
+    }
+    function cancelarPedido(id) {
+        if (!confirm('Deseja cancelar o pedido #' + id + '?')) return;
+        fetch('{% url 'payment_processing:cancelar_pedido' 0 %}'.replace('/0/', '/' + id + '/'), {
+            method: 'POST',
+            headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+        })
+        .then(r => r.json())
+        .then(data => { alert(data.msg); location.reload(); });
+    }
+    function reprocessarTodos() {
+        if (!confirm('Deseja reprocessar TODOS os pedidos pendentes?')) return;
+        fetch('{% url 'payment_processing:reprocessar_todos_pendentes' %}', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+        })
+        .then(r => r.json())
+        .then(data => { alert(data.msg); location.reload(); });
+    }
+
+    // Sininho de notificações
+    const bell = document.getElementById('notificacoes-bell');
+    const badge = document.getElementById('notificacoes-badge');
+    const dropdown = document.getElementById('notificacoes-dropdown');
+    let dropdownOpen = false;
+    function renderNotificacoes(notificacoes, naoLidas) {
+        badge.style.display = naoLidas > 0 ? 'block' : 'none';
+        badge.textContent = naoLidas;
+        let html = '';
+        if (notificacoes.length === 0) {
+            html = '<div class="notificacao-item">Nenhuma notificação recente.</div>';
+        } else {
+            notificacoes.forEach(n => {
+                html += `<div class="notificacao-item${n.is_read ? '' : ' unread'}">` +
+                    `<span class="icon"><i class="fas fa-bell"></i></span>` +
+                    `<span>${n.message}</span>` +
+                    `<span style="margin-left:auto; color:#888; font-size:0.9em;">${n.created_at}</span>` +
+                    `</div>`;
+            });
+        }
+        dropdown.innerHTML = html;
+    }
+    function fetchNotificacoes() {
+        fetch('{% url 'payment_processing:notificacoes_recentes' %}')
+            .then(r => r.json())
+            .then(data => renderNotificacoes(data.notificacoes, data.nao_lidas));
+    }
+    bell.addEventListener('click', () => {
+        dropdownOpen = !dropdownOpen;
+        dropdown.classList.toggle('active', dropdownOpen);
+        if (dropdownOpen) fetchNotificacoes();
+    });
+    // Atualiza badge a cada 20s
+    setInterval(fetchNotificacoes, 20000);
+    fetchNotificacoes();
+</script>
+{% endblock %} 

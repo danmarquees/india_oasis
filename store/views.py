@@ -74,27 +74,11 @@ def calculate_shipping_cost(total_cart_price):
 # --- Core Store Views ---
 
 def home(request):
-    from django.db.models import Avg, Count
     products = Product.objects.filter(available=True).annotate(
         average_rating=Avg('reviews__rating'),
         review_count=Count('reviews')
     ).order_by('-created')[:8]
-    # Avaliações em destaque: 6 mais recentes
-    featured_reviews = Review.objects.select_related('product', 'user').order_by('-created_at')[:6]
-    # Estatísticas gerais
-    total_reviews = Review.objects.count()
-    avg_rating = Review.objects.aggregate(avg=Avg('rating'))['avg'] or 0
-    # Exemplo: porcentagem de recompra (ajuste conforme sua lógica real)
-    percent_repeat_buyers = 95
-    avg_response_time = '24h'
-    return render(request, 'store/index.html', {
-        'products': products,
-        'featured_reviews': featured_reviews,
-        'total_reviews': total_reviews,
-        'avg_rating': avg_rating,
-        'percent_repeat_buyers': percent_repeat_buyers,
-        'avg_response_time': avg_response_time,
-    })
+    return render(request, 'store/index.html', {'products': products})
 
 def about(request):
     return render(request, 'store/about.html')
@@ -140,7 +124,10 @@ def product_detail(request, slug):
     # Calcular a média das avaliações
     average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
 
-    # Remover toda a lógica relacionada a user_has_reviewed
+    # Verificar se o usuário já avaliou este produto
+    user_has_reviewed = False
+    if request.user.is_authenticated:
+        user_has_reviewed = Review.objects.filter(product=product, user=request.user).exists()
 
     # Encontrar produtos relacionados (mesma categoria) com anotações para média e contagem
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id).annotate(
@@ -170,6 +157,7 @@ def product_detail(request, slug):
         'reviews': reviews,
         'review_form': review_form,
         'average_rating': average_rating,
+        'user_has_reviewed': user_has_reviewed,
         'related_products': related_products,
         'form': review_form,  # Garantir compatibilidade com o template existente
         'rating_distribution': rating_distribution,
@@ -187,19 +175,14 @@ def cart_detail(request):
 def cart_add(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart_instance = get_cart(request)
-    # Tenta pegar a quantidade do POST, senão usa 1
-    quantity = 1
-    if request.method == "POST":
-        try:
-            data = json.loads(request.body)
-            quantity = int(data.get("quantity", 1))
-        except Exception:
-            pass
 
-    cart_item, created = CartItem.objects.get_or_create(cart=cart_instance, product=product)
-    if not created:
-        if cart_item.quantity + quantity <= product.stock:
-            cart_item.quantity += quantity
+    cart_item = CartItem.objects.filter(cart=cart_instance, product=product).first()
+
+    if cart_item:
+        # Item já existe no carrinho
+        if cart_item.quantity < product.stock:
+            # Incrementa a quantidade do item existente
+            cart_item.quantity += 1
             cart_item.save()
             message = f"'{product.name}' foi adicionado ao carrinho."
             success = True
@@ -207,22 +190,25 @@ def cart_add(request, product_id):
             message = f"Desculpe, não há mais estoque disponível para '{product.name}'."
             success = False
     else:
-        if product.stock >= quantity:
-            cart_item.quantity = quantity
-            cart_item.save()
+        # Item não existe no carrinho, cria um novo
+        if product.stock > 0:
+            CartItem.objects.create(
+                cart=cart_instance,
+                product=product,
+                quantity=1  # <<-- Começa com quantidade 1
+            )
             message = f"'{product.name}' foi adicionado ao carrinho."
             success = True
         else:
-            cart_item.delete()
             message = f"Desculpe, não há mais estoque disponível para '{product.name}'."
             success = False
 
+    # ... (resto do código para JsonResponse e redirect)
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         return JsonResponse({
             'success': success,
             'message': message,
             'cart_count': cart_instance.total_items,
-            'cart_total': float(cart_instance.total_price),
         })
 
     if success:
@@ -231,36 +217,29 @@ def cart_add(request, product_id):
         messages.error(request, message)
     return redirect('store:product_list')
 
+
 def cart_remove(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart_instance = get_cart(request)
     removed_completely = False
     try:
-        cart_item = CartItem.objects.filter(cart=cart_instance, product=product).first()
-        if cart_item:
-            if cart_item.quantity > 1:
-                cart_item.quantity -= 1
-                cart_item.save()
-            else:
-                cart_item.delete()
-                removed_completely = True
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            items = [
-                {'id': item.product.id, 'quantity': item.quantity}
-                for item in cart_instance.items.all()
-            ]
-            return JsonResponse({
-                'success': True,
-                'cart_total': cart_instance.total_price,
-                'cart_count': cart_instance.total_items,
-                'removed_completely': removed_completely,
-                'items': items,
-            })
-        return redirect('store:cart_detail')
-    except Exception as e:
-        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            return JsonResponse({'success': False, 'error': str(e)}, status=400)
-        return redirect('store:cart_detail')
+        cart_item = CartItem.objects.get(cart=cart_instance, product=product)
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+            cart_item.delete()
+            removed_completely = True
+    except CartItem.DoesNotExist:
+        pass
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({
+            'cart_total': cart_instance.total_price,
+            'cart_count': cart_instance.total_items,
+            'removed_completely': removed_completely,
+        })
+    return redirect('store:cart_detail')
 
 
 # --- Checkout and Payment Views ---
@@ -404,11 +383,15 @@ def signup(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # Create a customer profile automatically
-            CustomerProfile.objects.create(user=user, nome=user.get_full_name())
+            CustomerProfile.objects.get_or_create(user=user, defaults={'nome': user.get_full_name()})
             login(request, user)
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': True, 'redirect_url': reverse('store:home')})
             messages.success(request, "Cadastro realizado com sucesso!")
             return redirect('store:home')
+        else:
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'errors': form.errors}, status=400)
     else:
         form = CustomUserCreationForm()
     return render(request, 'store/signup.html', {'form': form})
@@ -442,31 +425,37 @@ def add_review(request, product_id):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            review = form.save(commit=False)
-            review.product = product
-            review.user = request.user
-            review.save()
-
-            # Recalcular a classificação média
-            reviews = Review.objects.filter(product=product)
-            review_count = reviews.count()
-            average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
-
-            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                # Para requisições AJAX, retornar dados JSON
-                context = {
-                    'reviews': reviews,
-                    'product': product
-                }
-                reviews_html = render_to_string('store/includes/reviews_list.html', context, request)
-                return JsonResponse({
-                    'success': True,
-                    'html': reviews_html,
-                    'average_rating': average_rating,
-                    'review_count': review_count
-                })
+            if Review.objects.filter(product=product, user=request.user).exists():
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return JsonResponse({'success': False, 'error': 'Você já avaliou este produto.'})
+                else:
+                    messages.error(request, "Você já avaliou este produto.")
             else:
-                messages.success(request, "Obrigado pela sua avaliação!")
+                review = form.save(commit=False)
+                review.product = product
+                review.user = request.user
+                review.save()
+
+                # Recalcular a classificação média
+                reviews = Review.objects.filter(product=product)
+                review_count = reviews.count()
+                average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    # Para requisições AJAX, retornar dados JSON
+                    context = {
+                        'reviews': reviews,
+                        'product': product
+                    }
+                    reviews_html = render_to_string('store/includes/reviews_list.html', context, request)
+                    return JsonResponse({
+                        'success': True,
+                        'html': reviews_html,
+                        'average_rating': average_rating,
+                        'review_count': review_count
+                    })
+                else:
+                    messages.success(request, "Obrigado pela sua avaliação!")
 
     # Para requisições não-AJAX, redirecionar para a página do produto
     return redirect('store:product_detail', slug=product.slug)

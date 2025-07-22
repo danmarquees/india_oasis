@@ -4,8 +4,8 @@
 <script src="{% static 'js/toast-system.js' %}"></script>
 <script src="{% static 'js/script.js' %}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof initProductsPage === 'function') {
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof initProductsPage === "function") {
       initProductsPage();
     } else if (window.initProductsPage) {
       window.initProductsPage();
@@ -18,233 +18,198 @@
 
 <!-- ==== CONTEÚDO PRINCIPAL ==== -->
 <main class="container mx-auto p-4 sm:p-6 lg:p-8">
-    <!-- Breadcrumb -->
-    <nav class="mb-6">
-        <ol class="flex space-x-2 text-sm">
-            <li>
-                <a
-                    href="{% url 'store:home' %}"
-                    class="text-primary hover:underline"
-                    >Início</a
-                >
-            </li>
-            <li class="text-gray-500">/</li>
-            <li class="text-gray-700">Produtos</li>
-        </ol>
-    </nav>
-
-    <!-- Título da Página -->
-    <h1 class="text-5xl font-teko text-center text-secondary mb-8">
-        Nossa Coleção
-    </h1>
-
-    <!-- Filtros -->
-    <div class="mb-8 bg-white p-4 rounded-lg shadow-md">
-        <div class="flex flex-wrap gap-4 items-center justify-between">
-            <div class="flex flex-wrap gap-2">
-                <a
-                    href="{% url 'store:product_list' %}"
-                    class="filter-btn btn btn-secondary {% if not category %}active{% endif %}"
-                    data-category="all"
-                >
-                    Todos
-                </a>
-                {% for c in categories %}
-                <a
-                    href="{% url 'store:product_list_by_category' c.slug %}"
-                    class="filter-btn btn {% if category.slug == c.slug %}active{% endif %}"
-                    data-category="{{ c.name }}"
-                >
-                    {{ c.name }}
-                </a>
-                {% endfor %}
-            </div>
-            <div class="flex items-center space-x-2">
-                <form
-                    method="get"
-                    action="{{ request.path }}"
-                    class="flex flex-wrap items-center gap-4"
-                >
-                    <!-- Campo de Busca -->
-                    <div class="flex-grow sm:flex-grow-0">
-                        <input
-                            type="text"
-                            name="q"
-                            placeholder="Buscar produtos..."
-                            class="p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-primary"
-                            value="{{ request.GET.q|default_if_none:'' }}"
-                        />
-                    </div>
-                    <!-- Campo de Ordenação -->
-                    <div class="flex items-center space-x-2">
-                        <label for="sort-select" class="text-sm font-semibold"
-                            >Ordenar por:</label
-                        >
-                        <select
-                            name="sort"
-                            id="sort-select"
-                            class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                        >
-                            <option
-                                value="name"
-                                {%
-                                if
-                                request.GET.sort=""
-                                ="name"
-                                %}selected{%
-                                endif
-                                %}
-                            >
-                                Nome
-                            </option>
-                            <option
-                                value="price"
-                                {%
-                                if
-                                request.GET.sort=""
-                                ="price"
-                                %}selected{%
-                                endif
-                                %}
-                            >
-                                Menor preço
-                            </option>
-                            <option
-                                value="-price"
-                                {%
-                                if
-                                request.GET.sort=""
-                                ="-price"
-                                %}selected{%
-                                endif
-                                %}
-                            >
-                                Maior preço
-                            </option>
-                            <option
-                                value="-created_at"
-                                {%
-                                if
-                                request.GET.sort=""
-                                ="-created_at"
-                                %}selected{%
-                                endif
-                                %}
-                            >
-                                Avaliação
-                            </option>
-                        </select>
-                    </div>
-                    <!-- Botão de Submissão -->
-                    <button type="submit" class="btn btn-primary px-4 py-2">
-                        <i class="fas fa-search mr-1"></i>
-                        Buscar
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lista de Produtos -->
-    <div
-        id="product-list"
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-    >
-        {% for product in products %}
-        <div
-            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+  <!-- Breadcrumb -->
+  <nav class="mb-6">
+    <ol class="flex space-x-2 text-sm">
+      <li>
+        <a href="{% url 'store:home' %}" class="text-primary hover:underline"
+          >Início</a
         >
-            <div class="aspect-square bg-gray-100 relative">
-                <img
-                    src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
-                    alt="{{ product.name }}"
-                    class="w-full h-full object-cover"
-                />
-                <button
-                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                >
-                    <i
-                        class="fas fa-heart text-gray-400 hover:text-red-500"
-                    ></i>
-                </button>
-                {% comment %} Você pode adicionar lógica para tags como 'MAIS
-                VENDIDO', 'OFERTA', 'NOVO' aqui, baseada nos dados do produto
-                {%endcomment %} {% if product.stock == 0 %}
-                <span
-                    class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
-                    >ESGOTADO</span
-                >
-                {% elif product.is_new %} {% comment %} Supondo que você tenha
-                um atributo 'is_new' no seu modelo ou lógica para isso
-                {%endcomment %}
-                <span
-                    class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded"
-                    >NOVO</span
-                >
-                {% endif %}
-            </div>
-            <div class="p-4">
-                <a
-                    href="{% url 'store:product_detail' product.slug %}"
-                    class="block"
-                >
-                    <h3
-                        class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                    >
-                        {{ product.name }}
-                    </h3>
-                </a>
-                <p class="text-sm text-gray-600 mb-3">
-                    {{ product.description|truncatechars:50 }}
-                </p>
-                <div class="flex items-center mb-2">
-                    <div class="flex text-yellow-400 text-sm">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                    <span class="text-xs text-gray-500 ml-1">(0)</span>
-                </div>
-                <div class="flex items-center justify-between">
-                    <span class="text-lg font-bold text-primary"
-                        >R$ {{ product.price|floatformat:2 }}</span
-                    >
-                    <!-- Botão Adicionar ao Carrinho -->
-                    <button
-                        type="button"
-                        class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
-                        data-id="{{ product.id }}"
-                        data-product-name="{{ product.name }}"
-                    >
-                        <i class="fas fa-cart-plus mr-1"></i>
-                        Adicionar
-                    </button>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <!-- Mensagem de produtos não encontrados -->
-        <div id="no-products" class="col-span-full text-center py-12">
-            <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
-            {% if request.GET.q %}
-            <h3 class="text-2xl font-teko text-gray-500 mb-2">
-                Nenhum resultado para "{{ request.GET.q }}"
-            </h3>
-            <p class="text-gray-400">
-                Tente usar termos de busca diferentes ou verifique a ortografia.
-            </p>
-            {% else %}
-            <h3 class="text-2xl font-teko text-gray-500 mb-2">
-                Nenhum produto encontrado
-            </h3>
-            <p class="text-gray-400">
-                Não há produtos disponíveis nesta categoria no momento.
-            </p>
-            {% endif %}
-        </div>
+      </li>
+      <li class="text-gray-500">/</li>
+      <li class="text-gray-700">Produtos</li>
+    </ol>
+  </nav>
+
+  <!-- Título da Página -->
+  <h1 class="text-5xl font-teko text-center text-secondary mb-8">
+    Nossa Coleção
+  </h1>
+
+  <!-- Filtros -->
+  <div class="mb-8 bg-white p-4 rounded-lg shadow-md">
+    <div class="flex flex-wrap gap-4 items-center justify-between">
+      <div class="flex flex-wrap gap-2">
+        <a
+          href="{% url 'store:product_list' %}"
+          class="filter-btn btn btn-secondary {% if not category %}active{% endif %}"
+          data-category="all"
+        >
+          Todos
+        </a>
+        {% for c in categories %}
+        <a
+          href="{% url 'store:product_list_by_category' c.slug %}"
+          class="filter-btn btn {% if category.slug == c.slug %}active{% endif %}"
+          data-category="{{ c.name }}"
+        >
+          {{ c.name }}
+        </a>
         {% endfor %}
+      </div>
+      <div class="flex items-center space-x-2">
+        <form
+          method="get"
+          action="{{ request.path }}"
+          class="flex flex-wrap items-center gap-4"
+        >
+          <!-- Campo de Busca -->
+          <div class="flex-grow sm:flex-grow-0">
+            <input
+              type="text"
+              name="q"
+              placeholder="Buscar produtos..."
+              class="p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-primary"
+              value="{{ request.GET.q|default_if_none:'' }}"
+            />
+          </div>
+          <!-- Campo de Ordenação -->
+          <div class="flex items-center space-x-2">
+            <label for="sort-select" class="text-sm font-semibold"
+              >Ordenar por:</label
+            >
+            <select
+              name="sort"
+              id="sort-select"
+              class="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+            >
+              <option value="name" {% if request.GET.sort="" =="name" %}selected{% endif %}>
+                Nome
+              </option>
+              <option
+                value="price"
+                {% if request.GET.sort="" =="price" %}selected{% endif %}
+              >
+                Menor preço
+              </option>
+              <option
+                value="-price"
+                {% if request.GET.sort="" =="-price" %}selected{% endif %}
+              >
+                Maior preço
+              </option>
+              <option
+                value="-created_at"
+                {% if request.GET.sort="" =="-created_at" %}selected{% endif %}
+              >
+                Avaliação
+              </option>
+            </select>
+          </div>
+          <!-- Botão de Submissão -->
+          <button type="submit" class="btn btn-primary px-4 py-2">
+            <i class="fas fa-search mr-1"></i>
+            Buscar
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
+
+  <!-- Lista de Produtos -->
+  <div
+    id="product-list"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+  >
+    {% for product in products %}
+    <div
+      class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+    >
+      <div class="aspect-square bg-gray-100 relative">
+        <img
+          src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+          alt="{{ product.name }}"
+          class="w-full h-full object-cover"
+        />
+        <button
+          class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
+        >
+          <i class="fas fa-heart text-gray-400 hover:text-red-500"></i>
+        </button>
+        {% comment %} Você pode adicionar lógica para tags como 'MAIS VENDIDO',
+        'OFERTA', 'NOVO' aqui, baseada nos dados do produto {%endcomment %} {%
+        if product.stock == 0 %}
+        <span
+          class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
+          >ESGOTADO</span
+        >
+        {% elif product.is_new %} {% comment %} Supondo que você tenha um
+        atributo 'is_new' no seu modelo ou lógica para isso {%endcomment %}
+        <span
+          class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded"
+          >NOVO</span
+        >
+        {% endif %}
+      </div>
+      <div class="p-4">
+        <a href="{% url 'store:product_detail' product.slug %}" class="block">
+          <h3
+            class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
+          >
+            {{ product.name }}
+          </h3>
+        </a>
+        <p class="text-sm text-gray-600 mb-3">
+          {{ product.description|truncatechars:50 }}
+        </p>
+        <div class="flex items-center mb-2">
+          <div class="flex text-yellow-400 text-sm">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <span class="text-xs text-gray-500 ml-1">(0)</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-lg font-bold text-primary"
+            >R$ {{ product.price|floatformat:2 }}</span
+          >
+          <!-- Botão Adicionar ao Carrinho -->
+          <button
+            type="button"
+            class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
+            data-id="{{ product.id }}"
+            data-product-name="{{ product.name }}"
+          >
+            <i class="fas fa-cart-plus mr-1"></i>
+            Adicionar
+          </button>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <!-- Mensagem de produtos não encontrados -->
+    <div id="no-products" class="col-span-full text-center py-12">
+      <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+      {% if request.GET.q %}
+      <h3 class="text-2xl font-teko text-gray-500 mb-2">
+        Nenhum resultado para "{{ request.GET.q }}"
+      </h3>
+      <p class="text-gray-400">
+        Tente usar termos de busca diferentes ou verifique a ortografia.
+      </p>
+      {% else %}
+      <h3 class="text-2xl font-teko text-gray-500 mb-2">
+        Nenhum produto encontrado
+      </h3>
+      <p class="text-gray-400">
+        Não há produtos disponíveis nesta categoria no momento.
+      </p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
 </main>
 {% endblock content %}

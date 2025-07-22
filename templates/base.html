@@ -174,10 +174,13 @@
                         title="Meus Favoritos"
                     >
                         <i class="fas fa-heart"></i>
+                        {% if wishlist_count > 0 %}
                         <span
                             id="wishlist-count"
-                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold{% if wishlist_count == 0 %} hidden{% endif %}"
-                        >{{ wishlist_count }}</span>
+                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold"
+                            >{{ wishlist_count }}</span
+                        >
+                        {% endif %}
                     </a>
                     <a
                         href="{% url 'store:cart' %}"
@@ -187,8 +190,9 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span
                             id="cart-count"
-                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold{% if cart_count == 0 %} hidden{% endif %}"
-                        >{{ cart_count }}</span>
+                            class="absolute -top-2 -right-2 bg-accent text-black text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold {% if cart_count == 0 %}hidden{% endif %}"
+                            >{{ cart_count }}</span
+                        >
                     </a>
                     <div
                         class="w-px h-6 bg-gray-200 mx-2 hidden sm:block"
@@ -976,21 +980,111 @@
             ></div>
         </footer>
 
-        <!-- Modal de Feedback Global -->
-        <div id="feedback-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
-          <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full text-center relative">
-            <button id="modal-close-btn" class="absolute top-2 right-2 text-gray-400 hover:text-red-500 text-xl">&times;</button>
-            <h2 id="modal-title" class="text-2xl font-bold mb-2"></h2>
-            <p id="modal-message" class="text-gray-700"></p>
-          </div>
-        </div>
-
-        <!-- Scripts globais do projeto -->
-        <script src="{% static 'js/toast-system.js' %}"></script>
         <script>
-            window.initialCartCount = {{ cart_count|default:0 }};
+            // Lógica para o menu lateral
+            document.addEventListener("DOMContentLoaded", function () {
+                const openMenuBtn = document.getElementById("open-menu-btn");
+                const closeMenuBtn = document.getElementById("close-menu-btn");
+                const sideMenu = document.getElementById("side-menu");
+                const menuOverlay = document.getElementById("menu-overlay");
+
+                const openMenu = () => {
+                    sideMenu.classList.remove("-translate-x-full");
+                    menuOverlay.classList.remove("hidden");
+                };
+
+                const closeMenu = () => {
+                    sideMenu.classList.add("-translate-x-full");
+                    menuOverlay.classList.add("hidden");
+                };
+
+                if (openMenuBtn)
+                    openMenuBtn.addEventListener("click", openMenu);
+                if (closeMenuBtn)
+                    closeMenuBtn.addEventListener("click", closeMenu);
+                if (menuOverlay)
+                    menuOverlay.addEventListener("click", closeMenu);
+
+                document.addEventListener("keydown", (e) => {
+                    if (
+                        e.key === "Escape" &&
+                        !sideMenu.classList.contains("-translate-x-full")
+                    ) {
+                        closeMenu();
+                    }
+                });
+            });
+
+            // Função para buscar o CSRF token dos cookies
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== "") {
+                    const cookies = document.cookie.split(";");
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = cookies[i].trim();
+                        if (
+                            cookie.substring(0, name.length + 1) ===
+                            name + "="
+                        ) {
+                            cookieValue = decodeURIComponent(
+                                cookie.substring(name.length + 1),
+                            );
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            const csrftoken = getCookie("csrftoken");
+
+            // Lógica para adicionar item ao carrinho via AJAX
+            document.addEventListener("DOMContentLoaded", () => {
+                document
+                    .querySelectorAll(".add-to-cart-btn")
+                    .forEach((button) => {
+                        button.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            const productId = this.dataset.id;
+                            const url = `/cart/add/${productId}/`;
+
+                            fetch(url, {
+                                method: "POST",
+                                headers: {
+                                    "X-CSRFToken": csrftoken,
+                                    "X-Requested-With": "XMLHttpRequest", // Identifica a requisição como AJAX para o Django
+                                    "Content-Type": "application/json",
+                                },
+                            })
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    if (data.success) {
+                                        // Atualiza os contadores
+                                        const cartCountElements =
+                                            document.querySelectorAll(
+                                                "#cart-count, #cart-mini-count",
+                                            );
+                                        cartCountElements.forEach((el) => {
+                                            el.textContent = data.cart_count;
+                                            if (data.cart_count > 0) {
+                                                el.classList.remove("hidden");
+                                            }
+                                        });
+                                        showToast(data.message, "success");
+                                    } else {
+                                        showToast(data.message, "error");
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.error("Error:", error);
+                                    showToast(
+                                        "Ocorreu um erro. Por favor, tente novamente.",
+                                        "error",
+                                    );
+                                });
+                        });
+                    });
+            });
         </script>
-        <script src="{% static 'js/script.js' %}" defer></script>
 
         <!-- Sistema de Classificação por Estrelas -->
         <script src="{% static 'js/star-rating.js' %}"></script>

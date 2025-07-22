@@ -629,10 +629,9 @@
         const summaryTotal = document.getElementById("summary-total");
 
         function updateCartTotals(totalPrice, totalItems) {
-            const totalPriceNumber = parseFloat(totalPrice) || 0;
             // Update cart icon in navbar
             if (cartTotalSpan) {
-                cartTotalSpan.textContent = `R$ ${totalPriceNumber.toFixed(2).replace(".", ",")}`;
+                cartTotalSpan.textContent = `R$ ${totalPrice.toFixed(2).replace(".", ",")}`;
             }
             if (cartCountSpan) {
                 cartCountSpan.textContent = totalItems;
@@ -640,13 +639,13 @@
 
             // Update order summary details
             if (summarySubtotal) {
-                summarySubtotal.textContent = `R$ ${totalPriceNumber.toFixed(2).replace(".", ",")}`;
+                summarySubtotal.textContent = `R$ ${totalPrice.toFixed(2).replace(".", ",")}`;
             }
 
             let shippingCost = 0;
-            if (totalPriceNumber > 0) {
+            if (totalPrice > 0) {
                 // Free shipping for orders over R$200
-                shippingCost = totalPriceNumber > 200 ? 0 : 15.0;
+                shippingCost = totalPrice > 200 ? 0 : 15.0;
             }
 
             if (summaryShipping) {
@@ -657,20 +656,8 @@
             }
 
             if (summaryTotal) {
-                const finalTotal = totalPriceNumber + shippingCost;
+                const finalTotal = totalPrice + shippingCost;
                 summaryTotal.textContent = `R$ ${finalTotal.toFixed(2).replace(".", ",")}`;
-            }
-
-            // Atualizar o total no resumo do pedido (linha principal)
-            const cartTotalEl = document.getElementById("cart-total");
-            if (cartTotalEl) {
-                cartTotalEl.textContent = `R$ ${totalPriceNumber.toFixed(2).replace(".", ",")}`;
-            }
-
-            // Atualizar o subtotal no resumo do pedido (linha principal)
-            const subtotalEl = document.getElementById("subtotal");
-            if (subtotalEl) {
-                subtotalEl.textContent = `R$ ${totalPriceNumber.toFixed(2).replace(".", ",")}`;
             }
 
             if (totalItems === 0) {
@@ -721,7 +708,7 @@
                     "X-CSRFToken": csrftoken,
                     "X-Requested-With": "XMLHttpRequest",
                 },
-                body: JSON.stringify({ product_id: productId, action: action, quantity: 1 }),
+                body: JSON.stringify({ product_id: productId, action: action }),
             })
                 .then((response) => {
                     if (!response.ok) {
