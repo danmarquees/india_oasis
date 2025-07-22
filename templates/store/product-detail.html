@@ -161,42 +161,32 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Imagem do Produto -->
             <div class="space-y-4">
-                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden relative group" style="position:relative;">
-                    <img
-                        id="product-image"
-                        src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
-                        alt="{{ product.name }}"
-                        class="w-full h-full object-cover transition-transform duration-200"
-                        style="cursor: zoom-in;"
-                    />
-                    <!-- ZOOM LENS -->
-                    <div id="zoom-lens" style="display:none; position:absolute; pointer-events:none; border:2px solid #FFD700; border-radius:50%; width:120px; height:120px; z-index:20;"></div>
-                    <button
-                        class="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 transition-colors"
-                    >
-                        <i
-                            class="fas fa-heart text-gray-400 hover:text-red-500 text-lg"
-                        ></i>
-                    </button>
-                    <span
-                        class="absolute top-4 left-4 bg-green-500 text-white text-sm px-3 py-1 rounded-full"
-                    >
-                        <i class="fas fa-check mr-1"></i>
-                        Em Estoque
-                    </span>
+                <div class="relative group" id="carousel-container" style="max-width: 420px; margin: 0 auto;">
+                    <button id="carousel-prev" type="button" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 8px #0001;cursor:pointer;"><i class="fas fa-chevron-left"></i></button>
+                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden relative" style="position:relative;">
+                        <img
+                            id="product-image"
+                            src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
+                            alt="{{ product.name }}"
+                            class="w-full h-full object-cover transition-transform duration-200 main-carousel-image"
+                            style="cursor: zoom-in;"
+                        />
+                        <div id="zoom-lens" style="display:none; position:absolute; pointer-events:none; border:2px solid #FFD700; border-radius:50%; width:120px; height:120px; z-index:20;"></div>
+                    </div>
+                    <button id="carousel-next" type="button" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 8px #0001;cursor:pointer;"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                <div class="flex space-x-2 mt-2">
+                <div class="flex space-x-2 mt-2 justify-center" id="carousel-thumbnails">
                     {% if product.image %}
-                      <img src="{{ product.image.url }}" class="thumbnail-img w-20 h-20 object-cover rounded cursor-pointer border-2 border-primary" data-img="{{ product.image.url }}">
+                      <img src="{{ product.image.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2 border-primary" data-img="{{ product.image.url }}">
                     {% endif %}
                     {% if product.image_1 %}
-                      <img src="{{ product.image_1.url }}" class="thumbnail-img w-20 h-20 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_1.url }}">
+                      <img src="{{ product.image_1.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_1.url }}">
                     {% endif %}
                     {% if product.image_2 %}
-                      <img src="{{ product.image_2.url }}" class="thumbnail-img w-20 h-20 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_2.url }}">
+                      <img src="{{ product.image_2.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_2.url }}">
                     {% endif %}
                     {% if product.image_3 %}
-                      <img src="{{ product.image_3.url }}" class="thumbnail-img w-20 h-20 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_3.url }}">
+                      <img src="{{ product.image_3.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_3.url }}">
                     {% endif %}
                 </div>
             </div>
@@ -241,6 +231,11 @@
                             <i class="fas fa-check-circle mr-1"></i>
                             Verificado
                         </span>
+                    </div>
+                    <div class="flex items-center space-x-4 mb-4">
+                        {% if product.discount_price %}
+                            <span class="inline-block bg-red-600 text-white text-xs px-3 py-1 rounded-full font-bold">PROMOÇÃO -{{ product.discount_percent }}%</span>
+                        {% endif %}
                     </div>
                     <div class="flex items-center space-x-4 mb-4">
                         {% if product.discount_price %}
@@ -325,6 +320,7 @@
     <i class="fas fa-shopping-cart mr-2"></i>
     Adicionar ao Carrinho
 </button>
+                        <!-- Botão de wishlist na área de compra -->
                         <button
                             id="add-to-wishlist-btn"
                             class="btn btn-secondary flex-1 text-lg"
@@ -333,7 +329,7 @@
                             data-action="add-to-wishlist"
                         >
                             <i class="fas fa-heart mr-2"></i>
-                            Adicionar aos Desejos
+                            <span id="wishlist-btn-text">Adicionar aos Desejos</span>
                         </button>
                     </div>
                 </div>
@@ -576,26 +572,12 @@
                         alt="{{ p.name }}"
                         class="w-full h-full object-cover"
                     />
-                    <button
-                        class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
-                    >
-                        <i
-                            class="fas fa-heart text-gray-400 hover:text-red-500"
-                        ></i>
-                    </button>
-                    {% comment %} You can add logic for tags like \'BEST\n
-                    SELLER\', \'OFFER\', \'NEW\' here, based on product data
-                    {%endcomment %} {% if p.stock == 0 %}
-                    <span
-                        class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
-                        >ESGOTADO</span
-                    >
-                    {% elif p.is_new %} {# Assuming you have an \'is_new\'
-                    attribute or logic for this #}
-                    <span
-                        class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded"
-                        >NOVO</span
-                    >
+                    {% if p.discount_price %}
+                    <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">PROMOÇÃO -{{ p.discount_percent }}%</span>
+                    {% elif p.stock == 0 %}
+                    <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">ESGOTADO</span>
+                    {% elif p.is_new %}
+                    <span class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded">NOVO</span>
                     {% endif %}
                 </div>
                 <div class="p-4">
@@ -614,24 +596,26 @@
                     </p>
                     <div class="flex items-center mb-2">
                         <div class="flex text-yellow-400 text-sm">
-                            {# Logic for rating (stars) can be more complex,
-                            adapting to your model #}
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="far fa-star"></i>
                         </div>
-                        <span class="text-xs text-gray-500 ml-1">(<span class="review-count">{{ reviews.count }}</span>)</span>
+                        <span class="text-xs text-gray-500 ml-1">({{ p.review_count|default:0 }})</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        <span class="text-lg font-bold text-primary"
-                            >R$ {{ p.price|floatformat:2 }}</span
-                        >
+                        {% if p.discount_price %}
+                            <span class="text-lg font-bold text-gray-400 line-through">R$ {{ p.price|floatformat:2 }}</span>
+                            <span class="text-xl font-bold text-primary ml-2">R$ {{ p.discount_price|floatformat:2 }}</span>
+                        {% else %}
+                            <span class="text-lg font-bold text-primary">R$ {{ p.price|floatformat:2 }}</span>
+                        {% endif %}
                         <button
                             class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
                             data-id="{{ p.id }}"
-                            data-product-name="{{ p.name }}">
+                            data-product-name="{{ p.name }}"
+                        >
                             <i class="fas fa-cart-plus mr-1"></i>
                             Adicionar
                         </button>
@@ -656,33 +640,100 @@
 {% endblock content %}
 
 <script>
-  // Troca da imagem principal ao clicar na miniatura
+  // Carrossel de imagens do produto com zoom
   document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.thumbnail-img').forEach(function(img) {
-      img.addEventListener('click', function() {
-        document.getElementById('product-image').src = this.dataset.img;
-        document.querySelectorAll('.thumbnail-img').forEach(i => i.classList.remove('border-primary'));
+    // Coletar todas as imagens disponíveis
+    const images = [
+      {% if product.image %}'{{ product.image.url }}',{% endif %}
+      {% if product.image_1 %}'{{ product.image_1.url }}',{% endif %}
+      {% if product.image_2 %}'{{ product.image_2.url }}',{% endif %}
+      {% if product.image_3 %}'{{ product.image_3.url }}',{% endif %}
+    ];
+    let currentIndex = 0;
+    const mainImg = document.getElementById('product-image');
+    const thumbnails = document.querySelectorAll('.thumbnail-img');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    // Troca imagem principal ao clicar nas miniaturas
+    thumbnails.forEach((thumb, idx) => {
+      thumb.addEventListener('click', function() {
+        mainImg.src = images[idx];
+        currentIndex = idx;
+        thumbnails.forEach(i => i.classList.remove('border-primary'));
         this.classList.add('border-primary');
       });
     });
-
-    // Função de zoom
-    const productImage = document.getElementById('product-image');
+    // Navegação por setas
+    prevBtn.addEventListener('click', function() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      mainImg.src = images[currentIndex];
+      thumbnails.forEach(i => i.classList.remove('border-primary'));
+      if (thumbnails[currentIndex]) thumbnails[currentIndex].classList.add('border-primary');
+    });
+    nextBtn.addEventListener('click', function() {
+      currentIndex = (currentIndex + 1) % images.length;
+      mainImg.src = images[currentIndex];
+      thumbnails.forEach(i => i.classList.remove('border-primary'));
+      if (thumbnails[currentIndex]) thumbnails[currentIndex].classList.add('border-primary');
+    });
+    // Zoom ao passar o mouse
     const zoomLens = document.getElementById('zoom-lens');
-    if (productImage && zoomLens) {
-      productImage.addEventListener('mousemove', function(e) {
+    if (mainImg && zoomLens) {
+      mainImg.addEventListener('mousemove', function(e) {
         zoomLens.style.display = 'block';
-        const rect = productImage.getBoundingClientRect();
+        const rect = mainImg.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         zoomLens.style.left = (x - zoomLens.offsetWidth/2) + 'px';
         zoomLens.style.top = (y - zoomLens.offsetHeight/2) + 'px';
-        zoomLens.style.background = `url('${productImage.src}') no-repeat`;
-        zoomLens.style.backgroundSize = (productImage.width * 2) + 'px ' + (productImage.height * 2) + 'px';
+        zoomLens.style.background = `url('${mainImg.src}') no-repeat`;
+        zoomLens.style.backgroundSize = (mainImg.width * 2) + 'px ' + (mainImg.height * 2) + 'px';
         zoomLens.style.backgroundPosition = `-${x*2 - zoomLens.offsetWidth/2}px -${y*2 - zoomLens.offsetHeight/2}px`;
       });
-      productImage.addEventListener('mouseleave', function() {
+      mainImg.addEventListener('mouseleave', function() {
         zoomLens.style.display = 'none';
+      });
+    }
+  });
+</script>
+
+<script>
+  // Wishlist AJAX
+  document.addEventListener('DOMContentLoaded', function() {
+    const wishlistBtn = document.getElementById('add-to-wishlist-btn');
+    if (wishlistBtn) {
+      wishlistBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const productId = this.getAttribute('data-product-id');
+        const btnText = document.getElementById('wishlist-btn-text');
+        const icon = this.querySelector('i');
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        fetch('{% url 'store:toggle_wishlist' %}', {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest',
+          },
+          body: new URLSearchParams({product_id: productId})
+        })
+        .then(r => r.json())
+        .then(data => {
+          if (data.success) {
+            if (data.in_wishlist) {
+              btnText.textContent = 'Remover dos Desejos';
+              icon.classList.add('text-red-500');
+              icon.classList.remove('text-gray-400');
+              if (window.toastSystem) window.toastSystem.success('Adicionado à wishlist!');
+            } else {
+              btnText.textContent = 'Adicionar aos Desejos';
+              icon.classList.remove('text-red-500');
+              icon.classList.add('text-gray-400');
+              if (window.toastSystem) window.toastSystem.info('Removido da wishlist.');
+            }
+          } else {
+            if (window.toastSystem) window.toastSystem.error('Erro', data.error || 'Erro ao atualizar wishlist.');
+          }
+        });
       });
     }
   });

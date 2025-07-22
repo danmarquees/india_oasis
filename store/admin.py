@@ -18,49 +18,30 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'sku', 'price', 'discount_price', 'is_on_sale', 'stock', 'is_low_stock', 'image_tag')
-    search_fields = ('name', 'sku', 'description')
-    list_filter = ('stock', 'discount_price', 'category')
-    readonly_fields = ('image_tag', 'is_on_sale', 'is_low_stock')
-    actions = ['set_promotion', 'remove_promotion']
+    list_display = ("name", "category", "price", "stock", "available")
+    list_filter = ("available", "category")
+    search_fields = ("name", "description", "sku")
+    prepopulated_fields = {"slug": ("name",)}
     fieldsets = (
-        ('Informações Gerais', {
-            'fields': ('name', 'description', 'category', 'sku')
+        (None, {
+            'fields': ("category", "name", "slug", "description", "price", "discount_price", "sku", "stock", "available")
         }),
-        ('Preços', {
-            'fields': (('price', 'discount_price'), 'is_on_sale')
+        ("Imagens do Produto", {
+            'fields': ("image", "image_1", "image_2", "image_3"),
         }),
-        ('Estoque', {
-            'fields': ('stock', 'is_low_stock')
-        }),
-        ('Imagens', {
-            'fields': ('image', 'image_1', 'image_2', 'image_3', 'image_tag')
+        ("Datas", {
+            'fields': ("created", "updated"),
+            'classes': ('collapse',),
         }),
     )
-
+    readonly_fields = ("created", "updated")
+    # Exibe miniaturas das imagens no admin (opcional)
     def image_tag(self, obj):
         if obj.image:
-            return format_html('<img src="{}" style="max-width: 60px; max-height: 60px;" />', obj.image.url)
-        return "-"
-    image_tag.short_description = 'Miniatura'
-
-    def is_on_sale(self, obj):
-        return bool(obj.discount_price)
-    is_on_sale.boolean = True
-    is_on_sale.short_description = 'Promoção?'
-
-    def is_low_stock(self, obj):
-        return obj.stock is not None and obj.stock < 5
-    is_low_stock.boolean = True
-    is_low_stock.short_description = 'Estoque Baixo?'
-
-    def set_promotion(self, request, queryset):
-        queryset.update(discount_price=1)  # Exemplo: define desconto simbólico
-    set_promotion.short_description = 'Ativar promoção (definir desconto simbólico)'
-
-    def remove_promotion(self, request, queryset):
-        queryset.update(discount_price=None)
-    remove_promotion.short_description = 'Remover promoção'
+            return f'<img src="{obj.image.url}" style="max-height:60px;max-width:60px;" />'
+        return ""
+    image_tag.short_description = 'Imagem'
+    image_tag.allow_tags = True
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):

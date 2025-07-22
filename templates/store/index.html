@@ -267,9 +267,11 @@
                                 class="fas fa-heart text-gray-400 hover:text-red-500"
                             ></i>
                         </button>
-                        {% comment %} You can add logic for tags like 'BEST
-                        SELLER', 'OFFER', 'NEW' here, based on product data
-                        {%endcomment %} {% if product.stock == 0 %}
+                        {% if product.discount_price %}
+                        <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">
+                            PROMOÇÃO -{{ product.discount_percent }}%
+                        </span>
+                        {% elif product.stock == 0 %}
                         <span
                             class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
                             >ESGOTADO</span
@@ -308,9 +310,14 @@
                             {# Adjust to show actual review count #}
                         </div>
                         <div class="flex items-center justify-between">
-                            <span class="text-lg font-bold text-primary"
-                                >R$ {{ product.price|floatformat:2 }}</span
-                            >
+                            {% if product.discount_price %}
+                                <span class="text-lg font-bold text-gray-400 line-through">R$ {{ product.price|floatformat:2 }}</span>
+                                <span class="text-xl font-bold text-primary ml-2">R$ {{ product.discount_price|floatformat:2 }}</span>
+                            {% else %}
+                                <span class="text-lg font-bold text-primary"
+                                    >R$ {{ product.price|floatformat:2 }}</span
+                                >
+                            {% endif %}
                             <button
                                 class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
                                 data-id="{{ product.id }}"

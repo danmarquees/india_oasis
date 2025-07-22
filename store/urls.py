@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from .views import (
+    toggle_wishlist,
+)
 
 app_name = 'store'
 
@@ -35,6 +38,7 @@ urlpatterns = [
     path('wishlist/', views.wishlist, name='wishlist'),
     path('wishlist/add/<int:product_id>/', views.wishlist_add, name='wishlist_add'),
     path('wishlist/remove/<int:product_id>/', views.wishlist_remove, name='wishlist_remove'),
+    path('wishlist/toggle/', toggle_wishlist, name='toggle_wishlist'),
 
     # --- Reviews ---
     path('product/<int:product_id>/add_review/', views.add_review, name='add_review'),

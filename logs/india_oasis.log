@@ -11180,3 +11180,347 @@ INFO 2025-07-22 06:02:08,724 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
 INFO 2025-07-22 06:02:08,926 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
 INFO 2025-07-22 06:02:13,856 basehttp "GET /admin/email_service/emailtemplate/add/ HTTP/1.1" 200 36448
 INFO 2025-07-22 06:02:14,222 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:18:15,671 autoreload Watching for file changes with StatReloader
+INFO 2025-07-22 06:18:31,690 basehttp "GET /admin/ HTTP/1.1" 200 34890
+INFO 2025-07-22 06:18:32,989 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-07-22 06:18:32,990 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-07-22 06:18:33,010 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1125
+INFO 2025-07-22 06:18:33,011 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1517
+INFO 2025-07-22 06:18:33,083 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 18769
+INFO 2025-07-22 06:18:33,086 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-07-22 06:18:33,098 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1169
+INFO 2025-07-22 06:18:33,103 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 499
+INFO 2025-07-22 06:18:33,104 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1101
+INFO 2025-07-22 06:18:33,106 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2715
+INFO 2025-07-22 06:18:33,138 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5481
+INFO 2025-07-22 06:18:33,146 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1734
+INFO 2025-07-22 06:18:33,182 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1054
+INFO 2025-07-22 06:18:33,182 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 404
+INFO 2025-07-22 06:18:33,182 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1240
+INFO 2025-07-22 06:18:33,183 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 785
+INFO 2025-07-22 06:18:33,250 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2377
+INFO 2025-07-22 06:18:33,254 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 797
+INFO 2025-07-22 06:18:33,255 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1016
+INFO 2025-07-22 06:18:33,376 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5259
+INFO 2025-07-22 06:18:33,379 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 189
+INFO 2025-07-22 06:18:33,379 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 319
+INFO 2025-07-22 06:18:33,380 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2013
+INFO 2025-07-22 06:18:33,381 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2720
+INFO 2025-07-22 06:18:33,378 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2437
+INFO 2025-07-22 06:18:33,484 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 993
+INFO 2025-07-22 06:18:33,488 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 356
+INFO 2025-07-22 06:18:33,539 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 78
+INFO 2025-07-22 06:18:33,543 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1238
+INFO 2025-07-22 06:18:33,539 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1451
+INFO 2025-07-22 06:18:33,540 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6407
+INFO 2025-07-22 06:18:33,580 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-07-22 06:18:33,609 basehttp "GET /static/admin/css/responsive.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 16565
+INFO 2025-07-22 06:18:33,611 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1955
+INFO 2025-07-22 06:18:33,611 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-07-22 06:18:33,661 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6951
+INFO 2025-07-22 06:18:33,663 basehttp "GET /static/admin/css/responsive_rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1991
+INFO 2025-07-22 06:18:33,661 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2888
+INFO 2025-07-22 06:18:33,937 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-22 06:18:36,799 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-22 06:18:36,909 basehttp "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-22 06:18:36,962 basehttp "GET /static/admin_interface/related-modal/related-modal.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-22 06:18:37,991 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-07-22 06:18:37,991 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-07-22 06:18:38,241 basehttp "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO 2025-07-22 06:18:38,309 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+WARNING 2025-07-22 06:18:38,711 log Not Found: /favicon.ico
+INFO 2025-07-22 06:18:49,250 basehttp "GET /admin/store/product/ HTTP/1.1" 200 35206
+INFO 2025-07-22 06:18:49,811 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-07-22 06:18:49,815 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-07-22 06:18:49,815 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-22 06:18:49,885 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:18:49,897 basehttp "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-07-22 06:18:49,904 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-22 06:18:50,436 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-07-22 06:18:50,447 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-07-22 06:18:56,449 basehttp "GET /admin/store/product/9/change/ HTTP/1.1" 200 41899
+INFO 2025-07-22 06:18:56,727 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:18:56,823 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-07-22 06:18:56,911 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-07-22 06:18:56,913 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11991
+INFO 2025-07-22 06:18:56,914 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-07-22 06:18:57,781 basehttp "GET /static/admin/img/tooltag-arrowright.svg HTTP/1.1" 200 280
+INFO 2025-07-22 06:19:29,322 basehttp "GET / HTTP/1.1" 200 122416
+INFO 2025-07-22 06:19:30,846 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-22 06:19:30,959 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-22 06:19:31,229 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-22 06:19:31,293 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-22 06:19:31,317 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-22 06:19:31,318 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+WARNING 2025-07-22 06:19:34,063 log Not Found: /favicon.ico
+WARNING 2025-07-22 06:19:34,066 basehttp "GET /favicon.ico HTTP/1.1" 404 8846
+INFO 2025-07-22 06:20:09,174 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/ HTTP/1.1" 200 82576
+INFO 2025-07-22 06:20:12,368 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+WARNING 2025-07-22 06:20:13,903 log Not Found: /favicon.ico
+WARNING 2025-07-22 06:20:13,904 basehttp "GET /favicon.ico HTTP/1.1" 404 8846
+INFO 2025-07-22 06:20:40,623 basehttp "POST /product/16/add_review/ HTTP/1.1" 302 0
+INFO 2025-07-22 06:20:40,856 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/ HTTP/1.1" 200 82925
+INFO 2025-07-22 06:20:58,974 basehttp "GET / HTTP/1.1" 200 122416
+INFO 2025-07-22 06:21:08,489 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 82580
+INFO 2025-07-22 06:21:25,400 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 84817
+INFO 2025-07-22 06:24:48,171 basehttp "GET / HTTP/1.1" 200 122826
+ERROR 2025-07-22 06:31:46,818 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 81, in home
+    return render(request, 'store/index.html', {'products': products})
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 1531, in do_with
+    extra_context = token_kwargs(remaining_bits, parser, support_legacy=True)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 1127, in token_kwargs
+    kwargs[key] = parser.compile_filter(value)
+                  ~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 682, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse some characters: 100|-(product.discount_price||div:product.price|floatformat:2|floatval|mul:100|floatformat:0)
+ERROR 2025-07-22 06:31:46,936 basehttp "GET / HTTP/1.1" 500 356495
+WARNING 2025-07-22 06:31:49,675 log Not Found: /favicon.ico
+WARNING 2025-07-22 06:31:49,676 basehttp "GET /favicon.ico HTTP/1.1" 404 8846
+INFO 2025-07-22 06:34:21,341 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/views.py changed, reloading.
+INFO 2025-07-22 06:34:53,120 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-22 06:35:26,587 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 81, in home
+    return render(request, 'store/index.html', {'products': products})
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 489, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 682, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse some characters: |((1-product.discount_price/product.price)*100)||floatformat:0
+ERROR 2025-07-22 06:35:26,758 basehttp "GET / HTTP/1.1" 500 333543
+WARNING 2025-07-22 06:35:29,539 log Not Found: /favicon.ico
+WARNING 2025-07-22 06:35:29,540 basehttp "GET /favicon.ico HTTP/1.1" 404 8846
+INFO 2025-07-22 06:37:51,775 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/views.py changed, reloading.
+INFO 2025-07-22 06:38:02,533 autoreload Watching for file changes with StatReloader
+INFO 2025-07-22 06:38:24,534 basehttp "GET / HTTP/1.1" 200 122885
+INFO 2025-07-22 06:38:26,394 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-22 06:38:26,593 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-22 06:38:26,619 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-22 06:38:26,660 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-22 06:50:00,587 basehttp "GET /admin/ HTTP/1.1" 200 34890
+INFO 2025-07-22 06:50:01,853 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1517
+INFO 2025-07-22 06:50:01,854 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1125
+INFO 2025-07-22 06:50:01,999 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 499
+INFO 2025-07-22 06:50:02,000 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 18769
+INFO 2025-07-22 06:50:02,004 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1169
+INFO 2025-07-22 06:50:02,089 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2715
+INFO 2025-07-22 06:50:02,091 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1101
+INFO 2025-07-22 06:50:02,092 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5481
+INFO 2025-07-22 06:50:02,221 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-07-22 06:50:02,221 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-07-22 06:50:02,242 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1734
+INFO 2025-07-22 06:50:02,243 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1054
+INFO 2025-07-22 06:50:02,243 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 785
+INFO 2025-07-22 06:50:02,325 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2377
+INFO 2025-07-22 06:50:02,329 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 404
+INFO 2025-07-22 06:50:02,329 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 797
+INFO 2025-07-22 06:50:02,330 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 319
+INFO 2025-07-22 06:50:02,331 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1240
+INFO 2025-07-22 06:50:02,331 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-07-22 06:50:02,336 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1016
+INFO 2025-07-22 06:50:02,435 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2013
+INFO 2025-07-22 06:50:02,436 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2437
+INFO 2025-07-22 06:50:02,437 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5259
+INFO 2025-07-22 06:50:02,512 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 993
+INFO 2025-07-22 06:50:02,513 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2720
+INFO 2025-07-22 06:50:02,515 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1238
+INFO 2025-07-22 06:50:02,516 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 356
+INFO 2025-07-22 06:50:02,517 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1451
+INFO 2025-07-22 06:50:02,516 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 189
+INFO 2025-07-22 06:50:02,620 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6407
+INFO 2025-07-22 06:50:02,620 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 78
+INFO 2025-07-22 06:50:02,655 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-07-22 06:50:02,656 basehttp "GET /static/admin/css/responsive_rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1991
+INFO 2025-07-22 06:50:02,739 basehttp "GET /static/admin/css/responsive.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 16565
+INFO 2025-07-22 06:50:02,739 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-07-22 06:50:02,832 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1955
+INFO 2025-07-22 06:50:02,833 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6951
+INFO 2025-07-22 06:50:02,833 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2888
+INFO 2025-07-22 06:50:03,180 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-22 06:50:05,479 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-07-22 06:50:05,482 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-07-22 06:50:05,676 basehttp "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO 2025-07-22 06:50:05,677 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+WARNING 2025-07-22 06:50:06,579 log Not Found: /favicon.ico
+INFO 2025-07-22 06:50:42,859 basehttp "GET /admin/store/product/ HTTP/1.1" 200 35206
+INFO 2025-07-22 06:50:43,201 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-07-22 06:50:43,204 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-07-22 06:50:43,204 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-22 06:50:43,270 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:50:43,277 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-22 06:50:43,278 basehttp "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-07-22 06:50:44,115 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-07-22 06:50:44,127 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-07-22 06:50:49,896 basehttp "GET /admin/store/product/add/ HTTP/1.1" 200 41250
+INFO 2025-07-22 06:50:50,417 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-07-22 06:50:50,419 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:50:50,494 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-07-22 06:50:50,499 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-07-22 06:51:55,036 basehttp "POST /admin/store/product/add/ HTTP/1.1" 200 41732
+INFO 2025-07-22 06:51:55,323 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:52:23,670 basehttp "POST /admin/store/product/add/ HTTP/1.1" 200 41617
+INFO 2025-07-22 06:52:23,967 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:52:39,355 basehttp "POST /admin/store/product/add/ HTTP/1.1" 302 0
+INFO 2025-07-22 06:52:40,394 basehttp "GET /admin/store/product/ HTTP/1.1" 200 35956
+INFO 2025-07-22 06:52:42,458 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-22 06:53:05,200 basehttp "GET / HTTP/1.1" 200 131819
+INFO 2025-07-22 06:53:25,648 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-22 06:53:25,649 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-22 06:53:25,696 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-22 06:53:25,994 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-22 06:53:26,012 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-22 06:53:26,110 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-22 06:53:26,256 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-22 06:53:26,342 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-22 06:57:26,502 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/views.py changed, reloading.
+INFO 2025-07-22 06:57:44,150 autoreload Watching for file changes with StatReloader
+INFO 2025-07-22 07:00:08,956 basehttp "GET / HTTP/1.1" 200 131819
+INFO 2025-07-22 07:00:18,100 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+WARNING 2025-07-22 07:00:19,470 log Not Found: /favicon.ico
+WARNING 2025-07-22 07:00:19,473 basehttp "GET /favicon.ico HTTP/1.1" 404 9119
+INFO 2025-07-22 07:00:58,544 basehttp "GET /product/tempero-indiano-garam-masala-50g/ HTTP/1.1" 200 75831
+INFO 2025-07-22 07:01:02,727 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 304 0
+INFO 2025-07-22 07:01:34,906 basehttp "GET / HTTP/1.1" 200 131819
+INFO 2025-07-22 07:01:35,922 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-22 07:01:35,939 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-22 07:01:35,940 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-22 07:01:39,528 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+WARNING 2025-07-22 07:01:43,210 log Not Found: /favicon.ico
+WARNING 2025-07-22 07:01:43,306 basehttp "GET /favicon.ico HTTP/1.1" 404 9119

@@ -115,7 +115,7 @@ india_oasis/
 
 ## 📝 Licença
 
-Este projeto está licenciado sob a MIT License.
+Este projeto está licenciado sob a Licença MIT (c) 2025 Danilo Marques - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
 ---
 

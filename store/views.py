@@ -13,6 +13,7 @@ from django.db import transaction
 from decimal import Decimal
 import json
 import mercadopago
+from django.views.decorators.http import require_POST
 
 # Models
 from .models import Product, Category, Cart, CartItem, Order, OrderItem, Wishlist, Review, ContactMessage, CustomerProfile
@@ -78,6 +79,14 @@ def home(request):
         average_rating=Avg('reviews__rating'),
         review_count=Count('reviews')
     ).order_by('-created')[:8]
+
+    # Calcular porcentagem de desconto para cada produto
+    for p in products:
+        if p.discount_price and p.price:
+            p.discount_percent = int(round((1 - float(p.discount_price) / float(p.price)) * 100))
+        else:
+            p.discount_percent = 0
+
     return render(request, 'store/index.html', {'products': products})
 
 def about(request):
@@ -135,7 +144,8 @@ def product_detail(request, slug):
         review_count=Count('reviews')
     )[:4]
 
-    # Obter distribuição das avaliações por estrelas (1-5)
+    # Calcular percentual para cada pontuação se houver avaliações
+    total_reviews = reviews.count()
     rating_distribution = {
         5: reviews.filter(rating=5).count(),
         4: reviews.filter(rating=4).count(),
@@ -143,14 +153,22 @@ def product_detail(request, slug):
         2: reviews.filter(rating=2).count(),
         1: reviews.filter(rating=1).count(),
     }
-
-    # Calcular percentual para cada pontuação se houver avaliações
-    total_reviews = reviews.count()
     rating_percentages = {}
-
     if total_reviews > 0:
         for rating, count in rating_distribution.items():
             rating_percentages[rating] = int((count / total_reviews) * 100)
+
+    # Calcular porcentagem de desconto para o produto principal
+    if product.discount_price and product.price:
+        product.discount_percent = int(round((1 - float(product.discount_price) / float(product.price)) * 100))
+    else:
+        product.discount_percent = 0
+    # Calcular porcentagem de desconto para produtos relacionados
+    for p in related_products:
+        if p.discount_price and p.price:
+            p.discount_percent = int(round((1 - float(p.discount_price) / float(p.price)) * 100))
+        else:
+            p.discount_percent = 0
 
     return render(request, 'store/product-detail.html', {
         'product': product,
@@ -523,3 +541,21 @@ def wishlist_remove(request, product_id):
     except Wishlist.DoesNotExist:
         pass
     return redirect('store:wishlist')
+
+@login_required
+@require_POST
+def toggle_wishlist(request):
+    from django.http import JsonResponse
+    product_id = request.POST.get('product_id')
+    action = request.POST.get('action', 'add')
+    try:
+        product = Product.objects.get(id=product_id)
+        wishlist, _ = Wishlist.objects.get_or_create(user=request.user)
+        if action == 'remove':
+            wishlist.products.remove(product)
+            return JsonResponse({'success': True, 'in_wishlist': False})
+        else:
+            wishlist.products.add(product)
+            return JsonResponse({'success': True, 'in_wishlist': True})
+    except Product.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Produto não encontrado.'}, status=404)
