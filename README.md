@@ -1,128 +1,99 @@
-# 🏪 India Oasis
+# India Oasis
 
-E-commerce de temperos indianos desenvolvido com Django, focado em simplicidade, responsividade e integração com Mercado Pago para pagamentos online.
+E-commerce de produtos indianos desenvolvido em Django.
 
----
+## Funcionalidades
+- Catálogo de produtos com categorias, descontos e avaliações
+- Carrinho de compras e lista de desejos
+- Checkout integrado com Mercado Pago
+- Emissão de Nota Fiscal eletrônica (NF-e) via Olist (estrutura pronta)
+- Painel administrativo customizado (produtos, banners, pedidos, etc)
+- Banners dinâmicos gerenciáveis pelo admin
+- Menu lateral funcional
+- Sistema de notificações toast
+- Frontend com Tailwind CSS (configuração local recomendada)
 
-## 📦 Funcionalidades
+## Instalação
 
-- 🛍️ Vitrine de produtos com categorias e busca
-- ➕ Carrinho de compras persistente (usuário ou sessão)
-- 🔐 Cadastro, login e perfil de usuário com endereço
-- 📦 Finalização de pedidos e histórico do cliente
-- 💳 Integração com Mercado Pago (Cartão, PIX, Boleto)
-- 🧾 Wishlist (lista de desejos)
-- ⭐ Avaliações de produtos
-- 💬 Formulário de contato e FAQ
-- 📱 Interface responsiva com Bootstrap e Tailwind CSS
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-- [Python 3.x](https://www.python.org/)
-- [Django 5.x](https://www.djangoproject.com/)
-- [SQLite3](https://www.sqlite.org/) (banco de dados padrão)
-- [Bootstrap 5](https://getbootstrap.com/) + Tailwind CSS (front-end)
-- [Mercado Pago SDK](https://www.mercadopago.com.br/developers/pt/docs/sdks/python)
-- [Pillow](https://python-pillow.org/) (imagens)
-- [django-environ](https://django-environ.readthedocs.io/) (variáveis de ambiente)
-
----
-
-## 🗂️ Estrutura de Diretórios
-
-```
-india_oasis/
-├── india_oasis_project/   # Configurações do projeto Django
-├── store/                 # App principal: produtos, carrinho, pedidos, usuários
-├── payment_processing/    # App de integração com Mercado Pago
-├── templates/             # Templates HTML (Bootstrap/Tailwind)
-├── static/                # Arquivos estáticos (CSS, JS, imagens)
-├── media/                 # Uploads de imagens de produtos
-├── requirements.txt       # Dependências Python
-├── manage.py              # Comando principal do Django
-└── Procfile               # Deploy (Heroku/Gunicorn)
+### 1. Clone o repositório
+```bash
+git clone <repo-url>
+cd india_oasis
 ```
 
----
+### 2. Crie e ative o ambiente virtual
+```bash
+python -m venv venv
+source venv/bin/activate
+```
 
-## ⚙️ Como executar localmente
+### 3. Instale as dependências Python
+```bash
+pip install -r requirements.txt
+```
 
-1. **Clone o repositório**
-   ```bash
-   git clone https://github.com/danmarquees/india_oasis.git
-   cd india_oasis
-   ```
+### 4. Instale e configure o Tailwind CSS (recomendado)
+```bash
+npm init -y
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+```
+Edite o `tailwind.config.js` para incluir:
+```js
+module.exports = {
+  content: [
+    './templates/**/*.html',
+    './store/**/*.py',
+    './payment_processing/**/*.py',
+  ],
+  theme: { extend: {} },
+  plugins: [],
+}
+```
+Crie `static/css/tailwind.css`:
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+Gere o CSS final:
+```bash
+npx tailwindcss -i ./static/css/tailwind.css -o ./static/css/styles.css --watch
+```
+Inclua `{% static 'css/styles.css' %}` no seu `base.html`.
 
-2. **Crie e ative um ambiente virtual**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # Linux/Mac
-   venv\Scripts\activate.bat  # Windows
-   ```
+### 5. Migrações e superusuário
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+```
 
-3. **Instale as dependências**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### 6. Rodando o projeto
+```bash
+python manage.py runserver
+```
 
-4. **Configure as variáveis de ambiente**
-   - Crie um arquivo `.env` na raiz do projeto com:
-     ```
-     SECRET_KEY=sua_secret_key
-     DEBUG=True
-     MERCADO_PAGO_PUBLIC_KEY=sua_public_key
-     MERCADO_PAGO_ACCESS_TOKEN=seu_access_token
-     ```
+Acesse: http://localhost:8000/
 
-5. **Aplique as migrações**
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
+## Integrações
+- **Mercado Pago:** Checkout transparente, webhooks e painel de pagamentos.
+- **Olist/NF-e:** Estrutura pronta para emissão de notas fiscais (preencha as credenciais e adapte o payload conforme a documentação da Olist).
 
-6. **Crie um superusuário**
-   ```bash
-   python manage.py createsuperuser
-   ```
+## Desenvolvimento
+- Use o painel admin para cadastrar produtos, banners, categorias, etc.
+- Os banners do carrossel são totalmente gerenciáveis pelo admin.
+- O menu lateral pode ser customizado em `templates/store/menu-funcional.html`.
+- O frontend utiliza Tailwind CSS para estilização consistente.
 
-7. **Execute o servidor**
-   ```bash
-   python manage.py runserver
-   ```
-   Acesse: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+## Testes
+```bash
+python manage.py test
+```
 
----
+## Dicas
+- Para produção, gere o CSS do Tailwind sem `--watch` e ative o purge para remover classes não usadas.
+- Configure variáveis de ambiente para credenciais sensíveis (Mercado Pago, Olist, etc).
+- Use o Django Debug Toolbar para facilitar o desenvolvimento.
 
-## 🛒 Principais Apps
-
-- `store`: Produtos, categorias, carrinho, pedidos, avaliações, wishlist, perfil do usuário, contato.
-- `payment_processing`: Integração Mercado Pago (checkout, webhooks, status de pagamento).
-
----
-
-## ✅ Futuras melhorias
-
-- Integração com outros gateways de pagamento (ex: PayPal, Stripe)
-- Testes automatizados (Pytest/Django Test)
-- Upload múltiplo de imagens para produtos
-- Filtros avançados e busca por atributos
-- Melhor tratamento de erros e UX
-- Painel administrativo customizado
-
----
-
-## 📝 Licença
-
-Este projeto está licenciado sob a Licença MIT (c) 2025 Danilo Marques - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
-## 👤 Autor
-
-Desenvolvido por Danilo Marques  
-[GitHub](https://github.com/danmarquees) • [LinkedIn](https://www.linkedin.com/in/danmarquesdev/)  
-Contato: d.silvamarques@gmail.com
-
----
+## Licença
+MIT
