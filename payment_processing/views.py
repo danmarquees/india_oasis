@@ -12,6 +12,7 @@ from store.models import Order
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count
 from .models import Notification
+from store.olist_nfe_service import OlistNfeService
 
 # Configurar logger
 logger = logging.getLogger(__name__)
@@ -300,7 +301,17 @@ def webhook(request):
                 if payment_status == "approved":
                     order.status = "payment_approved"
                     order.paid = True
-                    # Here you could trigger other actions like sending a confirmation email
+                    # Emissão de NF-e via Olist
+                    try:
+                        nfe_service = OlistNfeService()
+                        resultado = nfe_service.emitir_nfe(order)
+                        order.nfe_numero = resultado.get('numero')
+                        order.nfe_status = resultado.get('status')
+                        order.nfe_pdf_url = resultado.get('pdf_url')
+                        order.nfe_xml_url = resultado.get('xml_url')
+                    except Exception as nfe_exc:
+                        print(f"Erro ao emitir NF-e: {nfe_exc}")
+                    # Aqui você poderia disparar outras ações como envio de e-mail de confirmação
                 elif payment_status == "rejected":
                     order.status = "payment_rejected"
                     order.paid = False

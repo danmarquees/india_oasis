@@ -128,6 +128,10 @@ class Order(models.Model):
     # Novos campos para integração com Mercado Pago
     preference_id = models.CharField(max_length=255, null=True, blank=True, help_text="ID da preferência de pagamento do Mercado Pago")
     payment_id = models.CharField(max_length=255, null=True, blank=True, help_text="ID do pagamento no Mercado Pago")
+    nfe_numero = models.CharField("Número da NF-e", max_length=50, blank=True, null=True)
+    nfe_status = models.CharField("Status da NF-e", max_length=50, blank=True, null=True)
+    nfe_pdf_url = models.URLField("URL do PDF da NF-e", blank=True, null=True)
+    nfe_xml_url = models.URLField("URL do XML da NF-e", blank=True, null=True)
 
     class Meta:
         ordering = ('-created',)
