@@ -212,3 +212,20 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f'Mensagem de {self.name} ({self.subject})'
+
+class Banner(models.Model):
+    titulo = models.CharField(max_length=200)
+    subtitulo = models.CharField(max_length=400, blank=True)
+    imagem = models.ImageField(upload_to='banners/')
+    ordem = models.PositiveIntegerField(default=0)
+    ativo = models.BooleanField(default=True)
+    texto_botao = models.CharField(max_length=100, blank=True, help_text='Texto do botão (opcional)')
+    url_botao = models.URLField(blank=True, help_text='URL do botão (opcional)')
+    cor_texto = models.CharField(max_length=20, blank=True, help_text='Classe ou código de cor do texto (ex: text-white, #fff)')
+    cor_fundo = models.CharField(max_length=20, blank=True, help_text='Classe ou código de cor do fundo (ex: bg-primary, #000)')
+
+    class Meta:
+        ordering = ['ordem']
+
+    def __str__(self):
+        return f'{self.titulo} (ordem {self.ordem})'

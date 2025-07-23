@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
+
 <!-- Certifique-se de incluir o script de notificações -->
 <script src="{% static 'js/toast-system.js' %}"></script>
 
@@ -26,175 +27,30 @@
 <main id="main-content" class="container mx-auto p-4 sm:p-6 lg:p-8">
     <!-- ==== PÁGINA INICIAL ==== -->
     <div id="home-page" class="page active-page">
-        <!-- Hero Carousel Section -->
-        <section
-            class="relative w-full h-80 md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl mb-12"
-        >
+        <!-- Carrossel Dinâmico de Banners -->
+        <section class="relative w-full h-80 md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl mb-12">
             <div id="carousel-container" class="relative w-full h-full">
-                <!-- Slide 1 - Especiarias Aromáticas -->
-                <div
-                    class="carousel-item active absolute inset-0 bg-gradient-to-r from-amber-900/90 to-orange-800/90 text-white flex items-center"
-                    style="
-                        background-image: url(&quot;https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80&quot;);
-                        background-size: cover;
-                        background-position: center;
-                    "
-                >
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
-                    ></div>
+                {% for banner in banners %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %} absolute inset-0 flex items-center"
+                    style="background-image: url('{{ banner.imagem.url }}'); background-size: cover; background-position: center; {% if banner.cor_fundo %}background-color: {{ banner.cor_fundo }};{% endif %}">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
                     <div class="relative z-10 container mx-auto px-8">
                         <div class="max-w-2xl">
-                            <div class="mb-4">
-                                <span
-                                    class="inline-block bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-semibold"
-                                >
-                                    🌟 Especiarias Autênticas
-                                </span>
-                            </div>
-                            <h1
-                                class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight"
-                            >
-                                Sabores da Índia<br />
-                                <span class="text-yellow-400"
-                                    >Direto para sua Cozinha</span
-                                >
-                            </h1>
-                            <p
-                                class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed"
-                            >
-                                Explore uma seleção autêntica de temperos que
-                                trazem a alma da culinária indiana para suas
-                                receitas.
-                            </p>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <a
-                                    href="{% url 'store:product_list' %}"
-                                    class="btn btn-primary text-lg px-8 py-4"
-                                >
-                                    <i class="fas fa-shopping-bag mr-2"></i>
-                                    Ver Temperos
-                                </a>
-                                <a
-                                    href="#catalog"
-                                    class="btn btn-secondary text-lg px-8 py-4"
-                                >
-                                    <i class="fas fa-info-circle mr-2"></i>
-                                    Saiba Mais
-                                </a>
-                            </div>
+                            <h1 class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight" style="{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}">{{ banner.titulo }}</h1>
+                            {% if banner.subtitulo %}
+                            <p class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed" style="{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}">{{ banner.subtitulo }}</p>
+                            {% endif %}
+                            {% if banner.texto_botao and banner.url_botao %}
+                            <a href="{{ banner.url_botao }}" class="btn btn-primary text-lg px-8 py-4 mt-4 inline-block" style="{% if banner.cor_fundo %}background-color: {{ banner.cor_fundo }};{% endif %}{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}">
+                                {{ banner.texto_botao }}
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-
-                <!-- Slide 2 - Chás e Infusões -->
-                <div
-                    class="carousel-item absolute inset-0 bg-gradient-to-r from-green-900/90 to-teal-800/90 text-white flex items-center"
-                    style="
-                        background-image: url(&quot;https://images.unsplash.com/photo-1544787219-7f47ccb76574?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2341&q=80&quot;);
-                        background-size: cover;
-                        background-position: center;
-                    "
-                >
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
-                    ></div>
-                    <div class="relative z-10 container mx-auto px-8">
-                        <div class="max-w-2xl">
-                            <div class="mb-4">
-                                <span
-                                    class="inline-block bg-green-400 text-black px-4 py-2 rounded-full text-sm font-semibold"
-                                >
-                                    🍃 Chás Premium
-                                </span>
-                            </div>
-                            <h1
-                                class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight"
-                            >
-                                Aconchego em<br />
-                                <span class="text-green-400">Cada Gole</span>
-                            </h1>
-                            <p
-                                class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed"
-                            >
-                                Descubra nossos chás e infusões, perfeitos para
-                                um momento de paz e sabor autêntico.
-                            </p>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <a
-                                    href="{% url 'store:product_list' %}"
-                                    class="btn btn-secondary text-lg px-8 py-4"
-                                >
-                                    <i class="fas fa-leaf mr-2"></i>
-                                    Ver Chás
-                                </a>
-                                <a
-                                    href="#catalog"
-                                    class="btn btn-primary text-lg px-8 py-4"
-                                >
-                                    <i class="fas fa-heart mr-2"></i>
-                                    Favoritos
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 3 - Receitas Tradicionais -->
-                <div
-                    class="carousel-item absolute inset-0 bg-gradient-to-r from-red-900/90 to-pink-800/90 text-white flex items-center"
-                    style="
-                        background-image: url(&quot;https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2342&q=80&quot;);
-                        background-size: cover;
-                        background-position: center;
-                    "
-                >
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
-                    ></div>
-                    <div class="relative z-10 container mx-auto px-8">
-                        <div class="max-w-2xl">
-                            <div class="mb-4">
-                                <span
-                                    class="inline-block bg-red-400 text-white px-4 py-2 rounded-full text-sm font-semibold"
-                                >
-                                    🍛 Receitas Tradicionais
-                                </span>
-                            </div>
-                            <h1
-                                class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight"
-                            >
-                                Tradição que<br />
-                                <span class="text-red-400">Inspira</span>
-                            </h1>
-                            <p
-                                class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed"
-                            >
-                                Aprenda receitas autênticas da Índia com
-                                ingredientes selecionados especialmente para
-                                você.
-                            </p>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <a
-                                    href="{% url 'store:product_list' %}"
-                                    class="btn btn-primary text-lg px-8 py-4"
-                                >
-                                    <i class="fas fa-book mr-2"></i>
-                                    Ver Receitas
-                                </a>
-                                <a
-                                    href="#catalog"
-                                    class="btn btn-secondary text-lg px-8 py-4"
-                                >
-                                    <i class="fas fa-utensils mr-2"></i>
-                                    Ingredientes
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
-
+            <!-- Carousel Controls e Indicators podem ser mantidos ou adaptados -->
             <!-- Carousel Controls -->
             <button
                 id="prev-slide"
@@ -217,18 +73,12 @@
             <div
                 class="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex space-x-3"
             >
+                {% for banner in banners %}
                 <button
-                    class="carousel-indicator active w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300"
-                    data-slide="0"
+                    class="carousel-indicator {% if forloop.first %}active{% endif %} w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300"
+                    data-slide="{{ forloop.counter0 }}"
                 ></button>
-                <button
-                    class="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-all duration-300"
-                    data-slide="1"
-                ></button>
-                <button
-                    class="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white transition-all duration-300"
-                    data-slide="2"
-                ></button>
+                {% endfor %}
             </div>
 
             <!-- Progress Bar -->

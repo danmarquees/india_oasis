@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, ContactMessage, Review
+from .models import Category, Product, Cart, CartItem, Order, OrderItem, Wishlist, CustomerProfile, ContactMessage, Review, Banner
 from django.utils.html import format_html
 
 @admin.register(CustomerProfile)
@@ -16,32 +16,27 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
-@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("name", "category", "price", "stock", "available")
-    list_filter = ("available", "category")
-    search_fields = ("name", "description", "sku")
-    prepopulated_fields = {"slug": ("name",)}
-    fieldsets = (
-        (None, {
-            'fields': ("category", "name", "slug", "description", "price", "discount_price", "sku", "stock", "available")
-        }),
-        ("Imagens do Produto", {
-            'fields': ("image", "image_1", "image_2", "image_3"),
-        }),
-        ("Datas", {
-            'fields': ("created", "updated"),
-            'classes': ('collapse',),
-        }),
-    )
-    readonly_fields = ("created", "updated")
-    # Exibe miniaturas das imagens no admin (opcional)
-    def image_tag(self, obj):
+    list_display = ('name', 'thumbnail', 'price', 'available', 'stock', 'category')
+    list_filter = ('available', 'category')
+    search_fields = ('name', 'description')
+    actions = ['ativar_produtos', 'desativar_produtos']
+
+    def thumbnail(self, obj):
         if obj.image:
-            return f'<img src="{obj.image.url}" style="max-height:60px;max-width:60px;" />'
-        return ""
-    image_tag.short_description = 'Imagem'
-    image_tag.allow_tags = True
+            return format_html('<img src="{}" width="50" height="50" style="object-fit:cover; border-radius:6px;" />', obj.image.url)
+        return "-"
+    thumbnail.short_description = 'Imagem'
+
+    def ativar_produtos(self, request, queryset):
+        queryset.update(available=True)
+    ativar_produtos.short_description = "Ativar produtos selecionados"
+
+    def desativar_produtos(self, request, queryset):
+        queryset.update(available=False)
+    desativar_produtos.short_description = "Desativar produtos selecionados"
+
+admin.site.register(Product, ProductAdmin)
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
@@ -81,3 +76,26 @@ class ReviewAdmin(admin.ModelAdmin):
     list_filter = ['rating', 'created_at']
     search_fields = ['comment', 'product__name', 'user__username']
     readonly_fields = ('created_at',)
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    list_display = ('titulo', 'ordem', 'ativo', 'thumbnail')
+    list_editable = ('ordem', 'ativo')
+    search_fields = ('titulo', 'subtitulo')
+    list_filter = ('ativo',)
+    actions = ['ativar_banners', 'desativar_banners']
+    fields = ('titulo', 'subtitulo', 'imagem', 'ordem', 'ativo', 'texto_botao', 'url_botao', 'cor_texto', 'cor_fundo')
+
+    def thumbnail(self, obj):
+        if obj.imagem:
+            return format_html('<img src="{}" width="80" height="40" style="object-fit:cover; border-radius:6px;" />', obj.imagem.url)
+        return "-"
+    thumbnail.short_description = 'Preview'
+
+    def ativar_banners(self, request, queryset):
+        queryset.update(ativo=True)
+    ativar_banners.short_description = "Ativar banners selecionados"
+
+    def desativar_banners(self, request, queryset):
+        queryset.update(ativo=False)
+    desativar_banners.short_description = "Desativar banners selecionados"

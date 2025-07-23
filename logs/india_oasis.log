@@ -12563,3 +12563,117 @@ INFO 2025-07-22 20:43:37,082 basehttp "GET /cart/ HTTP/1.1" 200 93970
 INFO 2025-07-22 20:43:37,589 basehttp "GET /cart/ HTTP/1.1" 200 93970
 INFO 2025-07-22 20:43:43,764 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 69
 INFO 2025-07-22 20:43:43,782 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 69
+INFO 2025-07-23 11:37:16,385 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 11:39:11,402 basehttp "GET / HTTP/1.1" 200 141050
+INFO 2025-07-23 11:39:11,856 basehttp "GET /static/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-23 11:39:11,897 basehttp "GET /static/css/custom.css HTTP/1.1" 304 0
+INFO 2025-07-23 11:39:11,920 basehttp "GET /static/css/star-rating.css HTTP/1.1" 304 0
+INFO 2025-07-23 11:39:12,058 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-23 11:39:12,677 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-23 11:39:12,745 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-23 11:39:13,122 basehttp "GET /static/js/star-rating.js HTTP/1.1" 304 0
+WARNING 2025-07-23 11:39:16,779 log Not Found: /favicon.ico
+WARNING 2025-07-23 11:39:16,780 basehttp "GET /favicon.ico HTTP/1.1" 404 9119
+INFO 2025-07-23 11:46:12,235 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/models.py changed, reloading.
+INFO 2025-07-23 11:46:24,751 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 11:48:12,511 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 11:49:39,039 basehttp "GET / HTTP/1.1" 200 131804
+INFO 2025-07-23 11:55:01,924 basehttp "GET /admin/ HTTP/1.1" 200 35668
+INFO 2025-07-23 11:55:02,170 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,173 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,197 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,301 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,324 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,326 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,346 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,364 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,399 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,400 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,412 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,446 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,466 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,467 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,485 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,507 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,535 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,556 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,573 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,606 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,613 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,623 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,637 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,668 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,686 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,705 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,736 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,745 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:02,947 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:03,153 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:03,260 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:03,261 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:03,397 basehttp "GET /static/admin_interface/related-modal/related-modal.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:03,481 basehttp "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 11:55:04,010 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-23 11:55:07,836 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 30704
+INFO 2025-07-23 11:55:08,398 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 11:55:11,559 basehttp "GET /admin/store/banner/add/ HTTP/1.1" 200 33526
+INFO 2025-07-23 11:55:11,669 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 11:55:50,454 basehttp "POST /admin/store/banner/add/ HTTP/1.1" 302 0
+INFO 2025-07-23 11:55:50,578 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 33120
+INFO 2025-07-23 11:55:50,758 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 11:55:58,743 basehttp "GET / HTTP/1.1" 200 133023
+INFO 2025-07-23 11:56:00,062 basehttp "GET /media/banners/images.jpeg HTTP/1.1" 200 12587
+INFO 2025-07-23 11:59:01,002 basehttp "POST /admin/store/banner/ HTTP/1.1" 200 30359
+INFO 2025-07-23 11:59:02,276 basehttp "GET /static/admin/js/cancel.js HTTP/1.1" 200 729
+INFO 2025-07-23 11:59:03,872 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-23 11:59:03,947 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 30840
+INFO 2025-07-23 11:59:04,174 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 11:59:06,917 basehttp "GET /admin/store/banner/add/ HTTP/1.1" 200 33526
+INFO 2025-07-23 11:59:07,050 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 11:59:51,729 basehttp "POST /admin/store/banner/add/ HTTP/1.1" 302 0
+INFO 2025-07-23 11:59:51,791 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 33174
+INFO 2025-07-23 11:59:51,937 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 11:59:59,243 basehttp "GET / HTTP/1.1" 200 133060
+INFO 2025-07-23 12:00:00,671 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-23 12:03:28,778 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/models.py changed, reloading.
+INFO 2025-07-23 12:05:45,618 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 12:05:54,205 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 32968
+INFO 2025-07-23 12:05:55,607 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 12:05:59,310 basehttp "GET /admin/store/banner/2/change/ HTTP/1.1" 200 37424
+INFO 2025-07-23 12:05:59,504 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 12:07:36,264 basehttp "POST /admin/store/banner/2/change/ HTTP/1.1" 302 0
+INFO 2025-07-23 12:07:36,334 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 33192
+INFO 2025-07-23 12:07:36,628 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 12:07:44,191 basehttp "GET / HTTP/1.1" 200 133026
+INFO 2025-07-23 12:07:45,507 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-23 12:08:06,632 basehttp "GET /admin/store/banner/2/change/ HTTP/1.1" 200 37485
+INFO 2025-07-23 12:08:06,792 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 12:08:16,528 basehttp "GET /products/ HTTP/1.1" 200 67851
+INFO 2025-07-23 12:08:17,204 basehttp "GET /static/js/script.js HTTP/1.1" 200 54472
+INFO 2025-07-23 12:08:31,205 basehttp "POST /admin/store/banner/2/change/ HTTP/1.1" 302 0
+INFO 2025-07-23 12:08:31,279 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 33192
+INFO 2025-07-23 12:08:31,433 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 12:08:38,438 basehttp "GET / HTTP/1.1" 200 133322
+INFO 2025-07-23 12:08:39,092 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-23 12:08:42,490 basehttp "GET /products/ HTTP/1.1" 200 67851
+INFO 2025-07-23 12:08:42,621 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+INFO 2025-07-23 12:08:46,113 basehttp "GET / HTTP/1.1" 200 133322
+INFO 2025-07-23 12:09:23,622 basehttp "GET /cart/ HTTP/1.1" 200 93970
+INFO 2025-07-23 12:09:33,174 basehttp "GET / HTTP/1.1" 200 133322
+INFO 2025-07-23 12:09:33,698 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-23 12:17:05,683 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/admin.py changed, reloading.
+INFO 2025-07-23 12:17:14,072 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 12:19:32,303 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 12:19:50,639 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 34803
+INFO 2025-07-23 12:19:51,104 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 12:19:51,747 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-23 12:20:05,450 basehttp "GET /admin/store/product/ HTTP/1.1" 200 37803
+INFO 2025-07-23 12:20:05,702 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 12:20:28,091 basehttp "GET /products/ HTTP/1.1" 200 67851
+INFO 2025-07-23 12:20:28,511 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+INFO 2025-07-23 12:20:33,839 basehttp "GET / HTTP/1.1" 200 133322
+INFO 2025-07-23 12:20:40,444 basehttp "GET /products/ HTTP/1.1" 200 67851
+INFO 2025-07-23 12:20:55,713 basehttp "GET / HTTP/1.1" 200 133322
+INFO 2025-07-23 12:24:12,132 basehttp "GET / HTTP/1.1" 200 159857
+INFO 2025-07-23 12:24:18,386 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-23 12:25:20,107 basehttp "GET / HTTP/1.1" 200 133323

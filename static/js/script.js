@@ -44,6 +44,15 @@ let touchEndX = 0;
 let carouselDebounceTimer = null;
 let isCarouselTransitioning = false;
 
+// Inicialização do carrossel ao carregar a página
+window.addEventListener('DOMContentLoaded', function() {
+  if (totalSlides > 0) {
+    updateCarousel();
+    startCarouselAutoplay();
+    setupCarouselListeners();
+  }
+});
+
 // Debug do carrossel
 console.log("🎠 Carrossel Debug:");
 console.log("- carouselItems:", carouselItems.length);

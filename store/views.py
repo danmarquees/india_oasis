@@ -16,7 +16,7 @@ import mercadopago
 from django.views.decorators.http import require_POST
 
 # Models
-from .models import Product, Category, Cart, CartItem, Order, OrderItem, Wishlist, Review, ContactMessage, CustomerProfile
+from .models import Product, Category, Cart, CartItem, Order, OrderItem, Wishlist, Review, ContactMessage, CustomerProfile, Banner
 
 def restore_cart_from_session(request):
     cart_items_data = request.session.pop('cart_backup', None)
@@ -75,6 +75,7 @@ def calculate_shipping_cost(total_cart_price):
 # --- Core Store Views ---
 
 def home(request):
+    banners = Banner.objects.filter(ativo=True)
     products = Product.objects.filter(available=True).annotate(
         average_rating=Avg('reviews__rating'),
         review_count=Count('reviews')
@@ -87,7 +88,10 @@ def home(request):
         else:
             p.discount_percent = 0
 
-    return render(request, 'store/index.html', {'products': products})
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
 
 def about(request):
     return render(request, 'store/about.html')
