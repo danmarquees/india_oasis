@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container mx-auto p-8 flex flex-col items-center justify-center min-h-[60vh]">
+    <div class="text-center">
+        <img src="{% static 'images/logo.png' %}" alt="India Oasis" class="mx-auto mb-6 w-24 h-24 animate-pulse" />
+        <h1 class="text-7xl font-teko text-primary mb-4">500</h1>
+        <h2 class="text-3xl font-teko text-secondary mb-2">Erro Interno do Servidor</h2>
+        <p class="text-gray-600 mb-6 max-w-xl mx-auto">
+            Algo inesperado aconteceu em nosso servidor.<br>
+            Por favor, tente novamente em instantes ou entre em contato se o problema persistir.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'store:home' %}" class="btn btn-primary text-lg px-8 py-3">
+                <i class="fas fa-home mr-2"></i> Voltar para Início
+            </a>
+            <a href="javascript:location.reload()" class="btn btn-secondary text-lg px-8 py-3">
+                <i class="fas fa-redo mr-2"></i> Tentar Novamente
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock content %} 

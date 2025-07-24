@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<main class="container mx-auto p-8 flex flex-col items-center justify-center min-h-[60vh]">
+    <div class="text-center">
+        <img src="{% static 'images/logo.png' %}" alt="India Oasis" class="mx-auto mb-6 w-24 h-24 animate-bounce" />
+        <h1 class="text-7xl font-teko text-primary mb-4">404</h1>
+        <h2 class="text-3xl font-teko text-secondary mb-2">Página não encontrada</h2>
+        <p class="text-gray-600 mb-6 max-w-xl mx-auto">
+            Ops! A página que você procura não existe ou foi removida.<br>
+            Que tal explorar nossos produtos autênticos da Índia?
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="{% url 'store:home' %}" class="btn btn-primary text-lg px-8 py-3">
+                <i class="fas fa-home mr-2"></i> Voltar para Início
+            </a>
+            <a href="{% url 'store:product_list' %}" class="btn btn-secondary text-lg px-8 py-3">
+                <i class="fas fa-search mr-2"></i> Ver Produtos
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock content %} 
