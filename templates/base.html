@@ -142,6 +142,7 @@
                             src="{% static 'images/logo.png' %}"
                             alt="India Oasis Logo"
                             class="h-14"
+                            loading="lazy"
                         />
                     </a>
                 </div>
@@ -1085,6 +1086,22 @@
                     });
             });
         </script>
+
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("{% url 'store:cart_count' %}", {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.querySelectorAll("#cart-count, #cart-mini-count").forEach(el => {
+            el.textContent = data.cart_count;
+            if (data.cart_count > 0) el.classList.remove("hidden");
+            else el.classList.add("hidden");
+        });
+    });
+});
+</script>
 
         <!-- Sistema de Classificação por Estrelas -->
         <script src="{% static 'js/star-rating.js' %}"></script>

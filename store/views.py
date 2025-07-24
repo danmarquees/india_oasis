@@ -14,6 +14,8 @@ from decimal import Decimal
 import json
 import mercadopago
 from django.views.decorators.http import require_POST
+from django.views.decorators.cache import cache_page
+from .services import calcular_frete_melhor_envio
 
 # Models
 from .models import Product, Category, Cart, CartItem, Order, OrderItem, Wishlist, Review, ContactMessage, CustomerProfile, Banner
@@ -74,36 +76,38 @@ def calculate_shipping_cost(total_cart_price):
 
 # --- Core Store Views ---
 
+@cache_page(60 * 10)  # 10 minutos
 def home(request):
     banners = Banner.objects.filter(ativo=True)
     products = Product.objects.filter(available=True).annotate(
         average_rating=Avg('reviews__rating'),
-        review_count=Count('reviews')
-    ).order_by('-created')[:8]
-
-    # Calcular porcentagem de desconto para cada produto
+        review_count=Count('reviews'),
+    )
     for p in products:
-        if p.discount_price and p.price:
-            p.discount_percent = int(round((1 - float(p.discount_price) / float(p.price)) * 100))
+        if p.discount_price:
+            p.discount_percent = int(100 - (p.discount_price / p.price) * 100)
         else:
             p.discount_percent = 0
-
     return render(request, 'store/index.html', {
         'banners': banners,
         'products': products
     })
 
+@cache_page(60 * 10)
 def about(request):
     return render(request, 'store/about.html')
 
+@cache_page(60 * 10)
 def terms(request):
     return render(request, 'store/terms.html')
 
+@cache_page(60 * 10)
 def privacy(request):
     return render(request, 'store/privacy.html')
 
 # --- Product Views ---
 
+@cache_page(60 * 10)  # 10 minutos
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
@@ -129,6 +133,7 @@ def product_list(request, category_slug=None):
         'products': products
     })
 
+@cache_page(60 * 10)  # 10 minutos
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, available=True)
     reviews = product.reviews.all()
@@ -141,6 +146,10 @@ def product_detail(request, slug):
     user_has_reviewed = False
     if request.user.is_authenticated:
         user_has_reviewed = Review.objects.filter(product=product, user=request.user).exists()
+
+    # Marcar se o usuário já marcou cada review como útil
+    for review in reviews:
+        review.user_marked_helpful = review.is_marked_helpful_by(request.user) if request.user.is_authenticated else False
 
     # Encontrar produtos relacionados (mesma categoria) com anotações para média e contagem
     related_products = Product.objects.filter(category=product.category).exclude(id=product.id).annotate(
@@ -273,17 +282,35 @@ def checkout(request):
         messages.info(request, "Seu carrinho está vazio.")
         return redirect("store:product_list")
 
-    # This view now only displays the checkout page.
-    # The actual order creation and payment initiation happens in a separate view.
     customer_profile = get_object_or_404(CustomerProfile, user=request.user)
-    shipping_cost = calculate_shipping_cost(cart.total_price)
-    total_with_shipping = cart.total_price + shipping_cost
+    shipping_options = []
+    shipping_erro = None
+
+    cep_origem = '01001-000'  # CEP da loja
+    cep_destino = customer_profile.cep
+    peso_total = sum([item.product.peso * item.quantity for item in cart.items.all()]) or 0.5
+    token = 'SEU_TOKEN_AQUI'  # Substitua pelo seu token real
+
+    if request.method == 'POST' or request.GET.get('calcular_frete'):
+        cep_destino = request.POST.get('cep') or request.GET.get('cep') or customer_profile.cep
+        resultado = calcular_frete_melhor_envio(
+            cep_origem=cep_origem,
+            cep_destino=cep_destino,
+            peso_kg=peso_total,
+            valor_produtos=cart.total_price,
+            token=token,
+            servicos=["1", "2"]  # 1=PAC, 2=SEDEX
+        )
+        if isinstance(resultado, list):
+            shipping_options = resultado
+        else:
+            shipping_erro = resultado.get('erro')
 
     context = {
         'cart': cart,
         'customer_profile': customer_profile,
-        'shipping_cost': shipping_cost,
-        'total_with_shipping': total_with_shipping,
+        'shipping_options': shipping_options,
+        'shipping_erro': shipping_erro,
     }
     return render(request, 'store/checkout.html', context)
 
@@ -398,6 +425,7 @@ def profile(request):
     }
     return render(request, 'store/profile.html', context)
 
+@cache_page(60 * 10)
 def signup(request):
     if request.user.is_authenticated:
         return redirect('store:home')
@@ -418,6 +446,7 @@ def signup(request):
         form = CustomUserCreationForm()
     return render(request, 'store/signup.html', {'form': form})
 
+@cache_page(60 * 10)
 def user_login(request):
     if request.user.is_authenticated:
         return redirect('store:profile')
@@ -508,6 +537,7 @@ def mark_review_helpful(request, review_id):
         'is_helpful': is_helpful
     })
 
+@cache_page(60 * 10)
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -563,3 +593,7 @@ def toggle_wishlist(request):
             return JsonResponse({'success': True, 'in_wishlist': True})
     except Product.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Produto não encontrado.'}, status=404)
+
+def cart_count(request):
+    cart = get_cart(request)
+    return JsonResponse({'cart_count': cart.total_items})

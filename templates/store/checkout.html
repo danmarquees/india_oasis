@@ -87,6 +87,7 @@
                             src="{{ item.product.image.url }}"
                             alt="{{ item.product.name }}"
                             class="w-12 h-12 rounded-lg object-cover"
+                            loading="lazy"
                         />
                         <div class="flex-1">
                             <h4 class="font-medium text-gray-800">
@@ -103,6 +104,33 @@
                         </div>
                     </div>
                     {% endfor %}
+
+                    {% if shipping_erro %}
+                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
+                            <strong class="font-bold">Erro ao calcular frete:</strong>
+                            <span class="block sm:inline">{{ shipping_erro }}</span>
+                        </div>
+                    {% endif %}
+
+                    {% if shipping_options %}
+                        <div class="mb-6">
+                            <h3 class="text-xl font-semibold mb-2">Opções de Frete</h3>
+                            <ul class="space-y-2">
+                                {% for option in shipping_options %}
+                                    <li class="p-4 bg-gray-50 rounded border flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                        <div>
+                                            <span class="font-bold"> {{ option.name }} </span>
+                                            <span class="ml-2 text-gray-600">({{ option.company.name }})</span>
+                                        </div>
+                                        <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                                            <span class="text-primary font-bold text-lg">R$ {{ option.price|floatformat:2 }}</span>
+                                            <span class="text-gray-500">Prazo: {{ option.delivery_time }} dia(s)</span>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
 
                     <div class="space-y-3 mb-6">
                         <div class="flex justify-between">

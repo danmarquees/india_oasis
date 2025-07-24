@@ -21,6 +21,22 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('available', 'category')
     search_fields = ('name', 'description')
     actions = ['ativar_produtos', 'desativar_produtos']
+    fieldsets = (
+        (None, {
+            'fields': ('category', 'name', 'slug', 'description', 'price', 'discount_price', 'sku', 'stock', 'available')
+        }),
+        ('Imagens do Produto', {
+            'fields': ('image', 'image_1', 'image_2', 'image_3'),
+        }),
+        ('Detalhes Técnicos', {
+            'fields': ('peso', 'origem', 'validade', 'ingredientes', 'certificacao', 'uso'),
+        }),
+        ('Datas', {
+            'fields': ('created', 'updated'),
+            'classes': ('collapse',),
+        }),
+    )
+    readonly_fields = ('created', 'updated')
 
     def thumbnail(self, obj):
         if obj.image:

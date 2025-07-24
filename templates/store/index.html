@@ -109,6 +109,7 @@
                             src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
                             alt="{{ product.name }}"
                             class="w-full h-full object-cover"
+                            loading="lazy"
                         />
                         <button
                             class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
@@ -219,6 +220,7 @@
                             src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
                             alt="{{ product.name }}"
                             class="w-full h-full object-cover"
+                            loading="lazy"
                         />
                         <button
                             class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"
@@ -323,6 +325,7 @@
                             src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
                             alt="{{ product.name }}"
                             class="w-full h-full object-cover"
+                            loading="lazy"
                         />
                         <button
                             class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50"

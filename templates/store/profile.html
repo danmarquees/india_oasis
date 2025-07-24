@@ -334,6 +334,7 @@ Oasis - Temperos e Sabores da Índia{% endblock title %} {% block extra_css %}
               alt="Avatar"
               class="avatar-preview mx-auto"
               id="avatar-preview"
+              loading="lazy"
             />
             <label for="avatar-input" class="upload-overlay">
               <i class="fas fa-camera"></i>
@@ -463,6 +464,7 @@ Oasis - Temperos e Sabores da Índia{% endblock title %} {% block extra_css %}
                     src="{{ first_order.items.first.product.image.url|default:'https://via.placeholder.com/60' }}"
                     alt="{{ first_order.items.first.product.name }}"
                     class="w-12 h-12 rounded object-cover"
+                    loading="lazy"
                   />
                   <div>
                     <div class="font-medium">
@@ -497,6 +499,7 @@ Oasis - Temperos e Sabores da Índia{% endblock title %} {% block extra_css %}
                     src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=60&h=60&fit=crop"
                     alt="Produto"
                     class="w-12 h-12 rounded object-cover"
+                    loading="lazy"
                   />
                   <div>
                     <div class="font-medium">Curry em Pó Especial</div>

@@ -12771,3 +12771,1693 @@ INFO 2025-07-23 13:52:44,366 basehttp "GET /contact/ HTTP/1.1" 200 66782
 INFO 2025-07-23 13:52:55,833 basehttp "GET /admin/ HTTP/1.1" 200 35738
 INFO 2025-07-23 13:53:01,490 basehttp "GET /admin/store/contactmessage/ HTTP/1.1" 200 36837
 INFO 2025-07-23 13:53:01,835 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 14:02:57,573 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 14:03:05,954 basehttp "GET /contact/ HTTP/1.1" 200 66423
+INFO 2025-07-23 14:27:24,608 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 14:32:11,886 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-23 14:32:16,657 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-23 14:32:17,579 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 304 0
+WARNING 2025-07-23 14:32:22,177 log Not Found: /favicon.ico
+WARNING 2025-07-23 14:32:22,212 basehttp "GET /favicon.ico HTTP/1.1" 404 9119
+INFO 2025-07-23 14:32:31,242 basehttp "GET /products/ HTTP/1.1" 200 68019
+INFO 2025-07-23 14:32:31,752 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+INFO 2025-07-23 14:32:42,044 basehttp "GET /contact/ HTTP/1.1" 200 66466
+INFO 2025-07-23 14:32:44,811 basehttp "GET /about/ HTTP/1.1" 200 68639
+INFO 2025-07-23 14:32:55,079 basehttp "GET /cart/ HTTP/1.1" 200 94115
+INFO 2025-07-23 14:33:00,145 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 68
+INFO 2025-07-23 14:33:04,244 basehttp "GET /checkout/ HTTP/1.1" 200 62787
+INFO 2025-07-23 22:27:01,399 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 22:28:55,201 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/services.py changed, reloading.
+INFO 2025-07-23 22:28:57,019 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 22:30:55,351 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/views.py changed, reloading.
+INFO 2025-07-23 22:31:05,150 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-23 22:41:19,715 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: store_product.peso
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 86, in home
+    for p in products:
+             ^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1949, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: store_product.peso
+ERROR 2025-07-23 22:41:20,111 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: store_product.peso
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 86, in home
+    for p in products:
+             ^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 384, in __iter__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1949, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such column: store_product.peso
+ERROR 2025-07-23 22:41:20,157 basehttp "GET / HTTP/1.1" 500 164333
+WARNING 2025-07-23 22:41:23,577 log Not Found: /favicon.ico
+WARNING 2025-07-23 22:41:23,579 basehttp "GET /favicon.ico HTTP/1.1" 404 9119
+INFO 2025-07-23 22:43:21,573 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 22:43:25,544 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-23 22:43:26,347 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-23 22:43:29,869 basehttp "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-07-23 22:43:30,102 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-23 22:43:34,300 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 304 0
+INFO 2025-07-23 22:43:34,454 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 304 0
+INFO 2025-07-23 22:43:34,492 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 304 0
+INFO 2025-07-23 22:43:34,522 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 304 0
+INFO 2025-07-23 22:43:34,657 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 304 0
+ERROR 2025-07-23 22:43:42,000 log Internal Server Error: /product/arroz-basmati/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/smartif.py", line 180, in translate_token
+    op = OPERATORS[token]
+         ~~~~~~~~~^^^^^^^
+KeyError: 'review.is_marked_helpful_by|call:request.user'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 182, in product_detail
+    return render(request, 'store/product-detail.html', {
+        'product': product,
+    ...<8 lines>...
+        'total_reviews': total_reviews
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 208, in select_template
+    return self.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 961, in do_if
+    condition = TemplateIfParser(parser, bits).parse()
+                ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 894, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/smartif.py", line 171, in __init__
+    mapped_tokens.append(self.translate_token(token))
+                         ~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/smartif.py", line 182, in translate_token
+    return self.create_var(token)
+           ~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 897, in create_var
+    return TemplateLiteral(self.template_parser.compile_filter(value), value)
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 705, in __init__
+    filter_func = parser.find_filter(filter_name)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 615, in find_filter
+    raise TemplateSyntaxError("Invalid filter: '%s'" % filter_name)
+django.template.exceptions.TemplateSyntaxError: Invalid filter: 'call'
+ERROR 2025-07-23 22:43:42,020 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 500 330036
+INFO 2025-07-23 22:45:51,260 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/views.py changed, reloading.
+INFO 2025-07-23 22:46:05,707 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 22:46:14,408 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 79393
+INFO 2025-07-23 22:46:51,722 basehttp "POST /product/9/add_review/ HTTP/1.1" 302 0
+INFO 2025-07-23 22:46:51,887 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 79393
+INFO 2025-07-23 22:50:16,368 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/models.py changed, reloading.
+INFO 2025-07-23 22:50:24,396 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 23:51:40,631 autoreload Watching for file changes with StatReloader
+INFO 2025-07-23 23:51:45,780 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 79742
+INFO 2025-07-23 23:51:50,681 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 79742
+INFO 2025-07-23 23:52:08,859 basehttp "GET /products/ HTTP/1.1" 200 68019
+INFO 2025-07-23 23:52:09,654 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:17,229 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/ HTTP/1.1" 200 76304
+INFO 2025-07-23 23:52:41,563 basehttp "GET /admin/ HTTP/1.1" 200 35738
+INFO 2025-07-23 23:52:41,665 basehttp "GET /static/admin/css/base.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,679 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,690 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,858 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,871 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,903 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,903 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,925 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:41,972 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,016 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,054 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,103 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,104 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,115 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,121 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,141 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,163 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,166 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,193 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,217 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,233 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,243 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,280 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,284 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,297 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,334 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,338 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,357 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,389 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,391 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,450 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,457 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,464 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,496 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,509 basehttp "GET /static/admin/css/responsive.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,510 basehttp "GET /static/admin/css/responsive_rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,522 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,564 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,575 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,588 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,683 basehttp "GET /static/admin_interface/related-modal/related-modal.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,744 basehttp "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,771 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,804 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,925 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,926 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,926 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:42,985 basehttp "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:52:44,297 basehttp "GET /admin/ HTTP/1.1" 200 35738
+INFO 2025-07-23 23:53:04,931 basehttp "GET /admin/store/product/ HTTP/1.1" 200 37803
+INFO 2025-07-23 23:53:05,167 basehttp "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,171 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,205 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,213 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,378 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,424 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,425 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,464 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,479 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 23:53:05,523 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,524 basehttp "GET /static/admin/img/icon-yes.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,538 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,619 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,680 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:05,700 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:08,338 basehttp "GET /admin/store/product/9/change/ HTTP/1.1" 200 47404
+INFO 2025-07-23 23:53:08,522 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 23:53:08,780 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:08,801 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:08,899 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:08,904 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 304 0
+INFO 2025-07-23 23:53:09,074 basehttp "GET /static/admin/img/tooltag-arrowright.svg HTTP/1.1" 304 0
+INFO 2025-07-23 23:54:05,825 basehttp "POST /admin/store/product/9/change/ HTTP/1.1" 302 0
+INFO 2025-07-23 23:54:05,917 basehttp "GET /admin/store/product/ HTTP/1.1" 200 38009
+INFO 2025-07-23 23:54:06,118 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 23:54:11,795 basehttp "GET /admin/store/product/9/change/ HTTP/1.1" 200 47482
+INFO 2025-07-23 23:54:12,000 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 23:54:17,318 basehttp "POST /admin/store/product/9/change/ HTTP/1.1" 302 0
+INFO 2025-07-23 23:54:17,411 basehttp "GET /admin/store/product/ HTTP/1.1" 200 38009
+INFO 2025-07-23 23:54:17,619 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-23 23:56:19,372 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 79742
+INFO 2025-07-23 23:56:46,412 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-23 23:56:47,554 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-24 09:34:59,491 autoreload Watching for file changes with StatReloader
+INFO 2025-07-24 09:42:42,198 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 09:42:45,611 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-24 09:42:45,612 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-24 09:42:45,612 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-24 09:42:45,767 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-24 09:42:45,801 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-24 09:42:46,807 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-24 09:42:46,841 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-24 09:47:00,493 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-24 09:47:01,211 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-24 09:47:01,383 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-24 09:47:01,384 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+WARNING 2025-07-24 09:47:02,223 log Not Found: /favicon.ico
+INFO 2025-07-24 09:47:02,224 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-24 09:47:02,225 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+WARNING 2025-07-24 09:47:02,226 basehttp "GET /favicon.ico HTTP/1.1" 404 9119
+INFO 2025-07-24 09:47:02,380 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-24 09:48:44,513 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 09:52:25,203 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 09:52:25,594 basehttp "GET /static/css/star-rating.css HTTP/1.1" 304 0
+INFO 2025-07-24 09:52:25,687 basehttp "GET /static/css/custom.css HTTP/1.1" 304 0
+INFO 2025-07-24 09:52:25,728 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-24 09:52:26,462 basehttp "GET /static/js/star-rating.js HTTP/1.1" 304 0
+INFO 2025-07-24 09:54:33,487 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 09:55:23,673 autoreload Watching for file changes with StatReloader
+INFO 2025-07-24 09:55:45,149 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 09:55:45,888 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-24 09:55:45,889 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-24 09:55:45,903 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-24 09:55:45,924 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-24 09:55:46,187 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-24 09:55:47,451 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 09:55:47,608 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-24 09:55:47,614 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-24 09:55:47,619 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-24 09:55:47,621 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-24 09:55:47,735 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-24 09:56:26,082 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-24 09:56:26,828 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-24 09:56:26,858 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-24 09:56:26,941 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-24 09:56:27,036 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-24 09:56:27,092 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-24 09:56:27,258 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+WARNING 2025-07-24 09:56:28,925 log Not Found: /favicon.ico
+WARNING 2025-07-24 09:56:28,929 basehttp "GET /favicon.ico HTTP/1.1" 404 9119
+INFO 2025-07-24 09:56:37,925 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 09:58:23,891 basehttp "GET /admin/ HTTP/1.1" 200 35732
+INFO 2025-07-24 09:58:24,112 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,117 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,124 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,133 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,148 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,182 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,208 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,225 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,236 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,241 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,253 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,285 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,297 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,312 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,338 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,353 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,388 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,388 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,423 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,471 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,473 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,484 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,497 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,522 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,525 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,557 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,585 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,596 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,665 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,667 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,701 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,716 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,838 basehttp "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:24,847 basehttp "GET /static/admin_interface/related-modal/related-modal.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:25,029 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 304 0
+INFO 2025-07-24 09:58:41,822 basehttp "GET /admin/store/product/ HTTP/1.1" 200 37803
+INFO 2025-07-24 09:58:42,300 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 09:59:02,119 basehttp "GET /admin/store/product/9/change/ HTTP/1.1" 200 47482
+INFO 2025-07-24 09:59:02,277 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 09:59:28,600 basehttp "GET /admin/r/10/9/ HTTP/1.1" 302 0
+INFO 2025-07-24 09:59:28,864 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 79964
+INFO 2025-07-24 10:00:07,960 basehttp "GET /admin/store/product/9/change/ HTTP/1.1" 200 47482
+INFO 2025-07-24 10:00:37,892 basehttp "POST /admin/store/product/9/change/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:00:38,030 basehttp "GET /admin/store/product/ HTTP/1.1" 200 38009
+INFO 2025-07-24 10:00:38,187 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:00:46,924 basehttp "GET /products/ HTTP/1.1" 200 68019
+INFO 2025-07-24 10:00:47,211 basehttp "GET /static/js/script.js HTTP/1.1" 304 0
+INFO 2025-07-24 10:01:16,407 basehttp "GET /admin/store/product/9/change/ HTTP/1.1" 200 47522
+INFO 2025-07-24 10:01:16,604 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:01:43,422 basehttp "GET /products/temperos/ HTTP/1.1" 200 60111
+INFO 2025-07-24 10:01:45,606 basehttp "GET /products/graos/ HTTP/1.1" 200 64083
+INFO 2025-07-24 10:01:49,035 basehttp "GET /products/chas/ HTTP/1.1" 200 58528
+INFO 2025-07-24 10:01:53,133 basehttp "GET /products/arroz/ HTTP/1.1" 200 60042
+INFO 2025-07-24 10:07:24,306 basehttp "GET /contact/ HTTP/1.1" 200 66466
+INFO 2025-07-24 10:07:26,594 basehttp "GET / HTTP/1.1" 200 134011
+INFO 2025-07-24 10:07:30,111 basehttp "GET /about/ HTTP/1.1" 200 68639
+INFO 2025-07-24 10:07:42,880 basehttp "GET /cart/ HTTP/1.1" 200 90181
+INFO 2025-07-24 10:13:08,054 basehttp "GET /cart/ HTTP/1.1" 200 93937
+INFO 2025-07-24 10:15:28,084 basehttp "GET /cart/ HTTP/1.1" 200 95263
+WARNING 2025-07-24 10:15:52,517 log Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-07-24 10:15:52,518 basehttp "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 9230
+INFO 2025-07-24 10:16:53,363 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+ERROR 2025-07-24 10:16:53,698 log Internal Server Error: /cart/add/15/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 10:16:53,759 basehttp "POST /cart/add/15/ HTTP/1.1" 500 165647
+INFO 2025-07-24 10:16:55,587 basehttp "GET /cart/ HTTP/1.1" 200 99201
+INFO 2025-07-24 10:23:39,387 basehttp "GET /cart/ HTTP/1.1" 200 98883
+INFO 2025-07-24 10:25:36,403 basehttp "GET /cart/ HTTP/1.1" 200 104570
+INFO 2025-07-24 10:25:42,944 basehttp "POST /cart/remove/17/ HTTP/1.1" 200 68
+INFO 2025-07-24 10:25:43,082 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 62
+INFO 2025-07-24 10:25:43,709 basehttp "GET /cart/ HTTP/1.1" 200 96708
+INFO 2025-07-24 10:25:50,124 basehttp "GET / HTTP/1.1" 200 134017
+INFO 2025-07-24 10:26:05,675 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:26:05,876 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+INFO 2025-07-24 10:26:06,024 basehttp "GET /products/ HTTP/1.1" 200 68421
+INFO 2025-07-24 10:26:07,529 basehttp "POST /cart/add/16/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:26:07,542 basehttp "GET /products/ HTTP/1.1" 200 68421
+INFO 2025-07-24 10:26:07,696 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-24 10:26:09,086 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+ERROR 2025-07-24 10:26:09,351 log Internal Server Error: /cart/add/17/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 10:26:09,362 basehttp "POST /cart/add/17/ HTTP/1.1" 500 166028
+INFO 2025-07-24 10:26:10,413 basehttp "GET /cart/ HTTP/1.1" 200 108906
+INFO 2025-07-24 10:26:15,389 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 69
+INFO 2025-07-24 10:26:16,777 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 69
+INFO 2025-07-24 10:27:25,322 basehttp "POST /cart/add/18/ HTTP/1.1" 200 102
+ERROR 2025-07-24 10:27:25,600 log Internal Server Error: /cart/add/18/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 10:27:25,611 basehttp "POST /cart/add/18/ HTTP/1.1" 500 165419
+INFO 2025-07-24 10:27:28,660 basehttp "GET /cart/ HTTP/1.1" 200 112378
+INFO 2025-07-24 10:38:43,946 basehttp "POST /cart/remove/18/ HTTP/1.1" 200 68
+INFO 2025-07-24 10:38:45,589 basehttp "POST /cart/remove/17/ HTTP/1.1" 200 68
+INFO 2025-07-24 10:38:48,709 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-24 10:38:50,423 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 69
+INFO 2025-07-24 10:39:05,045 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 68
+INFO 2025-07-24 10:39:05,165 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 62
+INFO 2025-07-24 10:39:05,738 basehttp "GET /cart/ HTTP/1.1" 200 96708
+INFO 2025-07-24 10:39:36,578 basehttp "GET / HTTP/1.1" 200 134017
+INFO 2025-07-24 10:40:16,333 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 34803
+INFO 2025-07-24 10:40:16,778 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:42:30,698 basehttp "GET /admin/store/banner/add/ HTTP/1.1" 200 36978
+INFO 2025-07-24 10:42:31,055 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:43:35,580 basehttp "GET /products/ HTTP/1.1" 200 68025
+INFO 2025-07-24 10:43:55,600 basehttp "POST /admin/store/banner/add/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:43:55,686 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35836
+INFO 2025-07-24 10:43:55,863 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:43:55,987 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-24 10:44:02,001 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:44:02,132 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35730
+INFO 2025-07-24 10:44:02,297 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:44:02,306 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:44:40,780 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:44:40,919 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35732
+INFO 2025-07-24 10:44:41,263 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:44:41,327 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:44:45,963 basehttp "GET / HTTP/1.1" 200 134017
+INFO 2025-07-24 10:45:08,815 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:45:08,924 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35722
+INFO 2025-07-24 10:45:09,103 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:45:09,115 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:45:13,736 basehttp "GET / HTTP/1.1" 200 134017
+INFO 2025-07-24 10:45:25,499 basehttp "GET /admin/store/banner/2/change/ HTTP/1.1" 200 37639
+INFO 2025-07-24 10:45:25,716 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:45:43,524 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35584
+INFO 2025-07-24 10:45:43,713 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:45:43,737 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:45:47,217 basehttp "GET /admin/store/banner/3/change/ HTTP/1.1" 200 37689
+INFO 2025-07-24 10:45:47,369 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:45:58,360 basehttp "POST /admin/store/banner/3/change/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:45:58,452 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35784
+INFO 2025-07-24 10:45:58,643 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:45:58,674 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:46:02,145 basehttp "GET / HTTP/1.1" 200 134017
+INFO 2025-07-24 10:46:57,583 autoreload Watching for file changes with StatReloader
+INFO 2025-07-24 10:47:04,374 basehttp "GET / HTTP/1.1" 200 134024
+INFO 2025-07-24 10:47:07,306 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:47:18,808 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:47:19,395 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35702
+INFO 2025-07-24 10:47:20,365 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:47:25,947 basehttp "GET / HTTP/1.1" 200 134024
+INFO 2025-07-24 10:47:26,860 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:48:00,120 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:48:00,232 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35702
+INFO 2025-07-24 10:48:00,395 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:48:00,404 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-24 10:48:32,984 autoreload Watching for file changes with StatReloader
+INFO 2025-07-24 10:48:39,532 basehttp "GET / HTTP/1.1" 200 135530
+INFO 2025-07-24 10:48:40,922 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:49:11,658 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:49:11,788 basehttp "GET /products/ HTTP/1.1" 200 68421
+ERROR 2025-07-24 10:49:12,078 log Internal Server Error: /cart/add/15/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 10:49:12,098 basehttp "POST /cart/add/15/ HTTP/1.1" 500 165252
+INFO 2025-07-24 10:49:17,981 basehttp "POST /cart/add/16/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:49:17,991 basehttp "GET /products/ HTTP/1.1" 200 68421
+INFO 2025-07-24 10:49:18,168 basehttp "POST /cart/add/16/ HTTP/1.1" 200 121
+INFO 2025-07-24 10:49:20,139 basehttp "GET /cart/ HTTP/1.1" 200 104982
+INFO 2025-07-24 10:49:23,905 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 69
+INFO 2025-07-24 10:49:36,212 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:53:00,504 basehttp "GET / HTTP/1.1" 200 135530
+INFO 2025-07-24 10:53:02,548 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 10:53:35,604 basehttp "GET /product/arroz-basmati-indiano-parabolizado-1kg/ HTTP/1.1" 200 76877
+INFO 2025-07-24 10:53:45,464 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:53:45,725 basehttp "GET /products/ HTTP/1.1" 200 68421
+INFO 2025-07-24 10:53:58,400 basehttp "GET /product/tempero-indiano-garam-masala-50g/ HTTP/1.1" 200 71209
+INFO 2025-07-24 10:54:04,202 basehttp "POST /cart/add/17/ HTTP/1.1" 302 0
+INFO 2025-07-24 10:54:04,223 basehttp "GET /products/ HTTP/1.1" 200 68421
+INFO 2025-07-24 10:54:08,104 basehttp "GET /cart/ HTTP/1.1" 200 108900
+INFO 2025-07-24 10:54:12,020 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 69
+INFO 2025-07-24 10:54:15,284 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 68
+INFO 2025-07-24 10:54:16,071 basehttp "POST /cart/remove/16/ HTTP/1.1" 200 68
+INFO 2025-07-24 10:54:16,737 basehttp "POST /cart/remove/17/ HTTP/1.1" 200 62
+INFO 2025-07-24 10:55:50,159 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 11:01:31,941 basehttp "GET / HTTP/1.1" 200 135530
+INFO 2025-07-24 11:01:33,481 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 11:01:39,877 basehttp "POST /cart/add/9/ HTTP/1.1" 302 0
+INFO 2025-07-24 11:01:40,180 basehttp "GET /products/ HTTP/1.1" 200 68394
+ERROR 2025-07-24 11:01:40,594 log Internal Server Error: /cart/add/9/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 11:01:41,014 basehttp "POST /cart/add/9/ HTTP/1.1" 500 164903
+INFO 2025-07-24 11:01:44,067 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-24 11:01:44,173 basehttp "GET /products/ HTTP/1.1" 200 68394
+ERROR 2025-07-24 11:01:44,415 log Internal Server Error: /cart/add/15/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 11:01:44,435 basehttp "POST /cart/add/15/ HTTP/1.1" 500 165326
+INFO 2025-07-24 11:01:46,580 basehttp "GET /cart/ HTTP/1.1" 200 104909
+INFO 2025-07-24 11:02:08,840 basehttp "GET /cart/ HTTP/1.1" 200 104507
+INFO 2025-07-24 11:02:25,411 basehttp "GET /contact/ HTTP/1.1" 200 66466
+INFO 2025-07-24 11:02:28,195 basehttp "GET /about/ HTTP/1.1" 200 68639
+INFO 2025-07-24 11:11:29,332 basehttp "GET / HTTP/1.1" 200 135530
+INFO 2025-07-24 11:11:31,811 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+ERROR 2025-07-24 11:11:37,309 log Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 204, in cart_detail
+    return render(request, 'store/cart.html', {'cart': cart_instance})
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/urls/base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/urls/resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'cart_count' not found. 'cart_count' is not a valid view function or pattern name.
+ERROR 2025-07-24 11:11:37,420 basehttp "GET /cart/ HTTP/1.1" 500 148755
+INFO 2025-07-24 11:13:12,093 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/views.py changed, reloading.
+INFO 2025-07-24 11:13:25,972 autoreload Watching for file changes with StatReloader
+INFO 2025-07-24 11:13:56,916 basehttp "GET /cart/ HTTP/1.1" 200 105012
+INFO 2025-07-24 11:13:59,231 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:02,212 basehttp "GET / HTTP/1.1" 200 136029
+INFO 2025-07-24 11:14:05,081 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:08,417 basehttp "GET /products/ HTTP/1.1" 200 68524
+INFO 2025-07-24 11:14:10,754 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:12,178 basehttp "GET /contact/ HTTP/1.1" 200 66971
+INFO 2025-07-24 11:14:14,431 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:17,256 basehttp "GET /about/ HTTP/1.1" 200 69144
+INFO 2025-07-24 11:14:17,987 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:21,277 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 11:14:21,813 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:28,437 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-24 11:14:28,605 basehttp "GET /products/ HTTP/1.1" 200 68524
+INFO 2025-07-24 11:14:28,811 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+INFO 2025-07-24 11:14:31,837 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:33,074 basehttp "GET /contact/ HTTP/1.1" 200 66971
+INFO 2025-07-24 11:14:33,836 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:36,023 basehttp "GET / HTTP/1.1" 200 136029
+INFO 2025-07-24 11:14:37,313 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:39,190 basehttp "GET /cart/ HTTP/1.1" 200 105414
+INFO 2025-07-24 11:14:40,658 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:46,870 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 69
+INFO 2025-07-24 11:14:51,017 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 68
+INFO 2025-07-24 11:14:57,187 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:14:59,077 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:15:02,130 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:15:05,121 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:15:07,501 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:15:09,855 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:17:11,117 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+ERROR 2025-07-24 11:17:12,693 log Internal Server Error: /cart/add/17/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 11:17:12,940 basehttp "POST /cart/add/17/ HTTP/1.1" 500 165533
+INFO 2025-07-24 11:17:13,516 basehttp "GET /cart/ HTTP/1.1" 200 104996
+INFO 2025-07-24 11:17:15,901 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:17:28,956 basehttp "POST /cart/add/9/ HTTP/1.1" 200 92
+INFO 2025-07-24 11:17:29,657 basehttp "POST /cart/add/9/ HTTP/1.1" 200 92
+INFO 2025-07-24 11:17:30,059 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+INFO 2025-07-24 11:17:30,533 basehttp "POST /cart/remove/17/ HTTP/1.1" 200 69
+INFO 2025-07-24 11:17:30,947 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+INFO 2025-07-24 11:17:31,359 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+INFO 2025-07-24 11:17:33,961 basehttp "POST /cart/remove/9/ HTTP/1.1" 200 69
+INFO 2025-07-24 11:17:35,602 basehttp "POST /cart/remove/9/ HTTP/1.1" 200 68
+INFO 2025-07-24 11:17:38,677 basehttp "POST /cart/remove/17/ HTTP/1.1" 200 69
+INFO 2025-07-24 11:17:40,560 basehttp "POST /cart/remove/17/ HTTP/1.1" 200 69
+INFO 2025-07-24 11:17:45,012 basehttp "POST /cart/remove/17/ HTTP/1.1" 200 62
+INFO 2025-07-24 11:18:00,600 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:18:01,596 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 11:18:07,513 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:18:17,554 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:18:24,560 basehttp "POST /cart/add/18/ HTTP/1.1" 200 102
+ERROR 2025-07-24 11:18:24,800 log Internal Server Error: /cart/add/18/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 11:18:24,823 basehttp "POST /cart/add/18/ HTTP/1.1" 500 165057
+INFO 2025-07-24 11:18:32,180 basehttp "POST /cart/add/18/ HTTP/1.1" 200 102
+INFO 2025-07-24 11:18:32,337 basehttp "POST /cart/add/18/ HTTP/1.1" 200 102
+INFO 2025-07-24 11:18:33,868 basehttp "GET /cart/ HTTP/1.1" 200 101087
+INFO 2025-07-24 11:18:34,902 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:18:37,762 basehttp "POST /cart/remove/18/ HTTP/1.1" 200 69
+INFO 2025-07-24 11:18:38,883 basehttp "POST /cart/remove/18/ HTTP/1.1" 200 69
+ERROR 2025-07-24 11:18:41,396 log Internal Server Error: /checkout/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/contrib/auth/decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 315, in checkout
+    return render(request, 'store/checkout.html', context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 489, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '['name']' from 'option['name']'
+ERROR 2025-07-24 11:18:41,415 basehttp "GET /checkout/ HTTP/1.1" 500 278533
+INFO 2025-07-24 11:21:40,854 basehttp "GET /checkout/ HTTP/1.1" 200 63278
+INFO 2025-07-24 11:21:47,522 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:22:08,099 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-24 11:22:09,558 basehttp "GET /payment/create/ HTTP/1.1" 302 0
+INFO 2025-07-24 11:22:10,026 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-24 11:22:10,741 basehttp "GET /products/ HTTP/1.1" 200 68524
+INFO 2025-07-24 11:22:12,560 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:22:18,440 basehttp "GET /cart/ HTTP/1.1" 200 97556
+INFO 2025-07-24 11:22:19,445 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:22:23,488 basehttp "GET /checkout/ HTTP/1.1" 302 0
+INFO 2025-07-24 11:22:24,669 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:22:31,881 basehttp "GET /cart/ HTTP/1.1" 200 97558
+INFO 2025-07-24 11:22:32,695 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:22:38,294 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 11:22:38,875 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:24:44,233 basehttp "GET /products/ HTTP/1.1" 200 68530
+INFO 2025-07-24 11:24:47,098 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:24:54,248 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+ERROR 2025-07-24 11:24:55,038 log Internal Server Error: /cart/add/17/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 226, in cart_add
+    CartItem.objects.create(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cart=cart_instance,
+        ^^^^^^^^^^^^^^^^^^^
+        product=product,
+        ^^^^^^^^^^^^^^^^
+        quantity=1  # <<-- Começa com quantidade 1
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 902, in save
+    self.save_base(
+    ~~~~~~~~~~~~~~^
+        using=using,
+        ^^^^^^^^^^^^
+    ...<2 lines>...
+        update_fields=update_fields,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1008, in save_base
+    updated = self._save_table(
+        raw,
+    ...<4 lines>...
+        update_fields,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1169, in _save_table
+    results = self._do_insert(
+        cls._base_manager, using, fields, returning_fields, raw
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/base.py", line 1210, in _do_insert
+    return manager._insert(
+           ~~~~~~~~~~~~~~~^
+        [self],
+        ^^^^^^^
+    ...<3 lines>...
+        raw=raw,
+        ^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/models/sql/compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: UNIQUE constraint failed: store_cartitem.cart_id, store_cartitem.product_id
+ERROR 2025-07-24 11:24:55,053 basehttp "POST /cart/add/17/ HTTP/1.1" 500 165183
+INFO 2025-07-24 11:25:02,047 basehttp "GET /cart/ HTTP/1.1" 200 101137
+INFO 2025-07-24 11:25:04,428 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 11:25:10,004 basehttp "GET /checkout/ HTTP/1.1" 200 63326
+INFO 2025-07-24 11:25:10,990 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-24 14:44:21,580 basehttp "GET / HTTP/1.1" 200 136029
+INFO 2025-07-24 14:44:26,695 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-24 14:44:26,754 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-24 14:44:27,034 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 304 0
+INFO 2025-07-24 14:44:28,774 basehttp "GET /cart/count/ HTTP/1.1" 200 17

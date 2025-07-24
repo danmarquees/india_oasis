@@ -316,8 +316,9 @@ function updateCounters() {
   }
 }
 
-// Adiciona um item ao carrinho
-function addToCart(productId, productName) {
+// Adiciona um item ao carrinho (versão robusta)
+function addToCart(productId, productName, button = null) {
+  if (button) button.disabled = true;
   fetch(`/cart/add/${productId}/`, {
     method: "POST",
     headers: {
@@ -327,17 +328,24 @@ function addToCart(productId, productName) {
   })
     .then((response) => response.json())
     .then((data) => {
+      // Atualiza contadores
+      document.querySelectorAll("#cart-count, #cart-mini-count").forEach((el) => {
+        el.textContent = data.cart_count;
+        if (data.cart_count > 0) el.classList.remove("hidden");
+      });
+      // Feedback visual
       if (data.success) {
-        cartItems.push({ id: productId, quantity: 1 });
-        updateCounters();
-        showFeedback("Sucesso!", `${productName} foi adicionado ao carrinho.`);
+        window.cartNotifications?.itemAdded(productName, 1);
       } else {
-        showFeedback("Erro", "Não foi possível adicionar o produto.");
+        window.toastSystem?.error("Erro ao adicionar", data.message || "Não foi possível adicionar ao carrinho.");
       }
     })
     .catch((error) => {
+      window.toastSystem?.error("Erro de conexão", "Falha ao conectar com o servidor.");
       console.error("Erro ao adicionar ao carrinho:", error);
-      showFeedback("Erro", "Falha ao conectar com o servidor.");
+    })
+    .finally(() => {
+      if (button) button.disabled = false;
     });
 }
 
@@ -775,46 +783,20 @@ function addReviewFormListeners() {
   }
 }
 
-// Delegação de eventos no corpo do documento
-document.body.addEventListener("click", (e) => {
-  const addToCartBtn = e.target.closest(".add-to-cart-btn");
-  if (addToCartBtn) {
-    const productId = parseInt(addToCartBtn.dataset.id);
-    const productName = addToCartBtn.dataset.productName; // Obter o nome do produto
-    addToCart(productId, productName);
-    const wishlistIndex = wishlistItems.indexOf(productId);
-    if (wishlistIndex > -1) {
-      toggleWishlist(productId);
+// Delegação de eventos para todos os botões de adicionar ao carrinho
+// Remove duplicidade e garante robustez
+if (window.__addToCartListenerApplied !== true) {
+  document.body.addEventListener("click", (e) => {
+    const btn = e.target.closest(".add-to-cart-btn");
+    if (btn) {
+      e.preventDefault();
+      const productId = btn.dataset.id;
+      const productName = btn.dataset.productName || "Produto";
+      addToCart(productId, productName, btn);
     }
-  }
-
-  const productLink = e.target.closest(".product-link");
-  if (productLink) {
-    const productId = parseInt(productLink.dataset.id);
-    renderProductDetail(productId);
-    showPage("product-detail");
-  }
-
-  const wishlistToggle = e.target.closest(".wishlist-toggle");
-  if (wishlistToggle) {
-    const productId = parseInt(wishlistToggle.dataset.id);
-    toggleWishlist(productId);
-  }
-
-  const removeFromWishlistBtn = e.target.closest(".remove-from-wishlist");
-  if (removeFromWishlistBtn) {
-    const productId = parseInt(removeFromWishlistBtn.dataset.id);
-    toggleWishlist(productId);
-  }
-
-  const removeFromCartBtn = e.target.closest(".remove-from-cart");
-  if (removeFromCartBtn) {
-    const productId = parseInt(removeFromCartBtn.dataset.id);
-    cartItems = cartItems.filter((item) => item.id !== productId);
-    renderCart();
-    updateCounters();
-  }
-});
+  });
+  window.__addToCartListenerApplied = true;
+}
 
 // Event listener para navegação principal
 navLinks.forEach((link) => {

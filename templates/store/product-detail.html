@@ -2,191 +2,83 @@
 
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-
-
-<!-- Configuração de URLs do Django para o sistema de toast -->
 <script>
-    // Definição global das URLs do Django para uso no JavaScript
+    // Endpoints globais para uso em JS
     var URLS = {
         cart: "{% url 'store:cart' %}",
         wishlist: "{% url 'store:wishlist' %}",
         products: "{% url 'store:product_list' %}",
         home: "{% url 'store:home' %}",
-        product_detail: function (slug) {
-            return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace(
-                "PLACEHOLDER_SLUG",
-                slug,
-            );
+        product_detail: function(slug) {
+            return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace("PLACEHOLDER_SLUG", slug);
         },
+        cart_add: function(id) {
+            return "{% url 'store:cart_add' 999 %}".replace("999", id);
+        },
+        wishlist_add: function(id) {
+            return "{% url 'store:wishlist_add' 999 %}".replace("999", id);
+        },
+        toggle_wishlist: "{% url 'store:toggle_wishlist' %}"
     };
 </script>
 
-<style>
-  /* Estilos específicos para este template */
-  .review-form-container {
-    position: relative;
-  }
-
-  .review-success {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(243, 252, 243, 0.98);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-    z-index: 10;
-    border-radius: 0.5rem;
-    padding: 2rem;
-    text-align: center;
-  }
-
-  /* Estilo para a mensagem de sucesso */
-  #review-success {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #review-success.show {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Estilo para as estrelas de avaliação */
-  .star-rating-component {
-    --star-color: #FFD700;
-    --star-size: 24px;
-  }
-
-  .star-rating-component.large {
-    --star-size: 32px;
-  }
-
-  .star-rating-component.small {
-    --star-size: 18px;
-  }
-
-  .star-rating-component .rating-star {
-    color: var(--star-color);
-    font-size: var(--star-size);
-    transition: transform 0.2s ease;
-  }
-
-  .star-rating-component .rating-star:hover {
-    transform: scale(1.2);
-  }
-
-  .star-rating-component .rating-value {
-    font-weight: bold;
-    margin-left: 8px;
-  }
-
-  /* Animação para feedback visual */
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  .pulse {
-    animation: pulse 0.5s ease-in-out;
-  }
-
-  .review-success.show {
-    opacity: 1;
-    pointer-events: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-</style>
-<!-- Certifique-se de incluir o script de notificações -->
-<script src="{% static 'js/toast-system.js' %}"></script>
-<script src="{% static 'js/script.js' %}"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (typeof initProductDetailPage === 'function') {
-      initProductDetailPage();
-    } else if (window.initProductDetailPage) {
-      window.initProductDetailPage();
-    }
-  });
-</script>
-<!-- CSRF Token para requisições AJAX -->
-{% csrf_token %}
-
-<title>
-    {% block title %} {{ product.name }} - India Oasis - Temperos e Sabores da
-    Índia {% endblock %}
-</title>
-
-<!-- ==== CONTEÚDO PRINCIPAL ==== -->
 <main class="container mx-auto p-4 sm:p-6 lg:p-8">
     <!-- Breadcrumb -->
     <nav class="mb-6">
         <ol class="flex space-x-2 text-sm">
             <li>
-                <a href="index.html" class="text-primary hover:underline"
-                    >Início</a
-                >
+                <a href="{% url 'store:home' %}" class="text-primary hover:underline">Início</a>
             </li>
             <li class="text-gray-500">/</li>
             <li>
-                <a href="products.html" class="text-primary hover:underline"
-                    >Produtos</a
-                >
+                <a href="{% url 'store:product_list' %}" class="text-primary hover:underline">Produtos</a>
             </li>
             <li class="text-gray-500">/</li>
-            <li id="product-breadcrumb" class="text-gray-700">
-                {{ product.name }}
-            </li>
+            <li id="product-breadcrumb" class="text-gray-700">Detalhes do Produto</li>
         </ol>
     </nav>
 
     <!-- Detalhes do Produto -->
-    <div
-        id="product-detail-container"
-        class="bg-white rounded-lg shadow-lg p-6 lg:p-8"
-    >
+    <div id="product-detail-container" class="bg-white rounded-lg shadow-lg p-6 lg:p-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Imagem do Produto -->
             <div class="space-y-4">
-                <div class="relative group" id="carousel-container" style="max-width: 420px; margin: 0 auto;">
-                    <button id="carousel-prev" type="button" style="position:absolute;left:0;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 8px #0001;cursor:pointer;"><i class="fas fa-chevron-left"></i></button>
-                    <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden relative" style="position:relative;">
-                        <img
-                            id="product-image"
-                            src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
-                            alt="{{ product.name }}"
-                            class="w-full h-full object-cover transition-transform duration-200 main-carousel-image"
-                            style="cursor: zoom-in;"
-                        />
-                        <div id="zoom-lens" style="display:none; position:absolute; pointer-events:none; border:2px solid #FFD700; border-radius:50%; width:120px; height:120px; z-index:20;"></div>
-                    </div>
-                    <button id="carousel-next" type="button" style="position:absolute;right:0;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 8px #0001;cursor:pointer;"><i class="fas fa-chevron-right"></i></button>
+                <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden relative">
+                    <img id="product-image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}" alt="{{ product.name }}" class="w-full h-full object-cover" loading="lazy" />
+                    <button class="absolute top-4 right-4 w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-red-50 transition-colors">
+                        <i class="fas fa-heart text-gray-400 hover:text-red-500 text-lg"></i>
+                    </button>
+                    {% if product.stock > 0 %}
+                    <span class="absolute top-4 left-4 bg-green-500 text-white text-sm px-3 py-1 rounded-full">
+                        <i class="fas fa-check mr-1"></i> Em Estoque
+                    </span>
+                    {% else %}
+                    <span class="absolute top-4 left-4 bg-red-600 text-white text-sm px-3 py-1 rounded-full">
+                        <i class="fas fa-times mr-1"></i> Esgotado
+                    </span>
+                    {% endif %}
                 </div>
-                <div class="flex space-x-2 mt-2 justify-center" id="carousel-thumbnails">
+                <!-- Miniaturas -->
+                <div id="product-thumbnails" class="flex space-x-2">
                     {% if product.image %}
-                      <img src="{{ product.image.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2 border-primary" data-img="{{ product.image.url }}">
+                    <button class="w-20 h-20 rounded-lg overflow-hidden border-2 border-primary">
+                        <img src="{{ product.image.url }}" alt="Vista 1" class="w-full h-full object-cover" loading="lazy" />
+                    </button>
                     {% endif %}
                     {% if product.image_1 %}
-                      <img src="{{ product.image_1.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_1.url }}">
+                    <button class="w-20 h-20 rounded-lg overflow-hidden border border-gray-300 hover:border-primary">
+                        <img src="{{ product.image_1.url }}" alt="Vista 2" class="w-full h-full object-cover" loading="lazy" />
+                    </button>
                     {% endif %}
                     {% if product.image_2 %}
-                      <img src="{{ product.image_2.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_2.url }}">
+                    <button class="w-20 h-20 rounded-lg overflow-hidden border border-gray-300 hover:border-primary">
+                        <img src="{{ product.image_2.url }}" alt="Vista 3" class="w-full h-full object-cover" loading="lazy" />
+                    </button>
                     {% endif %}
                     {% if product.image_3 %}
-                      <img src="{{ product.image_3.url }}" class="thumbnail-img w-16 h-16 object-cover rounded cursor-pointer border-2" data-img="{{ product.image_3.url }}">
+                    <button class="w-20 h-20 rounded-lg overflow-hidden border border-gray-300 hover:border-primary">
+                        <img src="{{ product.image_3.url }}" alt="Vista 4" class="w-full h-full object-cover" loading="lazy" />
+                    </button>
                     {% endif %}
                 </div>
             </div>
@@ -194,67 +86,43 @@
             <!-- Informações do Produto -->
             <div class="space-y-6">
                 <div>
-                    <span
-                        class="inline-block bg-accent text-black text-sm px-3 py-1 rounded-full mb-3 font-bold"
-                    >
-                        <i class="fas fa-fire mr-1"></i>
-                        MAIS VENDIDO
+                    {% if product.is_best_seller %}
+                    <span class="inline-block bg-accent text-black text-sm px-3 py-1 rounded-full mb-3 font-bold">
+                        <i class="fas fa-fire mr-1"></i> MAIS VENDIDO
                     </span>
-                    <h1
-                        id="product-name"
-                        class="text-4xl font-teko text-secondary mb-2"
-                    >
-                        {{ product.name }}
-                    </h1>
+                    {% endif %}
+                    <h1 id="product-name" class="text-4xl font-teko text-secondary mb-2">{{ product.name }}</h1>
                     <div class="flex items-center space-x-4 mb-4">
-                        <div
-                            id="product-rating"
-                            class="rating flex items-center"
-                        >
-                            <span
-                                class="star-rating"
-                                data-rating="{{ average_rating|floatformat:1 }}"
-                            >
-                                <!-- Stars will be rendered by JS function renderStars -->
-                            </span>
-                            <span class="ml-2 text-sm font-bold text-gray-700"
-                                >{{ average_rating|floatformat:1 }}</span
-                            >
+                        <div id="product-rating" class="rating flex items-center">
+                            {% for i in "12345" %}
+                                {% if average_rating|default:0|floatformat:0 >= i|add:"0" %}
+                                    <i class="fas fa-star text-accent"></i>
+                                {% else %}
+                                    <i class="fas fa-star text-gray-300"></i>
+                                {% endif %}
+                            {% endfor %}
+                            <span class="ml-2 text-sm font-bold text-gray-700">{{ average_rating|floatformat:1 }}</span>
                         </div>
-                        <span
-                            id="product-reviews-count"
-                            class="text-sm text-gray-600"
-                        >
-                            (<span class="average-rating">{{ average_rating|floatformat:1 }}</span>/5 - {{ reviews.count }} avaliações)
+                        <span id="product-reviews-count" class="text-sm text-gray-600">
+                            ({{ total_reviews }} avaliações)
                         </span>
+                        {% if product.is_verified %}
                         <span class="text-sm text-green-600 font-bold">
-                            <i class="fas fa-check-circle mr-1"></i>
-                            Verificado
+                            <i class="fas fa-check-circle mr-1"></i> Verificado
                         </span>
-                    </div>
-                    <div class="flex items-center space-x-4 mb-4">
-                        {% if product.discount_price %}
-                            <span class="inline-block bg-red-600 text-white text-xs px-3 py-1 rounded-full font-bold">PROMOÇÃO -{{ product.discount_percent }}%</span>
                         {% endif %}
                     </div>
                     <div class="flex items-center space-x-4 mb-4">
+                        <p id="product-price" class="text-3xl font-bold text-primary">
+                            R$ {{ product.price|floatformat:2 }}
+                        </p>
                         {% if product.discount_price %}
-                            <p id="product-price" class="text-2xl font-bold text-gray-400 line-through">
-                                R$ {{ product.price|floatformat:2 }}
-                            </p>
-                            <p id="product-discount-price" class="text-3xl font-bold text-primary">
-                                R$ {{ product.discount_price|floatformat:2 }}
-                            </p>
-                            <span class="ml-2 px-2 py-1 bg-red-100 text-red-600 text-xs rounded font-bold">Promoção</span>
-                        {% else %}
-                            <p id="product-price" class="text-3xl font-bold text-primary">
-                                R$ {{ product.price|floatformat:2 }}
-                            </p>
+                        <span class="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded line-through">
+                            R$ {{ product.discount_price|floatformat:2 }}
+                        </span>
                         {% endif %}
                     </div>
-                    <div
-                        class="flex items-center space-x-2 text-sm text-gray-600"
-                    >
+                    <div class="flex items-center space-x-2 text-sm text-gray-600">
                         <i class="fas fa-shipping-fast text-primary"></i>
                         <span>Frete grátis para pedidos acima de R$ 150</span>
                     </div>
@@ -262,102 +130,80 @@
 
                 <div>
                     <h2 class="text-2xl font-teko text-secondary mb-3">
-                        <i class="fas fa-info-circle text-primary mr-2"></i>
-                        Descrição
+                        <i class="fas fa-info-circle text-primary mr-2"></i> Descrição
                     </h2>
-                    <p
-                        id="product-description"
-                        class="text-gray-700 leading-relaxed"
-                    >
-                        {{ product.description|safe }}
+                    <p id="product-description" class="text-gray-700 leading-relaxed">
+                        {{ product.description }}
                     </p>
                 </div>
 
                 <div>
                     <h2 class="text-2xl font-teko text-secondary mb-3">
-                        <i class="fas fa-list-ul text-primary mr-2"></i>
-                        Especificações
+                        <i class="fas fa-list-ul text-primary mr-2"></i> Especificações
                     </h2>
+                    <ul id="product-specs" class="space-y-2 text-gray-700">
+                        <li class="flex items-center">
+                            <i class="fas fa-weight text-primary mr-3 w-4"></i>
+                            <span><strong>Peso:</strong> {{ product.peso }} kg</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-globe text-primary mr-3 w-4"></i>
+                            <span><strong>Origem:</strong> {{ product.origem|default:"Índia" }}</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-calendar text-primary mr-3 w-4"></i>
+                            <span><strong>Validade:</strong> {{ product.validade|default:"24 meses" }}</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-leaf text-primary mr-3 w-4"></i>
+                            <span><strong>Ingredientes:</strong> {{ product.ingredientes|default:"Ver descrição" }}</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-seedling text-primary mr-3 w-4"></i>
+                            <span><strong>Certificação:</strong> {{ product.certificacao|default:"100% Natural, Sem Conservantes" }}</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-utensils text-primary mr-3 w-4"></i>
+                            <span><strong>Uso:</strong> {{ product.uso|default:"Ver descrição" }}</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Opções de Compra -->
                 <div class="space-y-4">
                     <div class="flex items-center space-x-4">
-                        <label for="quantity" class="font-semibold"
-                            >Quantidade:</label
-                        >
+                        <label for="quantity" class="font-semibold">Quantidade:</label>
                         <div class="flex items-center border rounded-lg">
-                            <button
-                                id="decrease-qty"
-                                class="px-3 py-2 hover:bg-gray-100"
-                                type="button"
-                            >
+                            <button id="decrease-qty" class="px-3 py-2 hover:bg-gray-100" type="button">
                                 <i class="fas fa-minus"></i>
                             </button>
-                            <input
-                                type="number"
-                                id="quantity"
-                                value="1"
-                                min="1"
-                                max="10"
-                                class="w-16 text-center border-0 focus:outline-none"
-                            />
-                            <button
-                                id="increase-qty"
-                                class="px-3 py-2 hover:bg-gray-100"
-                                type="button"
-                            >
+                            <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" class="w-16 text-center border-0 focus:outline-none" />
+                            <button id="increase-qty" class="px-3 py-2 hover:bg-gray-100" type="button">
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
                     </div>
-
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button type="button"
-        class="btn btn-primary flex-1 text-lg add-to-cart-btn"
-        data-id="{{ product.id }}"
-        data-product-name="{{ product.name }}">
-    <i class="fas fa-shopping-cart mr-2"></i>
-    Adicionar ao Carrinho
-</button>
-                        <!-- Botão de wishlist na área de compra -->
-                        <button
-                            id="add-to-wishlist-btn"
-                            class="btn btn-secondary flex-1 text-lg"
-                            data-product-id="{{ product.id }}"
-                            data-product-name="{{ product.name }}"
-                            data-action="add-to-wishlist"
-                        >
-                            <i class="fas fa-heart mr-2"></i>
-                            <span id="wishlist-btn-text">Adicionar aos Desejos</span>
+                        <button type="button" class="btn btn-primary flex-1 text-lg add-to-cart-btn" data-id="{{ product.id }}" data-product-name="{{ product.name }}">
+                            <i class="fas fa-shopping-cart mr-2"></i> Adicionar ao Carrinho
                         </button>
+                        <form method="post" action="{% url 'store:wishlist_add' product.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-secondary flex-1 text-lg">
+                                <i class="fas fa-heart mr-2"></i> Adicionar aos Desejos
+                            </button>
+                        </form>
                     </div>
                 </div>
 
                 <!-- Informações Adicionais -->
                 <div class="bg-gray-50 p-4 rounded-lg">
-                    <h3 class="font-teko text-xl text-secondary mb-2">
-                        Informações de Entrega
-                    </h3>
+                    <h3 class="font-teko text-xl text-secondary mb-2">Informações de Entrega</h3>
                     <ul class="space-y-1 text-sm text-gray-600">
-                        <li>
-                            <i
-                                class="fas fa-shipping-fast mr-2 text-primary"
-                            ></i
-                            >Frete grátis para pedidos acima de R$ 150
-                        </li>
-                        <li>
-                            <i class="fas fa-clock mr-2 text-primary"></i
-                            >Entrega em 5-7 dias úteis
-                        </li>
-                        <li>
-                            <i class="fas fa-shield-alt mr-2 text-primary"></i
-                            >Garantia de qualidade
-                        </li>
-                        <li>
-                            <i class="fas fa-undo mr-2 text-primary"></i
-                            >Devolução em até 30 dias
-                        </li>
+                        <li><i class="fas fa-shipping-fast mr-2 text-primary"></i>Frete grátis para pedidos acima de R$ 150</li>
+                        <li><i class="fas fa-clock mr-2 text-primary"></i>Entrega em 5-7 dias úteis</li>
+                        <li><i class="fas fa-shield-alt mr-2 text-primary"></i>Garantia de qualidade</li>
+                        <li><i class="fas fa-undo mr-2 text-primary"></i>Devolução em até 30 dias</li>
                     </ul>
                 </div>
             </div>
@@ -366,234 +212,76 @@
 
     <!-- Avaliações -->
     <div class="mt-12 bg-white rounded-lg shadow-lg p-6 lg:p-8">
-        <h2 class="text-3xl font-teko text-secondary mb-6">
-            Avaliações dos Clientes
-        </h2>
-
-        <!-- Resumo das Avaliações -->
+        <h2 class="text-3xl font-teko text-secondary mb-6">Avaliações dos Clientes</h2>
         <div class="mb-8 p-4 bg-gray-50 rounded-lg">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center space-x-4">
-                    <span class="text-4xl font-bold text-primary"
-                        >{{ average_rating|floatformat:1 }}</span
-                    >
+                    <span class="text-4xl font-bold text-primary">{{ average_rating|floatformat:1 }}</span>
                     <div>
-                        <div
-                            class="rating flex items-center mb-1 star-rating"
-                            data-rating="{{ average_rating|floatformat:1 }}"
-                        >
-                            <!-- Stars will be rendered by JS function renderStars -->
-                        </div>
-                        <p class="text-sm text-gray-600">
-                            Nota média: <strong class="average-rating">{{ average_rating|floatformat:1 }}</strong>/5 (Baseado em {{ reviews.count }} avaliações)
-                        </p>
-
-                        <!-- Distribuição das avaliações -->
-                        <div class="mt-4 space-y-2">
-                            {% for i in "54321"|make_list %}
-                            <div class="flex items-center text-sm">
-                                <span class="w-6">{{ i }}</span>
-                                <i class="fas fa-star text-yellow-400 w-6"></i>
-                                <div class="w-full bg-gray-200 rounded-full h-2 mx-2">
-                                    <div class="bg-yellow-400 h-2 rounded-full distribution-bar-{{ i }}" style="width: {{ rating_percentages.i|default:'0' }}%;"></div>
-                                </div>
-                                <span class="w-8 text-right distribution-count-{{ i }}">{{ rating_distribution.i|default:'0' }}</span>
-                                <span class="w-12 text-right text-gray-500 distribution-percent-{{ i }}">{{ rating_percentages.i|default:'0'|floatformat:0 }}%</span>
-                            </div>
+                        <div class="rating flex items-center mb-1">
+                            {% for i in "12345" %}
+                                {% if average_rating|default:0|floatformat:0 >= i|add:"0" %}
+                                    <i class="fas fa-star text-accent"></i>
+                                {% else %}
+                                    <i class="fas fa-star text-gray-300"></i>
+                                {% endif %}
                             {% endfor %}
                         </div>
+                        <p class="text-sm text-gray-600">Baseado em {{ total_reviews }} avaliações</p>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Lista de Avaliações -->
         <div id="product-reviews" class="space-y-6">
-            {% for review in reviews %}
-            <div class="border-b border-gray-200 pb-6">
-                <div class="flex items-start space-x-4">
-                    <div
-                        class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold"
-                    >
-                        {{ review.user.username|first|upper }}
-                    </div>
-                    <div class="flex-1">
-                        <div class="flex items-center justify-between mb-2">
-                            <div>
-                                <h4 class="font-semibold text-gray-800">
-                                    {{ review.user.username }}
-                                </h4>
-                                <div class="flex items-center space-x-2">
-                                    <div
-                                        class="rating flex items-center star-rating"
-                                        data-rating="{{ review.rating }}"
-                                    >
-                                        <!-- Stars will be rendered by JS function renderStars -->
-                                    </div>
-                                    <span class="text-sm text-gray-500"
-                                        >{{ review.created_at|date:"d M Y"}}</span
-                                    >
-                                </div>
-                            </div>
-                            <!-- Assuming all reviews shown are from verified purchases -->
-                            <span
-                                class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded"
-                            >
-                                <i class="fas fa-check mr-1"></i>
-                                Compra Verificada
-                            </span>
-                        </div>
-                        <p class="text-gray-700">{{ review.comment }}</p>
-                        <!-- For simplicity, removed 'Útil' and 'Responder' buttons -->
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="text-center py-8">
-                <p class="text-gray-600">
-                    Ainda não há avaliações para este produto. Seja o primeiro a
-                    avaliar!
-                </p>
-            </div>
-            {% endfor %}
+            {% include 'store/includes/reviews_list.html' %}
         </div>
-
-        <!-- Formulário de Avaliação -->
-        <div class="mt-8 p-6 bg-gray-50 rounded-lg review-form-container">
-            <!-- Mensagem de sucesso após avaliação -->
-            <div id="review-success" class="review-success">
-                <div class="mb-4 text-center">
-                    <i class="fas fa-check-circle text-green-500 text-5xl"></i>
-                </div>
-                <h3 class="text-2xl font-teko text-green-700 mb-2">Avaliação Enviada!</h3>
-                <p class="text-gray-700 mb-6">
-                    Obrigado por compartilhar sua opinião sobre este produto. Sua avaliação ajudará outros clientes a tomar decisões de compra.
-                </p>
-                <div class="flex space-x-4">
-                    <button
-                        class="btn btn-outline-primary btn-continue"
-                        onclick="hideSuccessMessage()"
-                    >
-                        <i class="fas fa-arrow-left mr-2"></i>
-                        Continuar Comprando
-                    </button>
-                </div>
-            </div>
-
-            <h3 class="text-2xl font-teko text-secondary mb-4">
-                Deixe sua Avaliação
-            </h3>
-            {% if request.user.is_authenticated %}
-            <form
-                id="review-form"
-                action="{% url 'store:add_review' product.id %}"
-                method="post"
-                class="space-y-4"
-                onsubmit="submitReview(event)"
-            >
+        <div class="mt-8 p-6 bg-gray-50 rounded-lg">
+            <h3 class="text-2xl font-teko text-secondary mb-4">Deixe sua Avaliação</h3>
+            <form id="review-form" method="post" action="{% url 'store:add_review' product.id %}">
                 {% csrf_token %}
-
-                <div class="form-group">
-                    <label for="{{ form.rating.id_for_label }}"
-                        >Sua Avaliação (Estrelas)</label
-                    >
-                    <div
-                        id="review-stars-input-{{ product.id }}"
-                        class="flex items-center space-x-1 mt-2 mb-3"
-                        data-rating-input="true"
-                        data-rating-value="0"
-                        data-rating-target="#hidden-rating-input"
-                        data-half-star="true"
-                        data-rating-size="large"
-                        data-show-value="true"
-                    ></div>
-                    <input type="hidden" id="hidden-rating-input" name="rating" value="0" />
-                    {% if form.rating.errors %}
-                    <div class="text-red-500 text-sm mt-1">
-                        {{ form.rating.errors }}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="reviewer-name" class="block mb-1 font-semibold">Seu Nome</label>
+                        <input type="text" name="name" id="reviewer-name" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary" required />
                     </div>
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    <label for="{{ form.comment.id_for_label }}"
-                        >Comentário</label
-                    >
-                    {{ form.comment }} {% if form.comment.errors %}
-                    <div class="text-red-500 text-sm mt-1">
-                        {{ form.comment.errors }}
+                    <div>
+                        <label for="reviewer-rating" class="block mb-1 font-semibold">Avaliação</label>
+                        <select name="rating" id="reviewer-rating" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary" required>
+                            <option value="">Selecione uma nota</option>
+                            <option value="5">⭐⭐⭐⭐⭐ Excelente</option>
+                            <option value="4">⭐⭐⭐⭐ Muito Bom</option>
+                            <option value="3">⭐⭐⭐ Bom</option>
+                            <option value="2">⭐⭐ Regular</option>
+                            <option value="1">⭐ Ruim</option>
+                        </select>
                     </div>
-                    {% endif %}
                 </div>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                    id="submit-review-btn"
-                >
-                    Enviar Avaliação
-                </button>
+                <div class="mb-4">
+                    <label for="review-comment" class="block mb-1 font-semibold">Comentário</label>
+                    <textarea name="comment" id="review-comment" rows="4" class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Conte-nos sobre sua experiência com este produto..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
             </form>
-            {% else %}
-            <div
-                class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4"
-                role="alert"
-            >
-                <p class="font-bold">Faça login para avaliar!</p>
-                <p>
-                    <a
-                        href="{% url 'store:login' %}?next={{ request.path }}"
-                        class="text-yellow-800 underline hover:no-underline"
-                        >Clique aqui</a
-                    >
-                    para fazer login e deixar sua avaliação.
-                </p>
-            </div>
-            {% endif %}
         </div>
     </div>
 
     <!-- Produtos Relacionados -->
     <div class="mt-12">
-        <h2 class="text-3xl font-teko text-secondary mb-6">
-            Produtos Relacionados
-        </h2>
-        <div
-            id="related-products"
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-        >
+        <h2 class="text-3xl font-teko text-secondary mb-6">Produtos Relacionados</h2>
+        <div id="related-products" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {% for p in related_products %}
-            <div
-                class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
-            >
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 <div class="aspect-square bg-gray-100 relative">
-                    <img
-                        src="{% if p.image %}{{ p.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}"
-                        alt="{{ p.name }}"
-                        class="w-full h-full object-cover"
-                    />
-                    {% if p.discount_price %}
-                    <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">PROMOÇÃO -{{ p.discount_percent }}%</span>
-                    {% elif p.stock == 0 %}
-                    <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">ESGOTADO</span>
-                    {% elif p.is_new %}
-                    <span class="absolute top-3 left-3 bg-green-500 text-white text-xs px-2 py-1 rounded">NOVO</span>
-                    {% endif %}
+                    <img src="{% if p.image %}{{ p.image.url }}{% else %}{% static 'images/default_product.png' %}{% endif %}" alt="{{ p.name }}" class="w-full h-full object-cover" loading="lazy" />
+                    <button class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-50">
+                        <i class="fas fa-heart text-gray-400 hover:text-red-500"></i>
+                    </button>
                 </div>
                 <div class="p-4">
-                    <a
-                        href="{% url 'store:product_detail' p.slug %}"
-                        class="block"
-                    >
-                        <h3
-                            class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors"
-                        >
-                            {{ p.name }}
-                        </h3>
+                    <a href="{% url 'store:product_detail' p.slug %}" class="block">
+                        <h3 class="font-semibold text-gray-800 mb-2 hover:text-primary transition-colors">{{ p.name }}</h3>
                     </a>
-                    <p class="text-sm text-gray-600 mb-3">
-                        {{ p.description|truncatechars:50 }}
-                    </p>
+                    <p class="text-sm text-gray-600 mb-3">{{ p.description|truncatechars:50 }}</p>
                     <div class="flex items-center mb-2">
                         <div class="flex text-yellow-400 text-sm">
                             <i class="fas fa-star"></i>
@@ -605,32 +293,12 @@
                         <span class="text-xs text-gray-500 ml-1">({{ p.review_count|default:0 }})</span>
                     </div>
                     <div class="flex items-center justify-between">
-                        {% if p.discount_price %}
-                            <span class="text-lg font-bold text-gray-400 line-through">R$ {{ p.price|floatformat:2 }}</span>
-                            <span class="text-xl font-bold text-primary ml-2">R$ {{ p.discount_price|floatformat:2 }}</span>
-                        {% else %}
-                            <span class="text-lg font-bold text-primary">R$ {{ p.price|floatformat:2 }}</span>
-                        {% endif %}
-                        <button
-                            class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
-                            data-id="{{ p.id }}"
-                            data-product-name="{{ p.name }}"
-                        >
-                            <i class="fas fa-cart-plus mr-1"></i>
-                            Adicionar
+                        <span class="text-lg font-bold text-primary">R$ {{ p.price|floatformat:2 }}</span>
+                        <button class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn" data-id="{{ p.id }}" data-product-name="{{ p.name }}">
+                            <i class="fas fa-cart-plus mr-1"></i> Adicionar
                         </button>
                     </div>
                 </div>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-center py-12">
-                <i class="fas fa-box-open text-6xl text-gray-300 mb-4"></i>
-                <h3 class="text-2xl font-teko text-gray-500 mb-2">
-                    Nenhum produto relacionado encontrado.
-                </h3>
-                <p class="text-gray-400">
-                    Explore outros produtos em nosso catálogo!
-                </p>
             </div>
             {% endfor %}
         </div>
@@ -638,103 +306,3 @@
 </main>
 
 {% endblock content %}
-
-<script>
-  // Carrossel de imagens do produto com zoom
-  document.addEventListener('DOMContentLoaded', function() {
-    // Coletar todas as imagens disponíveis
-    const images = [
-      {% if product.image %}'{{ product.image.url }}',{% endif %}
-      {% if product.image_1 %}'{{ product.image_1.url }}',{% endif %}
-      {% if product.image_2 %}'{{ product.image_2.url }}',{% endif %}
-      {% if product.image_3 %}'{{ product.image_3.url }}',{% endif %}
-    ];
-    let currentIndex = 0;
-    const mainImg = document.getElementById('product-image');
-    const thumbnails = document.querySelectorAll('.thumbnail-img');
-    const prevBtn = document.getElementById('carousel-prev');
-    const nextBtn = document.getElementById('carousel-next');
-    // Troca imagem principal ao clicar nas miniaturas
-    thumbnails.forEach((thumb, idx) => {
-      thumb.addEventListener('click', function() {
-        mainImg.src = images[idx];
-        currentIndex = idx;
-        thumbnails.forEach(i => i.classList.remove('border-primary'));
-        this.classList.add('border-primary');
-      });
-    });
-    // Navegação por setas
-    prevBtn.addEventListener('click', function() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      mainImg.src = images[currentIndex];
-      thumbnails.forEach(i => i.classList.remove('border-primary'));
-      if (thumbnails[currentIndex]) thumbnails[currentIndex].classList.add('border-primary');
-    });
-    nextBtn.addEventListener('click', function() {
-      currentIndex = (currentIndex + 1) % images.length;
-      mainImg.src = images[currentIndex];
-      thumbnails.forEach(i => i.classList.remove('border-primary'));
-      if (thumbnails[currentIndex]) thumbnails[currentIndex].classList.add('border-primary');
-    });
-    // Zoom ao passar o mouse
-    const zoomLens = document.getElementById('zoom-lens');
-    if (mainImg && zoomLens) {
-      mainImg.addEventListener('mousemove', function(e) {
-        zoomLens.style.display = 'block';
-        const rect = mainImg.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        zoomLens.style.left = (x - zoomLens.offsetWidth/2) + 'px';
-        zoomLens.style.top = (y - zoomLens.offsetHeight/2) + 'px';
-        zoomLens.style.background = `url('${mainImg.src}') no-repeat`;
-        zoomLens.style.backgroundSize = (mainImg.width * 2) + 'px ' + (mainImg.height * 2) + 'px';
-        zoomLens.style.backgroundPosition = `-${x*2 - zoomLens.offsetWidth/2}px -${y*2 - zoomLens.offsetHeight/2}px`;
-      });
-      mainImg.addEventListener('mouseleave', function() {
-        zoomLens.style.display = 'none';
-      });
-    }
-  });
-</script>
-
-<script>
-  // Wishlist AJAX
-  document.addEventListener('DOMContentLoaded', function() {
-    const wishlistBtn = document.getElementById('add-to-wishlist-btn');
-    if (wishlistBtn) {
-      wishlistBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const productId = this.getAttribute('data-product-id');
-        const btnText = document.getElementById('wishlist-btn-text');
-        const icon = this.querySelector('i');
-        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        fetch('{% url 'store:toggle_wishlist' %}', {
-          method: 'POST',
-          headers: {
-            'X-CSRFToken': csrfToken,
-            'X-Requested-With': 'XMLHttpRequest',
-          },
-          body: new URLSearchParams({product_id: productId})
-        })
-        .then(r => r.json())
-        .then(data => {
-          if (data.success) {
-            if (data.in_wishlist) {
-              btnText.textContent = 'Remover dos Desejos';
-              icon.classList.add('text-red-500');
-              icon.classList.remove('text-gray-400');
-              if (window.toastSystem) window.toastSystem.success('Adicionado à wishlist!');
-            } else {
-              btnText.textContent = 'Adicionar aos Desejos';
-              icon.classList.remove('text-red-500');
-              icon.classList.add('text-gray-400');
-              if (window.toastSystem) window.toastSystem.info('Removido da wishlist.');
-            }
-          } else {
-            if (window.toastSystem) window.toastSystem.error('Erro', data.error || 'Erro ao atualizar wishlist.');
-          }
-        });
-      });
-    }
-  });
-</script>

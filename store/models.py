@@ -53,6 +53,12 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     discount_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, help_text="Preço promocional (deixe em branco se não houver desconto)")
+    peso = models.DecimalField('Peso (kg)', max_digits=5, decimal_places=2, default=0.5, help_text='Peso do produto em kg para cálculo de frete')
+    origem = models.CharField('Origem', max_length=100, blank=True, null=True, help_text='Ex: Índia, Brasil, etc')
+    validade = models.CharField('Validade', max_length=50, blank=True, null=True, help_text='Ex: 24 meses')
+    ingredientes = models.TextField('Ingredientes', blank=True, null=True, help_text='Lista de ingredientes do produto')
+    certificacao = models.CharField('Certificação', max_length=100, blank=True, null=True, help_text='Ex: 100% Natural, Sem Conservantes')
+    uso = models.CharField('Uso', max_length=200, blank=True, null=True, help_text='Sugestão de uso do produto')
 
     class Meta:
         ordering = ('name',)

@@ -23,6 +23,7 @@ urlpatterns = [
     path('cart/', views.cart_detail, name='cart'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
     path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
+    path('cart/count/', views.cart_count, name='cart_count'),
 
     # --- Checkout Process ---
     path('checkout/', views.checkout, name='checkout'),
