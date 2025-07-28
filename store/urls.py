@@ -24,6 +24,7 @@ urlpatterns = [
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
     path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
     path('cart/count/', views.cart_count, name='cart_count'),
+    path('cart/calculate-shipping/', views.calculate_shipping_ajax, name='calculate_shipping_ajax'),
 
     # --- Checkout Process ---
     path('checkout/', views.checkout, name='checkout'),

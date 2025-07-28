@@ -648,7 +648,7 @@ function startCarouselAutoplay() {
         console.error("❌ Erro no auto-play interval:", error);
         stopCarouselAutoplay();
       }
-    }, 5000);
+    }, 3000); // Alterado de 5000 para 3000ms
     console.log("▶️ Auto-play do carrossel iniciado");
   } catch (error) {
     console.error("❌ Erro ao iniciar auto-play:", error);

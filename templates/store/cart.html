@@ -1036,4 +1036,55 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cepInput = document.getElementById('cep-input');
+    const calcBtn = document.getElementById('calculate-shipping');
+    const optionsDiv = document.getElementById('shipping-options');
+    const shippingCostSpan = document.getElementById('shipping-cost');
+
+    if (calcBtn && cepInput && optionsDiv) {
+        calcBtn.addEventListener('click', function() {
+            const cep = cepInput.value.replace(/\D/g, '');
+            if (cep.length < 8) {
+                optionsDiv.innerHTML = '<span class="text-red-600">Digite um CEP válido.</span>';
+                return;
+            }
+            optionsDiv.innerHTML = 'Calculando...';
+            fetch('/cart/calculate-shipping/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': (document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)')||[])[2]
+                },
+                body: JSON.stringify({cep: cep})
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success && data.options.length > 0) {
+                    optionsDiv.innerHTML = data.options.map(opt => `
+                        <div class='p-2 border rounded mb-2 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
+                            <div><b>${opt.name}</b> <span class='text-gray-600'>(${opt.company.name})</span></div>
+                            <div class='flex items-center gap-4 mt-2 sm:mt-0'>
+                                <span class='text-primary font-bold text-lg'>R$ ${parseFloat(opt.price).toFixed(2)}</span>
+                                <span class='text-gray-500'>Prazo: ${opt.delivery_time} dia(s)</span>
+                            </div>
+                        </div>
+                    `).join('');
+                    // Atualiza o valor do frete exibido
+                    shippingCostSpan.textContent = 'R$ ' + parseFloat(data.options[0].price).toFixed(2);
+                } else {
+                    optionsDiv.innerHTML = '<span class="text-red-600">' + (data.erro || 'Não foi possível calcular o frete.') + '</span>';
+                    shippingCostSpan.textContent = 'R$ --';
+                }
+            })
+            .catch(() => {
+                optionsDiv.innerHTML = '<span class="text-red-600">Erro ao calcular frete.</span>';
+                shippingCostSpan.textContent = 'R$ --';
+            });
+        });
+    }
+});
+</script>
+
 {% endblock content %}

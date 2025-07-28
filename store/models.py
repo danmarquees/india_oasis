@@ -59,6 +59,9 @@ class Product(models.Model):
     ingredientes = models.TextField('Ingredientes', blank=True, null=True, help_text='Lista de ingredientes do produto')
     certificacao = models.CharField('Certificação', max_length=100, blank=True, null=True, help_text='Ex: 100% Natural, Sem Conservantes')
     uso = models.CharField('Uso', max_length=200, blank=True, null=True, help_text='Sugestão de uso do produto')
+    altura = models.DecimalField('Altura (cm)', max_digits=5, decimal_places=2, default=10, help_text='Altura do produto em centímetros para cálculo de frete')
+    largura = models.DecimalField('Largura (cm)', max_digits=5, decimal_places=2, default=15, help_text='Largura do produto em centímetros para cálculo de frete')
+    comprimento = models.DecimalField('Comprimento (cm)', max_digits=5, decimal_places=2, default=20, help_text='Comprimento do produto em centímetros para cálculo de frete')
 
     class Meta:
         ordering = ('name',)

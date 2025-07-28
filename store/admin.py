@@ -29,7 +29,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('image', 'image_1', 'image_2', 'image_3'),
         }),
         ('Detalhes Técnicos', {
-            'fields': ('peso', 'origem', 'validade', 'ingredientes', 'certificacao', 'uso'),
+            'fields': ('peso', 'altura', 'largura', 'comprimento', 'origem', 'validade', 'ingredientes', 'certificacao', 'uso'),
         }),
         ('Datas', {
             'fields': ('created', 'updated'),

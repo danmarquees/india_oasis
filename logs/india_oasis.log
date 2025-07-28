@@ -14461,3 +14461,1957 @@ INFO 2025-07-24 14:44:26,695 basehttp "GET /media/banners/header-banner-garam-ma
 INFO 2025-07-24 14:44:26,754 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
 INFO 2025-07-24 14:44:27,034 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 304 0
 INFO 2025-07-24 14:44:28,774 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 12:46:03,338 autoreload Watching for file changes with StatReloader
+INFO 2025-07-25 12:46:33,331 basehttp "GET / HTTP/1.1" 200 136029
+INFO 2025-07-25 12:46:35,057 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-25 12:46:35,058 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-25 12:46:35,058 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-25 12:46:35,071 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-25 12:49:15,782 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-25 12:49:15,977 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-25 12:49:16,462 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-25 12:49:16,466 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-25 12:49:16,623 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-25 12:49:16,582 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-25 12:49:16,587 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-25 12:49:16,620 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-25 12:49:17,668 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-25 12:49:17,790 log Not Found: /favicon.ico
+WARNING 2025-07-25 12:49:17,792 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-25 12:49:34,632 basehttp "GET /cart/ HTTP/1.1" 200 103698
+INFO 2025-07-25 12:49:36,472 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-25 12:49:48,248 log Not Found: /store/cart/calculate-shipping/
+WARNING 2025-07-25 12:49:48,249 basehttp "POST /store/cart/calculate-shipping/ HTTP/1.1" 404 9729
+WARNING 2025-07-25 12:49:49,394 log Not Found: /store/cart/calculate-shipping/
+WARNING 2025-07-25 12:49:49,396 basehttp "POST /store/cart/calculate-shipping/ HTTP/1.1" 404 9729
+INFO 2025-07-25 12:49:57,318 basehttp "GET /checkout/ HTTP/1.1" 200 63326
+INFO 2025-07-25 12:49:58,103 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-25 12:50:12,268 log Not Found: /store/cart/calculate-shipping/
+WARNING 2025-07-25 12:50:12,285 basehttp "POST /store/cart/calculate-shipping/ HTTP/1.1" 404 9729
+WARNING 2025-07-25 12:50:32,276 log Not Found: /store/cart/calculate-shipping/
+WARNING 2025-07-25 12:50:32,278 basehttp "POST /store/cart/calculate-shipping/ HTTP/1.1" 404 9729
+WARNING 2025-07-25 12:50:46,152 log Not Found: /store/cart/calculate-shipping/
+WARNING 2025-07-25 12:50:46,153 basehttp "POST /store/cart/calculate-shipping/ HTTP/1.1" 404 9729
+INFO 2025-07-25 12:54:31,002 basehttp "GET /cart/ HTTP/1.1" 200 103692
+WARNING 2025-07-25 12:54:35,643 log Not Found: /favicon.ico
+INFO 2025-07-25 12:54:38,153 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 12:54:38,747 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+ERROR 2025-07-25 12:54:49,770 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a744c830>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a744c830>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a744c830>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 12:54:50,298 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189945
+INFO 2025-07-25 12:59:53,357 basehttp "GET /cart/ HTTP/1.1" 200 103692
+INFO 2025-07-25 12:59:57,545 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-25 12:59:57,725 log Not Found: /favicon.ico
+ERROR 2025-07-25 13:00:04,821 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a7224cd0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7224cd0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7224cd0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:00:04,832 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189945
+INFO 2025-07-25 13:00:14,182 basehttp "GET /checkout/ HTTP/1.1" 200 63326
+INFO 2025-07-25 13:00:16,205 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:00:24,184 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-25 13:00:25,476 basehttp "GET /payment/create/ HTTP/1.1" 302 0
+INFO 2025-07-25 13:00:56,913 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-25 13:00:56,959 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-25 13:00:59,907 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-25 13:01:16,746 basehttp "GET / HTTP/1.1" 200 136035
+INFO 2025-07-25 13:01:17,270 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-25 13:01:18,856 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-25 13:01:18,865 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-25 13:01:18,890 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-25 13:01:18,899 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-25 13:01:19,141 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:01:26,482 basehttp "GET /cart/ HTTP/1.1" 200 99768
+INFO 2025-07-25 13:01:26,765 basehttp "GET /cart/ HTTP/1.1" 200 99768
+WARNING 2025-07-25 13:01:29,016 log Not Found: /favicon.ico
+INFO 2025-07-25 13:01:29,063 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:01:36,398 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:17:00,491 basehttp "POST /cart/add/15/ HTTP/1.1" 302 0
+INFO 2025-07-25 13:17:00,939 basehttp "POST /cart/add/15/ HTTP/1.1" 200 119
+INFO 2025-07-25 13:17:01,028 basehttp "GET /products/ HTTP/1.1" 200 68926
+INFO 2025-07-25 13:17:03,939 basehttp "GET /cart/ HTTP/1.1" 200 103708
+INFO 2025-07-25 13:17:06,703 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+ERROR 2025-07-25 13:17:19,065 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a72cb110>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a72cb110>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a72cb110>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:17:19,158 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189945
+ERROR 2025-07-25 13:17:23,233 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a69011d0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a69011d0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a69011d0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:17:23,244 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189945
+ERROR 2025-07-25 13:17:30,746 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a90d8550>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a90d8550>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a90d8550>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:17:30,758 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189945
+INFO 2025-07-25 13:17:35,109 basehttp "GET /cart/ HTTP/1.1" 200 103708
+INFO 2025-07-25 13:17:36,884 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+ERROR 2025-07-25 13:17:42,195 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a72cb110>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a72cb110>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a72cb110>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:17:42,212 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189944
+ERROR 2025-07-25 13:17:45,563 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a7224050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7224050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7224050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:17:45,576 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189945
+ERROR 2025-07-25 13:19:54,557 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a7225310>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7225310>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7225310>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:19:54,613 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189944
+ERROR 2025-07-25 13:20:07,541 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f91a7225090>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7225090>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 605, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<3 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f91a7225090>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 13:20:07,552 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 189945
+INFO 2025-07-25 13:20:11,222 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 69
+INFO 2025-07-25 13:20:15,001 basehttp "POST /cart/remove/15/ HTTP/1.1" 200 62
+INFO 2025-07-25 13:20:17,865 basehttp "GET / HTTP/1.1" 200 136035
+INFO 2025-07-25 13:20:20,325 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-25 13:20:20,373 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-25 13:20:20,414 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-25 13:20:21,208 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-25 13:20:21,309 log Not Found: /favicon.ico
+INFO 2025-07-25 13:24:33,101 basehttp "GET / HTTP/1.1" 200 136035
+INFO 2025-07-25 13:24:36,346 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:29:25,880 basehttp "GET / HTTP/1.1" 200 136035
+INFO 2025-07-25 13:29:32,972 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:31:42,115 basehttp "GET /admin/ HTTP/1.1" 200 35917
+INFO 2025-07-25 13:31:42,813 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-07-25 13:31:42,814 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-07-25 13:31:43,180 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-07-25 13:31:43,184 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-07-25 13:31:43,189 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2025-07-25 13:31:43,212 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1125
+INFO 2025-07-25 13:31:43,212 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1101
+INFO 2025-07-25 13:31:43,213 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1169
+INFO 2025-07-25 13:31:43,215 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 499
+INFO 2025-07-25 13:31:43,216 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1517
+INFO 2025-07-25 13:31:43,230 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 18769
+INFO 2025-07-25 13:31:43,232 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2715
+INFO 2025-07-25 13:31:43,232 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5481
+INFO 2025-07-25 13:31:43,239 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1734
+INFO 2025-07-25 13:31:43,255 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1054
+INFO 2025-07-25 13:31:43,259 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 785
+INFO 2025-07-25 13:31:43,260 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1240
+INFO 2025-07-25 13:31:43,278 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 404
+INFO 2025-07-25 13:31:43,280 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2377
+INFO 2025-07-25 13:31:43,306 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 797
+INFO 2025-07-25 13:31:43,308 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 319
+INFO 2025-07-25 13:31:43,308 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1016
+INFO 2025-07-25 13:31:43,310 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2437
+INFO 2025-07-25 13:31:43,326 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2013
+INFO 2025-07-25 13:31:43,329 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5259
+INFO 2025-07-25 13:31:43,355 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 189
+INFO 2025-07-25 13:31:43,356 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2720
+INFO 2025-07-25 13:31:43,358 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 993
+INFO 2025-07-25 13:31:43,358 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 356
+INFO 2025-07-25 13:31:43,387 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1238
+INFO 2025-07-25 13:31:43,388 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1451
+INFO 2025-07-25 13:31:43,412 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6407
+INFO 2025-07-25 13:31:43,439 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 78
+INFO 2025-07-25 13:31:43,501 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-07-25 13:31:43,625 basehttp "GET /static/admin/css/responsive_rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1991
+INFO 2025-07-25 13:31:43,636 basehttp "GET /static/admin/css/responsive.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 16565
+INFO 2025-07-25 13:31:43,649 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-07-25 13:31:43,681 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1955
+INFO 2025-07-25 13:31:43,683 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6951
+INFO 2025-07-25 13:31:43,684 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1750
+INFO 2025-07-25 13:31:43,800 basehttp "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 60830
+INFO 2025-07-25 13:31:43,814 basehttp "GET /static/admin_interface/related-modal/related-modal.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 7095
+INFO 2025-07-25 13:31:43,818 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2888
+INFO 2025-07-25 13:31:44,194 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-25 13:31:45,504 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-07-25 13:31:45,506 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-07-25 13:31:45,525 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+INFO 2025-07-25 13:31:51,836 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35564
+INFO 2025-07-25 13:31:52,170 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-07-25 13:31:52,213 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-07-25 13:31:52,214 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-07-25 13:31:52,215 basehttp "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-07-25 13:31:52,215 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-07-25 13:31:52,289 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2025-07-25 13:31:52,291 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-07-25 13:31:52,289 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+INFO 2025-07-25 13:31:52,309 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-07-25 13:31:52,311 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-25 13:31:52,337 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-07-25 13:31:52,341 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11991
+INFO 2025-07-25 13:31:52,465 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 13:31:52,517 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-25 13:31:52,539 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-25 13:31:52,573 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-25 13:31:52,917 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-07-25 13:31:52,929 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-07-25 13:32:00,278 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-25 13:32:00,385 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35702
+INFO 2025-07-25 13:32:00,681 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 13:32:01,006 basehttp "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-07-25 13:32:13,809 basehttp "GET / HTTP/1.1" 200 136439
+INFO 2025-07-25 13:32:19,906 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:32:39,917 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-25 13:32:40,001 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35704
+INFO 2025-07-25 13:32:40,300 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 13:32:47,526 basehttp "GET / HTTP/1.1" 200 136439
+INFO 2025-07-25 13:32:50,149 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 13:34:04,598 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-25 13:34:04,726 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35704
+INFO 2025-07-25 13:34:05,048 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 13:34:11,609 basehttp "GET / HTTP/1.1" 200 136439
+INFO 2025-07-25 13:34:14,826 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 14:08:57,044 basehttp "GET / HTTP/1.1" 200 137045
+INFO 2025-07-25 14:09:23,063 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 14:42:31,863 autoreload Watching for file changes with StatReloader
+INFO 2025-07-25 14:43:27,226 basehttp "GET /admin/ HTTP/1.1" 200 35948
+INFO 2025-07-25 14:43:30,281 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 18769
+INFO 2025-07-25 14:43:30,286 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 499
+INFO 2025-07-25 14:43:30,291 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1125
+INFO 2025-07-25 14:43:30,297 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1169
+INFO 2025-07-25 14:43:30,302 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1517
+INFO 2025-07-25 14:43:30,306 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1101
+INFO 2025-07-25 14:43:30,331 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2715
+INFO 2025-07-25 14:43:30,343 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5481
+INFO 2025-07-25 14:43:30,354 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1734
+INFO 2025-07-25 14:43:30,376 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1054
+INFO 2025-07-25 14:43:30,392 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-07-25 14:43:30,394 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 785
+INFO 2025-07-25 14:43:30,394 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-07-25 14:43:30,398 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-07-25 14:43:30,405 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1240
+INFO 2025-07-25 14:43:30,405 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2377
+INFO 2025-07-25 14:43:30,410 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 404
+INFO 2025-07-25 14:43:30,410 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 797
+INFO 2025-07-25 14:43:30,419 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 319
+INFO 2025-07-25 14:43:30,440 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1016
+INFO 2025-07-25 14:43:30,452 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2013
+INFO 2025-07-25 14:43:30,453 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2437
+INFO 2025-07-25 14:43:30,456 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5259
+INFO 2025-07-25 14:43:30,456 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2720
+INFO 2025-07-25 14:43:30,464 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 189
+INFO 2025-07-25 14:43:30,484 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 993
+INFO 2025-07-25 14:43:30,495 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 356
+INFO 2025-07-25 14:43:30,495 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1238
+INFO 2025-07-25 14:43:30,498 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1451
+INFO 2025-07-25 14:43:30,499 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6407
+INFO 2025-07-25 14:43:30,508 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 78
+INFO 2025-07-25 14:43:30,542 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1955
+INFO 2025-07-25 14:43:30,551 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6951
+INFO 2025-07-25 14:43:30,572 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-07-25 14:43:30,572 basehttp "GET /static/admin/css/responsive_rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1991
+INFO 2025-07-25 14:43:30,573 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-07-25 14:43:30,574 basehttp "GET /static/admin/css/responsive.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 16565
+INFO 2025-07-25 14:43:30,585 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2888
+INFO 2025-07-25 14:43:30,740 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-25 14:43:32,505 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-07-25 14:43:32,506 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+INFO 2025-07-25 14:43:32,506 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+WARNING 2025-07-25 14:43:33,151 log Not Found: /favicon.ico
+INFO 2025-07-25 14:43:47,929 basehttp "GET /admin/store/product/ HTTP/1.1" 200 37801
+INFO 2025-07-25 14:43:49,449 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-07-25 14:43:49,492 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-07-25 14:43:49,493 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-25 14:43:49,511 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 14:43:49,535 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-25 14:43:49,542 basehttp "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-07-25 14:43:49,553 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-25 14:43:49,554 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-25 14:43:49,668 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-25 14:43:49,791 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-25 14:43:49,852 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-25 14:43:53,240 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-07-25 14:43:53,241 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-07-25 14:44:05,785 basehttp "GET /admin/store/product/17/change/ HTTP/1.1" 200 47422
+INFO 2025-07-25 14:44:06,284 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-07-25 14:44:06,300 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 14:44:06,387 basehttp "GET /static/admin/js/change_form.js HTTP/1.1" 200 606
+INFO 2025-07-25 14:44:06,388 basehttp "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 586
+INFO 2025-07-25 14:44:07,229 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11991
+INFO 2025-07-25 14:44:08,541 basehttp "GET /static/admin/img/tooltag-arrowright.svg HTTP/1.1" 200 280
+INFO 2025-07-25 14:45:40,643 basehttp "POST /admin/store/product/17/change/ HTTP/1.1" 302 0
+INFO 2025-07-25 14:45:40,891 basehttp "GET /admin/store/product/ HTTP/1.1" 200 38029
+INFO 2025-07-25 14:45:41,172 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 14:46:30,800 basehttp "GET / HTTP/1.1" 200 137045
+INFO 2025-07-25 14:46:32,520 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-25 14:46:32,521 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-25 14:46:32,558 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-25 14:46:35,969 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-25 14:46:36,084 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-25 14:46:36,232 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-25 14:46:37,316 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 14:46:52,527 basehttp "POST /cart/add/17/ HTTP/1.1" 302 0
+INFO 2025-07-25 14:46:52,707 basehttp "POST /cart/add/17/ HTTP/1.1" 200 113
+INFO 2025-07-25 14:46:52,764 basehttp "GET /products/ HTTP/1.1" 200 68920
+INFO 2025-07-25 14:46:56,134 basehttp "GET /cart/ HTTP/1.1" 200 103692
+INFO 2025-07-25 14:46:57,569 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+ERROR 2025-07-25 14:47:11,314 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f79b2d34050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f79b2d34050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 614, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<6 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f79b2d34050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 14:47:11,331 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 201151
+ERROR 2025-07-25 14:47:12,645 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f79b215c050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f79b215c050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 614, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<6 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f79b215c050>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 14:47:12,656 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 201152
+INFO 2025-07-25 14:47:36,788 basehttp "GET /cart/ HTTP/1.1" 200 103692
+INFO 2025-07-25 14:47:37,422 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-25 14:47:37,423 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-25 14:47:37,433 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-25 14:47:37,460 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-25 14:48:44,657 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-25 14:48:44,978 basehttp "GET /cart/ HTTP/1.1" 200 103692
+INFO 2025-07-25 14:48:47,181 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-25 14:48:47,195 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-25 14:48:47,214 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+WARNING 2025-07-25 14:48:47,842 log Not Found: /favicon.ico
+WARNING 2025-07-25 14:48:47,844 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+ERROR 2025-07-25 14:49:00,250 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f79b215d310>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f79b215d310>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 614, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<6 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f79b215d310>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-25 14:49:00,261 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 201152
+INFO 2025-07-25 14:50:16,969 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/admin.py changed, reloading.
+INFO 2025-07-25 14:50:26,277 autoreload Watching for file changes with StatReloader
+INFO 2025-07-25 14:50:37,480 basehttp "GET /admin/store/product/ HTTP/1.1" 200 37801
+INFO 2025-07-25 14:50:37,915 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 14:50:48,712 basehttp "GET /admin/store/product/9/change/ HTTP/1.1" 200 50207
+INFO 2025-07-25 14:50:49,036 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-25 14:50:55,568 basehttp "GET /admin/store/product/ HTTP/1.1" 200 37801
+INFO 2025-07-25 14:51:01,040 basehttp "GET /admin/store/product/17/change/ HTTP/1.1" 200 50159
+INFO 2025-07-25 14:51:01,665 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 11:16:16,432 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 11:16:43,607 basehttp "GET / HTTP/1.1" 200 137039
+INFO 2025-07-28 11:16:44,616 basehttp "GET /static/css/star-rating.css HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:44,698 basehttp "GET /static/css/styles.css HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:44,833 basehttp "GET /static/css/custom.css HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:45,056 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:46,027 basehttp "GET /static/js/star-rating.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:46,737 basehttp "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:46,977 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:47,310 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:47,927 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:48,152 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:48,164 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:48,225 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:48,284 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 304 0
+INFO 2025-07-28 11:16:53,868 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-28 11:16:54,630 log Not Found: /favicon.ico
+WARNING 2025-07-28 11:16:54,632 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 11:19:29,049 basehttp "GET / HTTP/1.1" 200 137039
+INFO 2025-07-28 11:19:32,370 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:19:46,275 basehttp "GET / HTTP/1.1" 200 137039
+INFO 2025-07-28 11:19:46,921 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-28 11:19:46,922 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-28 11:19:46,934 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-28 11:19:46,959 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-28 11:19:47,546 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-28 11:19:48,039 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 11:19:48,211 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-28 11:19:48,235 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-28 11:19:48,467 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-28 11:19:48,485 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-28 11:19:48,487 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 11:19:48,512 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-28 11:19:48,521 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 11:19:49,082 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-28 11:19:49,454 log Not Found: /favicon.ico
+WARNING 2025-07-28 11:19:49,456 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 11:21:06,660 basehttp "GET / HTTP/1.1" 200 137039
+INFO 2025-07-28 11:21:08,049 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-28 11:21:08,082 basehttp "GET /static/css/custom.css HTTP/1.1" 200 6940
+INFO 2025-07-28 11:21:08,227 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:21:08,493 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-28 11:21:11,735 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-28 11:21:16,350 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 304 0
+INFO 2025-07-28 11:21:16,358 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 304 0
+INFO 2025-07-28 11:21:19,004 basehttp "GET /static/images/logo.png HTTP/1.1" 304 0
+INFO 2025-07-28 11:21:19,008 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 304 0
+INFO 2025-07-28 11:21:19,032 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-28 11:21:19,065 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-28 11:21:19,136 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 11:21:20,221 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:21:30,371 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 11:24:52,837 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 11:25:05,935 basehttp "GET / HTTP/1.1" 200 136635
+INFO 2025-07-28 11:25:13,560 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:25:38,636 basehttp "GET /products/ HTTP/1.1" 200 68524
+INFO 2025-07-28 11:25:39,548 basehttp "GET /static/js/script.js HTTP/1.1" 200 53990
+INFO 2025-07-28 11:25:40,953 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:25:46,778 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/ HTTP/1.1" 200 77117
+INFO 2025-07-28 11:25:48,917 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:26:15,876 basehttp "POST /product/16/add_review/ HTTP/1.1" 302 0
+INFO 2025-07-28 11:26:16,033 basehttp "GET /product/arroz-classico-basmati-indiano-5kg/ HTTP/1.1" 200 77117
+INFO 2025-07-28 11:26:17,798 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:34:55,279 basehttp "GET / HTTP/1.1" 200 136635
+INFO 2025-07-28 11:34:57,332 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:35:30,901 basehttp "GET /admin/ HTTP/1.1" 200 36069
+INFO 2025-07-28 11:35:31,430 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-07-28 11:35:31,431 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-07-28 11:35:31,430 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-07-28 11:35:31,442 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1517
+INFO 2025-07-28 11:35:31,444 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1125
+INFO 2025-07-28 11:35:31,445 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1169
+INFO 2025-07-28 11:35:31,445 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 499
+INFO 2025-07-28 11:35:31,446 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 18769
+INFO 2025-07-28 11:35:31,446 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1101
+INFO 2025-07-28 11:35:31,453 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2715
+INFO 2025-07-28 11:35:31,456 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5481
+INFO 2025-07-28 11:35:31,453 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1734
+INFO 2025-07-28 11:35:31,491 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1240
+INFO 2025-07-28 11:35:31,491 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1054
+INFO 2025-07-28 11:35:31,492 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 785
+INFO 2025-07-28 11:35:31,498 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 404
+INFO 2025-07-28 11:35:31,500 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2377
+INFO 2025-07-28 11:35:31,501 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 797
+INFO 2025-07-28 11:35:31,539 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2437
+INFO 2025-07-28 11:35:31,540 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 319
+INFO 2025-07-28 11:35:31,555 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1016
+INFO 2025-07-28 11:35:31,556 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5259
+INFO 2025-07-28 11:35:31,559 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2720
+INFO 2025-07-28 11:35:31,560 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2013
+INFO 2025-07-28 11:35:31,587 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 993
+INFO 2025-07-28 11:35:31,590 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 189
+INFO 2025-07-28 11:35:31,607 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 356
+INFO 2025-07-28 11:35:31,610 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6407
+INFO 2025-07-28 11:35:31,610 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1238
+INFO 2025-07-28 11:35:31,611 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1451
+INFO 2025-07-28 11:35:31,635 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 78
+INFO 2025-07-28 11:35:31,665 basehttp "GET /static/admin/css/responsive.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 16565
+INFO 2025-07-28 11:35:31,666 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-07-28 11:35:31,667 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-07-28 11:35:31,667 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1955
+INFO 2025-07-28 11:35:31,668 basehttp "GET /static/admin/css/responsive_rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1991
+INFO 2025-07-28 11:35:31,683 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6951
+INFO 2025-07-28 11:35:31,708 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2888
+INFO 2025-07-28 11:35:31,796 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 11:35:31,813 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:35:31,833 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-28 11:35:31,868 basehttp "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-28 11:35:31,886 basehttp "GET /static/admin_interface/related-modal/related-modal.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 304 0
+INFO 2025-07-28 11:35:31,905 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:35:33,017 basehttp "GET /static/admin/img/icon-no.svg HTTP/1.1" 200 560
+INFO 2025-07-28 11:35:33,029 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-07-28 11:35:33,283 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+INFO 2025-07-28 11:35:33,284 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-07-28 11:36:09,406 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35564
+INFO 2025-07-28 11:36:09,784 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-28 11:36:09,863 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-28 11:36:09,967 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:09,978 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,025 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-28 11:36:10,035 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,045 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,062 basehttp "GET /static/admin/js/core.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,089 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,129 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,149 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,164 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 11:36:10,189 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,220 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 304 0
+INFO 2025-07-28 11:36:10,319 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-28 11:36:10,330 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11991
+INFO 2025-07-28 11:36:11,064 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-07-28 11:36:11,082 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-07-28 11:36:17,066 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-28 11:36:17,158 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35694
+INFO 2025-07-28 11:36:17,442 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 11:36:17,685 basehttp "GET /static/admin/img/icon-yes.svg HTTP/1.1" 200 436
+INFO 2025-07-28 11:36:22,333 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-28 11:36:22,431 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35696
+INFO 2025-07-28 11:36:22,936 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 11:36:28,980 basehttp "GET / HTTP/1.1" 200 135129
+INFO 2025-07-28 11:36:31,906 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:41:18,878 basehttp "GET / HTTP/1.1" 200 135129
+INFO 2025-07-28 11:41:23,159 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:41:29,057 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-28 11:41:29,262 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35702
+INFO 2025-07-28 11:41:29,729 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 11:41:37,899 basehttp "GET / HTTP/1.1" 200 135129
+INFO 2025-07-28 11:41:42,395 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:42:15,176 basehttp "GET / HTTP/1.1" 200 135129
+INFO 2025-07-28 11:42:18,255 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:44:04,031 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-28 11:45:07,690 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 91, in home
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 228, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'content' appears more than once
+ERROR 2025-07-28 11:45:07,714 basehttp "GET / HTTP/1.1" 500 338087
+INFO 2025-07-28 11:46:36,765 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-28 11:46:37,177 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35688
+INFO 2025-07-28 11:46:38,004 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+ERROR 2025-07-28 11:46:43,775 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 91, in home
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 228, in do_block
+    raise TemplateSyntaxError(
+        "'%s' tag with name '%s' appears more than once" % (bits[0], block_name)
+    )
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'content' appears more than once
+ERROR 2025-07-28 11:46:43,806 basehttp "GET / HTTP/1.1" 500 337775
+INFO 2025-07-28 11:48:05,307 basehttp "GET / HTTP/1.1" 200 133674
+INFO 2025-07-28 11:48:08,192 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:48:26,788 basehttp "GET / HTTP/1.1" 200 133674
+INFO 2025-07-28 11:48:28,969 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:49:35,064 basehttp "GET / HTTP/1.1" 200 133674
+INFO 2025-07-28 11:49:37,382 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:49:45,992 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-28 11:49:46,377 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35704
+INFO 2025-07-28 11:49:46,691 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 11:49:53,076 basehttp "GET / HTTP/1.1" 200 133674
+INFO 2025-07-28 11:49:55,694 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:50:17,023 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 11:50:22,622 basehttp "GET / HTTP/1.1" 200 136705
+INFO 2025-07-28 11:50:24,903 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:50:34,136 basehttp "POST /admin/store/banner/ HTTP/1.1" 302 0
+INFO 2025-07-28 11:50:34,605 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35702
+INFO 2025-07-28 11:50:35,381 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 11:50:40,683 basehttp "GET / HTTP/1.1" 200 136705
+INFO 2025-07-28 11:50:44,016 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:51:11,416 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 11:52:47,045 basehttp "GET / HTTP/1.1" 200 136705
+INFO 2025-07-28 11:52:49,825 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 11:55:40,488 basehttp "GET /cart/ HTTP/1.1" 200 103692
+INFO 2025-07-28 11:55:42,142 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+ERROR 2025-07-28 11:56:05,913 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f00ca598830>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f00ca598830>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 614, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<6 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f00ca598830>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-28 11:56:05,925 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 201153
+ERROR 2025-07-28 11:56:08,687 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f00c9b05f90>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f00c9b05f90>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 614, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<6 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f00c9b05f90>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-28 11:56:08,696 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 201152
+ERROR 2025-07-28 11:56:30,361 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f00ca4a4b90>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f00ca4a4b90>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 614, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<6 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f00ca4a4b90>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-28 11:56:30,372 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 201153
+INFO 2025-07-28 12:01:11,916 basehttp "GET /admin/ HTTP/1.1" 200 35934
+INFO 2025-07-28 12:01:16,979 basehttp "GET /admin/store/review/ HTTP/1.1" 200 37504
+INFO 2025-07-28 12:01:17,627 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 12:01:36,297 basehttp "GET /products/ HTTP/1.1" 200 68524
+INFO 2025-07-28 12:01:39,521 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 12:01:43,715 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 80189
+INFO 2025-07-28 12:01:45,511 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 12:02:09,551 basehttp "POST /product/9/add_review/ HTTP/1.1" 302 0
+INFO 2025-07-28 12:02:09,710 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 80189
+INFO 2025-07-28 12:02:11,162 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 12:02:22,822 basehttp "GET /admin/store/review/ HTTP/1.1" 200 37639
+INFO 2025-07-28 12:02:23,141 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 12:02:27,729 basehttp "GET /admin/store/review/ HTTP/1.1" 200 37504
+INFO 2025-07-28 12:02:28,594 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 12:10:28,014 autoreload /home/danmarques/Documentos/Workplace/india_oasis/store/views.py changed, reloading.
+INFO 2025-07-28 12:10:41,446 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 12:11:32,176 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 80189
+INFO 2025-07-28 12:11:35,409 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 12:11:58,162 basehttp "POST /product/9/add_review/ HTTP/1.1" 302 0
+INFO 2025-07-28 12:11:58,318 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 80189
+INFO 2025-07-28 12:12:04,730 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 12:12:15,572 basehttp "GET /admin/store/review/ HTTP/1.1" 200 38176
+INFO 2025-07-28 12:12:15,928 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 12:16:11,442 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 12:16:23,211 basehttp "GET /product/arroz-basmati/ HTTP/1.1" 200 83009
+INFO 2025-07-28 12:16:25,429 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 12:16:36,268 basehttp "POST /review/6/helpful/ HTTP/1.1" 200 114
+INFO 2025-07-28 12:16:51,027 basehttp "GET / HTTP/1.1" 200 136705
+INFO 2025-07-28 12:16:54,136 basehttp "GET /cart/count/ HTTP/1.1" 200 17

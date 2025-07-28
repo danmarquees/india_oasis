@@ -1,7 +1,10 @@
 import requests
+from django.conf import settings
 
-def calcular_frete_melhor_envio(cep_origem, cep_destino, peso_kg, valor_produtos, token='SEU_TOKEN_AQUI', servicos=None):
+def calcular_frete_melhor_envio(cep_origem, cep_destino, peso_kg, valor_produtos, altura_cm, largura_cm, comprimento_cm, token=None, servicos=None):
     url = 'https://api.melhorenvio.com.br/api/v2/me/shipment/calculate'
+    if token is None:
+        token = settings.MELHOR_ENVIO_TOKEN
     headers = {
         'Authorization': f'Bearer {token}',
         'Content-Type': 'application/json',
@@ -12,9 +15,9 @@ def calcular_frete_melhor_envio(cep_origem, cep_destino, peso_kg, valor_produtos
         "to": {"postal_code": cep_destino},
         "products": [{
             "weight": int(peso_kg * 1000),  # em gramas
-            "width": 15,
-            "height": 10,
-            "length": 20,
+            "width": int(largura_cm),
+            "height": int(altura_cm),
+            "length": int(comprimento_cm),
             "insurance_value": float(valor_produtos),
             "quantity": 1
         }],

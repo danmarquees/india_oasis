@@ -286,10 +286,12 @@ def checkout(request):
     shipping_options = []
     shipping_erro = None
 
-    cep_origem = '01001-000'  # CEP da loja
+    cep_origem = settings.MELHOR_ENVIO_CEP_ORIGEM  # CEP da loja
     cep_destino = customer_profile.cep
     peso_total = sum([item.product.peso * item.quantity for item in cart.items.all()]) or 0.5
-    token = 'SEU_TOKEN_AQUI'  # Substitua pelo seu token real
+    comprimento_total = sum([item.product.comprimento * item.quantity for item in cart.items.all()]) or 20
+    altura_max = max([item.product.altura for item in cart.items.all()], default=10)
+    largura_max = max([item.product.largura for item in cart.items.all()], default=15)
 
     if request.method == 'POST' or request.GET.get('calcular_frete'):
         cep_destino = request.POST.get('cep') or request.GET.get('cep') or customer_profile.cep
@@ -298,7 +300,9 @@ def checkout(request):
             cep_destino=cep_destino,
             peso_kg=peso_total,
             valor_produtos=cart.total_price,
-            token=token,
+            altura_cm=altura_max,
+            largura_cm=largura_max,
+            comprimento_cm=comprimento_total,
             servicos=["1", "2"]  # 1=PAC, 2=SEDEX
         )
         if isinstance(resultado, list):
@@ -476,37 +480,31 @@ def add_review(request, product_id):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            if Review.objects.filter(product=product, user=request.user).exists():
-                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                    return JsonResponse({'success': False, 'error': 'Você já avaliou este produto.'})
-                else:
-                    messages.error(request, "Você já avaliou este produto.")
+            review = form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+
+            # Recalcular a classificação média
+            reviews = Review.objects.filter(product=product)
+            review_count = reviews.count()
+            average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
+
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                # Para requisições AJAX, retornar dados JSON
+                context = {
+                    'reviews': reviews,
+                    'product': product
+                }
+                reviews_html = render_to_string('store/includes/reviews_list.html', context, request)
+                return JsonResponse({
+                    'success': True,
+                    'html': reviews_html,
+                    'average_rating': average_rating,
+                    'review_count': review_count
+                })
             else:
-                review = form.save(commit=False)
-                review.product = product
-                review.user = request.user
-                review.save()
-
-                # Recalcular a classificação média
-                reviews = Review.objects.filter(product=product)
-                review_count = reviews.count()
-                average_rating = reviews.aggregate(Avg('rating'))['rating__avg'] or 0
-
-                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-                    # Para requisições AJAX, retornar dados JSON
-                    context = {
-                        'reviews': reviews,
-                        'product': product
-                    }
-                    reviews_html = render_to_string('store/includes/reviews_list.html', context, request)
-                    return JsonResponse({
-                        'success': True,
-                        'html': reviews_html,
-                        'average_rating': average_rating,
-                        'review_count': review_count
-                    })
-                else:
-                    messages.success(request, "Obrigado pela sua avaliação!")
+                messages.success(request, "Obrigado pela sua avaliação!")
 
     # Para requisições não-AJAX, redirecionar para a página do produto
     return redirect('store:product_detail', slug=product.slug)
@@ -593,6 +591,34 @@ def toggle_wishlist(request):
             return JsonResponse({'success': True, 'in_wishlist': True})
     except Product.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Produto não encontrado.'}, status=404)
+
+@require_POST
+def calculate_shipping_ajax(request):
+    data = json.loads(request.body.decode('utf-8'))
+    cep_destino = data.get('cep')
+    # Defina o CEP de origem fixo ou pegue do settings
+    cep_origem = settings.MELHOR_ENVIO_CEP_ORIGEM
+    # Calcule o peso total do carrinho
+    cart = get_cart(request)
+    peso_total = sum([item.product.peso * item.quantity for item in cart.items.all()]) or 0.5
+    comprimento_total = sum([item.product.comprimento * item.quantity for item in cart.items.all()]) or 20
+    altura_max = max([item.product.altura for item in cart.items.all()], default=10)
+    largura_max = max([item.product.largura for item in cart.items.all()], default=15)
+    valor_produtos = cart.total_price
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+        cep_destino=cep_destino,
+        peso_kg=peso_total,
+        valor_produtos=valor_produtos,
+        altura_cm=altura_max,
+        largura_cm=largura_max,
+        comprimento_cm=comprimento_total,
+        servicos=["1", "2"]
+    )
+    if isinstance(resultado, list):
+        return JsonResponse({'success': True, 'options': resultado})
+    else:
+        return JsonResponse({'success': False, 'erro': resultado.get('erro', 'Erro ao calcular frete')})
 
 def cart_count(request):
     cart = get_cart(request)

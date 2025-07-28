@@ -156,6 +156,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MERCADO_PAGO_PUBLIC_KEY = env('MERCADO_PAGO_PUBLIC_KEY')
 MERCADO_PAGO_ACCESS_TOKEN = env('MERCADO_PAGO_ACCESS_TOKEN')
 
+# Melhor Envio Token
+MELHOR_ENVIO_TOKEN = env('MELHOR_ENVIO_TOKEN', default='')
+
+# Melhor Envio CEP de Origem
+MELHOR_ENVIO_CEP_ORIGEM = '01034-001'
+
 # Logging Configuration
 LOGGING = {
     'version': 1,
