@@ -1,261 +1,4 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Termos de Uso - India Oasis - Temperos e Sabores da Índia</title>
-
-        <!-- Tailwind CSS -->
-        <script src="https://cdn.tailwindcss.com"></script>
-
-        <!-- Fontes do Google -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Teko:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap"
-            rel="stylesheet"
-        />
-
-        <!-- Font Awesome (Ícones) -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        />
-
-        <!-- Link para o arquivo CSS externo -->
-        <link rel="stylesheet" href="assets/css/styles.css" />
-
-        <style>
-            /* Estilos específicos para página de termos */
-            .terms-content {
-                max-width: 800px;
-                margin: 0 auto;
-                line-height: 1.8;
-            }
-
-            .terms-section {
-                margin-bottom: 2rem;
-                padding: 1.5rem;
-                background: white;
-                border-radius: 12px;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-                border-left: 4px solid #ff6b35;
-            }
-
-            .terms-section h2 {
-                color: #1f2937;
-                font-size: 1.5rem;
-                font-weight: 600;
-                margin-bottom: 1rem;
-                padding-bottom: 0.5rem;
-                border-bottom: 2px solid #f3f4f6;
-            }
-
-            .terms-section h3 {
-                color: #374151;
-                font-size: 1.25rem;
-                font-weight: 500;
-                margin: 1.5rem 0 0.75rem 0;
-            }
-
-            .terms-section p {
-                margin-bottom: 1rem;
-                color: #4b5563;
-            }
-
-            .terms-section ul {
-                margin-bottom: 1rem;
-                padding-left: 1.5rem;
-            }
-
-            .terms-section li {
-                margin-bottom: 0.5rem;
-                color: #4b5563;
-            }
-
-            .highlight-box {
-                background: linear-gradient(135deg, #fef3c7, #fed7aa);
-                border: 1px solid #f59e0b;
-                border-radius: 8px;
-                padding: 1rem;
-                margin: 1.5rem 0;
-            }
-
-            .contact-box {
-                background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-                border: 1px solid #3b82f6;
-                border-radius: 8px;
-                padding: 1.5rem;
-                margin: 2rem 0;
-                text-align: center;
-            }
-
-            .toc {
-                background: #f9fafb;
-                border: 1px solid #e5e7eb;
-                border-radius: 8px;
-                padding: 1.5rem;
-                margin-bottom: 2rem;
-            }
-
-            .toc ul {
-                list-style: none;
-                padding: 0;
-            }
-
-            .toc li {
-                margin: 0.5rem 0;
-            }
-
-            .toc a {
-                color: #ff6b35;
-                text-decoration: none;
-                transition: all 0.3s ease;
-            }
-
-            .toc a:hover {
-                color: #e55a2b;
-                text-decoration: underline;
-            }
-
-            .last-updated {
-                background: #ecfdf5;
-                border: 1px solid #10b981;
-                border-radius: 8px;
-                padding: 1rem;
-                margin-bottom: 2rem;
-                text-align: center;
-                color: #065f46;
-            }
-        </style>
-    </head>
-    <body class="text-gray-800 bg-gray-50">
-        <!-- ==== MENU LATERAL RETRÁTIL ==== -->
-        <div
-            id="menu-overlay"
-            class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"
-        ></div>
-        <aside
-            id="side-menu"
-            class="fixed top-0 left-0 w-72 h-full bg-white shadow-lg z-50 overflow-y-auto transform -translate-x-full transition-transform duration-300"
-        >
-            <div class="p-4">
-                <button
-                    id="close-menu-btn"
-                    class="absolute top-4 right-4 text-2xl text-gray-500 hover:text-primary"
-                >
-                    &times;
-                </button>
-                <h2 class="text-3xl font-teko text-primary mb-6">Menu</h2>
-
-                <!-- Barra de Busca -->
-                <div class="relative mb-6">
-                    <input
-                        type="text"
-                        id="search-input"
-                        placeholder="Buscar produtos..."
-                        class="w-full pl-4 pr-10 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                    <i
-                        class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"
-                    ></i>
-                </div>
-
-                <!-- Links de Navegação -->
-                <div class="space-y-4">
-                    <a
-                        href="index.html"
-                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
-                    >
-                        <i class="fas fa-home w-5"></i>
-                        <span>Início</span>
-                    </a>
-                    <a
-                        href="products.html"
-                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
-                    >
-                        <i class="fas fa-shopping-bag w-5"></i>
-                        <span>Produtos</span>
-                    </a>
-                    <a
-                        href="about.html"
-                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
-                    >
-                        <i class="fas fa-info-circle w-5"></i>
-                        <span>Sobre Nós</span>
-                    </a>
-                    <a
-                        href="contact.html"
-                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
-                    >
-                        <i class="fas fa-envelope w-5"></i>
-                        <span>Contato</span>
-                    </a>
-                    <hr class="my-4" />
-                    <a
-                        href="terms.html"
-                        class="flex items-center space-x-3 text-primary font-semibold"
-                    >
-                        <i class="fas fa-file-contract w-5"></i>
-                        <span>Termos de Uso</span>
-                    </a>
-                    <a
-                        href="privacy.html"
-                        class="flex items-center space-x-3 text-gray-700 hover:text-primary transition-colors"
-                    >
-                        <i class="fas fa-shield-alt w-5"></i>
-                        <span>Política de Privacidade</span>
-                    </a>
-                </div>
-            </div>
-        </aside>
-
-        <!-- ==== CABEÇALHO ==== -->
-        <header class="bg-white shadow-md sticky top-0 z-40">
-            <nav
-                class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center"
-            >
-                <div class="flex items-center space-x-4">
-                    <button
-                        id="open-menu-btn"
-                        class="text-xl hover:text-primary"
-                    >
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <a href="index.html" class="flex items-center">
-                        <h1 class="text-2xl md:text-3xl font-teko text-primary">
-                            India<span class="text-secondary">Oasis</span>
-                        </h1>
-                    </a>
-                </div>
-
-                <div class="flex items-center space-x-4">
-                    <!-- Botão de Login -->
-                    <a
-                        href="profile.html"
-                        class="hidden md:flex items-center space-x-2 text-sm hover:text-primary transition-colors"
-                    >
-                        <i class="fas fa-user text-lg"></i>
-                        <span>Minha Conta</span>
-                    </a>
-
-                    <!-- Botão do Carrinho -->
-                    <a
-                        href="cart.html"
-                        class="relative flex items-center space-x-2 text-sm hover:text-primary transition-colors"
-                    >
-                        <i class="fas fa-shopping-cart text-lg"></i>
-                        <span class="hidden md:block">Carrinho</span>
-                        <span
-                            id="cart-count"
-                            class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center"
-                        >
-                            0
-                        </span>
-                    </a>
-                </div>
-            </nav>
-        </header>
+{% load static %} {% extends 'base.html' %} {% block content %  }
 
         <!-- ==== CONTEÚDO PRINCIPAL ==== -->
         <main class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -264,8 +7,8 @@
                 <ol class="flex space-x-2 text-sm">
                     <li>
                         <a
-                            href="index.html"
-                            class="text-primary hover:underline"
+                            href="{% url 'store:home' %}"
+                            class="text-orange-600 hover:underline"
                             >Início</a
                         >
                     </li>
@@ -277,7 +20,7 @@
             <!-- Título da Página -->
             <div class="text-center mb-8">
                 <h1 class="text-4xl md:text-5xl font-teko text-secondary mb-4">
-                    <i class="fas fa-file-contract text-primary mr-3"></i>
+                                            <i class="fas fa-file-contract text-orange-600 mr-3"></i>
                     Termos de Uso
                 </h1>
                 <p class="text-gray-600 text-lg max-w-3xl mx-auto">
@@ -360,7 +103,7 @@
 
                     <h3>3.1 Criação de Conta</h3>
                     <p>
-                        Para fazer compras e</p> acessar determinados recursos, você deve criar uma conta.
+                        Para fazer compras e acessar determinados recursos, você deve criar uma conta.
                         Você se compromete a fornecer informações precisas, atuais e completas
                         durante o processo de registro.
                     </p>
@@ -527,7 +270,7 @@
                     <h2>9. Privacidade e Dados</h2>
                     <p>
                         A coleta e uso de seus dados pessoais são regidos por nossa
-                        <a href="privacy.html" class="text-primary hover:underline">Política de Privacidade</a>,
+                        <a href="{% url 'store:privacy' %}" class="text-orange-600 hover:underline">Política de Privacidade</a>,
                         que faz parte integrante destes Termos.
                     </p>
                     <p>
@@ -640,7 +383,7 @@
 
                 <!-- Declaração Final -->
                 <div class="highlight-box text-center">
-                    <i class="fas fa-handshake text-primary text-2xl mb-3"></i>
+                    <i class="fas fa-handshake text-orange-600 text-2xl mb-3"></i>
                     <p class="font-semibold text-lg mb-2">
                         Obrigado por escolher a India Oasis!
                     </p>
@@ -652,118 +395,73 @@
             </div>
         </main>
 
-        <!-- ==== RODAPÉ ==== -->
-        <footer class="bg-gray-900 text-gray-300 py-12 mt-16">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <!-- Logo e Descrição -->
-                    <div class="col-span-1 md:col-span-2">
-                        <h2 class="text-3xl font-teko text-primary mb-4">
-                            India<span class="text-secondary">Oasis</span>
-                        </h2>
-                        <p class="text-gray-400 mb-4 max-w-md">
-                            Descubra os autênticos sabores da Índia com nossos
-                            temperos e especiarias selecionados. Uma jornada
-                            culinária que desperta os sentidos.
-                        </p>
-                        <div class="flex space-x-4">
-                            <a
-                                href="#"
-                                class="text-gray-400 hover:text-primary transition-colors"
-                            >
-                                <i class="fab fa-facebook-f text-xl"></i>
-                            </a>
-                            <a
-                                href="#"
-                                class="text-gray-400 hover:text-primary transition-colors"
-                            >
-                                <i class="fab fa-instagram text-xl"></i>
-                            </a>
-                            <a
-                                href="#"
-                                class="text-gray-400 hover:text-primary transition-colors"
-                            >
-                                <i class="fab fa-whatsapp text-xl"></i>
-                            </a>
-                        </div>
-                    </div>
+        
+        <!-- Scripts -->
+        <script src="{% static 'js/script.js' %}"></script>
+        <script src="{% static 'js/toast-system.js' %}"></script>
+        
+        <!-- Configuração de URLs para o JavaScript -->
+        <script>
+            // Configurar URLs globais para o JavaScript
+            window.URLS = {
+                cart: "{% url 'store:cart' %}",
+                wishlist: "{% url 'store:wishlist' %}",
+                products: "{% url 'store:product_list' %}",
+                home: "{% url 'store:home' %}",
+                product_detail: function(slug) {
+                    return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace('PLACEHOLDER_SLUG', slug);
+                }
+            };
+        </script>
 
-                    <!-- Links Úteis -->
-                    <div>
-                        <h3 class="font-rajdhani font-semibold text-white mb-4">
-                            Links Úteis
-                        </h3>
-                        <ul class="space-y-2">
-                            <li>
-                                <a
-                                    href="index.html"
-                                    class="hover:text-primary transition-colors"
-                                    >Início</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="products.html"
-                                    class="hover:text-primary transition-colors"
-                                    >Produtos</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="about.html"
-                                    class="hover:text-primary transition-colors"
-                                    >Sobre Nós</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="contact.html"
-                                    class="hover:text-primary transition-colors"
-                                    >Contato</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
+        <!-- Script para carregar contador do carrinho -->
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lógica para o menu lateral
+            const openMenuBtn = document.getElementById("open-menu-btn");
+            const closeMenuBtn = document.getElementById("close-menu-btn");
+            const sideMenu = document.getElementById("side-menu");
+            const menuOverlay = document.getElementById("menu-overlay");
 
-                    <!-- Políticas -->
-                    <div>
-                        <h3 class="font-rajdhani font-semibold text-white mb-4">
-                            Políticas
-                        </h3>
-                        <ul class="space-y-2">
-                            <li>
-                                <a
-                                    href="terms.html"
-                                    class="text-primary font-semibold"
-                                    >Termos de Uso</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="privacy.html"
-                                    class="hover:text-primary transition-colors"
-                                    >Política de Privacidade</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="contact.html"
-                                    class="hover:text-primary transition-colors"
-                                    >Suporte</a
-                                >
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            const openMenu = () => {
+                sideMenu.classList.remove("-translate-x-full");
+                menuOverlay.classList.remove("hidden");
+            };
 
-                <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                    <p class="text-gray-400">
-                        &copy; 2024 India Oasis. Todos os direitos reservados.
-                    </p>
-                </div>
-            </div>
-        </footer>
+            const closeMenu = () => {
+                sideMenu.classList.add("-translate-x-full");
+                menuOverlay.classList.add("hidden");
+            };
 
-        <!-- Scripts migrados para static/js/script.js -->
-    </body>
-</html>
+            if (openMenuBtn) openMenuBtn.addEventListener("click", openMenu);
+            if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
+            if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && !sideMenu.classList.contains("-translate-x-full")) {
+                    closeMenu();
+                }
+            });
+
+            // Carregar contador do carrinho
+            fetch("{% url 'store:cart_count' %}", {
+                headers: { "X-Requested-With": "XMLHttpRequest" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const cartCountElement = document.getElementById("cart-count");
+                if (cartCountElement) {
+                    cartCountElement.textContent = data.cart_count;
+                    if (data.cart_count > 0) {
+                        cartCountElement.classList.remove("hidden");
+                    } else {
+                        cartCountElement.classList.add("hidden");
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao carregar contador do carrinho:", error);
+            });
+        });
+        </script>
+{% endblock content %}

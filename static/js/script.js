@@ -45,11 +45,19 @@ let carouselDebounceTimer = null;
 let isCarouselTransitioning = false;
 
 // Inicialização do carrossel ao carregar a página
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener("DOMContentLoaded", function () {
+  console.log(`🎠 Inicializando carrossel com ${totalSlides} slides`);
   if (totalSlides > 0) {
+    // Garantir que o primeiro slide esteja ativo
+    currentSlide = 0;
     updateCarousel();
-    startCarouselAutoplay();
     setupCarouselListeners();
+    // Delay para garantir que o DOM esteja completamente renderizado
+    setTimeout(() => {
+      startCarouselAutoplay();
+    }, 100);
+  } else {
+    console.warn("⚠️ Nenhum slide encontrado para o carrossel");
   }
 });
 
@@ -329,19 +337,27 @@ function addToCart(productId, productName, button = null) {
     .then((response) => response.json())
     .then((data) => {
       // Atualiza contadores
-      document.querySelectorAll("#cart-count, #cart-mini-count").forEach((el) => {
-        el.textContent = data.cart_count;
-        if (data.cart_count > 0) el.classList.remove("hidden");
-      });
+      document
+        .querySelectorAll("#cart-count, #cart-mini-count")
+        .forEach((el) => {
+          el.textContent = data.cart_count;
+          if (data.cart_count > 0) el.classList.remove("hidden");
+        });
       // Feedback visual
       if (data.success) {
         window.cartNotifications?.itemAdded(productName, 1);
       } else {
-        window.toastSystem?.error("Erro ao adicionar", data.message || "Não foi possível adicionar ao carrinho.");
+        window.toastSystem?.error(
+          "Erro ao adicionar",
+          data.message || "Não foi possível adicionar ao carrinho.",
+        );
       }
     })
     .catch((error) => {
-      window.toastSystem?.error("Erro de conexão", "Falha ao conectar com o servidor.");
+      window.toastSystem?.error(
+        "Erro de conexão",
+        "Falha ao conectar com o servidor.",
+      );
       console.error("Erro ao adicionar ao carrinho:", error);
     })
     .finally(() => {
@@ -350,8 +366,15 @@ function addToCart(productId, productName, button = null) {
 }
 
 function getCSRFToken() {
+  // First try to get from hidden input (template injection)
+  const hiddenInput = document.querySelector("[name=csrfmiddlewaretoken]");
+  if (hiddenInput) {
+    return hiddenInput.value;
+  }
+
+  // Fallback to cookie with correct name
   const cookieValue = document.cookie.match(
-    "(^|;)\\s*csrftoken\\s*=\\s*([^;]+)",
+    "(^|;)\\s*india_oasis_csrftoken\\s*=\\s*([^;]+)",
   );
   return cookieValue ? cookieValue.pop() : "";
 }
@@ -472,53 +495,51 @@ function updateCarousel() {
       console.warn(`🎠 Slide corrigido de ${oldSlide} para ${currentSlide}`);
     }
 
-    // Use requestAnimationFrame para performance
-    requestAnimationFrame(() => {
-      try {
-        // Atualizar slides
-        carouselItems.forEach((item, index) => {
-          if (!item) {
-            console.error(`❌ Slide ${index} é null ou undefined`);
-            return;
-          }
+    console.log(
+      `🎠 Atualizando carrossel - Slide ${currentSlide + 1}/${totalSlides}`,
+    );
 
-          const isActive = index === currentSlide;
-          const isPrev = index < currentSlide;
+    // Atualizar slides - remover todas as classes primeiro
+    carouselItems.forEach((item, index) => {
+      if (!item) {
+        console.error(`❌ Slide ${index} é null ou undefined`);
+        return;
+      }
 
-          item.classList.toggle("active", isActive);
-          item.classList.toggle("prev", isPrev && !isActive);
+      // Remover todas as classes de estado
+      item.classList.remove("active", "prev", "next");
 
-          // Otimização: só remover classes se necessário
-          if (!isActive && !isPrev) {
-            item.classList.remove("active", "prev");
-          }
-        });
-
-        // Atualizar indicadores
-        if (carouselIndicators.length) {
-          carouselIndicators.forEach((indicator, index) => {
-            if (!indicator) {
-              console.error(`❌ Indicador ${index} é null ou undefined`);
-              return;
-            }
-            indicator.classList.toggle("active", index === currentSlide);
-          });
-        }
-
-        // Resetar e iniciar barra de progresso
-        updateProgressBar();
-
-        // Liberar transição após 600ms (duração da animação CSS)
-        setTimeout(() => {
-          isCarouselTransitioning = false;
-        }, 600);
-
-        console.log(`🎠 Slide atual: ${currentSlide + 1}/${totalSlides}`);
-      } catch (animationError) {
-        console.error("❌ Erro na animação do carrossel:", animationError);
-        isCarouselTransitioning = false;
+      // Aplicar a classe apropriada baseada no styles.css
+      if (index === currentSlide) {
+        item.classList.add("active");
+        console.log(`✅ Slide ${index} ativo`);
+      } else if (index < currentSlide) {
+        item.classList.add("prev");
       }
     });
+
+    // Atualizar indicadores
+    if (carouselIndicators.length) {
+      carouselIndicators.forEach((indicator, index) => {
+        if (!indicator) {
+          console.error(`❌ Indicador ${index} é null ou undefined`);
+          return;
+        }
+        indicator.classList.toggle("active", index === currentSlide);
+      });
+      console.log(`🔘 Indicadores atualizados - ativo: ${currentSlide}`);
+    }
+
+    // Resetar e iniciar barra de progresso
+    updateProgressBar();
+
+    // Liberar transição após animação CSS
+    setTimeout(() => {
+      isCarouselTransitioning = false;
+      console.log(
+        `🎠 Transição concluída - Slide ${currentSlide + 1}/${totalSlides}`,
+      );
+    }, 500);
   } catch (error) {
     console.error("❌ Erro crítico no updateCarousel:", error);
     isCarouselTransitioning = false;
@@ -532,12 +553,14 @@ function updateProgressBar() {
       return;
     }
 
+    // Resetar animação da barra de progresso
     carouselProgress.style.width = "0%";
     carouselProgress.style.animation = "none";
 
-    // Force reflow de forma otimizada
-    void carouselProgress.offsetHeight;
+    // Force reflow
+    carouselProgress.offsetHeight;
 
+    // Iniciar animação usando CSS animation definida no styles.css
     setTimeout(() => {
       if (!isCarouselPaused && carouselProgress && !document.hidden) {
         carouselProgress.style.animation = "progressBar 5s linear";
@@ -545,7 +568,7 @@ function updateProgressBar() {
       }
     }, 50);
   } catch (error) {
-    console.error("❌ Erro ao atualizar barra de progresso:", error);
+    console.error("❌ Erro na barra de progresso:", error);
   }
 }
 
@@ -648,7 +671,7 @@ function startCarouselAutoplay() {
         console.error("❌ Erro no auto-play interval:", error);
         stopCarouselAutoplay();
       }
-    }, 3000); // Alterado de 5000 para 3000ms
+    }, 5000); // 5 segundos para cada slide
     console.log("▶️ Auto-play do carrossel iniciado");
   } catch (error) {
     console.error("❌ Erro ao iniciar auto-play:", error);

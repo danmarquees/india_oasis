@@ -99,11 +99,17 @@ def about(request):
 
 @cache_page(60 * 10)
 def terms(request):
-    return render(request, 'store/terms.html')
+    cart = get_cart(request)
+    return render(request, 'store/terms.html', {
+        'cart_count': cart.total_items
+    })
 
 @cache_page(60 * 10)
 def privacy(request):
-    return render(request, 'store/privacy.html')
+    cart = get_cart(request)
+    return render(request, 'store/privacy.html', {
+        'cart_count': cart.total_items
+    })
 
 # --- Product Views ---
 

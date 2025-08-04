@@ -16415,3 +16415,1064 @@ INFO 2025-07-28 12:16:25,429 basehttp "GET /cart/count/ HTTP/1.1" 200 17
 INFO 2025-07-28 12:16:36,268 basehttp "POST /review/6/helpful/ HTTP/1.1" 200 114
 INFO 2025-07-28 12:16:51,027 basehttp "GET / HTTP/1.1" 200 136705
 INFO 2025-07-28 12:16:54,136 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 13:03:58,643 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 13:05:18,839 basehttp "GET /admin/ HTTP/1.1" 301 0
+INFO 2025-07-28 13:05:18,862 basehttp code 400, message Bad request version ('\x98\x02')
+ERROR 2025-07-28 13:05:18,869 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:18,876 basehttp code 400, message Bad request syntax ('\x16\x03\x01\x06à\x01\x00\x06Ü\x03\x03\x8b\x19X\x14Þ¨\x00µ\x90OûÊ2÷Á,s6¤\x10r\x08º·fg=¿\x83\x95û\x90 ')
+ERROR 2025-07-28 13:05:18,877 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:22,087 basehttp code 400, message Bad request version ('ï§½\\?(û\x01G§Ä\x8d·Úèk±\x96ÇV{M&')
+ERROR 2025-07-28 13:05:22,089 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:22,091 basehttp code 400, message Bad request version ('ïmÔí:ûpðÞ\x15è¥1_R»¹c³\x11\x8câ?7¥ÎÂF½üß\x17i')
+ERROR 2025-07-28 13:05:22,100 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:22,108 basehttp code 400, message Bad request version ('èÂ\x98ÀYF)¾©ÙTÏ¨\x1aP:Fÿ\x90+Gô4Wy¼\\w\x99.Ô\x1a\x05ü.\x90+Q\x03\x91\x02®Ë1£\x9b\x16I\x83ÆÜ')
+ERROR 2025-07-28 13:05:22,118 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:22,108 basehttp code 400, message Bad request version ('\x8a\x8a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06Súú\x00\x00\x00#\x00\x00\x00')
+ERROR 2025-07-28 13:05:22,140 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:23,309 basehttp code 400, message Bad request version ('ùÐÛ')
+ERROR 2025-07-28 13:05:23,310 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:23,323 basehttp code 400, message Bad request version ('êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06s')
+ERROR 2025-07-28 13:05:23,323 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:28,893 basehttp code 400, message Bad request version ('\x8a\x8a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x063êê\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x00')
+ERROR 2025-07-28 13:05:28,893 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:28,895 basehttp code 400, message Bad request version (',\x02\x19Õ')
+ERROR 2025-07-28 13:05:28,900 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:05:28,907 basehttp code 400, message Bad request version ('Ï²M$¾õ"KubW+Ì(\x00')
+INFO 2025-07-28 13:05:28,910 basehttp code 400, message Bad request version ('hjg¯øÅË\xadÙ\x82UÓ+\x9eP')
+ERROR 2025-07-28 13:05:28,916 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-07-28 13:05:28,913 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:09,985 autoreload /home/danmarques/Documentos/Workplace/india_oasis/india_oasis_project/settings.py changed, reloading.
+INFO 2025-07-28 13:10:20,310 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 13:10:25,583 basehttp code 400, message Bad request version ("\x87º<×2£\x90\x04\x89=ö\x12Û|C!z9Îq¬&'Oà<\x80©\x16\x90\x87j«\x11ùº\x04É\x1bzÑw\x7fJ¨ú\x07y")
+ERROR 2025-07-28 13:10:25,585 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:25,612 basehttp code 400, message Bad request version ('£¶ËÉke\x17C<\x84p»¾¿høÿ\x91©\x93ëfÝz:"~}\x91!\x0eN\x00')
+ERROR 2025-07-28 13:10:25,612 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:25,613 basehttp code 400, message Bad request version ('ÒòÎ\x9cpù\\È\x11Z\x9dÒf3ùXS\x00')
+ERROR 2025-07-28 13:10:25,659 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:25,676 basehttp code 400, message Bad request version ('\x93\x08¬ÈK|\x87\x95½^÷jk')
+ERROR 2025-07-28 13:10:25,707 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:26,711 basehttp code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+ERROR 2025-07-28 13:10:26,711 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:26,716 basehttp code 400, message Bad request version ('\x8a\x8a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sÚÚ\x00\x00\x00')
+ERROR 2025-07-28 13:10:26,716 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:26,718 basehttp code 400, message Bad request version ('}¬×x´xC¯â\x1b\x12$à\x0e$·¾½\x82')
+ERROR 2025-07-28 13:10:26,718 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:26,725 basehttp code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00+\x00\x07\x06')
+ERROR 2025-07-28 13:10:26,726 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:31,132 basehttp code 400, message Bad request version ("**\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93::\x00\x00\x00#\x00\x00\x00\x17\x00\x00\x003\x04ï\x04ízz\x00\x01\x00\x11ì\x04À'4l±\x94")
+ERROR 2025-07-28 13:10:31,135 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:31,145 basehttp code 400, message Bad request version (".í\x8a\x15ÎnG'2íp¹B-ôùV³Õ1ÆmwüÇ")
+ERROR 2025-07-28 13:10:31,145 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:31,163 basehttp code 400, message Bad request version ('ÊÊ\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06sjj\x00\x00\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+ERROR 2025-07-28 13:10:31,163 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:31,175 basehttp code 400, message Bad request version ('\x8bÒ³ËëN¢í\x84Lá\x14¶úÓ\x1aÒíZq')
+ERROR 2025-07-28 13:10:31,175 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:49,165 basehttp code 400, message Bad request version ('êê\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93\x9a\x9a\x00\x00DÍ\x00\x05\x00\x03\x02h2\x00+\x00\x07\x06ÚÚ\x03\x04\x03\x03\x00')
+ERROR 2025-07-28 13:10:49,165 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:49,179 basehttp code 400, message Bad request version ('¬Q\x92Co±D\x02v')
+INFO 2025-07-28 13:10:49,182 basehttp code 400, message Bad request version ('yÎtí\x16\x18\x9a¾hvtTg\x11JúÁ7o')
+ERROR 2025-07-28 13:10:49,182 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-07-28 13:10:49,183 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:10:49,189 basehttp code 400, message Bad request version ('»Í\x84Í')
+ERROR 2025-07-28 13:10:49,189 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-07-28 13:11:32,059 basehttp "GET / HTTP/1.1" 200 136608
+INFO 2025-07-28 13:11:32,814 basehttp "GET /static/css/custom.css HTTP/1.1" 200 11770
+INFO 2025-07-28 13:11:32,942 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-28 13:11:32,961 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-28 13:11:33,016 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-28 13:11:33,742 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-28 13:11:39,447 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 13:11:39,884 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-28 13:11:39,893 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-28 13:11:40,218 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:11:40,219 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-28 13:11:40,272 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-28 13:11:42,142 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-28 13:11:42,188 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:11:42,808 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-28 13:11:44,459 log Not Found: /favicon.ico
+WARNING 2025-07-28 13:11:44,462 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 13:11:58,369 basehttp "GET /admin HTTP/1.1" 301 0
+INFO 2025-07-28 13:11:58,462 basehttp "GET /admin/ HTTP/1.1" 302 0
+INFO 2025-07-28 13:11:58,961 basehttp "GET /admin/login/?next=/admin/ HTTP/1.1" 200 16719
+INFO 2025-07-28 13:11:59,548 basehttp "GET /static/admin_interface/css/changelist.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1517
+INFO 2025-07-28 13:11:59,576 basehttp "GET /static/admin_interface/css/admin-interface.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 18769
+INFO 2025-07-28 13:11:59,602 basehttp "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-07-28 13:11:59,625 basehttp "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2025-07-28 13:11:59,626 basehttp "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-07-28 13:11:59,663 basehttp "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-07-28 13:11:59,664 basehttp "GET /static/admin_interface/css/change-form.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1125
+INFO 2025-07-28 13:11:59,778 basehttp "GET /static/admin_interface/css/file-upload.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1169
+INFO 2025-07-28 13:11:59,779 basehttp "GET /static/admin_interface/css/header.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1101
+INFO 2025-07-28 13:11:59,779 basehttp "GET /static/admin_interface/css/fieldsets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 499
+INFO 2025-07-28 13:11:59,857 basehttp "GET /static/admin_interface/css/inlines.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2715
+INFO 2025-07-28 13:11:59,871 basehttp "GET /static/admin_interface/css/list-filter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1054
+INFO 2025-07-28 13:11:59,877 basehttp "GET /static/admin_interface/css/jquery.ui.tabs.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5481
+INFO 2025-07-28 13:11:59,880 basehttp "GET /static/admin_interface/css/list-filter-dropdown.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 785
+INFO 2025-07-28 13:11:59,881 basehttp "GET /static/admin_interface/css/language-chooser.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1734
+INFO 2025-07-28 13:11:59,920 basehttp "GET /static/admin_interface/css/login.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1240
+INFO 2025-07-28 13:11:59,924 basehttp "GET /static/admin_interface/css/modules.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 404
+INFO 2025-07-28 13:11:59,959 basehttp "GET /static/admin_interface/css/nav-sidebar.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2377
+INFO 2025-07-28 13:11:59,962 basehttp "GET /static/admin_interface/css/tabbed-changeform.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2013
+INFO 2025-07-28 13:11:59,965 basehttp "GET /static/admin_interface/css/sticky-form-controls.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2437
+INFO 2025-07-28 13:11:59,960 basehttp "GET /static/admin_interface/css/object-tools.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 319
+INFO 2025-07-28 13:11:59,990 basehttp "GET /static/admin_interface/css/rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1016
+INFO 2025-07-28 13:11:59,990 basehttp "GET /static/admin_interface/css/paginator.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 797
+INFO 2025-07-28 13:12:00,000 basehttp "GET /static/admin_interface/css/third-party/ckeditor.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2720
+INFO 2025-07-28 13:12:00,030 basehttp "GET /static/admin_interface/css/third-party/import-export.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 189
+INFO 2025-07-28 13:12:00,033 basehttp "GET /static/admin_interface/css/third-party/json-widget.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 993
+INFO 2025-07-28 13:12:00,000 basehttp "GET /static/admin_interface/css/widgets.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 5259
+INFO 2025-07-28 13:12:00,036 basehttp "GET /static/admin_interface/css/third-party/rangefilter.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1238
+INFO 2025-07-28 13:12:00,041 basehttp "GET /static/admin_interface/css/third-party/modeltranslation.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 356
+INFO 2025-07-28 13:12:00,067 basehttp "GET /static/admin_interface/css/third-party/streamfield.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6407
+INFO 2025-07-28 13:12:00,068 basehttp "GET /static/admin_interface/css/third-party/sorl-thumbnail.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1451
+INFO 2025-07-28 13:12:00,127 basehttp "GET /static/admin_interface/css/third-party/tinymce.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 78
+INFO 2025-07-28 13:12:00,141 basehttp "GET /static/admin/css/responsive_rtl.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1991
+INFO 2025-07-28 13:12:00,142 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1955
+INFO 2025-07-28 13:12:00,154 basehttp "GET /static/admin/css/responsive.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 16565
+INFO 2025-07-28 13:12:00,158 basehttp "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-07-28 13:12:00,159 basehttp "GET /static/admin/css/login.css HTTP/1.1" 200 951
+INFO 2025-07-28 13:12:00,180 basehttp "GET /static/admin_interface/magnific-popup/magnific-popup.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 6951
+INFO 2025-07-28 13:12:00,236 basehttp "GET /static/admin_interface/related-modal/related-modal.css?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 2888
+INFO 2025-07-28 13:12:00,265 basehttp "GET /static/admin_interface/foldable-apps/foldable-apps.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 1750
+INFO 2025-07-28 13:12:00,271 basehttp "GET /static/admin_interface/magnific-popup/jquery.magnific-popup.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 60830
+INFO 2025-07-28 13:12:00,271 basehttp "GET /static/admin_interface/related-modal/related-modal.js?v=e74745aa09a56f5601b6268155f9e13e7f8098b4f41ff63c0fef6659 HTTP/1.1" 200 7095
+INFO 2025-07-28 13:12:00,273 basehttp "GET /media/admin-interface/logo/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 13:12:00,373 basehttp "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-07-28 13:12:11,830 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 16932
+INFO 2025-07-28 13:12:35,599 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 16918
+INFO 2025-07-28 13:12:59,596 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 16936
+INFO 2025-07-28 13:13:13,291 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 16936
+INFO 2025-07-28 13:13:53,198 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 200 16960
+INFO 2025-07-28 13:14:55,955 basehttp "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+INFO 2025-07-28 13:14:56,488 basehttp "GET /admin/ HTTP/1.1" 200 35508
+INFO 2025-07-28 13:14:56,877 basehttp "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-07-28 13:14:57,657 basehttp "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-07-28 13:14:57,657 basehttp "GET /static/admin/img/icon-viewlink.svg HTTP/1.1" 200 581
+INFO 2025-07-28 13:14:57,658 basehttp "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-07-28 13:14:57,659 basehttp "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 200 392
+INFO 2025-07-28 13:15:11,210 basehttp "GET /admin/store/banner/ HTTP/1.1" 200 35563
+INFO 2025-07-28 13:15:11,370 basehttp "GET /static/admin/css/changelists.css HTTP/1.1" 200 6878
+INFO 2025-07-28 13:15:11,372 basehttp "GET /static/admin/css/forms.css HTTP/1.1" 200 8525
+INFO 2025-07-28 13:15:11,373 basehttp "GET /static/admin/js/core.js HTTP/1.1" 200 6208
+INFO 2025-07-28 13:15:11,374 basehttp "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 347
+INFO 2025-07-28 13:15:11,423 basehttp "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 9777
+INFO 2025-07-28 13:15:11,424 basehttp "GET /static/admin/js/actions.js HTTP/1.1" 200 8076
+INFO 2025-07-28 13:15:11,426 basehttp "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1531
+INFO 2025-07-28 13:15:11,428 basehttp "GET /static/admin/js/urlify.js HTTP/1.1" 200 7887
+INFO 2025-07-28 13:15:11,460 basehttp "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 285314
+INFO 2025-07-28 13:15:11,486 basehttp "GET /admin/jsi18n/ HTTP/1.1" 200 8158
+INFO 2025-07-28 13:15:11,580 basehttp "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 325171
+INFO 2025-07-28 13:15:11,581 basehttp "GET /static/admin/css/widgets.css HTTP/1.1" 200 11991
+INFO 2025-07-28 13:15:11,639 basehttp "GET /static/admin/img/search.svg HTTP/1.1" 200 458
+INFO 2025-07-28 13:15:11,822 basehttp "GET /static/admin/js/filters.js HTTP/1.1" 200 978
+INFO 2025-07-28 13:15:11,924 basehttp "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+INFO 2025-07-28 13:15:11,981 basehttp "GET /static/admin/img/sorting-icons.svg HTTP/1.1" 200 1097
+INFO 2025-07-28 13:15:16,158 basehttp "GET /admin/ HTTP/1.1" 200 35508
+INFO 2025-07-28 13:15:51,810 basehttp "GET / HTTP/1.1" 200 136608
+INFO 2025-07-28 13:15:52,432 basehttp "GET /static/css/custom.css HTTP/1.1" 304 0
+INFO 2025-07-28 13:15:56,211 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 13:40:51,054 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 13:43:08,043 basehttp "GET / HTTP/1.1" 200 136705
+INFO 2025-07-28 13:43:12,050 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 13:43:12,465 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-28 13:43:12,517 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-28 13:43:14,137 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 13:43:14,187 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:43:14,209 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-28 13:43:14,307 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+WARNING 2025-07-28 13:43:16,617 log Not Found: /favicon.ico
+WARNING 2025-07-28 13:43:16,619 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 13:43:21,403 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:45:15,407 basehttp "GET / HTTP/1.1" 200 136705
+INFO 2025-07-28 13:45:17,506 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 13:45:34,623 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-28 13:45:38,654 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 91, in home
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 80: 'endif', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+ERROR 2025-07-28 13:45:38,668 basehttp "GET / HTTP/1.1" 500 300970
+ERROR 2025-07-28 13:45:44,222 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 91, in home
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 80: 'endif', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+ERROR 2025-07-28 13:45:44,235 basehttp "GET / HTTP/1.1" 500 300970
+INFO 2025-07-28 13:51:18,010 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-28 13:53:34,127 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'elif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 91, in home
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 263: 'elif', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+ERROR 2025-07-28 13:53:34,234 basehttp "GET / HTTP/1.1" 500 273821
+WARNING 2025-07-28 13:53:36,372 log Not Found: /favicon.ico
+WARNING 2025-07-28 13:53:36,374 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+ERROR 2025-07-28 13:54:35,579 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'elif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 91, in home
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 362: 'elif', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+ERROR 2025-07-28 13:54:35,652 basehttp "GET / HTTP/1.1" 500 247269
+ERROR 2025-07-28 13:54:40,954 log Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'elif'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 91, in home
+    return render(request, 'store/index.html', {
+        'banners': banners,
+        'products': products
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 362: 'elif', expected 'empty' or 'endfor'. Did you forget to register or load this tag?
+ERROR 2025-07-28 13:54:40,962 basehttp "GET / HTTP/1.1" 500 247269
+INFO 2025-07-28 13:55:08,835 basehttp "GET / HTTP/1.1" 200 117616
+INFO 2025-07-28 13:55:10,661 basehttp "GET /static/css/custom.css HTTP/1.1" 200 11770
+INFO 2025-07-28 13:55:10,684 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-28 13:55:10,766 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-28 13:55:16,647 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 13:55:16,894 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 13:55:17,265 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:55:17,270 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-28 13:55:17,271 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-28 13:55:17,353 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:55:17,551 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-28 13:55:39,753 basehttp "GET / HTTP/1.1" 200 117519
+INFO 2025-07-28 13:55:40,542 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-28 13:55:41,057 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-28 13:55:41,066 basehttp "GET /static/css/custom.css HTTP/1.1" 200 11770
+INFO 2025-07-28 13:55:41,065 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-28 13:55:41,091 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-28 13:55:41,664 basehttp "GET /static/js/star-rating.js HTTP/1.1" 200 11899
+INFO 2025-07-28 13:55:41,665 basehttp "GET /static/js/toast-system.js HTTP/1.1" 200 14082
+INFO 2025-07-28 13:55:46,910 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 13:55:47,023 basehttp "GET /media/banners/header-banner-garam-masala.webp HTTP/1.1" 200 271054
+INFO 2025-07-28 13:55:47,044 basehttp "GET /media/banners/about-banner.jpg HTTP/1.1" 200 457746
+INFO 2025-07-28 13:55:48,499 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:55:48,577 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+WARNING 2025-07-28 13:55:48,580 log Not Found: /favicon.ico
+WARNING 2025-07-28 13:55:48,585 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 13:55:48,601 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 13:55:48,604 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-28 13:55:48,636 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-28 13:55:53,487 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 13:59:02,227 basehttp "GET /accounts/login/ HTTP/1.1" 200 57036
+INFO 2025-07-28 13:59:02,592 basehttp "GET /static/css/custom.css HTTP/1.1" 304 0
+INFO 2025-07-28 13:59:09,635 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:00:03,951 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-07-28 14:00:03,981 basehttp "GET / HTTP/1.1" 200 117519
+INFO 2025-07-28 14:00:12,263 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:00:26,857 basehttp "GET /accounts/signup/ HTTP/1.1" 302 0
+INFO 2025-07-28 14:00:34,458 basehttp "GET /accounts/signup/ HTTP/1.1" 302 0
+INFO 2025-07-28 14:00:42,406 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:00:48,968 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:02:16,596 basehttp "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-07-28 14:02:16,684 basehttp "GET / HTTP/1.1" 200 117616
+INFO 2025-07-28 14:02:18,624 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:02:24,291 basehttp "GET /accounts/logout/ HTTP/1.1" 302 0
+INFO 2025-07-28 14:02:24,414 basehttp "GET /accounts/login/?next=/accounts/logout/ HTTP/1.1" 200 57380
+INFO 2025-07-28 14:02:26,023 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:02:34,735 basehttp "POST /accounts/login/ HTTP/1.1" 302 0
+INFO 2025-07-28 14:02:34,846 basehttp "GET / HTTP/1.1" 200 117616
+INFO 2025-07-28 14:02:36,739 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:08:50,569 basehttp "GET /cart/ HTTP/1.1" 200 103692
+INFO 2025-07-28 14:08:52,292 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-28 14:08:52,429 log Not Found: /favicon.ico
+ERROR 2025-07-28 14:09:04,864 log Internal Server Error: /cart/calculate-shipping/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+    ~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+                       ~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connection.py", line 205, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x7f8bd58497f0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f8bd58497f0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/views/decorators/http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 608, in calculate_shipping_ajax
+    resultado = calcular_frete_melhor_envio(
+        cep_origem=cep_origem,
+    ...<6 lines>...
+        servicos=["1", "2"]
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/services.py", line 26, in calcular_frete_melhor_envio
+    response = requests.post(url, json=payload, headers=headers)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/requests/adapters.py", line 700, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.melhorenvio.com.br', port=443): Max retries exceeded with url: /api/v2/me/shipment/calculate (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x7f8bd58497f0>: Failed to resolve 'api.melhorenvio.com.br' ([Errno -2] Name or service not known)"))
+ERROR 2025-07-28 14:09:04,922 basehttp "POST /cart/calculate-shipping/ HTTP/1.1" 500 201459
+INFO 2025-07-28 14:11:13,053 basehttp "GET /checkout/ HTTP/1.1" 200 63326
+INFO 2025-07-28 14:11:14,615 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 14:11:22,130 basehttp "POST /order/create/ HTTP/1.1" 302 0
+INFO 2025-07-28 14:11:23,376 basehttp "GET /payment/create/ HTTP/1.1" 302 0
+INFO 2025-07-28 17:07:55,219 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 17:08:45,905 basehttp "GET / HTTP/1.1" 200 117622
+INFO 2025-07-28 17:08:49,023 basehttp "GET /static/js/toast-system.js HTTP/1.1" 304 0
+INFO 2025-07-28 17:08:49,578 basehttp "GET /static/js/star-rating.js HTTP/1.1" 304 0
+INFO 2025-07-28 17:08:58,554 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-28 17:08:58,813 log Not Found: /favicon.ico
+WARNING 2025-07-28 17:08:58,814 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 17:08:59,043 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-28 17:08:59,145 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 17:11:59,291 basehttp "GET /products/ HTTP/1.1" 200 68530
+INFO 2025-07-28 17:12:07,629 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:12:07,939 basehttp "GET /static/js/script.js HTTP/1.1" 200 54022
+INFO 2025-07-28 17:13:29,203 basehttp "GET /contact/ HTTP/1.1" 200 66977
+INFO 2025-07-28 17:13:36,648 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:16:52,863 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:17:05,931 basehttp "GET /about/ HTTP/1.1" 200 69150
+INFO 2025-07-28 17:17:13,715 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:17:18,228 basehttp "GET /cart/ HTTP/1.1" 200 99768
+INFO 2025-07-28 17:17:28,454 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:23:48,771 autoreload Watching for file changes with StatReloader
+WARNING 2025-07-28 17:23:52,851 log Not Found: /products.html
+WARNING 2025-07-28 17:23:52,852 basehttp "GET /products.html HTTP/1.1" 404 9677
+INFO 2025-07-28 17:30:19,517 basehttp "GET / HTTP/1.1" 200 119043
+INFO 2025-07-28 17:30:20,992 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-28 17:30:21,025 basehttp "GET /static/css/custom.css HTTP/1.1" 200 11770
+INFO 2025-07-28 17:30:21,095 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-28 17:30:24,566 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 17:30:24,568 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-28 17:30:24,597 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 17:30:24,730 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+INFO 2025-07-28 17:30:24,796 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 17:30:24,879 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:30:24,975 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+WARNING 2025-07-28 17:30:26,087 log Not Found: /favicon.ico
+WARNING 2025-07-28 17:30:26,089 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 17:31:08,524 basehttp "GET /products/ HTTP/1.1" 200 69951
+INFO 2025-07-28 17:31:11,576 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:36:20,353 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:36:56,126 basehttp "GET / HTTP/1.1" 200 119043
+INFO 2025-07-28 17:36:57,593 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 17:37:14,804 basehttp "GET /terms/ HTTP/1.1" 200 34567
+WARNING 2025-07-28 17:37:15,744 log Not Found: /terms/assets/css/styles.css
+WARNING 2025-07-28 17:37:15,745 basehttp "GET /terms/assets/css/styles.css HTTP/1.1" 404 9719
+INFO 2025-07-28 17:45:19,980 basehttp "GET /terms/ HTTP/1.1" 200 34567
+WARNING 2025-07-28 17:45:20,295 log Not Found: /terms/assets/css/styles.css
+WARNING 2025-07-28 17:45:20,296 basehttp "GET /terms/assets/css/styles.css HTTP/1.1" 404 9719
+WARNING 2025-07-28 17:45:22,267 log Not Found: /terms/assets/css/styles.css
+WARNING 2025-07-28 17:45:22,269 basehttp "GET /terms/assets/css/styles.css HTTP/1.1" 404 9719
+INFO 2025-07-28 17:45:28,031 basehttp "GET /terms/ HTTP/1.1" 200 34567
+WARNING 2025-07-28 17:45:28,437 log Not Found: /terms/assets/css/styles.css
+WARNING 2025-07-28 17:45:28,443 basehttp "GET /terms/assets/css/styles.css HTTP/1.1" 404 9719
+WARNING 2025-07-28 17:45:28,589 log Not Found: /terms/assets/css/styles.css
+WARNING 2025-07-28 17:45:28,590 basehttp "GET /terms/assets/css/styles.css HTTP/1.1" 404 9719
+WARNING 2025-07-28 17:45:54,010 log Not Found: /terms/index.html
+WARNING 2025-07-28 17:45:54,011 basehttp "GET /terms/index.html HTTP/1.1" 404 9686
+WARNING 2025-07-28 17:46:11,560 log Not Found: /terms/assets/css/styles.css
+WARNING 2025-07-28 17:46:11,561 basehttp "GET /terms/assets/css/styles.css HTTP/1.1" 404 9719
+WARNING 2025-07-28 17:46:11,780 log Not Found: /terms/assets/css/styles.css
+WARNING 2025-07-28 17:46:11,782 basehttp "GET /terms/assets/css/styles.css HTTP/1.1" 404 9719
+INFO 2025-07-28 17:46:26,771 basehttp "GET /privacy/ HTTP/1.1" 200 48372
+WARNING 2025-07-28 17:46:27,477 log Not Found: /privacy/assets/css/styles.css
+WARNING 2025-07-28 17:46:27,479 basehttp "GET /privacy/assets/css/styles.css HTTP/1.1" 404 9725
+WARNING 2025-07-28 17:46:27,733 log Not Found: /privacy/assets/css/styles.css
+WARNING 2025-07-28 17:46:27,737 basehttp "GET /privacy/assets/css/styles.css HTTP/1.1" 404 9725
+INFO 2025-07-28 17:59:23,858 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 18:01:30,470 basehttp "GET / HTTP/1.1" 200 119043
+INFO 2025-07-28 18:01:48,781 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+WARNING 2025-07-28 18:01:50,429 log Not Found: /favicon.ico
+WARNING 2025-07-28 18:01:50,439 basehttp "GET /favicon.ico HTTP/1.1" 404 9671
+INFO 2025-07-28 18:02:10,100 basehttp "GET /terms/ HTTP/1.1" 200 37319
+INFO 2025-07-28 18:02:10,939 basehttp "GET /static/js/script.js HTTP/1.1" 200 54022
+INFO 2025-07-28 18:02:11,818 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+INFO 2025-07-28 18:02:37,548 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+ERROR 2025-07-28 18:02:48,750 log Internal Server Error: /privacy/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'static'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 110, in privacy
+    return render(request, 'store/privacy.html', {
+        'cart_count': cart.total_items
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 577, in invalid_block_tag
+    raise self.error(
+    ...<3 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 26: 'static'. Did you forget to register or load this tag?
+ERROR 2025-07-28 18:02:48,767 basehttp "GET /privacy/ HTTP/1.1" 500 184365
+INFO 2025-07-28 18:19:53,866 autoreload Watching for file changes with StatReloader
+INFO 2025-07-28 18:21:02,465 basehttp "GET / HTTP/1.1" 200 119043
+INFO 2025-07-28 18:21:06,494 basehttp "GET /static/css/styles.css HTTP/1.1" 200 38033
+INFO 2025-07-28 18:21:06,496 basehttp "GET /static/css/custom.css HTTP/1.1" 200 11770
+INFO 2025-07-28 18:21:06,497 basehttp "GET /static/css/star-rating.css HTTP/1.1" 200 3628
+INFO 2025-07-28 18:21:13,243 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.33.14.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 18:21:13,244 basehttp "GET /media/products/WhatsApp_Image_2025-06-30_at_13.27.57.jpeg HTTP/1.1" 200 52476
+INFO 2025-07-28 18:21:13,374 basehttp "GET /media/products/prod3.jpeg HTTP/1.1" 200 44805
+INFO 2025-07-28 18:21:14,286 basehttp "GET /static/images/logo.png HTTP/1.1" 200 110264
+INFO 2025-07-28 18:21:14,322 basehttp "GET /media/products/arroz-basmati-5kg.jpg HTTP/1.1" 200 76612
+INFO 2025-07-28 18:21:14,783 basehttp "GET /media/products/br-11134207-7qukw-lj313avkzdpx89.jpg HTTP/1.1" 200 109501
+WARNING 2025-07-28 18:21:28,467 log Not Found: /favicon.ico
+INFO 2025-07-28 18:21:28,575 basehttp "GET /cart/count/ HTTP/1.1" 200 17
+ERROR 2025-07-28 18:23:56,133 log Internal Server Error: /terms/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 103, in terms
+    return render(request, 'store/terms.html', {
+        'cart_count': cart.total_items
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 577, in invalid_block_tag
+    raise self.error(
+    ...<3 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 579: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-07-28 18:23:56,142 basehttp "GET /terms/ HTTP/1.1" 500 174951
+ERROR 2025-07-28 18:25:15,443 log Internal Server Error: /terms/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 103, in terms
+    return render(request, 'store/terms.html', {
+        'cart_count': cart.total_items
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 577, in invalid_block_tag
+    raise self.error(
+    ...<3 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 468: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-07-28 18:25:15,514 basehttp "GET /terms/ HTTP/1.1" 500 171872
+INFO 2025-07-28 18:37:04,956 autoreload Watching for file changes with StatReloader
+ERROR 2025-07-28 18:40:38,041 log Internal Server Error: /terms/
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/utils/decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/store/views.py", line 103, in terms
+    return render(request, 'store/terms.html', {
+        'cart_count': cart.total_items
+    })
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/backends/django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loaders/base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 518, in parse
+    raise self.error(token, e)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/danmarques/Documentos/Workplace/india_oasis/venv/lib/python3.13/site-packages/django/template/base.py", line 577, in invalid_block_tag
+    raise self.error(
+    ...<3 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 467: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-07-28 18:40:38,066 basehttp "GET /terms/ HTTP/1.1" 500 187238
+INFO 2025-07-29 10:22:27,263 autoreload Watching for file changes with StatReloader
+INFO 2025-07-29 11:07:27,061 autoreload Watching for file changes with StatReloader
+INFO 2025-08-04 01:02:37,727 autoreload Watching for file changes with StatReloader

@@ -1,8 +1,62 @@
-asgiref==3.8.1
+# India Oasis - Core Requirements
+# Production-ready Django e-commerce application
+
+# Core Django
 Django==5.2.3
-django-environ==0.11.2
-pillow==11.2.1
+asgiref==3.8.1
 sqlparse==0.5.3
+
+# Database
+psycopg2-binary==2.9.9
+
+# Environment and Configuration
+django-environ==0.11.2
+
+# Static Files and Media
+whitenoise==6.6.0
+Pillow==11.2.1
+
+# Payment Processing
 mercadopago==2.2.0
-django-admin-interface
-colorfield
+
+# Admin Interface
+django-admin-interface==0.28.6
+django-colorfield==0.11.0
+
+# Performance and Caching
+redis==5.0.1
+django-redis==5.4.0
+
+# Task Queue
+celery==5.3.4
+django-celery-beat==2.5.0
+django-celery-results==2.5.1
+
+# HTTP Client
+requests==2.31.0
+
+# Email
+django-email-backend==1.1.0
+
+# Security
+django-cors-headers==4.3.1
+django-ratelimit==4.1.0
+
+# Monitoring and Health
+django-health-check==3.17.0
+sentry-sdk[django]==1.38.0
+
+# Production Server
+gunicorn==21.2.0
+
+# File Storage
+django-storages==1.14.2
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3
+
+# Development dependencies (commented out for production)
+# Uncomment for development environment
+# django-debug-toolbar==4.2.0
+# django-extensions==3.2.3

@@ -1,34 +1,283 @@
+# India Oasis - Production .gitignore
+# Optimized for Django e-commerce deployment
+
 # Byte-compiled / optimized / dll files
 __pycache__/
-*.pyc
-*.pyd
-*.pyo
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
 *.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
 .pytest_cache/
+cover/
 
 # Environments
 .env
-venv/
+.venv
 env/
-/bin/
-/include/
-/lib/
-/lib64/
-/share/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.python-version
 
-# Database
+# Django specific
+*.log
+local_settings.py
 db.sqlite3
+db.sqlite3-journal
 
-# Media and Static files
-/media/
+# Static files (collected by Django)
 /staticfiles/
+/static/CACHE/
+
+# Media files
+/media/
+!/media/.gitkeep
+
+# Template source files (development only)
 templates_source/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Celery beat schedule file
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
 
 # IDE files
 .idea/
 .vscode/
+*.swp
+*.swo
+*~
 
 # OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
 .Trashes
+ehthumbs.db
 Thumbs.db
+
+# Docker
+.dockerignore
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+*.tmp
+*.temp
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+ssl/
+
+# Database dumps
+*.sql
+*.dump
+backups/*.sql
+backups/*.dump
+
+# Cache directories
+.cache/
+.npm/
+.yarn/
+
+# Node.js (if using for frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+build/
+dist/
+
+# Documentation builds
+docs/_build/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Collected static files
+staticfiles/
+
+# Local development settings
+local_settings.py
+dev_settings.py
+
+# Test files
+test_*.py
+*_test.py
+test_data/
+
+# Coverage reports
+htmlcov/
+.coverage
+
+# Profiling data
+*.prof
+
+# Memory dumps
+*.hprof
+
+# System files
+Thumbs.db
+.DS_Store
+
+# Redis dump
+dump.rdb
+
+# Celery results
+celerybeat-schedule.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Translations
+*.mo
+*.pot
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Development tools
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Production secrets
+secrets/
+credentials/
+keys/
+
+# Monitoring and logs
+monitoring/
+*.pid
+
+# Maintenance mode files
+maintenance.html
+maintenance/
+
+# Custom application files
+uploads/
+downloads/
+exports/
+imports/
+
+# Sentry CLI
+.sentryclirc

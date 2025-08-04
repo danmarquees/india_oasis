@@ -6,9 +6,25 @@ from unittest.mock import patch
 
 class NfeIntegracaoTestCase(TestCase):
     def setUp(self):
+        from django.contrib.auth.models import User
+        # Criar usuário de teste
+        self.user = User.objects.create_user(
+            username='testuser',
+            email='test@example.com',
+            password='testpass123'
+        )
+
         self.order = Order.objects.create(
-            # Preencha os campos obrigatórios do pedido conforme seu modelo
-            status='pending',
+            user=self.user,
+            first_name='João',
+            last_name='Silva',
+            email='joao@example.com',
+            address='Rua Teste, 123',
+            postal_code='12345-678',
+            city='São Paulo',
+            state='SP',
+            status='awaiting_payment',
+            total_price=99.90,
             paid=False,
         )
 

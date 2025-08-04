@@ -1,6 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
-
 <!-- Certifique-se de incluir o script de notificações -->
 <script src="{% static 'js/toast-system.js' %}"></script>
 
@@ -24,38 +23,51 @@
     };
 </script>
 
-<style>
-.carousel-item {
-  opacity: 0;
-  transition: opacity 0.5s;
-  z-index: 0;
-  pointer-events: none;
-}
-.carousel-item.active {
-  opacity: 1;
-  z-index: 1;
-  pointer-events: auto;
-}
-</style>
+<!-- CSS do carrossel já está definido em styles.css -->
 
 <main id="main-content" class="container mx-auto p-4 sm:p-6 lg:p-8">
     <!-- ==== PÁGINA INICIAL ==== -->
     <div id="home-page" class="page active-page">
         <!-- Carrossel Dinâmico de Banners -->
-        <section class="relative w-full h-80 md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl mb-12">
+        <section
+            class="relative w-full h-80 md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl mb-12"
+        >
             <div id="carousel-container" class="relative w-full h-full">
+                <!-- Debug: Total de banners: {{ banners|length }} -->
                 {% for banner in banners %}
-                <div class="carousel-item {% if forloop.first %}active{% endif %} absolute inset-0 flex items-center"
-                    style="background-image: url('{{ banner.imagem.url }}'); background-size: cover; background-position: center; {% if banner.cor_fundo %}background-color: {{ banner.cor_fundo }};{% endif %}">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+                <!-- Debug: Banner {{ forloop.counter }}: {{ banner.titulo }} (ativo: {{ banner.ativo }}, ordem: {{ banner.ordem }}) -->
+                <div
+                    class="carousel-item {% if forloop.first %}active{% endif %} absolute inset-0 flex items-center"
+                    style="background-image: url('{{ banner.imagem.url }}'); background-size: cover; background-position: center; {% if banner.cor_fundo %}background-color: {{ banner.cor_fundo }};{% endif %}"
+                    data-slide="{{ forloop.counter0 }}"
+                    data-title="{{ banner.titulo }}"
+                >
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
+                    ></div>
                     <div class="relative z-10 container mx-auto px-8">
                         <div class="max-w-2xl">
-                            <h1 class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight" style="{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}">{{ banner.titulo }}</h1>
+                            <h1
+                                class="text-4xl md:text-6xl lg:text-7xl font-teko mb-6 leading-tight"
+                                style="{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}"
+                            >
+                                {{ banner.titulo }}
+                            </h1>
                             {% if banner.subtitulo %}
-                            <p class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed" style="{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}">{{ banner.subtitulo }}</p>
+                            <p
+                                class="mb-8 text-lg md:text-xl text-gray-200 leading-relaxed"
+                                style="{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}"
+                            >
+                                {{ banner.subtitulo }}
+                            </p>
                             {% endif %}
+                            <!--prettier-ignore-start -->
                             {% if banner.texto_botao and banner.url_botao %}
-                            <a href="{{ banner.url_botao }}" class="btn btn-primary text-lg px-8 py-4 mt-4 inline-block" style="{% if banner.cor_fundo %}background-color: {{ banner.cor_fundo }};{% endif %}{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}">
+                            <a
+                                href="{{ banner.url_botao }}"
+                                class="btn btn-primary text-lg px-8 py-4 mt-4 inline-block"
+                                style="{% if banner.cor_fundo %}background-color: {{ banner.cor_fundo }};{% endif %}{% if banner.cor_texto %}color: {{ banner.cor_texto }};{% endif %}"
+                            >
                                 {{ banner.texto_botao }}
                             </a>
                             {% endif %}
@@ -87,10 +99,12 @@
             <div
                 class="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 flex space-x-3"
             >
+                <!-- Debug: Indicadores para {{ banners|length }} banners -->
                 {% for banner in banners %}
                 <button
                     class="carousel-indicator {% if forloop.first %}active{% endif %} w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300"
                     data-slide="{{ forloop.counter0 }}"
+                    title="Banner {{ forloop.counter }}: {{ banner.titulo }}"
                 ></button>
                 {% endfor %}
             </div>
@@ -104,6 +118,73 @@
                 ></div>
             </div>
         </section>
+
+        <!-- Script de Diagnóstico do Carrossel -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("🔍 === DIAGNÓSTICO DO CARROSSEL ===");
+
+                // Verificar elementos
+                const items = document.querySelectorAll(".carousel-item");
+                const indicators = document.querySelectorAll(
+                    ".carousel-indicator",
+                );
+                const container = document.getElementById("carousel-container");
+                const progress = document.getElementById("carousel-progress");
+                const nextBtn = document.getElementById("next-slide");
+                const prevBtn = document.getElementById("prev-slide");
+
+                console.log("📊 Elementos encontrados:");
+                console.log("- Slides:", items.length);
+                console.log("- Indicadores:", indicators.length);
+                console.log("- Container:", !!container);
+                console.log("- Barra de progresso:", !!progress);
+                console.log("- Botão próximo:", !!nextBtn);
+                console.log("- Botão anterior:", !!prevBtn);
+
+                // Verificar slides individualmente
+                items.forEach((item, index) => {
+                    const isActive = item.classList.contains("active");
+                    const title = item.getAttribute("data-title");
+                    const slide = item.getAttribute("data-slide");
+                    console.log(
+                        `📄 Slide ${index}: "${title}" (ativo: ${isActive}, data-slide: ${slide})`,
+                    );
+
+                    // Verificar estilos computados
+                    const styles = getComputedStyle(item);
+                    console.log(`  - Opacity: ${styles.opacity}`);
+                    console.log(`  - Z-index: ${styles.zIndex}`);
+                    console.log(`  - Visibility: ${styles.visibility}`);
+                });
+
+                // Verificar indicadores
+                indicators.forEach((indicator, index) => {
+                    const isActive = indicator.classList.contains("active");
+                    const slideIndex = indicator.getAttribute("data-slide");
+                    console.log(
+                        `🔘 Indicador ${index}: ativo=${isActive}, data-slide=${slideIndex}`,
+                    );
+                });
+
+                // Teste de funcionalidade
+                if (nextBtn) {
+                    console.log("🧪 Testando botão próximo...");
+                    nextBtn.addEventListener("click", function () {
+                        console.log("✅ Botão próximo funcionando!");
+                    });
+                }
+
+                if (prevBtn) {
+                    console.log("🧪 Testando botão anterior...");
+                    prevBtn.addEventListener("click", function () {
+                        console.log("✅ Botão anterior funcionando!");
+                    });
+                }
+
+                console.log("🔍 === FIM DO DIAGNÓSTICO ===");
+            });
+        </script>
 
         <!-- Catálogo de Produtos Preview -->
         <section class="mb-16">
@@ -133,7 +214,9 @@
                             ></i>
                         </button>
                         {% if product.discount_price %}
-                        <span class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">
+                        <span
+                            class="absolute top-3 left-3 bg-red-600 text-white text-xs px-2 py-1 rounded font-bold"
+                        >
                             PROMOÇÃO -{{ product.discount_percent }}%
                         </span>
                         {% elif product.stock == 0 %}
@@ -176,12 +259,18 @@
                         </div>
                         <div class="flex items-center justify-between">
                             {% if product.discount_price %}
-                                <span class="text-lg font-bold text-gray-400 line-through">R$ {{ product.price|floatformat:2 }}</span>
-                                <span class="text-xl font-bold text-primary ml-2">R$ {{ product.discount_price|floatformat:2 }}</span>
+                            <span
+                                class="text-lg font-bold text-gray-400 line-through"
+                                >R$ {{ product.price|floatformat:2 }}</span
+                            >
+                            <span class="text-xl font-bold text-primary ml-2"
+                                >R$ {{ product.discount_price|floatformat:2
+                                }}</span
+                            >
                             {% else %}
-                                <span class="text-lg font-bold text-primary"
-                                    >R$ {{ product.price|floatformat:2 }}</span
-                                >
+                            <span class="text-lg font-bold text-primary"
+                                >R$ {{ product.price|floatformat:2 }}</span
+                            >
                             {% endif %}
                             <button
                                 class="btn btn-primary text-sm px-4 py-2 add-to-cart-btn"
@@ -894,63 +983,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Teste de Notificações Toast -->
-        <section class="mb-12 bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-teko text-secondary mb-4">
-                <i class="fas fa-bell text-primary mr-2"></i>
-                Demonstração de Notificações
-            </h2>
-            <p class="mb-4">
-                Teste os diferentes tipos de notificações toast disponíveis no
-                sistema:
-            </p>
-            <div class="flex flex-wrap gap-3">
-                <button
-                    onclick="window.toastSystem.success('Sucesso!', 'Operação realizada com sucesso!')"
-                    class="btn bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
-                >
-                    <i class="fas fa-check-circle mr-2"></i>Sucesso
-                </button>
-                <button
-                    onclick="window.toastSystem.info('Informação', 'Atenção! Esta é uma mensagem importante.')"
-                    class="btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
-                >
-                    <i class="fas fa-info-circle mr-2"></i>Informação
-                </button>
-                <button
-                    onclick="window.toastSystem.warning('Aviso', 'Cuidado! Esta ação pode ser irreversível.')"
-                    class="btn bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
-                >
-                    <i class="fas fa-exclamation-triangle mr-2"></i>Aviso
-                </button>
-                <button
-                    onclick="window.toastSystem.error('Erro', 'Não foi possível completar a operação.')"
-                    class="btn bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
-                >
-                    <i class="fas fa-exclamation-circle mr-2"></i>Erro
-                </button>
-                <button
-                    onclick="testMultipleToasts()"
-                    class="btn bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
-                >
-                    <i class="fas fa-layer-group mr-2"></i>Teste de Múltiplos
-                </button>
-                <button
-                    onclick="window.cartNotifications.itemAdded('Produto Teste', 1)"
-                    class="btn bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
-                >
-                    <i class="fas fa-shopping-cart mr-2"></i>Adicionado ao
-                    Carrinho
-                </button>
-                <button
-                    onclick="window.wishlistNotifications.itemAdded('Produto Teste')"
-                    class="btn bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded transition-all duration-200 hover:shadow-lg"
-                >
-                    <i class="fas fa-heart mr-2"></i>Adicionado aos Favoritos
-                </button>
-            </div>
-        </section>
     </div>
 </main>
 
@@ -1006,17 +1038,17 @@
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Força o carrossel a recontar os slides após o DOM estar pronto
-  if (typeof updateCarousel === 'function') {
-    updateCarousel();
-    if (typeof startCarouselAutoplay === 'function') {
-      startCarouselAutoplay();
-    }
-    if (typeof setupCarouselListeners === 'function') {
-      setupCarouselListeners();
-    }
-  }
-});
+    document.addEventListener("DOMContentLoaded", function () {
+        // Força o carrossel a recontar os slides após o DOM estar pronto
+        if (typeof updateCarousel === "function") {
+            updateCarousel();
+            if (typeof startCarouselAutoplay === "function") {
+                startCarouselAutoplay();
+            }
+            if (typeof setupCarouselListeners === "function") {
+                setupCarouselListeners();
+            }
+        }
+    });
 </script>
 {% endblock content %}

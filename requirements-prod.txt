@@ -1,0 +1,53 @@
+# India Oasis - Production-Only Requirements
+# Additional packages needed specifically for production environment
+# These extend the base requirements.txt
+
+# Database Backup and Management
+django-dbbackup==4.0.2
+
+# Performance Optimization
+django-compressor==4.4
+csscompressor==0.9.5
+jsmin==3.0.1
+
+# Maintenance Mode
+django-maintenance-mode==0.21.1
+
+# Cloud Storage (AWS S3)
+boto3==1.34.0
+botocore==1.34.0
+
+# System Monitoring
+psutil==5.9.6
+newrelic==9.2.0
+
+# Security Headers
+django-secure==1.0.2
+
+# Production Logging
+python-json-logger==2.0.7
+
+# Memory Profiling (optional, for debugging production issues)
+# memory-profiler==0.61.0
+
+# SSL/TLS Support
+pyOpenSSL==23.3.0
+cryptography==41.0.8
+
+# Email Templates
+premailer==3.10.0
+
+# Rate Limiting (Redis-backed)
+django-ratelimit-backend==2.0
+
+# Session Management
+django-session-security==2.6.7
+
+# File Upload Security
+python-magic==0.4.27
+
+# Timezone Support
+backports.zoneinfo==0.2.1; python_version<"3.9"
+
+# Production Utilities
+supervisor==4.2.5

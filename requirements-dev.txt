@@ -1,0 +1,68 @@
+# Development Requirements
+# These are additional packages needed for local development
+
+# Core development dependencies
+django-debug-toolbar==4.2.0
+django-extensions==3.2.3
+
+# Development and testing tools
+pytest==7.4.3
+pytest-django==4.7.0
+pytest-cov==4.1.0
+factory-boy==3.3.0
+faker==20.1.0
+
+# Code quality tools
+flake8==6.1.0
+black==23.11.0
+isort==5.12.0
+pre-commit==3.5.0
+
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==1.3.0
+
+# Database tools
+django-seed==0.3.1
+
+# API development
+djangorestframework==3.14.0
+django-filter==23.5
+drf-spectacular==0.26.5
+
+# Debugging
+ipython==8.17.2
+ipdb==0.13.13
+django-pdb==0.6.2
+
+# Performance profiling
+django-silk==5.0.4
+memory-profiler==0.61.0
+
+# Environment management
+python-dotenv==1.0.0
+
+# Development server enhancements
+django-livereload-server==0.4
+
+# Static analysis
+mypy==1.7.1
+django-stubs==4.2.7
+
+# Security scanning
+bandit==1.7.5
+safety==2.3.5
+
+# Load testing
+locust==2.17.0
+
+# Development utilities
+django-model-utils==4.3.1
+django-crispy-forms==2.1
+crispy-bootstrap5==0.7
+
+# Image processing for development
+Pillow==11.2.1
+
+# Development-specific versions (if different from production)
+# Add any development-specific package versions here

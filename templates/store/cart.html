@@ -1,55 +1,58 @@
 {% extends 'base.html' %} {% load static %} {% block content %}
 
 <style>
-/* Estilo responsivo para o card do carrinho no modo grid */
-.cart-item.cart-item-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    padding: 1.5rem;
-    gap: 1rem;
-    min-height: 320px;
-    height: 100%;
-}
-.cart-item.cart-item-grid > div:first-child {
-    flex-direction: column !important;
-    align-items: center !important;
-    width: 100% !important;
-    margin-bottom: 0.5rem;
-}
-.cart-item.cart-item-grid img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    margin-bottom: 0.5rem;
-}
-.cart-item.cart-item-grid h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
-}
-.cart-item.cart-item-grid .text-right {
-    text-align: center !important;
-}
-.cart-item.cart-item-grid .flex-col,
-.cart-item.cart-item-grid .flex-row {
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-}
-@media (max-width: 640px) {
+    /* Estilo responsivo para o card do carrinho no modo grid */
     .cart-item.cart-item-grid {
-        min-height: 220px;
-        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        padding: 1.5rem;
+        gap: 1rem;
+        min-height: 320px;
+        height: 100%;
+    }
+    .cart-item.cart-item-grid > div:first-child {
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin-bottom: 0.5rem;
     }
     .cart-item.cart-item-grid img {
-        width: 80px;
-        height: 80px;
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        margin-bottom: 0.5rem;
     }
-}
+    .cart-item.cart-item-grid h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+    }
+    .cart-item.cart-item-grid .text-right {
+        text-align: center !important;
+    }
+    .cart-item.cart-item-grid .flex-col,
+    .cart-item.cart-item-grid .flex-row {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+    }
+    @media (max-width: 640px) {
+        .cart-item.cart-item-grid {
+            min-height: 220px;
+            padding: 1rem;
+        }
+        .cart-item.cart-item-grid img {
+            width: 80px;
+            height: 80px;
+        }
+    }
 </style>
+
+<!-- CSRF Token for JavaScript -->
+{% csrf_token %}
 
 <!-- ==== CONTEÚDO PRINCIPAL CARRINHO ==== -->
 <main class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -823,190 +826,244 @@
 </script>
 
 <script>
-// === Filtros e Ordenação do Carrinho ===
-document.addEventListener("DOMContentLoaded", function () {
-    // Seletores
-    const sortSelect = document.getElementById("sort-items");
-    const cartItemsContainer = document.getElementById("cart-items");
-    const viewGridBtn = document.getElementById("view-grid");
-    const viewListBtn = document.getElementById("view-list");
+    // === Filtros e Ordenação do Carrinho ===
+    document.addEventListener("DOMContentLoaded", function () {
+        // Seletores
+        const sortSelect = document.getElementById("sort-items");
+        const cartItemsContainer = document.getElementById("cart-items");
+        const viewGridBtn = document.getElementById("view-grid");
+        const viewListBtn = document.getElementById("view-list");
 
-    // Função para obter os elementos dos itens do carrinho
-    function getCartItemElements() {
-        return Array.from(cartItemsContainer.querySelectorAll(".cart-item"));
-    }
-
-    // Função para ordenar os itens
-    function sortCartItems(criteria) {
-        const items = getCartItemElements();
-        let sortedItems;
-        if (criteria === "price-low") {
-            sortedItems = items.sort((a, b) => {
-                const priceA = parseFloat(a.querySelector(".item-price").textContent.replace("R$", "").replace(",", "."));
-                const priceB = parseFloat(b.querySelector(".item-price").textContent.replace("R$", "").replace(",", "."));
-                return priceA - priceB;
-            });
-        } else if (criteria === "price-high") {
-            sortedItems = items.sort((a, b) => {
-                const priceA = parseFloat(a.querySelector(".item-price").textContent.replace("R$", "").replace(",", "."));
-                const priceB = parseFloat(b.querySelector(".item-price").textContent.replace("R$", "").replace(",", "."));
-                return priceB - priceA;
-            });
-        } else if (criteria === "name") {
-            sortedItems = items.sort((a, b) => {
-                const nameA = a.querySelector("h3").textContent.trim().toLowerCase();
-                const nameB = b.querySelector("h3").textContent.trim().toLowerCase();
-                return nameA.localeCompare(nameB);
-            });
-        } else {
-            // Padrão: não faz nada (ou recarrega a página, se quiser)
-            sortedItems = items;
+        // Função para obter os elementos dos itens do carrinho
+        function getCartItemElements() {
+            return Array.from(
+                cartItemsContainer.querySelectorAll(".cart-item"),
+            );
         }
-        // Remove todos e reinsere na ordem
-        cartItemsContainer.innerHTML = "";
-        sortedItems.forEach(item => cartItemsContainer.appendChild(item));
-    }
 
-    // Listener para ordenação
-    if (sortSelect) {
-        sortSelect.addEventListener("change", function () {
-            sortCartItems(this.value);
-        });
-    }
-
-    // Alternância de visualização
-    function setView(mode) {
-        const items = getCartItemElements();
-        if (mode === "grid") {
-            cartItemsContainer.classList.remove("space-y-4");
-            cartItemsContainer.classList.add("grid", "grid-cols-1", "sm:grid-cols-2", "gap-4");
-            items.forEach(item => {
-                item.classList.remove("mb-4");
-                item.classList.add("cart-item-grid");
-            });
-            viewGridBtn.classList.add("text-primary");
-            viewGridBtn.classList.remove("text-gray-400");
-            viewListBtn.classList.remove("text-primary");
-            viewListBtn.classList.add("text-gray-400");
-        } else {
-            cartItemsContainer.classList.remove("grid", "grid-cols-1", "sm:grid-cols-2", "gap-4");
-            cartItemsContainer.classList.add("space-y-4");
-            items.forEach(item => {
-                item.classList.add("mb-4");
-                item.classList.remove("cart-item-grid");
-            });
-            viewListBtn.classList.add("text-primary");
-            viewListBtn.classList.remove("text-gray-400");
-            viewGridBtn.classList.remove("text-primary");
-            viewGridBtn.classList.add("text-gray-400");
+        // Função para ordenar os itens
+        function sortCartItems(criteria) {
+            const items = getCartItemElements();
+            let sortedItems;
+            if (criteria === "price-low") {
+                sortedItems = items.sort((a, b) => {
+                    const priceA = parseFloat(
+                        a
+                            .querySelector(".item-price")
+                            .textContent.replace("R$", "")
+                            .replace(",", "."),
+                    );
+                    const priceB = parseFloat(
+                        b
+                            .querySelector(".item-price")
+                            .textContent.replace("R$", "")
+                            .replace(",", "."),
+                    );
+                    return priceA - priceB;
+                });
+            } else if (criteria === "price-high") {
+                sortedItems = items.sort((a, b) => {
+                    const priceA = parseFloat(
+                        a
+                            .querySelector(".item-price")
+                            .textContent.replace("R$", "")
+                            .replace(",", "."),
+                    );
+                    const priceB = parseFloat(
+                        b
+                            .querySelector(".item-price")
+                            .textContent.replace("R$", "")
+                            .replace(",", "."),
+                    );
+                    return priceB - priceA;
+                });
+            } else if (criteria === "name") {
+                sortedItems = items.sort((a, b) => {
+                    const nameA = a
+                        .querySelector("h3")
+                        .textContent.trim()
+                        .toLowerCase();
+                    const nameB = b
+                        .querySelector("h3")
+                        .textContent.trim()
+                        .toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+            } else {
+                // Padrão: não faz nada (ou recarrega a página, se quiser)
+                sortedItems = items;
+            }
+            // Remove todos e reinsere na ordem
+            cartItemsContainer.innerHTML = "";
+            sortedItems.forEach((item) => cartItemsContainer.appendChild(item));
         }
-    }
-    if (viewGridBtn && viewListBtn) {
-        viewGridBtn.addEventListener("click", function () {
-            setView("grid");
-        });
-        viewListBtn.addEventListener("click", function () {
-            setView("list");
-        });
-    }
-    // Inicializa como lista
-    setView("list");
-});
+
+        // Listener para ordenação
+        if (sortSelect) {
+            sortSelect.addEventListener("change", function () {
+                sortCartItems(this.value);
+            });
+        }
+
+        // Alternância de visualização
+        function setView(mode) {
+            const items = getCartItemElements();
+            if (mode === "grid") {
+                cartItemsContainer.classList.remove("space-y-4");
+                cartItemsContainer.classList.add(
+                    "grid",
+                    "grid-cols-1",
+                    "sm:grid-cols-2",
+                    "gap-4",
+                );
+                items.forEach((item) => {
+                    item.classList.remove("mb-4");
+                    item.classList.add("cart-item-grid");
+                });
+                viewGridBtn.classList.add("text-primary");
+                viewGridBtn.classList.remove("text-gray-400");
+                viewListBtn.classList.remove("text-primary");
+                viewListBtn.classList.add("text-gray-400");
+            } else {
+                cartItemsContainer.classList.remove(
+                    "grid",
+                    "grid-cols-1",
+                    "sm:grid-cols-2",
+                    "gap-4",
+                );
+                cartItemsContainer.classList.add("space-y-4");
+                items.forEach((item) => {
+                    item.classList.add("mb-4");
+                    item.classList.remove("cart-item-grid");
+                });
+                viewListBtn.classList.add("text-primary");
+                viewListBtn.classList.remove("text-gray-400");
+                viewGridBtn.classList.remove("text-primary");
+                viewGridBtn.classList.add("text-gray-400");
+            }
+        }
+        if (viewGridBtn && viewListBtn) {
+            viewGridBtn.addEventListener("click", function () {
+                setView("grid");
+            });
+            viewListBtn.addEventListener("click", function () {
+                setView("list");
+            });
+        }
+        // Inicializa como lista
+        setView("list");
+    });
 </script>
 
 <script>
-// === Salvar e Limpar Carrinho ===
-document.addEventListener("DOMContentLoaded", function () {
-    // Seletores dos botões
-    const saveForLaterBtn = document.getElementById("save-for-later");
-    const clearCartBtn = document.getElementById("clear-cart");
-    const loadSavedCartBtn = document.getElementById("load-saved-cart");
-    const cartItemsContainer = document.getElementById("cart-items");
-    const emptyCartDiv = document.getElementById("empty-cart");
+    // === Salvar e Limpar Carrinho ===
+    document.addEventListener("DOMContentLoaded", function () {
+        // Seletores dos botões
+        const saveForLaterBtn = document.getElementById("save-for-later");
+        const clearCartBtn = document.getElementById("clear-cart");
+        const loadSavedCartBtn = document.getElementById("load-saved-cart");
+        const cartItemsContainer = document.getElementById("cart-items");
+        const emptyCartDiv = document.getElementById("empty-cart");
 
-    // Função para obter os itens do carrinho
-    function getCartData() {
-        const items = [];
-        document.querySelectorAll(".cart-item").forEach(item => {
-            items.push({
-                product_id: item.getAttribute("data-product-id"),
-                name: item.querySelector("h3").textContent.trim(),
-                quantity: parseInt(item.querySelector(".quantity-display").textContent),
-                price: item.querySelector(".item-price").textContent.trim(),
-                image: item.querySelector("img").getAttribute("src"),
-                sku: item.querySelector(".text-sm.text-gray-500").textContent.trim(),
-            });
-        });
-        return items;
-    }
-
-    // Salvar carrinho no localStorage
-    if (saveForLaterBtn) {
-        saveForLaterBtn.addEventListener("click", function () {
-            const cartData = getCartData();
-            localStorage.setItem("savedCart", JSON.stringify(cartData));
-            alert("Carrinho salvo com sucesso!");
-        });
-    }
-
-    // Limpar carrinho (frontend e backend)
-    if (clearCartBtn) {
-        clearCartBtn.addEventListener("click", function () {
-            if (!confirm("Tem certeza que deseja limpar o carrinho?")) return;
-            // Limpa localStorage
-            localStorage.removeItem("savedCart");
-            // Limpa no backend (remove todos os itens)
-            const cartItemButtons = document.querySelectorAll(".remove-item");
-            let removeCount = 0;
-            if (cartItemButtons.length === 0) {
-                location.reload();
-                return;
-            }
-            cartItemButtons.forEach(btn => {
-                const productId = btn.getAttribute("data-product-id");
-                // Reutiliza a função de updateCartItem do script principal
-                fetch(`{% url 'store:cart_remove' 0 %}`.replace("0", productId), {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": csrftoken,
-                        "X-Requested-With": "XMLHttpRequest",
-                    },
-                    body: JSON.stringify({ product_id: productId, action: "delete" }),
-                })
-                .then(() => {
-                    removeCount++;
-                    if (removeCount === cartItemButtons.length) {
-                        setTimeout(() => location.reload(), 500);
-                    }
-                })
-                .catch(() => {
-                    setTimeout(() => location.reload(), 500);
+        // Função para obter os itens do carrinho
+        function getCartData() {
+            const items = [];
+            document.querySelectorAll(".cart-item").forEach((item) => {
+                items.push({
+                    product_id: item.getAttribute("data-product-id"),
+                    name: item.querySelector("h3").textContent.trim(),
+                    quantity: parseInt(
+                        item.querySelector(".quantity-display").textContent,
+                    ),
+                    price: item.querySelector(".item-price").textContent.trim(),
+                    image: item.querySelector("img").getAttribute("src"),
+                    sku: item
+                        .querySelector(".text-sm.text-gray-500")
+                        .textContent.trim(),
                 });
             });
-        });
-    }
+            return items;
+        }
 
-    // Restaurar carrinho salvo (apenas frontend, exibe os cards)
-    if (loadSavedCartBtn) {
-        loadSavedCartBtn.addEventListener("click", function () {
-            const savedCart = localStorage.getItem("savedCart");
-            if (!savedCart) {
-                alert("Nenhum carrinho salvo encontrado.");
-                return;
-            }
-            const items = JSON.parse(savedCart);
-            if (!items.length) {
-                alert("Carrinho salvo está vazio.");
-                return;
-            }
-            // Renderiza os cards (apenas visual, não envia ao backend)
-            cartItemsContainer.innerHTML = "";
-            items.forEach(item => {
-                const card = document.createElement("div");
-                card.className = "flex flex-col sm:flex-row items-center justify-between p-4 bg-white rounded-lg shadow mb-4 cart-item";
-                card.setAttribute("data-product-id", item.product_id);
-                card.innerHTML = `
+        // Salvar carrinho no localStorage
+        if (saveForLaterBtn) {
+            saveForLaterBtn.addEventListener("click", function () {
+                const cartData = getCartData();
+                localStorage.setItem("savedCart", JSON.stringify(cartData));
+                alert("Carrinho salvo com sucesso!");
+            });
+        }
+
+        // Limpar carrinho (frontend e backend)
+        if (clearCartBtn) {
+            clearCartBtn.addEventListener("click", function () {
+                if (!confirm("Tem certeza que deseja limpar o carrinho?"))
+                    return;
+                // Limpa localStorage
+                localStorage.removeItem("savedCart");
+                // Limpa no backend (remove todos os itens)
+                const cartItemButtons =
+                    document.querySelectorAll(".remove-item");
+                let removeCount = 0;
+                if (cartItemButtons.length === 0) {
+                    location.reload();
+                    return;
+                }
+                cartItemButtons.forEach((btn) => {
+                    const productId = btn.getAttribute("data-product-id");
+                    // Reutiliza a função de updateCartItem do script principal
+                    fetch(
+                        `{% url 'store:cart_remove' 0 %}`.replace(
+                            "0",
+                            productId,
+                        ),
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": csrftoken,
+                                "X-Requested-With": "XMLHttpRequest",
+                            },
+                            body: JSON.stringify({
+                                product_id: productId,
+                                action: "delete",
+                            }),
+                        },
+                    )
+                        .then(() => {
+                            removeCount++;
+                            if (removeCount === cartItemButtons.length) {
+                                setTimeout(() => location.reload(), 500);
+                            }
+                        })
+                        .catch(() => {
+                            setTimeout(() => location.reload(), 500);
+                        });
+                });
+            });
+        }
+
+        // Restaurar carrinho salvo (apenas frontend, exibe os cards)
+        if (loadSavedCartBtn) {
+            loadSavedCartBtn.addEventListener("click", function () {
+                const savedCart = localStorage.getItem("savedCart");
+                if (!savedCart) {
+                    alert("Nenhum carrinho salvo encontrado.");
+                    return;
+                }
+                const items = JSON.parse(savedCart);
+                if (!items.length) {
+                    alert("Carrinho salvo está vazio.");
+                    return;
+                }
+                // Renderiza os cards (apenas visual, não envia ao backend)
+                cartItemsContainer.innerHTML = "";
+                items.forEach((item) => {
+                    const card = document.createElement("div");
+                    card.className =
+                        "flex flex-col sm:flex-row items-center justify-between p-4 bg-white rounded-lg shadow mb-4 cart-item";
+                    card.setAttribute("data-product-id", item.product_id);
+                    card.innerHTML = `
                     <div class="flex items-center space-x-4 mb-2 sm:mb-0 w-full sm:w-auto">
                         <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-md object-cover" loading="lazy" />
                         <div class="flex-1">
@@ -1026,43 +1083,61 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
                 `;
-                cartItemsContainer.appendChild(card);
+                    cartItemsContainer.appendChild(card);
+                });
+                if (emptyCartDiv) emptyCartDiv.classList.add("hidden");
+                cartItemsContainer.classList.remove("hidden");
+                alert(
+                    "Carrinho salvo carregado! (Apenas visual, não envia ao backend)",
+                );
             });
-            if (emptyCartDiv) emptyCartDiv.classList.add("hidden");
-            cartItemsContainer.classList.remove("hidden");
-            alert("Carrinho salvo carregado! (Apenas visual, não envia ao backend)");
-        });
-    }
-});
+        }
+    });
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const cepInput = document.getElementById('cep-input');
-    const calcBtn = document.getElementById('calculate-shipping');
-    const optionsDiv = document.getElementById('shipping-options');
-    const shippingCostSpan = document.getElementById('shipping-cost');
+    document.addEventListener("DOMContentLoaded", function () {
+        const cepInput = document.getElementById("cep-input");
+        const calcBtn = document.getElementById("calculate-shipping");
+        const optionsDiv = document.getElementById("shipping-options");
+        const shippingCostSpan = document.getElementById("shipping-cost");
 
-    if (calcBtn && cepInput && optionsDiv) {
-        calcBtn.addEventListener('click', function() {
-            const cep = cepInput.value.replace(/\D/g, '');
-            if (cep.length < 8) {
-                optionsDiv.innerHTML = '<span class="text-red-600">Digite um CEP válido.</span>';
-                return;
-            }
-            optionsDiv.innerHTML = 'Calculando...';
-            fetch('/cart/calculate-shipping/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': (document.cookie.match('(^|;)\\s*csrftoken\\s*=\\s*([^;]+)')||[])[2]
-                },
-                body: JSON.stringify({cep: cep})
-            })
-            .then(r => r.json())
-            .then(data => {
-                if (data.success && data.options.length > 0) {
-                    optionsDiv.innerHTML = data.options.map(opt => `
+        if (calcBtn && cepInput && optionsDiv) {
+            calcBtn.addEventListener("click", function () {
+                const cep = cepInput.value.replace(/\D/g, "");
+                if (cep.length < 8) {
+                    optionsDiv.innerHTML =
+                        '<span class="text-red-600">Digite um CEP válido.</span>';
+                    return;
+                }
+                optionsDiv.innerHTML = "Calculando...";
+
+                // Get CSRF token from the hidden input or cookie
+                let csrfToken = document.querySelector(
+                    "[name=csrfmiddlewaretoken]",
+                )?.value;
+                if (!csrfToken) {
+                    // Fallback to cookie with correct name
+                    const cookieMatch = document.cookie.match(
+                        "(^|;)\\s*india_oasis_csrftoken\\s*=\\s*([^;]+)",
+                    );
+                    csrfToken = cookieMatch ? cookieMatch[2] : "";
+                }
+
+                fetch("/cart/calculate-shipping/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": csrfToken,
+                    },
+                    body: JSON.stringify({ cep: cep }),
+                })
+                    .then((r) => r.json())
+                    .then((data) => {
+                        if (data.success && data.options.length > 0) {
+                            optionsDiv.innerHTML = data.options
+                                .map(
+                                    (opt) => `
                         <div class='p-2 border rounded mb-2 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
                             <div><b>${opt.name}</b> <span class='text-gray-600'>(${opt.company.name})</span></div>
                             <div class='flex items-center gap-4 mt-2 sm:mt-0'>
@@ -1070,21 +1145,30 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <span class='text-gray-500'>Prazo: ${opt.delivery_time} dia(s)</span>
                             </div>
                         </div>
-                    `).join('');
-                    // Atualiza o valor do frete exibido
-                    shippingCostSpan.textContent = 'R$ ' + parseFloat(data.options[0].price).toFixed(2);
-                } else {
-                    optionsDiv.innerHTML = '<span class="text-red-600">' + (data.erro || 'Não foi possível calcular o frete.') + '</span>';
-                    shippingCostSpan.textContent = 'R$ --';
-                }
-            })
-            .catch(() => {
-                optionsDiv.innerHTML = '<span class="text-red-600">Erro ao calcular frete.</span>';
-                shippingCostSpan.textContent = 'R$ --';
+                    `,
+                                )
+                                .join("");
+                            // Atualiza o valor do frete exibido
+                            shippingCostSpan.textContent =
+                                "R$ " +
+                                parseFloat(data.options[0].price).toFixed(2);
+                        } else {
+                            optionsDiv.innerHTML =
+                                '<span class="text-red-600">' +
+                                (data.erro ||
+                                    "Não foi possível calcular o frete.") +
+                                "</span>";
+                            shippingCostSpan.textContent = "R$ --";
+                        }
+                    })
+                    .catch(() => {
+                        optionsDiv.innerHTML =
+                            '<span class="text-red-600">Erro ao calcular frete.</span>';
+                        shippingCostSpan.textContent = "R$ --";
+                    });
             });
-        });
-    }
-});
+        }
+    });
 </script>
 
 {% endblock content %}

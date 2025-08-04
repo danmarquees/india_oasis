@@ -32,7 +32,7 @@
     </head>
     <body class="bg-gray-50 font-sans">
         <!-- Toast Notification Container -->
-        <div id="toast-container"></div>
+        <div class="toast-container"></div>
 
         <!-- Menu Lateral Retrátil -->
         <div
@@ -338,7 +338,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="index.html"
+                                    href="{% url 'store:home' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-home w-4 mr-2"></i>
@@ -347,7 +347,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="products.html"
+                                    href="{% url 'store:product_list' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-box w-4 mr-2"></i>
@@ -356,7 +356,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="about.html"
+                                    href="{% url 'store:about' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-heart w-4 mr-2"></i>
@@ -365,7 +365,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="contact.html"
+                                    href="{% url 'store:contact' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-envelope w-4 mr-2"></i>
@@ -374,7 +374,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="cart.html"
+                                    href="{% url 'store:cart' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i
@@ -385,7 +385,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="wishlist.html"
+                                    href="{% url 'store:wishlist' %}"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-star w-4 mr-2"></i>
@@ -406,7 +406,7 @@
                         <ul class="space-y-2">
                             <li>
                                 <a
-                                    href="products.html?category=temperos"
+                                    href="{% url 'store:product_list' %}?category=temperos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-pepper-hot w-4 mr-2"></i>
@@ -415,7 +415,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="products.html?category=chas"
+                                    href="{% url 'store:product_list' %}?category=chas"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-mug-hot w-4 mr-2"></i>
@@ -424,7 +424,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="products.html?category=graos"
+                                    href="{% url 'store:product_list' %}?category=graos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-seedling w-4 mr-2"></i>
@@ -433,7 +433,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="products.html?category=oleos"
+                                    href="{% url 'store:product_list' %}?category=oleos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-tint w-4 mr-2"></i>
@@ -442,7 +442,7 @@
                             </li>
                             <li>
                                 <a
-                                    href="products.html?category=combos"
+                                    href="{% url 'store:product_list' %}?category=combos"
                                     class="text-gray-200 hover:text-accent transition-colors text-sm flex items-center"
                                 >
                                     <i class="fas fa-gift w-4 mr-2"></i>
@@ -941,25 +941,25 @@
                             class="flex flex-wrap justify-center gap-4 text-xs"
                         >
                             <a
-                                href="#"
+                                href="{% url 'store:privacy' %}"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Política de Privacidade</a
                             >
                             <span class="text-gray-500">|</span>
                             <a
-                                href="#"
+                                href="{% url 'store:terms' %}"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Termos de Uso</a
                             >
                             <span class="text-gray-500">|</span>
                             <a
-                                href="#"
+                                href="{% url 'store:terms' %}#entrega"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Política de Entrega</a
                             >
                             <span class="text-gray-500">|</span>
                             <a
-                                href="#"
+                                href="{% url 'store:terms' %}#trocas"
                                 class="text-gray-300 hover:text-accent transition-colors"
                                 >Trocas e Devoluções</a
                             >
@@ -1046,7 +1046,7 @@
                         button.addEventListener("click", function (event) {
                             event.preventDefault();
                             const productId = this.dataset.id;
-                            const url = `/cart/add/${productId}/`;
+                            const url = `{% url 'store:cart_add' 0 %}`.replace("0", productId);
 
                             fetch(url, {
                                 method: "POST",
@@ -1070,17 +1070,28 @@
                                                 el.classList.remove("hidden");
                                             }
                                         });
-                                        showToast(data.message, "success");
+                                        if (window.toastSystem) {
+                                            window.toastSystem.success("Sucesso!", data.message);
+                                        } else {
+                                            alert(data.message);
+                                        }
                                     } else {
-                                        showToast(data.message, "error");
-                                    }
+                                        if (window.toastSystem) {
+                                            window.toastSystem.error("Erro!", data.message);
+                                        } else {
+                                            alert(data.message);
+                                        }
                                 })
                                 .catch((error) => {
                                     console.error("Error:", error);
-                                    showToast(
-                                        "Ocorreu um erro. Por favor, tente novamente.",
-                                        "error",
-                                    );
+                                    if (window.toastSystem) {
+                                        window.toastSystem.error(
+                                            "Erro!",
+                                            "Ocorreu um erro. Por favor, tente novamente."
+                                        );
+                                    } else {
+                                        alert("Ocorreu um erro. Por favor, tente novamente.");
+                                    }
                                 });
                         });
                     });
@@ -1099,12 +1110,32 @@ document.addEventListener("DOMContentLoaded", function() {
             if (data.cart_count > 0) el.classList.remove("hidden");
             else el.classList.add("hidden");
         });
+    })
+    .catch(error => {
+        console.error("Erro ao carregar contador do carrinho:", error);
     });
 });
 </script>
 
         <!-- Sistema de Classificação por Estrelas -->
         <script src="{% static 'js/star-rating.js' %}"></script>
+
+        <!-- Sistema de Toast -->
+        <script src="{% static 'js/toast-system.js' %}"></script>
+
+        <!-- Configuração de URLs para o JavaScript -->
+        <script>
+            // Configurar URLs globais para o JavaScript
+            window.URLS = {
+                cart: "{% url 'store:cart' %}",
+                wishlist: "{% url 'store:wishlist' %}",
+                products: "{% url 'store:product_list' %}",
+                home: "{% url 'store:home' %}",
+                product_detail: function(slug) {
+                    return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace('PLACEHOLDER_SLUG', slug);
+                }
+            };
+        </script>
 
         {% block custom_js %}{% endblock custom_js %}
     </body>
