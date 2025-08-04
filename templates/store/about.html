@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
 <!-- ==== CONTEÚDO PRINCIPAL ==== -->
 <main class="container mx-auto p-4 sm:p-6 lg:p-8">
@@ -17,312 +19,290 @@
         </ol>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="text-center mb-16">
-        <h1 class="text-5xl font-teko text-secondary mb-6">
+    <!-- Título da Página -->
+    <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-teko text-secondary mb-4">
             <i class="fas fa-heart text-primary mr-3"></i>
-            Nossa História
+            Sobre a India Oasis
         </h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Uma jornada apaixonante pelos sabores autênticos da Índia, trazendo
-            para sua mesa os segredos milenares da culinária indiana.
+        <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+            Descubra a história por trás da India Oasis e nossa paixão por trazer
+            os autênticos sabores da Índia para sua mesa.
         </p>
     </div>
 
-    <!-- História Principal -->
-    <div
-        class="bg-white p-8 lg:p-12 rounded-lg shadow-md max-w-4xl mx-auto text-lg leading-relaxed mb-16"
-    >
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-            <div class="lg:col-span-2">
-                <p class="mb-6">
-                    O <strong>India Oasis</strong> nasceu de uma paixão pela
-                    gastronomia indiana e pelo poder que os temperos têm de
-                    transformar um prato simples em uma experiência sensorial
-                    única. Nossa jornada começou com uma viagem pelos mercados
-                    coloridos e aromáticos da Índia, onde descobrimos a riqueza
-                    e a diversidade dos sabores locais.
+    <!-- História da Empresa -->
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+                <h2 class="text-3xl font-rajdhani font-bold text-secondary mb-6">
+                    <i class="fas fa-seedling text-primary mr-2"></i>
+                    Nossa História
+                </h2>
+                <p class="text-gray-700 mb-4">
+                    A India Oasis nasceu da paixão de uma família apaixonada pela
+                    rica culinária indiana. Fundada em 2018, nossa empresa começou
+                    como um pequeno negócio familiar com o sonho de compartilhar os
+                    temperos autênticos e sabores únicos da Índia com o Brasil.
                 </p>
-                <p class="mb-6">
-                    Decidimos criar uma ponte entre os produtores tradicionais
-                    da Índia e os amantes da boa culinária no Brasil. Cada
-                    tempero, chá ou produto em nossa coleção é cuidadosamente
-                    selecionado, garantindo pureza, frescor e o sabor autêntico
-                    que define a verdadeira cozinha indiana.
+                <p class="text-gray-700 mb-4">
+                    Nossa jornada começou quando viajamos pela Índia e descobrimos
+                    os segredos dos temperos tradicionais diretamente dos
+                    produtores locais. Ficamos encantados com a qualidade,
+                    frescor e complexidade dos sabores que encontramos.
                 </p>
-                <p class="mb-6">
-                    Nossa missão é trazer os segredos e os sabores da Índia para
-                    a sua mesa, inspirando você a criar pratos deliciosos e a
-                    explorar um universo de aromas e texturas. Bem-vindo ao
-                    nosso oásis de sabores.
+                <p class="text-gray-700">
+                    Hoje, a India Oasis é uma das principais importadoras de
+                    temperos indianos do Brasil, mantendo sempre nossos valores
+                    de qualidade, autenticidade e sustentabilidade.
                 </p>
             </div>
-            <div class="lg:col-span-1">
-                <div
-                    class="bg-gradient-to-br from-primary to-secondary p-6 rounded-lg text-white text-center"
-                >
-                    <i class="fas fa-quote-left text-3xl mb-4 text-accent"></i>
-                    <blockquote class="text-lg italic mb-4">
-                        "Os temperos são a alma da culinária indiana. Cada grão
-                        conta uma história de tradição e paixão."
-                    </blockquote>
-                    <cite class="text-sm font-bold"
-                        >— Fundadores India Oasis</cite
-                    >
-                </div>
+            <div class="text-center">
+                <img
+                    src="{% static 'images/about-story.jpg' %}"
+                    alt="História da India Oasis"
+                    class="rounded-lg shadow-md w-full max-w-md mx-auto"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNzUgMTIwSDE2MEMxNTQuNDc3IDEyMCAxNTAgMTI0LjQ3NyAxNTAgMTMwVjE3MEMxNTAgMTc1LjUyMyAxNTQuNDc3IDE4MCAxNjAgMTgwSDI0MEMyNDUuNTIzIDE4MCAyNTAgMTc1LjUyMyAyNTAgMTcwVjEzMEMyNTAgMTI0LjQ3NyAyNDUuNTIzIDEyMCAyNDAgMTIwSDIyNSIgc3Ryb2tlPSIjRDFENUQ4IiBzdHJva2Utd2lkdGg9IjIiLz4KPGZ0eF0UCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCooKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCooKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCpsearch for products"></text></svg>'"
+                />
             </div>
         </div>
     </div>
 
-    <!-- Nossos Valores -->
-    <div class="mb-16">
-        <h2 class="text-4xl font-teko text-secondary text-center mb-12">
-            Nossos Valores
+    <!-- Missão, Visão e Valores -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <!-- Missão -->
+        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-6 text-center">
+            <div class="mb-4">
+                <i class="fas fa-compass text-4xl text-orange-600"></i>
+            </div>
+            <h3 class="text-xl font-rajdhani font-bold text-gray-800 mb-3">
+                Nossa Missão
+            </h3>
+            <p class="text-gray-700 text-sm">
+                Trazer os autênticos sabores da Índia para sua mesa, oferecendo
+                temperos de alta qualidade que transformam cada refeição em uma
+                experiência única e memorável.
+            </p>
+        </div>
+
+        <!-- Visão -->
+        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 text-center">
+            <div class="mb-4">
+                <i class="fas fa-eye text-4xl text-green-600"></i>
+            </div>
+            <h3 class="text-xl font-rajdhani font-bold text-gray-800 mb-3">
+                Nossa Visão
+            </h3>
+            <p class="text-gray-700 text-sm">
+                Ser a principal referência em temperos indianos no Brasil,
+                reconhecida pela qualidade excepcional e por conectar culturas
+                através dos sabores.
+            </p>
+        </div>
+
+        <!-- Valores -->
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 text-center">
+            <div class="mb-4">
+                <i class="fas fa-gem text-4xl text-purple-600"></i>
+            </div>
+            <h3 class="text-xl font-rajdhani font-bold text-gray-800 mb-3">
+                Nossos Valores
+            </h3>
+            <p class="text-gray-700 text-sm">
+                Autenticidade, qualidade, sustentabilidade e respeito às
+                tradições milenares da culinária indiana. Valorizamos cada
+                cliente como parte da nossa família.
+            </p>
+        </div>
+    </div>
+
+    <!-- Nossos Diferenciais -->
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+        <h2 class="text-3xl font-rajdhani font-bold text-secondary text-center mb-8">
+            <i class="fas fa-star text-primary mr-2"></i>
+            Nossos Diferenciais
         </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Qualidade Premium -->
+            <div class="text-center p-4">
+                <div class="mb-4">
+                    <i class="fas fa-medal text-3xl text-yellow-600"></i>
+                </div>
+                <h4 class="font-semibold text-gray-800 mb-2">Qualidade Premium</h4>
+                <p class="text-sm text-gray-600">
+                    Temperos selecionados diretamente dos melhores produtores da Índia
+                </p>
+            </div>
+
+            <!-- Frescor Garantido -->
+            <div class="text-center p-4">
+                <div class="mb-4">
+                    <i class="fas fa-leaf text-3xl text-green-600"></i>
+                </div>
+                <h4 class="font-semibold text-gray-800 mb-2">Frescor Garantido</h4>
+                <p class="text-sm text-gray-600">
+                    Produtos importados regularmente para garantir máximo frescor
+                </p>
+            </div>
+
+            <!-- Autenticidade -->
+            <div class="text-center p-4">
+                <div class="mb-4">
+                    <i class="fas fa-certificate text-3xl text-blue-600"></i>
+                </div>
+                <h4 class="font-semibold text-gray-800 mb-2">100% Autêntico</h4>
+                <p class="text-sm text-gray-600">
+                    Receitas e métodos tradicionais preservados há gerações
+                </p>
+            </div>
+
+            <!-- Sustentabilidade -->
+            <div class="text-center p-4">
+                <div class="mb-4">
+                    <i class="fas fa-globe text-3xl text-teal-600"></i>
+                </div>
+                <h4 class="font-semibold text-gray-800 mb-2">Sustentável</h4>
+                <p class="text-sm text-gray-600">
+                    Parcerias diretas com produtores que respeitam o meio ambiente
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nossa Equipe -->
+    <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-8 mb-12">
+        <h2 class="text-3xl font-rajdhani font-bold text-secondary text-center mb-8">
+            <i class="fas fa-users text-primary mr-2"></i>
+            Conheça Nossa Equipe
+        </h2>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                <div
-                    class="bg-primary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                >
-                    <i class="fas fa-leaf text-2xl"></i>
+            <!-- Fundador -->
+            <div class="text-center">
+                <div class="mb-4">
+                    <div
+                        class="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto flex items-center justify-center"
+                    >
+                        <i class="fas fa-user text-white text-2xl"></i>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-teko text-secondary mb-4">
-                    Qualidade Natural
-                </h3>
-                <p class="text-gray-600">
-                    Todos os nossos produtos são naturais, sem conservantes
-                    artificiais, importados diretamente dos melhores produtores
-                    da Índia.
+                <h4 class="text-lg font-semibold text-gray-800 mb-1">Raj Patel</h4>
+                <p class="text-sm text-primary font-medium mb-2">Fundador & CEO</p>
+                <p class="text-xs text-gray-600">
+                    Especialista em temperos indianos com mais de 20 anos de
+                    experiência na culinária tradicional.
                 </p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                <div
-                    class="bg-secondary text-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                >
-                    <i class="fas fa-handshake text-2xl"></i>
+
+            <!-- Chef -->
+            <div class="text-center">
+                <div class="mb-4">
+                    <div
+                        class="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-full mx-auto flex items-center justify-center"
+                    >
+                        <i class="fas fa-user text-white text-2xl"></i>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-teko text-secondary mb-4">
-                    Comércio Justo
-                </h3>
-                <p class="text-gray-600">
-                    Trabalhamos diretamente com agricultores familiares,
-                    garantindo preços justos e práticas sustentáveis em toda
-                    nossa cadeia de fornecimento.
+                <h4 class="text-lg font-semibold text-gray-800 mb-1">Priya Sharma</h4>
+                <p class="text-sm text-primary font-medium mb-2">Chef Consultora</p>
+                <p class="text-xs text-gray-600">
+                    Chef especializada em culinária indiana autêntica, responsável
+                    pela curadoria dos nossos temperos.
                 </p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                <div
-                    class="bg-accent text-black w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                >
-                    <i class="fas fa-heart text-2xl"></i>
+
+            <!-- Especialista -->
+            <div class="text-center">
+                <div class="mb-4">
+                    <div
+                        class="w-24 h-24 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full mx-auto flex items-center justify-center"
+                    >
+                        <i class="fas fa-user text-white text-2xl"></i>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-teko text-secondary mb-4">
-                    Paixão Autêntica
-                </h3>
-                <p class="text-gray-600">
-                    Nossa paixão pela cultura e culinária indiana se reflete em
-                    cada produto que escolhemos e em cada experiência que
-                    proporcionamos.
+                <h4 class="text-lg font-semibold text-gray-800 mb-1">Ana Santos</h4>
+                <p class="text-sm text-primary font-medium mb-2">Especialista em Qualidade</p>
+                <p class="text-xs text-gray-600">
+                    Responsável por garantir que todos os nossos produtos atendam
+                    aos mais altos padrões de qualidade.
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Nossa Jornada -->
-    <div class="mb-16">
-        <h2 class="text-4xl font-teko text-secondary text-center mb-12">
-            Nossa Jornada
-        </h2>
-        <div class="max-w-4xl mx-auto">
-            <div class="space-y-8">
-                <div class="flex items-start space-x-6">
-                    <div
-                        class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                        <span class="font-bold">1</span>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex-1">
-                        <h3 class="text-xl font-teko text-secondary mb-2">
-                            A Descoberta (2020)
-                        </h3>
-                        <p class="text-gray-600">
-                            Tudo começou com uma viagem à Índia, onde nos
-                            apaixonamos pelos aromas e sabores únicos dos
-                            mercados locais de especiarias.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex items-start space-x-6">
-                    <div
-                        class="bg-secondary text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                        <span class="font-bold">2</span>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex-1">
-                        <h3 class="text-xl font-teko text-secondary mb-2">
-                            As Parcerias (2021)
-                        </h3>
-                        <p class="text-gray-600">
-                            Estabelecemos parcerias com pequenos produtores
-                            familiares, garantindo a origem e qualidade de cada
-                            tempero e especiaria.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex items-start space-x-6">
-                    <div
-                        class="bg-accent text-black w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                        <span class="font-bold">3</span>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex-1">
-                        <h3 class="text-xl font-teko text-secondary mb-2">
-                            O Lançamento (2022)
-                        </h3>
-                        <p class="text-gray-600">
-                            Inauguramos nossa loja online, trazendo pela
-                            primeira vez os autênticos sabores indianos
-                            diretamente para o Brasil.
-                        </p>
-                    </div>
-                </div>
-                <div class="flex items-start space-x-6">
-                    <div
-                        class="bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                    >
-                        <span class="font-bold">4</span>
-                    </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex-1">
-                        <h3 class="text-xl font-teko text-secondary mb-2">
-                            O Crescimento (2023-2024)
-                        </h3>
-                        <p class="text-gray-600">
-                            Expandimos nossa linha de produtos e conquistamos a
-                            confiança de milhares de clientes que compartilham
-                            nossa paixão pela culinária indiana.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Compromissos -->
-    <div class="mb-16">
-        <h2 class="text-4xl font-teko text-secondary text-center mb-12">
-            Nossos Compromissos
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-shield-alt text-2xl text-primary mr-3"></i>
-                    <h3 class="text-xl font-teko text-secondary">
-                        Garantia de Qualidade
-                    </h3>
-                </div>
-                <p class="text-gray-600">
-                    Cada produto passa por rigorosos testes de qualidade e
-                    possui certificação de origem, garantindo a autenticidade e
-                    frescor que você merece.
-                </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <i
-                        class="fas fa-shipping-fast text-2xl text-primary mr-3"
-                    ></i>
-                    <h3 class="text-xl font-teko text-secondary">
-                        Entrega Segura
-                    </h3>
-                </div>
-                <p class="text-gray-600">
-                    Embalagem especial que preserva os aromas e propriedades dos
-                    temperos, com entrega rápida e segura em todo o Brasil.
-                </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-users text-2xl text-primary mr-3"></i>
-                    <h3 class="text-xl font-teko text-secondary">
-                        Atendimento Especializado
-                    </h3>
-                </div>
-                <p class="text-gray-600">
-                    Nossa equipe está sempre pronta para ajudar com dicas
-                    culinárias, sugestões de uso e esclarecimento de dúvidas.
-                </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <i class="fas fa-recycle text-2xl text-primary mr-3"></i>
-                    <h3 class="text-xl font-teko text-secondary">
-                        Sustentabilidade
-                    </h3>
-                </div>
-                <p class="text-gray-600">
-                    Embalagens eco-friendly e práticas sustentáveis em toda
-                    nossa operação, respeitando o meio ambiente.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Estatísticas -->
-    <div
-        class="bg-gradient-to-r from-primary to-secondary text-white p-8 lg:p-12 rounded-lg mb-16"
-    >
-        <h2 class="text-4xl font-teko text-center mb-12">
-            India Oasis em Números
-        </h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <div class="text-4xl lg:text-5xl font-bold text-accent mb-2">
-                    50+
-                </div>
-                <div class="text-sm lg:text-base">Produtos Únicos</div>
+    <!-- Compromisso com a Qualidade -->
+    <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div class="text-center lg:text-left">
+                <img
+                    src="{% static 'images/quality-commitment.jpg' %}"
+                    alt="Compromisso com a Qualidade"
+                    class="rounded-lg shadow-md w-full max-w-md mx-auto lg:mx-0"
+                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSJjkY29tbWl0bWVudCB0byBxdWFsaXR5Ii8+'
+                />
             </div>
             <div>
-                <div class="text-4xl lg:text-5xl font-bold text-accent mb-2">
-                    5000+
+                <h2 class="text-3xl font-rajdhani font-bold text-secondary mb-6">
+                    <i class="fas fa-shield-alt text-primary mr-2"></i>
+                    Compromisso com a Qualidade
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Rigoroso Controle de Qualidade</h4>
+                            <p class="text-sm text-gray-600">
+                                Todos os nossos produtos passam por testes rigorosos de
+                                qualidade e pureza antes de chegar até você.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Certificações Internacionais</h4>
+                            <p class="text-sm text-gray-600">
+                                Nossos fornecedores possuem certificações internacionais
+                                de qualidade e sustentabilidade.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <i class="fas fa-check-circle text-green-600 mt-1"></i>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Rastreabilidade Completa</h4>
+                            <p class="text-sm text-gray-600">
+                                Cada produto pode ser rastreado desde sua origem até
+                                sua mesa, garantindo transparência total.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-sm lg:text-base">Clientes Satisfeitos</div>
-            </div>
-            <div>
-                <div class="text-4xl lg:text-5xl font-bold text-accent mb-2">
-                    15+
-                </div>
-                <div class="text-sm lg:text-base">Regiões da Índia</div>
-            </div>
-            <div>
-                <div class="text-4xl lg:text-5xl font-bold text-accent mb-2">
-                    24h
-                </div>
-                <div class="text-sm lg:text-base">Tempo de Resposta</div>
             </div>
         </div>
     </div>
 
     <!-- Call to Action -->
-    <div class="text-center bg-white p-8 lg:p-12 rounded-lg shadow-md">
-        <h2 class="text-3xl font-teko text-secondary mb-4">
-            Faça Parte da Nossa História
+    <div class="bg-gradient-to-r from-primary to-secondary rounded-lg p-8 text-center text-white">
+        <h2 class="text-3xl font-rajdhani font-bold mb-4">
+            Pronto para Experimentar os Sabores Autênticos da Índia?
         </h2>
-        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Junte-se a milhares de pessoas que já descobriram os sabores
-            autênticos da Índia. Explore nossa coleção e transforme sua
-            culinária com nossos temperos premium.
+        <p class="text-lg opacity-90 mb-6">
+            Descubra nossa seleção especial de temperos e transforme sua cozinha
+            em uma verdadeira experiência indiana.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="space-x-4">
             <a
                 href="{% url 'store:product_list' %}"
-                class="btn btn-primary text-lg"
+                class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
                 <i class="fas fa-shopping-bag mr-2"></i>
-                Explorar Produtos
+                Ver Produtos
             </a>
             <a
                 href="{% url 'store:contact' %}"
-                class="btn btn-secondary text-lg"
+                class="inline-block border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors"
             >
                 <i class="fas fa-envelope mr-2"></i>
                 Entre em Contato
@@ -330,4 +310,73 @@
         </div>
     </div>
 </main>
+
+<!-- Scripts -->
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/toast-system.js' %}"></script>
+
+<!-- Configuração de URLs para o JavaScript -->
+<script>
+    // Configurar URLs globais para o JavaScript
+    window.URLS = {
+        cart: "{% url 'store:cart' %}",
+        wishlist: "{% url 'store:wishlist' %}",
+        products: "{% url 'store:product_list' %}",
+        home: "{% url 'store:home' %}",
+        product_detail: function(slug) {
+            return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace('PLACEHOLDER_SLUG', slug);
+        }
+    };
+</script>
+
+<!-- Script para carregar contador do carrinho -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Lógica para o menu lateral
+    const openMenuBtn = document.getElementById("open-menu-btn");
+    const closeMenuBtn = document.getElementById("close-menu-btn");
+    const sideMenu = document.getElementById("side-menu");
+    const menuOverlay = document.getElementById("menu-overlay");
+
+    const openMenu = () => {
+        sideMenu.classList.remove("-translate-x-full");
+        menuOverlay.classList.remove("hidden");
+    };
+
+    const closeMenu = () => {
+        sideMenu.classList.add("-translate-x-full");
+        menuOverlay.classList.add("hidden");
+    };
+
+    if (openMenuBtn) openMenuBtn.addEventListener("click", openMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
+    if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !sideMenu.classList.contains("-translate-x-full")) {
+            closeMenu();
+        }
+    });
+
+    // Carregar contador do carrinho
+    fetch("{% url 'store:cart_count' %}", {
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const cartCountElement = document.getElementById("cart-count");
+        if (cartCountElement) {
+            cartCountElement.textContent = data.cart_count;
+            if (data.cart_count > 0) {
+                cartCountElement.classList.remove("hidden");
+            } else {
+                cartCountElement.classList.add("hidden");
+            }
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao carregar contador do carrinho:", error);
+    });
+});
+</script>
 {% endblock content %}

@@ -1,8 +1,8 @@
 """
-Django settings for india_oasis_project - cPanel Compatible Version
+Django settings for india_oasis_project - cPanel Optimized Version
 
-This settings file has been optimized for GoDaddy cPanel shared hosting.
-Complex dependencies like Redis, Celery, and PostgreSQL have been removed.
+This settings file is specifically configured for GoDaddy cPanel shared hosting.
+It removes complex dependencies like Redis, Celery, and PostgreSQL.
 """
 
 from pathlib import Path
@@ -27,7 +27,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-# Hosts allowed for cPanel deployment
+# cPanel hosting typically uses domain names
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 # Application definition
@@ -209,7 +209,7 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
     X_FRAME_OPTIONS = 'DENY'
-    SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+    SECURE_REFERRER_POLICY = 'same-origin'
 
 # Session configuration
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -257,7 +257,10 @@ USE_X_FORWARDED_PORT = True
 ENABLE_BACKGROUND_TASKS = False
 ENABLE_ASYNC_PROCESSING = False
 
-# Admin interface customization
+# Rate limiting (disabled for cPanel to avoid issues)
+RATELIMIT_ENABLE = False
+
+# Admin interface customization (optional)
 ADMIN_SITE_HEADER = 'India Oasis Admin'
 ADMIN_SITE_TITLE = 'India Oasis Admin Portal'
 ADMIN_INDEX_TITLE = 'Bem-vindo ao India Oasis Admin'
@@ -278,5 +281,3 @@ MANAGERS = ADMINS
 # Create logs directory if it doesn't exist
 os.makedirs(BASE_DIR / 'logs', exist_ok=True)
 os.makedirs(BASE_DIR / 'cache', exist_ok=True)
-os.makedirs(BASE_DIR / 'public_html' / 'static', exist_ok=True)
-os.makedirs(BASE_DIR / 'public_html' / 'media', exist_ok=True)

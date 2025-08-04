@@ -1,0 +1,56 @@
+# India Oasis - cPanel Compatible Requirements
+# Simplified dependencies for GoDaddy cPanel shared hosting
+
+# Core Django
+Django==5.2.3
+asgiref==3.8.1
+sqlparse==0.5.3
+
+# MySQL Database (instead of PostgreSQL)
+mysqlclient==2.2.4
+
+# Environment and Configuration
+django-environ==0.11.2
+
+# Static Files (no whitenoise needed in cPanel)
+Pillow==11.2.1
+
+# Payment Processing
+mercadopago==2.2.0
+
+# HTTP Client
+requests==2.31.0
+
+# Email
+django-email-backend==1.1.0
+
+# Security (basic only)
+django-cors-headers==4.3.1
+
+# Utilities
+python-dateutil==2.8.2
+pytz==2023.3
+
+# File handling
+python-magic==0.4.27
+
+# JSON handling
+python-json-logger==2.0.7
+
+# Development dependencies (optional)
+# Uncomment for development environment
+# django-debug-toolbar==4.2.0
+# django-extensions==3.2.3
+
+# Note: Removed dependencies not compatible with cPanel:
+# - psycopg2-binary (PostgreSQL)
+# - redis and django-redis (Redis)
+# - celery and django-celery-* (Background tasks)
+# - gunicorn (WSGI server)
+# - whitenoise (Static files middleware)
+# - django-storages (Cloud storage)
+# - sentry-sdk (Error tracking)
+# - django-health-check (Health monitoring)
+# - django-ratelimit (Rate limiting)
+# - django-admin-interface (Complex admin)
+# - django-colorfield (Admin enhancement)

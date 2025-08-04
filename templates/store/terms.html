@@ -1,454 +1,512 @@
-{% load static %} {% extends 'base.html' %} {% block content %  }
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
-        <main class="container mx-auto p-4 sm:p-6 lg:p-8">
-            <!-- Breadcrumb -->
-            <nav class="mb-6">
-                <ol class="flex space-x-2 text-sm">
-                    <li>
-                        <a
-                            href="{% url 'store:home' %}"
-                            class="text-orange-600 hover:underline"
-                            >Início</a
-                        >
-                    </li>
-                    <li class="text-gray-500">/</li>
-                    <li class="text-gray-700">Termos de Uso</li>
-                </ol>
-            </nav>
+<!-- ==== CONTEÚDO PRINCIPAL ==== -->
+<main class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6">
+        <ol class="flex space-x-2 text-sm">
+            <li>
+                <a
+                    href="{% url 'store:home' %}"
+                    class="text-orange-600 hover:underline"
+                    >Início</a
+                >
+            </li>
+            <li class="text-gray-500">/</li>
+            <li class="text-gray-700">Termos de Uso</li>
+        </ol>
+    </nav>
 
-            <!-- Título da Página -->
-            <div class="text-center mb-8">
-                <h1 class="text-4xl md:text-5xl font-teko text-secondary mb-4">
-                                            <i class="fas fa-file-contract text-orange-600 mr-3"></i>
-                    Termos de Uso
-                </h1>
-                <p class="text-gray-600 text-lg max-w-3xl mx-auto">
-                    Leia atentamente nossos termos e condições de uso antes de utilizar
-                    nossos serviços. Sua segurança e transparência são nossas prioridades.
-                </p>
+    <!-- Título da Página -->
+    <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-teko text-secondary mb-4">
+            <i class="fas fa-file-contract text-orange-600 mr-3"></i>
+            Termos de Uso
+        </h1>
+        <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+            Leia atentamente nossos termos e condições de uso antes de utilizar
+            nossos serviços. Sua segurança e transparência são nossas
+            prioridades.
+        </p>
+    </div>
+
+    <div class="terms-content">
+        <!-- Data de Última Atualização -->
+        <div class="last-updated">
+            <i class="fas fa-calendar-alt mr-2"></i>
+            <strong>Última atualização:</strong> 15 de dezembro de 2024
+        </div>
+
+        <!-- Índice -->
+        <div class="toc">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">
+                <i class="fas fa-list mr-2"></i>
+                Índice
+            </h2>
+            <ul>
+                <li><a href="#aceitacao">1. Aceitação dos Termos</a></li>
+                <li><a href="#definicoes">2. Definições</a></li>
+                <li><a href="#cadastro">3. Cadastro e Conta do Usuário</a></li>
+                <li><a href="#uso">4. Uso do Site</a></li>
+                <li><a href="#produtos">5. Produtos e Preços</a></li>
+                <li><a href="#pedidos">6. Pedidos e Pagamentos</a></li>
+                <li><a href="#entrega">7. Entrega e Devolução</a></li>
+                <li><a href="#propriedade">8. Propriedade Intelectual</a></li>
+                <li><a href="#privacidade">9. Privacidade e Dados</a></li>
+                <li><a href="#responsabilidades">10. Responsabilidades</a></li>
+                <li>
+                    <a href="#limitacao">11. Limitação de Responsabilidade</a>
+                </li>
+                <li><a href="#modificacoes">12. Modificações</a></li>
+                <li><a href="#rescisao">13. Rescisão</a></li>
+                <li><a href="#lei">14. Lei Aplicável</a></li>
+                <li><a href="#contato">15. Contato</a></li>
+            </ul>
+        </div>
+
+        <!-- Seção 1: Aceitação dos Termos -->
+        <div class="terms-section" id="aceitacao">
+            <h2>1. Aceitação dos Termos</h2>
+            <p>
+                Bem-vindo ao <strong>India Oasis</strong>! Estes Termos de Uso
+                ("Termos") regem o uso do nosso site e serviços. Ao acessar ou
+                usar nosso site, você concorda em cumprir e ficar vinculado a
+                estes Termos.
+            </p>
+            <p>
+                Se você não concorda com qualquer parte destes Termos, não deve
+                usar nossos serviços. Recomendamos que leia estes Termos
+                cuidadosamente antes de criar uma conta ou fazer uma compra.
+            </p>
+            <div class="highlight-box">
+                <i class="fas fa-exclamation-triangle text-yellow-600 mr-2"></i>
+                <strong>Importante:</strong> Ao continuar navegando em nosso
+                site, você confirma que leu, entendeu e aceita todos os termos e
+                condições aqui estabelecidos.
             </div>
+        </div>
 
-            <div class="terms-content">
-                <!-- Data de Última Atualização -->
-                <div class="last-updated">
-                    <i class="fas fa-calendar-alt mr-2"></i>
-                    <strong>Última atualização:</strong> 15 de dezembro de 2024
-                </div>
+        <!-- Seção 2: Definições -->
+        <div class="terms-section" id="definicoes">
+            <h2>2. Definições</h2>
+            <p>
+                Para os fins destes Termos, as seguintes definições se aplicam:
+            </p>
+            <ul>
+                <li>
+                    <strong>"Empresa"</strong> ou <strong>"Nós"</strong>:
+                    refere-se à India Oasis
+                </li>
+                <li>
+                    <strong>"Usuário"</strong> ou <strong>"Você"</strong>:
+                    qualquer pessoa que acesse nosso site
+                </li>
+                <li>
+                    <strong>"Site"</strong>: o website India Oasis e todas as
+                    suas páginas
+                </li>
+                <li>
+                    <strong>"Serviços"</strong>: todos os serviços oferecidos
+                    através do nosso site
+                </li>
+                <li>
+                    <strong>"Produtos"</strong>: temperos, especiarias e demais
+                    itens vendidos
+                </li>
+                <li>
+                    <strong>"Conta"</strong>: conta de usuário criada no nosso
+                    site
+                </li>
+                <li>
+                    <strong>"Conteúdo"</strong>: textos, imagens, vídeos e
+                    outros materiais do site
+                </li>
+            </ul>
+        </div>
 
-                <!-- Índice -->
-                <div class="toc">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800">
-                        <i class="fas fa-list mr-2"></i>
-                        Índice
-                    </h2>
-                    <ul>
-                        <li><a href="#aceitacao">1. Aceitação dos Termos</a></li>
-                        <li><a href="#definicoes">2. Definições</a></li>
-                        <li><a href="#cadastro">3. Cadastro e Conta do Usuário</a></li>
-                        <li><a href="#uso">4. Uso do Site</a></li>
-                        <li><a href="#produtos">5. Produtos e Preços</a></li>
-                        <li><a href="#pedidos">6. Pedidos e Pagamentos</a></li>
-                        <li><a href="#entrega">7. Entrega e Devolução</a></li>
-                        <li><a href="#propriedade">8. Propriedade Intelectual</a></li>
-                        <li><a href="#privacidade">9. Privacidade e Dados</a></li>
-                        <li><a href="#responsabilidades">10. Responsabilidades</a></li>
-                        <li><a href="#limitacao">11. Limitação de Responsabilidade</a></li>
-                        <li><a href="#modificacoes">12. Modificações</a></li>
-                        <li><a href="#rescisao">13. Rescisão</a></li>
-                        <li><a href="#lei">14. Lei Aplicável</a></li>
-                        <li><a href="#contato">15. Contato</a></li>
-                    </ul>
-                </div>
+        <!-- Seção 3: Cadastro e Conta do Usuário -->
+        <div class="terms-section" id="cadastro">
+            <h2>3. Cadastro e Conta do Usuário</h2>
 
-                <!-- Seção 1: Aceitação dos Termos -->
-                <div class="terms-section" id="aceitacao">
-                    <h2>1. Aceitação dos Termos</h2>
-                    <p>
-                        Bem-vindo ao <strong>India Oasis</strong>! Estes Termos de Uso ("Termos")
-                        regem o uso do nosso site e serviços. Ao acessar ou usar nosso site,
-                        você concorda em cumprir e ficar vinculado a estes Termos.
-                    </p>
-                    <p>
-                        Se você não concorda com qualquer parte destes Termos, não deve usar
-                        nossos serviços. Recomendamos que leia estes Termos cuidadosamente antes
-                        de criar uma conta ou fazer uma compra.
-                    </p>
-                    <div class="highlight-box">
-                        <i class="fas fa-exclamation-triangle text-yellow-600 mr-2"></i>
-                        <strong>Importante:</strong> Ao continuar navegando em nosso site,
-                        você confirma que leu, entendeu e aceita todos os termos e condições
-                        aqui estabelecidos.
+            <h3>3.1 Criação de Conta</h3>
+            <p>
+                Para fazer compras e acessar determinados recursos, você deve
+                criar uma conta. Você se compromete a fornecer informações
+                precisas, atuais e completas durante o processo de registro.
+            </p>
+
+            <h3>3.2 Responsabilidade pela Conta</h3>
+            <p>
+                Você é responsável por manter a confidencialidade de suas
+                credenciais de login e por todas as atividades que ocorram em
+                sua conta. Deve notificar-nos imediatamente sobre qualquer uso
+                não autorizado.
+            </p>
+
+            <h3>3.3 Idade Mínima</h3>
+            <p>
+                Você deve ter pelo menos 18 anos para criar uma conta e fazer
+                compras. Ao se registrar, você declara que possui idade legal
+                para celebrar contratos.
+            </p>
+
+            <h3>3.4 Suspensão de Conta</h3>
+            <p>
+                Reservamo-nos o direito de suspender ou encerrar contas que
+                violem estes Termos ou sejam usadas para atividades fraudulentas
+                ou ilegais.
+            </p>
+        </div>
+
+        <!-- Seção 4: Uso do Site -->
+        <div class="terms-section" id="uso">
+            <h2>4. Uso do Site</h2>
+
+            <h3>4.1 Uso Permitido</h3>
+            <p>
+                Você pode usar nosso site para navegar, pesquisar produtos,
+                fazer compras e acessar informações relacionadas aos nossos
+                serviços, sempre em conformidade com estes Termos.
+            </p>
+
+            <h3>4.2 Uso Não Permitido</h3>
+            <p>Você concorda em NÃO usar o site para:</p>
+            <ul>
+                <li>Atividades ilegais ou fraudulentas</li>
+                <li>Violar direitos de terceiros</li>
+                <li>Transmitir vírus ou códigos maliciosos</li>
+                <li>Fazer engenharia reversa ou copiar o site</li>
+                <li>Usar bots ou ferramentas automatizadas não autorizadas</li>
+                <li>Interferir no funcionamento normal do site</li>
+                <li>Coletar dados de outros usuários sem autorização</li>
+            </ul>
+
+            <h3>4.3 Monitoramento</h3>
+            <p>
+                Reservamo-nos o direito de monitorar o uso do site e tomar
+                medidas apropriadas contra usos inadequados, incluindo a
+                suspensão de acesso.
+            </p>
+        </div>
+
+        <!-- Seção 5: Produtos e Preços -->
+        <div class="terms-section" id="produtos">
+            <h2>5. Produtos e Preços</h2>
+
+            <h3>5.1 Informações dos Produtos</h3>
+            <p>
+                Fazemos o possível para fornecer descrições precisas e imagens
+                representativas dos nossos produtos. No entanto, não garantimos
+                que as descrições sejam completamente precisas ou livres de
+                erros.
+            </p>
+
+            <h3>5.2 Disponibilidade</h3>
+            <p>
+                Todos os produtos estão sujeitos à disponibilidade.
+                Reservamo-nos o direito de descontinuar produtos a qualquer
+                momento e de limitar quantidades de compra.
+            </p>
+
+            <h3>5.3 Preços</h3>
+            <p>
+                Os preços são expressos em reais (R$) e podem ser alterados a
+                qualquer momento sem aviso prévio. O preço aplicável será aquele
+                vigente no momento da confirmação do pedido.
+            </p>
+
+            <h3>5.4 Erros de Preço</h3>
+            <p>
+                Reservamo-nos o direito de corrigir erros de preço e cancelar
+                pedidos com preços incorretos, mesmo após a confirmação da
+                compra.
+            </p>
+        </div>
+
+        <!-- Seção 6: Pedidos e Pagamentos -->
+        <div class="terms-section" id="pedidos">
+            <h2>6. Pedidos e Pagamentos</h2>
+
+            <h3>6.1 Processo de Compra</h3>
+            <p>
+                Ao fazer um pedido, você faz uma oferta de compra. Reservamo-nos
+                o direito de aceitar ou recusar qualquer pedido por qualquer
+                motivo.
+            </p>
+
+            <h3>6.2 Confirmação</h3>
+            <p>
+                Você receberá um email de confirmação após a realização do
+                pedido. Esta confirmação não garante a aceitação do pedido, que
+                ocorre apenas após a aprovação do pagamento.
+            </p>
+
+            <h3>6.3 Métodos de Pagamento</h3>
+            <p>Aceitamos os seguintes métodos de pagamento:</p>
+            <ul>
+                <li>Cartões de crédito (Visa, Mastercard, Elo)</li>
+                <li>Cartões de débito</li>
+                <li>PIX</li>
+                <li>Boleto bancário</li>
+            </ul>
+
+            <h3>6.4 Segurança de Pagamento</h3>
+            <p>
+                Utilizamos sistemas seguros para processar pagamentos. Não
+                armazenamos informações completas de cartões de crédito em
+                nossos servidores.
+            </p>
+        </div>
+
+        <!-- Seção 7: Entrega e Devolução -->
+        <div class="terms-section" id="entrega">
+            <h2>7. Entrega e Devolução</h2>
+
+            <h3>7.1 Entrega</h3>
+            <p>
+                Realizamos entregas para todo o território nacional. Os prazos
+                de entrega são estimados e podem variar devido a fatores
+                externos.
+            </p>
+
+            <h3>7.2 Frete</h3>
+            <p>
+                Os custos de frete são calculados com base no CEP de destino e
+                peso dos produtos. Oferecemos frete grátis para pedidos acima de
+                determinado valor.
+            </p>
+
+            <h3>7.3 Direito de Arrependimento</h3>
+            <p>
+                Conforme o Código de Defesa do Consumidor, você tem até 7 dias
+                corridos para desistir da compra, contados a partir do
+                recebimento do produto.
+            </p>
+
+            <h3>7.4 Trocas e Devoluções</h3>
+            <p>
+                Produtos podem ser trocados ou devolvidos dentro do prazo legal,
+                desde que estejam em perfeitas condições, na embalagem original
+                e com nota fiscal.
+            </p>
+        </div>
+
+        <!-- Seção 8: Propriedade Intelectual -->
+        <div class="terms-section" id="propriedade">
+            <h2>8. Propriedade Intelectual</h2>
+            <p>
+                Todo o conteúdo do site, incluindo textos, imagens, logotipos,
+                design e código, é de propriedade da India Oasis ou de terceiros
+                licenciados e está protegido por leis de direitos autorais.
+            </p>
+            <p>
+                Você não pode copiar, modificar, distribuir ou usar nosso
+                conteúdo sem autorização expressa por escrito.
+            </p>
+        </div>
+
+        <!-- Seção 9: Privacidade e Dados -->
+        <div class="terms-section" id="privacidade">
+            <h2>9. Privacidade e Dados</h2>
+            <p>
+                A coleta e uso de seus dados pessoais são regidos por nossa
+                <a
+                    href="{% url 'store:privacy' %}"
+                    class="text-orange-600 hover:underline"
+                    >Política de Privacidade</a
+                >, que faz parte integrante destes Termos.
+            </p>
+            <p>
+                Ao usar nossos serviços, você consente com a coleta e uso de
+                suas informações conforme descrito em nossa Política de
+                Privacidade.
+            </p>
+        </div>
+
+        <!-- Seção 10: Responsabilidades -->
+        <div class="terms-section" id="responsabilidades">
+            <h2>10. Responsabilidades</h2>
+
+            <h3>10.1 Nossas Responsabilidades</h3>
+            <p>Comprometemo-nos a:</p>
+            <ul>
+                <li>Fornecer produtos de qualidade</li>
+                <li>Processar pedidos de forma eficiente</li>
+                <li>Manter a segurança dos dados</li>
+                <li>Cumprir prazos de entrega estimados</li>
+                <li>Atender ao cliente com qualidade</li>
+            </ul>
+
+            <h3>10.2 Suas Responsabilidades</h3>
+            <p>Você é responsável por:</p>
+            <ul>
+                <li>Fornecer informações precisas</li>
+                <li>Manter suas credenciais seguras</li>
+                <li>Usar o site de forma adequada</li>
+                <li>Efetuar pagamentos no prazo</li>
+                <li>Receber produtos no endereço indicado</li>
+            </ul>
+        </div>
+
+        <!-- Seção 11: Limitação de Responsabilidade -->
+        <div class="terms-section" id="limitacao">
+            <h2>11. Limitação de Responsabilidade</h2>
+            <p>
+                Nossa responsabilidade é limitada ao valor pago pelo produto ou
+                serviço. Não seremos responsáveis por danos indiretos,
+                incidentais ou consequenciais.
+            </p>
+            <p>
+                Não garantimos que o site estará sempre disponível ou livre de
+                erros, embora façamos nossos melhores esforços para mantê-lo
+                funcionando adequadamente.
+            </p>
+        </div>
+
+        <!-- Seção 12: Modificações -->
+        <div class="terms-section" id="modificacoes">
+            <h2>12. Modificações</h2>
+            <p>
+                Reservamo-nos o direito de modificar estes Termos a qualquer
+                momento. As alterações entrarão em vigor imediatamente após a
+                publicação no site.
+            </p>
+            <p>
+                É sua responsabilidade revisar estes Termos periodicamente. O
+                uso continuado do site após as modificações constitui aceitação
+                dos novos termos.
+            </p>
+        </div>
+
+        <!-- Seção 13: Rescisão -->
+        <div class="terms-section" id="rescisao">
+            <h2>13. Rescisão</h2>
+            <p>
+                Você pode encerrar sua conta a qualquer momento entrando em
+                contato conosco. Podemos suspender ou encerrar sua conta se você
+                violar estes Termos.
+            </p>
+            <p>
+                Após o encerramento, você não poderá mais acessar sua conta, mas
+                suas obrigações financeiras permanecerão em vigor.
+            </p>
+        </div>
+
+        <!-- Seção 14: Lei Aplicável -->
+        <div class="terms-section" id="lei">
+            <h2>14. Lei Aplicável</h2>
+            <p>
+                Estes Termos são regidos pelas leis da República Federativa do
+                Brasil. Qualquer disputa será resolvida nos tribunais
+                brasileiros.
+            </p>
+            <p>
+                Tentaremos resolver qualquer disputa através de negociação
+                direta antes de recorrer a procedimentos legais formais.
+            </p>
+        </div>
+
+        <!-- Seção 15: Contato -->
+        <div class="terms-section" id="contato">
+            <h2>15. Contato</h2>
+            <p>
+                Se você tiver dúvidas sobre estes Termos de Uso, entre em
+                contato conosco:
+            </p>
+
+            <div class="contact-box">
+                <h3 class="text-lg font-semibold mb-4 text-blue-800">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Informações de Contato
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p>
+                            <strong>E-mail:</strong> contato@indiaoasis.com.br
+                        </p>
+                        <p><strong>Telefone:</strong> (11) 99999-9999</p>
+                    </div>
+                    <div>
+                        <p><strong>WhatsApp:</strong> (11) 99999-9999</p>
+                        <p><strong>Horário:</strong> Seg-Sex, 8h às 18h</p>
                     </div>
                 </div>
-
-                <!-- Seção 2: Definições -->
-                <div class="terms-section" id="definicoes">
-                    <h2>2. Definições</h2>
-                    <p>Para os fins destes Termos, as seguintes definições se aplicam:</p>
-                    <ul>
-                        <li><strong>"Empresa"</strong> ou <strong>"Nós"</strong>: refere-se à India Oasis</li>
-                        <li><strong>"Usuário"</strong> ou <strong>"Você"</strong>: qualquer pessoa que acesse nosso site</li>
-                        <li><strong>"Site"</strong>: o website India Oasis e todas as suas páginas</li>
-                        <li><strong>"Serviços"</strong>: todos os serviços oferecidos através do nosso site</li>
-                        <li><strong>"Produtos"</strong>: temperos, especiarias e demais itens vendidos</li>
-                        <li><strong>"Conta"</strong>: conta de usuário criada no nosso site</li>
-                        <li><strong>"Conteúdo"</strong>: textos, imagens, vídeos e outros materiais do site</li>
-                    </ul>
-                </div>
-
-                <!-- Seção 3: Cadastro e Conta do Usuário -->
-                <div class="terms-section" id="cadastro">
-                    <h2>3. Cadastro e Conta do Usuário</h2>
-
-                    <h3>3.1 Criação de Conta</h3>
-                    <p>
-                        Para fazer compras e acessar determinados recursos, você deve criar uma conta.
-                        Você se compromete a fornecer informações precisas, atuais e completas
-                        durante o processo de registro.
-                    </p>
-
-                    <h3>3.2 Responsabilidade pela Conta</h3>
-                    <p>
-                        Você é responsável por manter a confidencialidade de suas credenciais de
-                        login e por todas as atividades que ocorram em sua conta. Deve notificar-nos
-                        imediatamente sobre qualquer uso não autorizado.
-                    </p>
-
-                    <h3>3.3 Idade Mínima</h3>
-                    <p>
-                        Você deve ter pelo menos 18 anos para criar uma conta e fazer compras.
-                        Ao se registrar, você declara que possui idade legal para celebrar contratos.
-                    </p>
-
-                    <h3>3.4 Suspensão de Conta</h3>
-                    <p>
-                        Reservamo-nos o direito de suspender ou encerrar contas que violem estes
-                        Termos ou sejam usadas para atividades fraudulentas ou ilegais.
-                    </p>
-                </div>
-
-                <!-- Seção 4: Uso do Site -->
-                <div class="terms-section" id="uso">
-                    <h2>4. Uso do Site</h2>
-
-                    <h3>4.1 Uso Permitido</h3>
-                    <p>
-                        Você pode usar nosso site para navegar, pesquisar produtos, fazer compras
-                        e acessar informações relacionadas aos nossos serviços, sempre em conformidade
-                        com estes Termos.
-                    </p>
-
-                    <h3>4.2 Uso Não Permitido</h3>
-                    <p>Você concorda em NÃO usar o site para:</p>
-                    <ul>
-                        <li>Atividades ilegais ou fraudulentas</li>
-                        <li>Violar direitos de terceiros</li>
-                        <li>Transmitir vírus ou códigos maliciosos</li>
-                        <li>Fazer engenharia reversa ou copiar o site</li>
-                        <li>Usar bots ou ferramentas automatizadas não autorizadas</li>
-                        <li>Interferir no funcionamento normal do site</li>
-                        <li>Coletar dados de outros usuários sem autorização</li>
-                    </ul>
-
-                    <h3>4.3 Monitoramento</h3>
-                    <p>
-                        Reservamo-nos o direito de monitorar o uso do site e tomar medidas apropriadas
-                        contra usos inadequados, incluindo a suspensão de acesso.
-                    </p>
-                </div>
-
-                <!-- Seção 5: Produtos e Preços -->
-                <div class="terms-section" id="produtos">
-                    <h2>5. Produtos e Preços</h2>
-
-                    <h3>5.1 Informações dos Produtos</h3>
-                    <p>
-                        Fazemos o possível para fornecer descrições precisas e imagens representativas
-                        dos nossos produtos. No entanto, não garantimos que as descrições sejam
-                        completamente precisas ou livres de erros.
-                    </p>
-
-                    <h3>5.2 Disponibilidade</h3>
-                    <p>
-                        Todos os produtos estão sujeitos à disponibilidade. Reservamo-nos o direito
-                        de descontinuar produtos a qualquer momento e de limitar quantidades de compra.
-                    </p>
-
-                    <h3>5.3 Preços</h3>
-                    <p>
-                        Os preços são expressos em reais (R$) e podem ser alterados a qualquer momento
-                        sem aviso prévio. O preço aplicável será aquele vigente no momento da confirmação
-                        do pedido.
-                    </p>
-
-                    <h3>5.4 Erros de Preço</h3>
-                    <p>
-                        Reservamo-nos o direito de corrigir erros de preço e cancelar pedidos com
-                        preços incorretos, mesmo após a confirmação da compra.
-                    </p>
-                </div>
-
-                <!-- Seção 6: Pedidos e Pagamentos -->
-                <div class="terms-section" id="pedidos">
-                    <h2>6. Pedidos e Pagamentos</h2>
-
-                    <h3>6.1 Processo de Compra</h3>
-                    <p>
-                        Ao fazer um pedido, você faz uma oferta de compra. Reservamo-nos o direito
-                        de aceitar ou recusar qualquer pedido por qualquer motivo.
-                    </p>
-
-                    <h3>6.2 Confirmação</h3>
-                    <p>
-                        Você receberá um email de confirmação após a realização do pedido. Esta
-                        confirmação não garante a aceitação do pedido, que ocorre apenas após a
-                        aprovação do pagamento.
-                    </p>
-
-                    <h3>6.3 Métodos de Pagamento</h3>
-                    <p>Aceitamos os seguintes métodos de pagamento:</p>
-                    <ul>
-                        <li>Cartões de crédito (Visa, Mastercard, Elo)</li>
-                        <li>Cartões de débito</li>
-                        <li>PIX</li>
-                        <li>Boleto bancário</li>
-                    </ul>
-
-                    <h3>6.4 Segurança de Pagamento</h3>
-                    <p>
-                        Utilizamos sistemas seguros para processar pagamentos. Não armazenamos
-                        informações completas de cartões de crédito em nossos servidores.
-                    </p>
-                </div>
-
-                <!-- Seção 7: Entrega e Devolução -->
-                <div class="terms-section" id="entrega">
-                    <h2>7. Entrega e Devolução</h2>
-
-                    <h3>7.1 Entrega</h3>
-                    <p>
-                        Realizamos entregas para todo o território nacional. Os prazos de entrega
-                        são estimados e podem variar devido a fatores externos.
-                    </p>
-
-                    <h3>7.2 Frete</h3>
-                    <p>
-                        Os custos de frete são calculados com base no CEP de destino e peso dos
-                        produtos. Oferecemos frete grátis para pedidos acima de determinado valor.
-                    </p>
-
-                    <h3>7.3 Direito de Arrependimento</h3>
-                    <p>
-                        Conforme o Código de Defesa do Consumidor, você tem até 7 dias corridos
-                        para desistir da compra, contados a partir do recebimento do produto.
-                    </p>
-
-                    <h3>7.4 Trocas e Devoluções</h3>
-                    <p>
-                        Produtos podem ser trocados ou devolvidos dentro do prazo legal, desde que
-                        estejam em perfeitas condições, na embalagem original e com nota fiscal.
-                    </p>
-                </div>
-
-                <!-- Seção 8: Propriedade Intelectual -->
-                <div class="terms-section" id="propriedade">
-                    <h2>8. Propriedade Intelectual</h2>
-                    <p>
-                        Todo o conteúdo do site, incluindo textos, imagens, logotipos, design e
-                        código, é de propriedade da India Oasis ou de terceiros licenciados e
-                        está protegido por leis de direitos autorais.
-                    </p>
-                    <p>
-                        Você não pode copiar, modificar, distribuir ou usar nosso conteúdo sem
-                        autorização expressa por escrito.
-                    </p>
-                </div>
-
-                <!-- Seção 9: Privacidade e Dados -->
-                <div class="terms-section" id="privacidade">
-                    <h2>9. Privacidade e Dados</h2>
-                    <p>
-                        A coleta e uso de seus dados pessoais são regidos por nossa
-                        <a href="{% url 'store:privacy' %}" class="text-orange-600 hover:underline">Política de Privacidade</a>,
-                        que faz parte integrante destes Termos.
-                    </p>
-                    <p>
-                        Ao usar nossos serviços, você consente com a coleta e uso de suas informações
-                        conforme descrito em nossa Política de Privacidade.
-                    </p>
-                </div>
-
-                <!-- Seção 10: Responsabilidades -->
-                <div class="terms-section" id="responsabilidades">
-                    <h2>10. Responsabilidades</h2>
-
-                    <h3>10.1 Nossas Responsabilidades</h3>
-                    <p>Comprometemo-nos a:</p>
-                    <ul>
-                        <li>Fornecer produtos de qualidade</li>
-                        <li>Processar pedidos de forma eficiente</li>
-                        <li>Manter a segurança dos dados</li>
-                        <li>Cumprir prazos de entrega estimados</li>
-                        <li>Atender ao cliente com qualidade</li>
-                    </ul>
-
-                    <h3>10.2 Suas Responsabilidades</h3>
-                    <p>Você é responsável por:</p>
-                    <ul>
-                        <li>Fornecer informações precisas</li>
-                        <li>Manter suas credenciais seguras</li>
-                        <li>Usar o site de forma adequada</li>
-                        <li>Efetuar pagamentos no prazo</li>
-                        <li>Receber produtos no endereço indicado</li>
-                    </ul>
-                </div>
-
-                <!-- Seção 11: Limitação de Responsabilidade -->
-                <div class="terms-section" id="limitacao">
-                    <h2>11. Limitação de Responsabilidade</h2>
-                    <p>
-                        Nossa responsabilidade é limitada ao valor pago pelo produto ou serviço.
-                        Não seremos responsáveis por danos indiretos, incidentais ou consequenciais.
-                    </p>
-                    <p>
-                        Não garantimos que o site estará sempre disponível ou livre de erros,
-                        embora façamos nossos melhores esforços para mantê-lo funcionando adequadamente.
-                    </p>
-                </div>
-
-                <!-- Seção 12: Modificações -->
-                <div class="terms-section" id="modificacoes">
-                    <h2>12. Modificações</h2>
-                    <p>
-                        Reservamo-nos o direito de modificar estes Termos a qualquer momento.
-                        As alterações entrarão em vigor imediatamente após a publicação no site.
-                    </p>
-                    <p>
-                        É sua responsabilidade revisar estes Termos periodicamente. O uso continuado
-                        do site após as modificações constitui aceitação dos novos termos.
-                    </p>
-                </div>
-
-                <!-- Seção 13: Rescisão -->
-                <div class="terms-section" id="rescisao">
-                    <h2>13. Rescisão</h2>
-                    <p>
-                        Você pode encerrar sua conta a qualquer momento entrando em contato conosco.
-                        Podemos suspender ou encerrar sua conta se você violar estes Termos.
-                    </p>
-                    <p>
-                        Após o encerramento, você não poderá mais acessar sua conta, mas suas
-                        obrigações financeiras permanecerão em vigor.
-                    </p>
-                </div>
-
-                <!-- Seção 14: Lei Aplicável -->
-                <div class="terms-section" id="lei">
-                    <h2>14. Lei Aplicável</h2>
-                    <p>
-                        Estes Termos são regidos pelas leis da República Federativa do Brasil.
-                        Qualquer disputa será resolvida nos tribunais brasileiros.
-                    </p>
-                    <p>
-                        Tentaremos resolver qualquer disputa através de negociação direta antes
-                        de recorrer a procedimentos legais formais.
-                    </p>
-                </div>
-
-                <!-- Seção 15: Contato -->
-                <div class="terms-section" id="contato">
-                    <h2>15. Contato</h2>
-                    <p>
-                        Se você tiver dúvidas sobre estes Termos de Uso, entre em contato conosco:
-                    </p>
-
-                    <div class="contact-box">
-                        <h3 class="text-lg font-semibold mb-4 text-blue-800">
-                            <i class="fas fa-envelope mr-2"></i>
-                            Informações de Contato
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p><strong>E-mail:</strong> contato@indiaoasis.com.br</p>
-                                <p><strong>Telefone:</strong> (11) 99999-9999</p>
-                            </div>
-                            <div>
-                                <p><strong>WhatsApp:</strong> (11) 99999-9999</p>
-                                <p><strong>Horário:</strong> Seg-Sex, 8h às 18h</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Declaração Final -->
-                <div class="highlight-box text-center">
-                    <i class="fas fa-handshake text-orange-600 text-2xl mb-3"></i>
-                    <p class="font-semibold text-lg mb-2">
-                        Obrigado por escolher a India Oasis!
-                    </p>
-                    <p class="text-sm">
-                        Estamos comprometidos em oferecer a você a melhor experiência em
-                        temperos e especiarias autênticas da Índia.
-                    </p>
-                </div>
             </div>
-        </main>
+        </div>
 
-        
-        <!-- Scripts -->
-        <script src="{% static 'js/script.js' %}"></script>
-        <script src="{% static 'js/toast-system.js' %}"></script>
-        
-        <!-- Configuração de URLs para o JavaScript -->
-        <script>
-            // Configurar URLs globais para o JavaScript
-            window.URLS = {
-                cart: "{% url 'store:cart' %}",
-                wishlist: "{% url 'store:wishlist' %}",
-                products: "{% url 'store:product_list' %}",
-                home: "{% url 'store:home' %}",
-                product_detail: function(slug) {
-                    return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace('PLACEHOLDER_SLUG', slug);
-                }
-            };
-        </script>
+        <!-- Declaração Final -->
+        <div class="highlight-box text-center">
+            <i class="fas fa-handshake text-orange-600 text-2xl mb-3"></i>
+            <p class="font-semibold text-lg mb-2">
+                Obrigado por escolher a India Oasis!
+            </p>
+            <p class="text-sm">
+                Estamos comprometidos em oferecer a você a melhor experiência em
+                temperos e especiarias autênticas da Índia.
+            </p>
+        </div>
+    </div>
+</main>
 
-        <!-- Script para carregar contador do carrinho -->
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Lógica para o menu lateral
-            const openMenuBtn = document.getElementById("open-menu-btn");
-            const closeMenuBtn = document.getElementById("close-menu-btn");
-            const sideMenu = document.getElementById("side-menu");
-            const menuOverlay = document.getElementById("menu-overlay");
+<!-- Scripts -->
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/toast-system.js' %}"></script>
 
-            const openMenu = () => {
-                sideMenu.classList.remove("-translate-x-full");
-                menuOverlay.classList.remove("hidden");
-            };
+<!-- Configuração de URLs para o JavaScript -->
+<script>
+    // Configurar URLs globais para o JavaScript
+    window.URLS = {
+        cart: "{% url 'store:cart' %}",
+        wishlist: "{% url 'store:wishlist' %}",
+        products: "{% url 'store:product_list' %}",
+        home: "{% url 'store:home' %}",
+        product_detail: function (slug) {
+            return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace(
+                "PLACEHOLDER_SLUG",
+                slug,
+            );
+        },
+    };
+</script>
 
-            const closeMenu = () => {
-                sideMenu.classList.add("-translate-x-full");
-                menuOverlay.classList.add("hidden");
-            };
+<!-- Script para carregar contador do carrinho -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lógica para o menu lateral
+        const openMenuBtn = document.getElementById("open-menu-btn");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+        const sideMenu = document.getElementById("side-menu");
+        const menuOverlay = document.getElementById("menu-overlay");
 
-            if (openMenuBtn) openMenuBtn.addEventListener("click", openMenu);
-            if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
-            if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+        const openMenu = () => {
+            sideMenu.classList.remove("-translate-x-full");
+            menuOverlay.classList.remove("hidden");
+        };
 
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && !sideMenu.classList.contains("-translate-x-full")) {
-                    closeMenu();
-                }
-            });
+        const closeMenu = () => {
+            sideMenu.classList.add("-translate-x-full");
+            menuOverlay.classList.add("hidden");
+        };
 
-            // Carregar contador do carrinho
-            fetch("{% url 'store:cart_count' %}", {
-                headers: { "X-Requested-With": "XMLHttpRequest" }
-            })
-            .then(response => response.json())
-            .then(data => {
+        if (openMenuBtn) openMenuBtn.addEventListener("click", openMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
+        if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+
+        document.addEventListener("keydown", (e) => {
+            if (
+                e.key === "Escape" &&
+                !sideMenu.classList.contains("-translate-x-full")
+            ) {
+                closeMenu();
+            }
+        });
+
+        // Carregar contador do carrinho
+        fetch("{% url 'store:cart_count' %}", {
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
+            .then((response) => response.json())
+            .then((data) => {
                 const cartCountElement = document.getElementById("cart-count");
                 if (cartCountElement) {
                     cartCountElement.textContent = data.cart_count;
@@ -459,9 +517,9 @@
                     }
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("Erro ao carregar contador do carrinho:", error);
             });
-        });
-        </script>
+    });
+</script>
 {% endblock content %}

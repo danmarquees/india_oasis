@@ -1,691 +1,838 @@
-{% extends 'store/base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
-        <!-- ==== CONTEÚDO PRINCIPAL ==== -->
-        <main class="container mx-auto p-4 sm:p-6 lg:p-8">
-            <!-- Breadcrumb -->
-            <nav class="mb-6">
-                <ol class="flex space-x-2 text-sm">
-                    <li>
-                        <a
-                            href="{% url 'store:home' %}"
-                            class="text-primary hover:underline"
-                            >Início</a
-                        >
-                    </li>
-                    <li class="text-gray-500">/</li>
-                    <li class="text-gray-700">Política de Privacidade</li>
-                </ol>
-            </nav>
+<!-- ==== CONTEÚDO PRINCIPAL ==== -->
+<main class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-6">
+        <ol class="flex space-x-2 text-sm">
+            <li>
+                <a
+                    href="{% url 'store:home' %}"
+                    class="text-primary hover:underline"
+                    >Início</a
+                >
+            </li>
+            <li class="text-gray-500">/</li>
+            <li class="text-gray-700">Política de Privacidade</li>
+        </ol>
+    </nav>
 
-            <!-- Título da Página -->
-            <div class="text-center mb-8">
-                <h1 class="text-4xl md:text-5xl font-teko text-secondary mb-4">
-                    <i class="fas fa-shield-alt text-primary mr-3"></i>
-                    Política de Privacidade
-                </h1>
-                <p class="text-gray-600 text-lg max-w-3xl mx-auto">
-                    Sua privacidade é fundamental para nós. Esta política explica como
-                    coletamos, usamos e protegemos suas informações pessoais.
+    <!-- Título da Página -->
+    <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-teko text-secondary mb-4">
+            <i class="fas fa-shield-alt text-primary mr-3"></i>
+            Política de Privacidade
+        </h1>
+        <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+            Sua privacidade é fundamental para nós. Esta política explica como
+            coletamos, usamos e protegemos suas informações pessoais.
+        </p>
+    </div>
+
+    <div class="privacy-content">
+        <!-- Data de Última Atualização -->
+        <div class="last-updated">
+            <i class="fas fa-calendar-alt mr-2"></i>
+            <strong>Última atualização:</strong> 15 de dezembro de 2024
+        </div>
+
+        <!-- Aviso LGPD -->
+        <div class="gdpr-notice">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-gavel text-purple-600 text-2xl mr-3"></i>
+                <h3 class="text-lg font-semibold text-purple-800">
+                    Conformidade com a LGPD
+                </h3>
+            </div>
+            <p class="text-purple-700">
+                Esta política está em conformidade com a Lei Geral de Proteção
+                de Dados (LGPD - Lei 13.709/2018) e garante seus direitos como
+                titular de dados pessoais.
+            </p>
+        </div>
+
+        <!-- Índice -->
+        <div class="toc">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">
+                <i class="fas fa-list mr-2"></i>
+                Índice
+            </h2>
+            <ul>
+                <li><a href="#introducao">1. Introdução</a></li>
+                <li><a href="#definicoes">2. Definições</a></li>
+                <li><a href="#dados-coletados">3. Dados Coletados</a></li>
+                <li><a href="#finalidade">4. Finalidade do Tratamento</a></li>
+                <li><a href="#base-legal">5. Base Legal</a></li>
+                <li>
+                    <a href="#compartilhamento">6. Compartilhamento de Dados</a>
+                </li>
+                <li><a href="#seguranca">7. Segurança dos Dados</a></li>
+                <li><a href="#cookies">8. Cookies e Tecnologias</a></li>
+                <li><a href="#direitos">9. Seus Direitos</a></li>
+                <li><a href="#retencao">10. Retenção de Dados</a></li>
+                <li><a href="#criancas">11. Dados de Crianças</a></li>
+                <li>
+                    <a href="#transferencia">12. Transferência Internacional</a>
+                </li>
+                <li><a href="#alteracoes">13. Alterações na Política</a></li>
+                <li><a href="#contato-dpo">14. Contato e DPO</a></li>
+            </ul>
+        </div>
+
+        <!-- Seção 1: Introdução -->
+        <div class="privacy-section" id="introducao">
+            <h2>1. Introdução</h2>
+            <p>
+                A <strong>India Oasis</strong> valoriza sua privacidade e está
+                comprometida em proteger seus dados pessoais. Esta Política de
+                Privacidade descreve como coletamos, usamos, armazenamos e
+                protegemos suas informações quando você utiliza nosso site e
+                serviços.
+            </p>
+            <p>
+                Ao usar nossos serviços, você concorda com as práticas descritas
+                nesta política. Se você não concorda com qualquer parte desta
+                política, recomendamos que não use nossos serviços.
+            </p>
+            <div class="data-protection-box">
+                <i class="fas fa-lock text-green-600 mr-2"></i>
+                <strong>Compromisso:</strong> Garantimos transparência total
+                sobre como seus dados são tratados e asseguramos o cumprimento
+                de todas as normas de proteção de dados.
+            </div>
+        </div>
+
+        <!-- Seção 2: Definições -->
+        <div class="privacy-section" id="definicoes">
+            <h2>2. Definições</h2>
+            <p>
+                Para melhor compreensão desta política, definimos os seguintes
+                termos:
+            </p>
+            <ul>
+                <li>
+                    <strong>Dados Pessoais:</strong> Qualquer informação que
+                    permita identificar você direta ou indiretamente
+                </li>
+                <li>
+                    <strong>Tratamento:</strong> Toda operação realizada com
+                    dados pessoais (coleta, uso, armazenamento, etc.)
+                </li>
+                <li>
+                    <strong>Titular:</strong> Você, pessoa física a quem se
+                    referem os dados pessoais
+                </li>
+                <li>
+                    <strong>Controlador:</strong> India Oasis, responsável pelas
+                    decisões sobre o tratamento de dados
+                </li>
+                <li>
+                    <strong>LGPD:</strong> Lei Geral de Proteção de Dados (Lei
+                    13.709/2018)
+                </li>
+                <li>
+                    <strong>DPO:</strong> Data Protection Officer (Encarregado
+                    de Proteção de Dados)
+                </li>
+                <li>
+                    <strong>Consentimento:</strong> Manifestação livre,
+                    informada e inequívoca de concordância
+                </li>
+            </ul>
+        </div>
+
+        <!-- Seção 3: Dados Coletados -->
+        <div class="privacy-section" id="dados-coletados">
+            <h2>3. Dados Coletados</h2>
+
+            <h3>3.1 Dados Fornecidos por Você</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo de Dado</th>
+                        <th>Exemplos</th>
+                        <th>Quando Coletamos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Identificação</td>
+                        <td>Nome, CPF, RG</td>
+                        <td>Cadastro, compras</td>
+                    </tr>
+                    <tr>
+                        <td>Contato</td>
+                        <td>E-mail, telefone</td>
+                        <td>Cadastro, atendimento</td>
+                    </tr>
+                    <tr>
+                        <td>Endereço</td>
+                        <td>CEP, rua, cidade</td>
+                        <td>Entrega de produtos</td>
+                    </tr>
+                    <tr>
+                        <td>Financeiros</td>
+                        <td>Dados de pagamento</td>
+                        <td>Processamento de pedidos</td>
+                    </tr>
+                    <tr>
+                        <td>Demográficos</td>
+                        <td>Idade, gênero</td>
+                        <td>Personalização de ofertas</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>3.2 Dados Coletados Automaticamente</h3>
+            <ul>
+                <li>
+                    <strong>Dados de Navegação:</strong> IP, navegador, sistema
+                    operacional
+                </li>
+                <li>
+                    <strong>Cookies:</strong> Preferências, sessão, análise de
+                    uso
+                </li>
+                <li>
+                    <strong>Logs de Acesso:</strong> Horários, páginas
+                    visitadas, ações realizadas
+                </li>
+                <li>
+                    <strong>Dados de Dispositivo:</strong> Tipo, modelo,
+                    resolução de tela
+                </li>
+                <li>
+                    <strong>Localização:</strong> Dados de GPS quando autorizado
+                </li>
+            </ul>
+
+            <h3>3.3 Dados de Terceiros</h3>
+            <p>
+                Podemos receber dados de parceiros comerciais, redes sociais ou
+                empresas de análise de crédito, sempre com seu consentimento ou
+                quando permitido por lei.
+            </p>
+        </div>
+
+        <!-- Seção 4: Finalidade do Tratamento -->
+        <div class="privacy-section" id="finalidade">
+            <h2>4. Finalidade do Tratamento</h2>
+
+            <h3>4.1 Execução de Contratos</h3>
+            <ul>
+                <li>Processar e entregar pedidos</li>
+                <li>Gerenciar sua conta e perfil</li>
+                <li>Processar pagamentos e emitir notas fiscais</li>
+                <li>Fornecer atendimento ao cliente</li>
+                <li>Cumprir obrigações legais e regulamentares</li>
+            </ul>
+
+            <h3>4.2 Melhoria de Serviços</h3>
+            <ul>
+                <li>Personalizar sua experiência de compra</li>
+                <li>Recomendar produtos de seu interesse</li>
+                <li>Analisar padrões de uso e preferências</li>
+                <li>Desenvolver novos produtos e funcionalidades</li>
+                <li>Realizar pesquisas de satisfação</li>
+            </ul>
+
+            <h3>4.3 Comunicação e Marketing</h3>
+            <ul>
+                <li>Enviar ofertas e promoções personalizadas</li>
+                <li>Comunicar sobre novos produtos</li>
+                <li>Enviar newsletters e conteúdo relevante</li>
+                <li>Notificar sobre status de pedidos</li>
+                <li>Realizar campanhas publicitárias direcionadas</li>
+            </ul>
+
+            <h3>4.4 Segurança e Prevenção</h3>
+            <ul>
+                <li>Prevenir fraudes e atividades ilícitas</li>
+                <li>Monitorar segurança do site</li>
+                <li>Investigar violações de termos de uso</li>
+                <li>Cumprir ordens judiciais</li>
+            </ul>
+        </div>
+
+        <!-- Seção 5: Base Legal -->
+        <div class="privacy-section" id="base-legal">
+            <h2>5. Base Legal</h2>
+            <p>
+                O tratamento de seus dados pessoais está fundamentado nas
+                seguintes bases legais da LGPD:
+            </p>
+
+            <h3>5.1 Consentimento (Art. 7º, I)</h3>
+            <p>
+                Para envio de newsletters, ofertas promocionais e comunicações
+                de marketing não essenciais.
+            </p>
+
+            <h3>5.2 Execução de Contrato (Art. 7º, V)</h3>
+            <p>
+                Para processar pedidos, entregar produtos, processar pagamentos
+                e fornecer atendimento ao cliente.
+            </p>
+
+            <h3>5.3 Legítimo Interesse (Art. 7º, IX)</h3>
+            <p>
+                Para análise de dados, melhoria de serviços, segurança e
+                prevenção de fraudes.
+            </p>
+
+            <h3>5.4 Cumprimento de Obrigação Legal (Art. 7º, II)</h3>
+            <p>Para atender exigências fiscais, contábeis e regulamentares.</p>
+        </div>
+
+        <!-- Seção 6: Compartilhamento de Dados -->
+        <div class="privacy-section" id="compartilhamento">
+            <h2>6. Compartilhamento de Dados</h2>
+
+            <h3>6.1 Quando Compartilhamos</h3>
+            <p>
+                Seus dados podem ser compartilhados apenas nas seguintes
+                situações:
+            </p>
+            <ul>
+                <li>
+                    <strong>Prestadores de Serviço:</strong> Transportadoras,
+                    processadores de pagamento, provedores de tecnologia
+                </li>
+                <li>
+                    <strong>Obrigações Legais:</strong> Autoridades competentes
+                    quando exigido por lei
+                </li>
+                <li>
+                    <strong>Proteção de Direitos:</strong> Para proteger nossos
+                    direitos legais ou de terceiros
+                </li>
+                <li>
+                    <strong>Transações Empresariais:</strong> Em caso de fusão,
+                    aquisição ou venda de ativos
+                </li>
+            </ul>
+
+            <h3>6.2 Parceiros e Fornecedores</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Finalidade</th>
+                        <th>Dados Compartilhados</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Transportadoras</td>
+                        <td>Entrega de produtos</td>
+                        <td>Nome, endereço, telefone</td>
+                    </tr>
+                    <tr>
+                        <td>Gateways de Pagamento</td>
+                        <td>Processar pagamentos</td>
+                        <td>Dados financeiros necessários</td>
+                    </tr>
+                    <tr>
+                        <td>Provedores de E-mail</td>
+                        <td>Comunicação</td>
+                        <td>E-mail, nome</td>
+                    </tr>
+                    <tr>
+                        <td>Análise de Dados</td>
+                        <td>Melhorar serviços</td>
+                        <td>Dados anonimizados</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>6.3 Proteções</h3>
+            <p>
+                Todos os nossos parceiros são obrigados a manter a
+                confidencialidade e segurança dos dados, usando-os apenas para
+                as finalidades específicas contratadas.
+            </p>
+        </div>
+
+        <!-- Seção 7: Segurança dos Dados -->
+        <div class="privacy-section" id="seguranca">
+            <h2>7. Segurança dos Dados</h2>
+
+            <div class="security-box">
+                <i class="fas fa-shield-alt text-yellow-600 mr-2"></i>
+                <strong>Compromisso:</strong> Implementamos medidas técnicas e
+                organizacionais rigorosas para proteger seus dados contra
+                acessos não autorizados, alterações, divulgação ou destruição.
+            </div>
+
+            <h3>7.1 Medidas Técnicas</h3>
+            <ul>
+                <li>
+                    <strong>Criptografia:</strong> SSL/TLS para transmissão de
+                    dados
+                </li>
+                <li>
+                    <strong>Firewall:</strong> Proteção contra acessos não
+                    autorizados
+                </li>
+                <li><strong>Backup:</strong> Cópias de segurança regulares</li>
+                <li>
+                    <strong>Monitoramento:</strong> Detecção de atividades
+                    suspeitas 24/7
+                </li>
+                <li>
+                    <strong>Atualizações:</strong> Sistemas sempre atualizados
+                </li>
+            </ul>
+
+            <h3>7.2 Medidas Organizacionais</h3>
+            <ul>
+                <li>
+                    <strong>Treinamento:</strong> Equipe capacitada em proteção
+                    de dados
+                </li>
+                <li>
+                    <strong>Acesso Restrito:</strong> Princípio do menor
+                    privilégio
+                </li>
+                <li>
+                    <strong>Auditoria:</strong> Revisões regulares de segurança
+                </li>
+                <li>
+                    <strong>Políticas:</strong> Procedimentos internos rigorosos
+                </li>
+                <li>
+                    <strong>Resposta a Incidentes:</strong> Plano de
+                    contingência
+                </li>
+            </ul>
+
+            <h3>7.3 Notificação de Incidentes</h3>
+            <p>
+                Em caso de violação de dados que possa gerar riscos aos
+                titulares, notificaremos a ANPD e os afetados no prazo legal,
+                informando as medidas tomadas para mitigar os danos.
+            </p>
+        </div>
+
+        <!-- Seção 8: Cookies e Tecnologias -->
+        <div class="privacy-section" id="cookies">
+            <h2>8. Cookies e Tecnologias</h2>
+
+            <h3>8.1 O que são Cookies</h3>
+            <p>
+                Cookies são pequenos arquivos de texto armazenados em seu
+                dispositivo que nos ajudam a melhorar sua experiência e entender
+                como você usa nosso site.
+            </p>
+
+            <h3>8.2 Tipos de Cookies</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Finalidade</th>
+                        <th>Duração</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Essenciais</td>
+                        <td>Funcionamento básico do site</td>
+                        <td>Sessão</td>
+                    </tr>
+                    <tr>
+                        <td>Funcionais</td>
+                        <td>Lembrar preferências</td>
+                        <td>1 ano</td>
+                    </tr>
+                    <tr>
+                        <td>Analíticos</td>
+                        <td>Análise de uso</td>
+                        <td>2 anos</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing</td>
+                        <td>Publicidade direcionada</td>
+                        <td>1 ano</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>8.3 Gerenciamento de Cookies</h3>
+            <p>
+                Você pode gerenciar cookies através das configurações do seu
+                navegador ou através do nosso painel de preferências de cookies
+                disponível no site.
+            </p>
+        </div>
+
+        <!-- Seção 9: Seus Direitos -->
+        <div class="privacy-section" id="direitos">
+            <h2>9. Seus Direitos</h2>
+
+            <div class="rights-box">
+                <i class="fas fa-user-shield text-blue-600 text-2xl mb-3"></i>
+                <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                    Seus Direitos como Titular de Dados
+                </h3>
+                <p class="text-blue-700">
+                    A LGPD garante diversos direitos sobre seus dados pessoais.
+                    Entre em contato conosco para exercer qualquer um deles.
                 </p>
             </div>
 
-            <div class="privacy-content">
-                <!-- Data de Última Atualização -->
-                <div class="last-updated">
-                    <i class="fas fa-calendar-alt mr-2"></i>
-                    <strong>Última atualização:</strong> 15 de dezembro de 2024
-                </div>
+            <h3>9.1 Direitos Garantidos pela LGPD</h3>
+            <ul>
+                <li>
+                    <strong>Confirmação e Acesso:</strong> Saber se tratamos
+                    seus dados e ter acesso a eles
+                </li>
+                <li>
+                    <strong>Correção:</strong> Corrigir dados incompletos,
+                    inexatos ou desatualizados
+                </li>
+                <li>
+                    <strong>Anonimização:</strong> Anonimizar dados quando
+                    possível
+                </li>
+                <li>
+                    <strong>Bloqueio:</strong> Bloquear dados desnecessários ou
+                    tratados irregularmente
+                </li>
+                <li>
+                    <strong>Eliminação:</strong> Excluir dados desnecessários ou
+                    tratados irregularmente
+                </li>
+                <li>
+                    <strong>Portabilidade:</strong> Receber seus dados em
+                    formato estruturado
+                </li>
+                <li>
+                    <strong>Informação:</strong> Saber com quem compartilhamos
+                    seus dados
+                </li>
+                <li>
+                    <strong>Revogação:</strong> Retirar consentimento a qualquer
+                    momento
+                </li>
+                <li>
+                    <strong>Oposição:</strong> Opor-se ao tratamento quando não
+                    baseado em consentimento
+                </li>
+                <li>
+                    <strong>Revisão:</strong> Solicitar revisão de decisões
+                    automatizadas
+                </li>
+            </ul>
 
-                <!-- Aviso LGPD -->
-                <div class="gdpr-notice">
-                    <div class="flex items-center mb-3">
-                        <i class="fas fa-gavel text-purple-600 text-2xl mr-3"></i>
-                        <h3 class="text-lg font-semibold text-purple-800">
-                            Conformidade com a LGPD
-                        </h3>
+            <h3>9.2 Como Exercer seus Direitos</h3>
+            <p>
+                Para exercer qualquer destes direitos, entre em contato através
+                dos canais disponíveis na seção de contato. Responderemos sua
+                solicitação no prazo máximo de 15 dias.
+            </p>
+
+            <h3>9.3 Verificação de Identidade</h3>
+            <p>
+                Para proteger sua privacidade, podemos solicitar documentos que
+                comprovem sua identidade antes de atender certas solicitações.
+            </p>
+        </div>
+
+        <!-- Seção 10: Retenção de Dados -->
+        <div class="privacy-section" id="retencao">
+            <h2>10. Retenção de Dados</h2>
+
+            <h3>10.1 Períodos de Retenção</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo de Dado</th>
+                        <th>Período de Retenção</th>
+                        <th>Justificativa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dados de Cadastro</td>
+                        <td>Enquanto conta ativa + 5 anos</td>
+                        <td>Obrigações fiscais</td>
+                    </tr>
+                    <tr>
+                        <td>Dados de Transação</td>
+                        <td>10 anos</td>
+                        <td>Código Civil e tributário</td>
+                    </tr>
+                    <tr>
+                        <td>Dados de Navegação</td>
+                        <td>12 meses</td>
+                        <td>Marco Civil da Internet</td>
+                    </tr>
+                    <tr>
+                        <td>Cookies</td>
+                        <td>Conforme configuração</td>
+                        <td>Funcionalidade do site</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing</td>
+                        <td>Até revogação do consentimento</td>
+                        <td>Consentimento</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>10.2 Critérios de Retenção</h3>
+            <p>Mantemos dados pessoais apenas pelo tempo necessário para:</p>
+            <ul>
+                <li>Cumprir as finalidades para as quais foram coletados</li>
+                <li>Atender obrigações legais e regulamentares</li>
+                <li>Proteger nossos direitos em processos judiciais</li>
+                <li>Exercer direitos em contratos</li>
+            </ul>
+
+            <h3>10.3 Eliminação Segura</h3>
+            <p>
+                Após o período de retenção, eliminamos dados pessoais de forma
+                segura e irreversível, exceto quando a manutenção for exigida
+                por lei ou para exercício de direitos.
+            </p>
+        </div>
+
+        <!-- Seção 11: Dados de Crianças -->
+        <div class="privacy-section" id="criancas">
+            <h2>11. Dados de Crianças e Adolescentes</h2>
+
+            <h3>11.1 Política Geral</h3>
+            <p>
+                Nossos serviços são destinados a maiores de 18 anos. Não
+                coletamos intencionalmente dados pessoais de crianças ou
+                adolescentes menores de 18 anos sem consentimento parental.
+            </p>
+
+            <h3>11.2 Descoberta de Dados de Menores</h3>
+            <p>
+                Se descobrirmos que coletamos dados de menores sem o devido
+                consentimento, tomaremos medidas para removê-los de nossos
+                sistemas o mais rapidamente possível.
+            </p>
+
+            <h3>11.3 Responsabilidade dos Pais</h3>
+            <p>
+                Encorajamos pais e responsáveis a monitorar a atividade online
+                de seus filhos e nos notificar se souberem de qualquer coleta
+                não autorizada de dados de menores.
+            </p>
+        </div>
+
+        <!-- Seção 12: Transferência Internacional -->
+        <div class="privacy-section" id="transferencia">
+            <h2>12. Transferência Internacional de Dados</h2>
+
+            <h3>12.1 Transferências Realizadas</h3>
+            <p>
+                Alguns de nossos fornecedores de tecnologia podem estar
+                localizados fora do Brasil. Quando isso ocorre, garantimos que a
+                transferência seja realizada com adequadas garantias de
+                proteção.
+            </p>
+
+            <h3>12.2 Salvaguardas</h3>
+            <ul>
+                <li>
+                    <strong>Cláusulas Contratuais:</strong> Contratos com
+                    proteções adequadas
+                </li>
+                <li>
+                    <strong>Países Adequados:</strong> Transferência apenas para
+                    países com proteção adequada
+                </li>
+                <li>
+                    <strong>Certificações:</strong> Fornecedores com
+                    certificações de segurança
+                </li>
+                <li>
+                    <strong>Consentimento:</strong> Quando aplicável, obtemos
+                    seu consentimento
+                </li>
+            </ul>
+
+            <h3>12.3 Seus Direitos</h3>
+            <p>
+                Você tem o direito de ser informado sobre transferências
+                internacionais e pode solicitar informações sobre as
+                salvaguardas implementadas.
+            </p>
+        </div>
+
+        <!-- Seção 13: Alterações na Política -->
+        <div class="privacy-section" id="alteracoes">
+            <h2>13. Alterações na Política</h2>
+
+            <h3>13.1 Atualizações</h3>
+            <p>
+                Esta política pode ser atualizada periodicamente para refletir
+                mudanças em nossas práticas, tecnologias ou requisitos legais. A
+                data da última atualização é sempre indicada no topo da página.
+            </p>
+
+            <h3>13.2 Notificação de Mudanças</h3>
+            <p>Para mudanças significativas, notificaremos você através de:</p>
+            <ul>
+                <li>E-mail para seu endereço cadastrado</li>
+                <li>Notificação proeminente em nosso site</li>
+                <li>Pop-up ou banner informativo</li>
+                <li>Outros meios de comunicação apropriados</li>
+            </ul>
+
+            <h3>13.3 Consentimento para Mudanças</h3>
+            <p>
+                Para alterações que requeiram novo consentimento, solicitaremos
+                sua aprovação expressa antes de implementar as mudanças.
+            </p>
+        </div>
+
+        <!-- Seção 14: Contato e DPO -->
+        <div class="privacy-section" id="contato-dpo">
+            <h2>14. Contato e Encarregado de Proteção de Dados (DPO)</h2>
+
+            <h3>14.1 Encarregado de Proteção de Dados</h3>
+            <p>
+                Designamos um Encarregado de Proteção de Dados (DPO) para atuar
+                como canal de comunicação entre você, a India Oasis e a ANPD
+                sobre questões relacionadas ao tratamento de dados pessoais.
+            </p>
+
+            <div class="contact-box">
+                <h3 class="text-lg font-semibold mb-4 text-blue-800">
+                    <i class="fas fa-user-shield mr-2"></i>
+                    Contato do DPO
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p><strong>E-mail:</strong> dpo@indiaoasis.com.br</p>
+                        <p><strong>Telefone:</strong> (11) 99999-9999</p>
                     </div>
-                    <p class="text-purple-700">
-                        Esta política está em conformidade com a Lei Geral de Proteção
-                        de Dados (LGPD - Lei 13.709/2018) e garante seus direitos como
-                        titular de dados pessoais.
-                    </p>
-                </div>
-
-                <!-- Índice -->
-                <div class="toc">
-                    <h2 class="text-xl font-semibold mb-4 text-gray-800">
-                        <i class="fas fa-list mr-2"></i>
-                        Índice
-                    </h2>
-                    <ul>
-                        <li><a href="#introducao">1. Introdução</a></li>
-                        <li><a href="#definicoes">2. Definições</a></li>
-                        <li><a href="#dados-coletados">3. Dados Coletados</a></li>
-                        <li><a href="#finalidade">4. Finalidade do Tratamento</a></li>
-                        <li><a href="#base-legal">5. Base Legal</a></li>
-                        <li><a href="#compartilhamento">6. Compartilhamento de Dados</a></li>
-                        <li><a href="#seguranca">7. Segurança dos Dados</a></li>
-                        <li><a href="#cookies">8. Cookies e Tecnologias</a></li>
-                        <li><a href="#direitos">9. Seus Direitos</a></li>
-                        <li><a href="#retencao">10. Retenção de Dados</a></li>
-                        <li><a href="#criancas">11. Dados de Crianças</a></li>
-                        <li><a href="#transferencia">12. Transferência Internacional</a></li>
-                        <li><a href="#alteracoes">13. Alterações na Política</a></li>
-                        <li><a href="#contato-dpo">14. Contato e DPO</a></li>
-                    </ul>
-                </div>
-
-                <!-- Seção 1: Introdução -->
-                <div class="privacy-section" id="introducao">
-                    <h2>1. Introdução</h2>
-                    <p>
-                        A <strong>India Oasis</strong> valoriza sua privacidade e está comprometida
-                        em proteger seus dados pessoais. Esta Política de Privacidade descreve
-                        como coletamos, usamos, armazenamos e protegemos suas informações quando
-                        você utiliza nosso site e serviços.
-                    </p>
-                    <p>
-                        Ao usar nossos serviços, você concorda com as práticas descritas nesta
-                        política. Se você não concorda com qualquer parte desta política,
-                        recomendamos que não use nossos serviços.
-                    </p>
-                    <div class="data-protection-box">
-                        <i class="fas fa-lock text-green-600 mr-2"></i>
-                        <strong>Compromisso:</strong> Garantimos transparência total sobre
-                        como seus dados são tratados e asseguramos o cumprimento de todas
-                        as normas de proteção de dados.
+                    <div>
+                        <p><strong>Endereço:</strong> Rua Example, 123</p>
+                        <p><strong>São Paulo - SP, CEP: 01234-567</strong></p>
                     </div>
-                </div>
-
-                <!-- Seção 2: Definições -->
-                <div class="privacy-section" id="definicoes">
-                    <h2>2. Definições</h2>
-                    <p>Para melhor compreensão desta política, definimos os seguintes termos:</p>
-                    <ul>
-                        <li><strong>Dados Pessoais:</strong> Qualquer informação que permita identificar você direta ou indiretamente</li>
-                        <li><strong>Tratamento:</strong> Toda operação realizada com dados pessoais (coleta, uso, armazenamento, etc.)</li>
-                        <li><strong>Titular:</strong> Você, pessoa física a quem se referem os dados pessoais</li>
-                        <li><strong>Controlador:</strong> India Oasis, responsável pelas decisões sobre o tratamento de dados</li>
-                        <li><strong>LGPD:</strong> Lei Geral de Proteção de Dados (Lei 13.709/2018)</li>
-                        <li><strong>DPO:</strong> Data Protection Officer (Encarregado de Proteção de Dados)</li>
-                        <li><strong>Consentimento:</strong> Manifestação livre, informada e inequívoca de concordância</li>
-                    </ul>
-                </div>
-
-                <!-- Seção 3: Dados Coletados -->
-                <div class="privacy-section" id="dados-coletados">
-                    <h2>3. Dados Coletados</h2>
-
-                    <h3>3.1 Dados Fornecidos por Você</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Tipo de Dado</th>
-                                <th>Exemplos</th>
-                                <th>Quando Coletamos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Identificação</td>
-                                <td>Nome, CPF, RG</td>
-                                <td>Cadastro, compras</td>
-                            </tr>
-                            <tr>
-                                <td>Contato</td>
-                                <td>E-mail, telefone</td>
-                                <td>Cadastro, atendimento</td>
-                            </tr>
-                            <tr>
-                                <td>Endereço</td>
-                                <td>CEP, rua, cidade</td>
-                                <td>Entrega de produtos</td>
-                            </tr>
-                            <tr>
-                                <td>Financeiros</td>
-                                <td>Dados de pagamento</td>
-                                <td>Processamento de pedidos</td>
-                            </tr>
-                            <tr>
-                                <td>Demográficos</td>
-                                <td>Idade, gênero</td>
-                                <td>Personalização de ofertas</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>3.2 Dados Coletados Automaticamente</h3>
-                    <ul>
-                        <li><strong>Dados de Navegação:</strong> IP, navegador, sistema operacional</li>
-                        <li><strong>Cookies:</strong> Preferências, sessão, análise de uso</li>
-                        <li><strong>Logs de Acesso:</strong> Horários, páginas visitadas, ações realizadas</li>
-                        <li><strong>Dados de Dispositivo:</strong> Tipo, modelo, resolução de tela</li>
-                        <li><strong>Localização:</strong> Dados de GPS quando autorizado</li>
-                    </ul>
-
-                    <h3>3.3 Dados de Terceiros</h3>
-                    <p>
-                        Podemos receber dados de parceiros comerciais, redes sociais ou
-                        empresas de análise de crédito, sempre com seu consentimento ou
-                        quando permitido por lei.
-                    </p>
-                </div>
-
-                <!-- Seção 4: Finalidade do Tratamento -->
-                <div class="privacy-section" id="finalidade">
-                    <h2>4. Finalidade do Tratamento</h2>
-
-                    <h3>4.1 Execução de Contratos</h3>
-                    <ul>
-                        <li>Processar e entregar pedidos</li>
-                        <li>Gerenciar sua conta e perfil</li>
-                        <li>Processar pagamentos e emitir notas fiscais</li>
-                        <li>Fornecer atendimento ao cliente</li>
-                        <li>Cumprir obrigações legais e regulamentares</li>
-                    </ul>
-
-                    <h3>4.2 Melhoria de Serviços</h3>
-                    <ul>
-                        <li>Personalizar sua experiência de compra</li>
-                        <li>Recomendar produtos de seu interesse</li>
-                        <li>Analisar padrões de uso e preferências</li>
-                        <li>Desenvolver novos produtos e funcionalidades</li>
-                        <li>Realizar pesquisas de satisfação</li>
-                    </ul>
-
-                    <h3>4.3 Comunicação e Marketing</h3>
-                    <ul>
-                        <li>Enviar ofertas e promoções personalizadas</li>
-                        <li>Comunicar sobre novos produtos</li>
-                        <li>Enviar newsletters e conteúdo relevante</li>
-                        <li>Notificar sobre status de pedidos</li>
-                        <li>Realizar campanhas publicitárias direcionadas</li>
-                    </ul>
-
-                    <h3>4.4 Segurança e Prevenção</h3>
-                    <ul>
-                        <li>Prevenir fraudes e atividades ilícitas</li>
-                        <li>Monitorar segurança do site</li>
-                        <li>Investigar violações de termos de uso</li>
-                        <li>Cumprir ordens judiciais</li>
-                    </ul>
-                </div>
-
-                <!-- Seção 5: Base Legal -->
-                <div class="privacy-section" id="base-legal">
-                    <h2>5. Base Legal</h2>
-                    <p>O tratamento de seus dados pessoais está fundamentado nas seguintes bases legais da LGPD:</p>
-
-                    <h3>5.1 Consentimento (Art. 7º, I)</h3>
-                    <p>
-                        Para envio de newsletters, ofertas promocionais e comunicações
-                        de marketing não essenciais.
-                    </p>
-
-                    <h3>5.2 Execução de Contrato (Art. 7º, V)</h3>
-                    <p>
-                        Para processar pedidos, entregar produtos, processar pagamentos
-                        e fornecer atendimento ao cliente.
-                    </p>
-
-                    <h3>5.3 Legítimo Interesse (Art. 7º, IX)</h3>
-                    <p>
-                        Para análise de dados, melhoria de serviços, segurança e
-                        prevenção de fraudes.
-                    </p>
-
-                    <h3>5.4 Cumprimento de Obrigação Legal (Art. 7º, II)</h3>
-                    <p>
-                        Para atender exigências fiscais, contábeis e regulamentares.
-                    </p>
-                </div>
-
-                <!-- Seção 6: Compartilhamento de Dados -->
-                <div class="privacy-section" id="compartilhamento">
-                    <h2>6. Compartilhamento de Dados</h2>
-
-                    <h3>6.1 Quando Compartilhamos</h3>
-                    <p>Seus dados podem ser compartilhados apenas nas seguintes situações:</p>
-                    <ul>
-                        <li><strong>Prestadores de Serviço:</strong> Transportadoras, processadores de pagamento, provedores de tecnologia</li>
-                        <li><strong>Obrigações Legais:</strong> Autoridades competentes quando exigido por lei</li>
-                        <li><strong>Proteção de Direitos:</strong> Para proteger nossos direitos legais ou de terceiros</li>
-                        <li><strong>Transações Empresariais:</strong> Em caso de fusão, aquisição ou venda de ativos</li>
-                    </ul>
-
-                    <h3>6.2 Parceiros e Fornecedores</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Categoria</th>
-                                <th>Finalidade</th>
-                                <th>Dados Compartilhados</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Transportadoras</td>
-                                <td>Entrega de produtos</td>
-                                <td>Nome, endereço, telefone</td>
-                            </tr>
-                            <tr>
-                                <td>Gateways de Pagamento</td>
-                                <td>Processar pagamentos</td>
-                                <td>Dados financeiros necessários</td>
-                            </tr>
-                            <tr>
-                                <td>Provedores de E-mail</td>
-                                <td>Comunicação</td>
-                                <td>E-mail, nome</td>
-                            </tr>
-                            <tr>
-                                <td>Análise de Dados</td>
-                                <td>Melhorar serviços</td>
-                                <td>Dados anonimizados</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>6.3 Proteções</h3>
-                    <p>
-                        Todos os nossos parceiros são obrigados a manter a confidencialidade
-                        e segurança dos dados, usando-os apenas para as finalidades específicas
-                        contratadas.
-                    </p>
-                </div>
-
-                <!-- Seção 7: Segurança dos Dados -->
-                <div class="privacy-section" id="seguranca">
-                    <h2>7. Segurança dos Dados</h2>
-
-                    <div class="security-box">
-                        <i class="fas fa-shield-alt text-yellow-600 mr-2"></i>
-                        <strong>Compromisso:</strong> Implementamos medidas técnicas e
-                        organizacionais rigorosas para proteger seus dados contra acessos
-                        não autorizados, alterações, divulgação ou destruição.
-                    </div>
-
-                    <h3>7.1 Medidas Técnicas</h3>
-                    <ul>
-                        <li><strong>Criptografia:</strong> SSL/TLS para transmissão de dados</li>
-                        <li><strong>Firewall:</strong> Proteção contra acessos não autorizados</li>
-                        <li><strong>Backup:</strong> Cópias de segurança regulares</li>
-                        <li><strong>Monitoramento:</strong> Detecção de atividades suspeitas 24/7</li>
-                        <li><strong>Atualizações:</strong> Sistemas sempre atualizados</li>
-                    </ul>
-
-                    <h3>7.2 Medidas Organizacionais</h3>
-                    <ul>
-                        <li><strong>Treinamento:</strong> Equipe capacitada em proteção de dados</li>
-                        <li><strong>Acesso Restrito:</strong> Princípio do menor privilégio</li>
-                        <li><strong>Auditoria:</strong> Revisões regulares de segurança</li>
-                        <li><strong>Políticas:</strong> Procedimentos internos rigorosos</li>
-                        <li><strong>Resposta a Incidentes:</strong> Plano de contingência</li>
-                    </ul>
-
-                    <h3>7.3 Notificação de Incidentes</h3>
-                    <p>
-                        Em caso de violação de dados que possa gerar riscos aos titulares,
-                        notificaremos a ANPD e os afetados no prazo legal, informando as
-                        medidas tomadas para mitigar os danos.
-                    </p>
-                </div>
-
-                <!-- Seção 8: Cookies e Tecnologias -->
-                <div class="privacy-section" id="cookies">
-                    <h2>8. Cookies e Tecnologias</h2>
-
-                    <h3>8.1 O que são Cookies</h3>
-                    <p>
-                        Cookies são pequenos arquivos de texto armazenados em seu dispositivo
-                        que nos ajudam a melhorar sua experiência e entender como você usa
-                        nosso site.
-                    </p>
-
-                    <h3>8.2 Tipos de Cookies</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Tipo</th>
-                                <th>Finalidade</th>
-                                <th>Duração</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Essenciais</td>
-                                <td>Funcionamento básico do site</td>
-                                <td>Sessão</td>
-                            </tr>
-                            <tr>
-                                <td>Funcionais</td>
-                                <td>Lembrar preferências</td>
-                                <td>1 ano</td>
-                            </tr>
-                            <tr>
-                                <td>Analíticos</td>
-                                <td>Análise de uso</td>
-                                <td>2 anos</td>
-                            </tr>
-                            <tr>
-                                <td>Marketing</td>
-                                <td>Publicidade direcionada</td>
-                                <td>1 ano</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>8.3 Gerenciamento de Cookies</h3>
-                    <p>
-                        Você pode gerenciar cookies através das configurações do seu navegador
-                        ou através do nosso painel de preferências de cookies disponível no site.
-                    </p>
-                </div>
-
-                <!-- Seção 9: Seus Direitos -->
-                <div class="privacy-section" id="direitos">
-                    <h2>9. Seus Direitos</h2>
-
-                    <div class="rights-box">
-                        <i class="fas fa-user-shield text-blue-600 text-2xl mb-3"></i>
-                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
-                            Seus Direitos como Titular de Dados
-                        </h3>
-                        <p class="text-blue-700">
-                            A LGPD garante diversos direitos sobre seus dados pessoais.
-                            Entre em contato conosco para exercer qualquer um deles.
-                        </p>
-                    </div>
-
-                    <h3>9.1 Direitos Garantidos pela LGPD</h3>
-                    <ul>
-                        <li><strong>Confirmação e Acesso:</strong> Saber se tratamos seus dados e ter acesso a eles</li>
-                        <li><strong>Correção:</strong> Corrigir dados incompletos, inexatos ou desatualizados</li>
-                        <li><strong>Anonimização:</strong> Anonimizar dados quando possível</li>
-                        <li><strong>Bloqueio:</strong> Bloquear dados desnecessários ou tratados irregularmente</li>
-                        <li><strong>Eliminação:</strong> Excluir dados desnecessários ou tratados irregularmente</li>
-                        <li><strong>Portabilidade:</strong> Receber seus dados em formato estruturado</li>
-                        <li><strong>Informação:</strong> Saber com quem compartilhamos seus dados</li>
-                        <li><strong>Revogação:</strong> Retirar consentimento a qualquer momento</li>
-                        <li><strong>Oposição:</strong> Opor-se ao tratamento quando não baseado em consentimento</li>
-                        <li><strong>Revisão:</strong> Solicitar revisão de decisões automatizadas</li>
-                    </ul>
-
-                    <h3>9.2 Como Exercer seus Direitos</h3>
-                    <p>
-                        Para exercer qualquer destes direitos, entre em contato através dos
-                        canais disponíveis na seção de contato. Responderemos sua solicitação
-                        no prazo máximo de 15 dias.
-                    </p>
-
-                    <h3>9.3 Verificação de Identidade</h3>
-                    <p>
-                        Para proteger sua privacidade, podemos solicitar documentos que
-                        comprovem sua identidade antes de atender certas solicitações.
-                    </p>
-                </div>
-
-                <!-- Seção 10: Retenção de Dados -->
-                <div class="privacy-section" id="retencao">
-                    <h2>10. Retenção de Dados</h2>
-
-                    <h3>10.1 Períodos de Retenção</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Tipo de Dado</th>
-                                <th>Período de Retenção</th>
-                                <th>Justificativa</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Dados de Cadastro</td>
-                                <td>Enquanto conta ativa + 5 anos</td>
-                                <td>Obrigações fiscais</td>
-                            </tr>
-                            <tr>
-                                <td>Dados de Transação</td>
-                                <td>10 anos</td>
-                                <td>Código Civil e tributário</td>
-                            </tr>
-                            <tr>
-                                <td>Dados de Navegação</td>
-                                <td>12 meses</td>
-                                <td>Marco Civil da Internet</td>
-                            </tr>
-                            <tr>
-                                <td>Cookies</td>
-                                <td>Conforme configuração</td>
-                                <td>Funcionalidade do site</td>
-                            </tr>
-                            <tr>
-                                <td>Marketing</td>
-                                <td>Até revogação do consentimento</td>
-                                <td>Consentimento</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <h3>10.2 Critérios de Retenção</h3>
-                    <p>Mantemos dados pessoais apenas pelo tempo necessário para:</p>
-                    <ul>
-                        <li>Cumprir as finalidades para as quais foram coletados</li>
-                        <li>Atender obrigações legais e regulamentares</li>
-                        <li>Proteger nossos direitos em processos judiciais</li>
-                        <li>Exercer direitos em contratos</li>
-                    </ul>
-
-                    <h3>10.3 Eliminação Segura</h3>
-                    <p>
-                        Após o período de retenção, eliminamos dados pessoais de forma
-                        segura e irreversível, exceto quando a manutenção for exigida
-                        por lei ou para exercício de direitos.
-                    </p>
-                </div>
-
-                <!-- Seção 11: Dados de Crianças -->
-                <div class="privacy-section" id="criancas">
-                    <h2>11. Dados de Crianças e Adolescentes</h2>
-
-                    <h3>11.1 Política Geral</h3>
-                    <p>
-                        Nossos serviços são destinados a maiores de 18 anos. Não coletamos
-                        intencionalmente dados pessoais de crianças ou adolescentes menores
-                        de 18 anos sem consentimento parental.
-                    </p>
-
-                    <h3>11.2 Descoberta de Dados de Menores</h3>
-                    <p>
-                        Se descobrirmos que coletamos dados de menores sem o devido
-                        consentimento, tomaremos medidas para removê-los de nossos sistemas
-                        o mais rapidamente possível.
-                    </p>
-
-                    <h3>11.3 Responsabilidade dos Pais</h3>
-                    <p>
-                        Encorajamos pais e responsáveis a monitorar a atividade online
-                        de seus filhos e nos notificar se souberem de qualquer coleta
-                        não autorizada de dados de menores.
-                    </p>
-                </div>
-
-                <!-- Seção 12: Transferência Internacional -->
-                <div class="privacy-section" id="transferencia">
-                    <h2>12. Transferência Internacional de Dados</h2>
-
-                    <h3>12.1 Transferências Realizadas</h3>
-                    <p>
-                        Alguns de nossos fornecedores de tecnologia podem estar localizados
-                        fora do Brasil. Quando isso ocorre, garantimos que a transferência
-                        seja realizada com adequadas garantias de proteção.
-                    </p>
-
-                    <h3>12.2 Salvaguardas</h3>
-                    <ul>
-                        <li><strong>Cláusulas Contratuais:</strong> Contratos com proteções adequadas</li>
-                        <li><strong>Países Adequados:</strong> Transferência apenas para países com proteção adequada</li>
-                        <li><strong>Certificações:</strong> Fornecedores com certificações de segurança</li>
-                        <li><strong>Consentimento:</strong> Quando aplicável, obtemos seu consentimento</li>
-                    </ul>
-
-                    <h3>12.3 Seus Direitos</h3>
-                    <p>
-                        Você tem o direito de ser informado sobre transferências internacionais
-                        e pode solicitar informações sobre as salvaguardas implementadas.
-                    </p>
-                </div>
-
-                <!-- Seção 13: Alterações na Política -->
-                <div class="privacy-section" id="alteracoes">
-                    <h2>13. Alterações na Política</h2>
-
-                    <h3>13.1 Atualizações</h3>
-                    <p>
-                        Esta política pode ser atualizada periodicamente para refletir
-                        mudanças em nossas práticas, tecnologias ou requisitos legais.
-                        A data da última atualização é sempre indicada no topo da página.
-                    </p>
-
-                    <h3>13.2 Notificação de Mudanças</h3>
-                    <p>Para mudanças significativas, notificaremos você através de:</p>
-                    <ul>
-                        <li>E-mail para seu endereço cadastrado</li>
-                        <li>Notificação proeminente em nosso site</li>
-                        <li>Pop-up ou banner informativo</li>
-                        <li>Outros meios de comunicação apropriados</li>
-                    </ul>
-
-                    <h3>13.3 Consentimento para Mudanças</h3>
-                    <p>
-                        Para alterações que requeiram novo consentimento, solicitaremos
-                        sua aprovação expressa antes de implementar as mudanças.
-                    </p>
-                </div>
-
-                <!-- Seção 14: Contato e DPO -->
-                <div class="privacy-section" id="contato-dpo">
-                    <h2>14. Contato e Encarregado de Proteção de Dados (DPO)</h2>
-
-                    <h3>14.1 Encarregado de Proteção de Dados</h3>
-                    <p>
-                        Designamos um Encarregado de Proteção de Dados (DPO) para atuar
-                        como canal de comunicação entre você, a India Oasis e a ANPD
-                        sobre questões relacionadas ao tratamento de dados pessoais.
-                    </p>
-
-                    <div class="contact-box">
-                        <h3 class="text-lg font-semibold mb-4 text-blue-800">
-                            <i class="fas fa-user-shield mr-2"></i>
-                            Contato do DPO
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <p><strong>E-mail:</strong> dpo@indiaoasis.com.br</p>
-                                <p><strong>Telefone:</strong> (11) 99999-9999</p>
-                            </div>
-                            <div>
-                                <p><strong>Endereço:</strong> Rua Example, 123</p>
-                                <p><strong>São Paulo - SP, CEP: 01234-567</strong></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>14.2 Canais de Atendimento</h3>
-                    <p>Para questões sobre privacidade e proteção de dados:</p>
-                    <ul>
-                        <li><strong>E-mail Geral:</strong> privacidade@indiaoasis.com.br</li>
-                        <li><strong>Formulário Online:</strong> Disponível na página de contato</li>
-                        <li><strong>Telefone:</strong> (11) 99999-9999 (Seg-Sex, 8h às 18h)</li>
-                        <li><strong>WhatsApp:</strong> (11) 99999-9999</li>
-                    </ul>
-
-                    <h3>14.3 Prazo de Resposta</h3>
-                    <p>
-                        Nos comprometemos a responder suas solicitações relacionadas à
-                        privacidade em até 15 dias, conforme estabelecido pela LGPD.
-                        Para solicitações complexas, o prazo pode ser prorrogado por
-                        mais 15 dias, mediante justificativa.
-                    </p>
-
-                    <h3>14.4 Reclamações à ANPD</h3>
-                    <p>
-                        Se não ficar satisfeito com nossa resposta, você pode apresentar
-                        reclamação à Autoridade Nacional de Proteção de Dados (ANPD)
-                        através do site: <a href="https://www.gov.br/anpd" class="text-primary hover:underline" target="_blank">www.gov.br/anpd</a>
-                    </p>
-                </div>
-
-                <!-- Declaração Final -->
-                <div class="gdpr-notice text-center">
-                    <i class="fas fa-certificate text-purple-600 text-2xl mb-3"></i>
-                    <p class="font-semibold text-lg mb-2 text-purple-800">
-                        Compromisso com sua Privacidade
-                    </p>
-                    <p class="text-sm text-purple-700">
-                        A India Oasis está comprometida em proteger sua privacidade e garantir
-                        a transparência no tratamento de seus dados pessoais. Esta política
-                        reflete nosso compromisso com as melhores práticas de proteção de dados.
-                    </p>
                 </div>
             </div>
-        </main>
 
-        <!-- Scripts -->
-        <script src="{% static 'js/script.js' %}"></script>
-        <script src="{% static 'js/toast-system.js' %}"></script>
-        
-        <!-- Configuração de URLs para o JavaScript -->
-        <script>
-            // Configurar URLs globais para o JavaScript
-            window.URLS = {
-                cart: "{% url 'store:cart' %}",
-                wishlist: "{% url 'store:wishlist' %}",
-                products: "{% url 'store:product_list' %}",
-                home: "{% url 'store:home' %}",
-                product_detail: function(slug) {
-                    return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace('PLACEHOLDER_SLUG', slug);
-                }
-            };
-        </script>
+            <h3>14.2 Canais de Atendimento</h3>
+            <p>Para questões sobre privacidade e proteção de dados:</p>
+            <ul>
+                <li>
+                    <strong>E-mail Geral:</strong> privacidade@indiaoasis.com.br
+                </li>
+                <li>
+                    <strong>Formulário Online:</strong> Disponível na página de
+                    contato
+                </li>
+                <li>
+                    <strong>Telefone:</strong> (11) 99999-9999 (Seg-Sex, 8h às
+                    18h)
+                </li>
+                <li><strong>WhatsApp:</strong> (11) 99999-9999</li>
+            </ul>
 
-        <!-- Script para carregar contador do carrinho -->
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Lógica para o menu lateral
-            const openMenuBtn = document.getElementById("open-menu-btn");
-            const closeMenuBtn = document.getElementById("close-menu-btn");
-            const sideMenu = document.getElementById("side-menu");
-            const menuOverlay = document.getElementById("menu-overlay");
+            <h3>14.3 Prazo de Resposta</h3>
+            <p>
+                Nos comprometemos a responder suas solicitações relacionadas à
+                privacidade em até 15 dias, conforme estabelecido pela LGPD.
+                Para solicitações complexas, o prazo pode ser prorrogado por
+                mais 15 dias, mediante justificativa.
+            </p>
 
-            const openMenu = () => {
-                sideMenu.classList.remove("-translate-x-full");
-                menuOverlay.classList.remove("hidden");
-            };
+            <h3>14.4 Reclamações à ANPD</h3>
+            <p>
+                Se não ficar satisfeito com nossa resposta, você pode apresentar
+                reclamação à Autoridade Nacional de Proteção de Dados (ANPD)
+                através do site:
+                <a
+                    href="https://www.gov.br/anpd"
+                    class="text-primary hover:underline"
+                    target="_blank"
+                    >www.gov.br/anpd</a
+                >
+            </p>
+        </div>
 
-            const closeMenu = () => {
-                sideMenu.classList.add("-translate-x-full");
-                menuOverlay.classList.add("hidden");
-            };
+        <!-- Declaração Final -->
+        <div class="gdpr-notice text-center">
+            <i class="fas fa-certificate text-purple-600 text-2xl mb-3"></i>
+            <p class="font-semibold text-lg mb-2 text-purple-800">
+                Compromisso com sua Privacidade
+            </p>
+            <p class="text-sm text-purple-700">
+                A India Oasis está comprometida em proteger sua privacidade e
+                garantir a transparência no tratamento de seus dados pessoais.
+                Esta política reflete nosso compromisso com as melhores práticas
+                de proteção de dados.
+            </p>
+        </div>
+    </div>
+</main>
 
-            if (openMenuBtn) openMenuBtn.addEventListener("click", openMenu);
-            if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
-            if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+<!-- Scripts -->
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/toast-system.js' %}"></script>
 
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && !sideMenu.classList.contains("-translate-x-full")) {
-                    closeMenu();
-                }
-            });
+<!-- Configuração de URLs para o JavaScript -->
+<script>
+    // Configurar URLs globais para o JavaScript
+    window.URLS = {
+        cart: "{% url 'store:cart' %}",
+        wishlist: "{% url 'store:wishlist' %}",
+        products: "{% url 'store:product_list' %}",
+        home: "{% url 'store:home' %}",
+        product_detail: function (slug) {
+            return "{% url 'store:product_detail' 'PLACEHOLDER_SLUG' %}".replace(
+                "PLACEHOLDER_SLUG",
+                slug,
+            );
+        },
+    };
+</script>
 
-            // Carregar contador do carrinho
-            fetch("{% url 'store:cart_count' %}", {
-                headers: { "X-Requested-With": "XMLHttpRequest" }
-            })
-            .then(response => response.json())
-            .then(data => {
+<!-- Script para carregar contador do carrinho -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lógica para o menu lateral
+        const openMenuBtn = document.getElementById("open-menu-btn");
+        const closeMenuBtn = document.getElementById("close-menu-btn");
+        const sideMenu = document.getElementById("side-menu");
+        const menuOverlay = document.getElementById("menu-overlay");
+
+        const openMenu = () => {
+            sideMenu.classList.remove("-translate-x-full");
+            menuOverlay.classList.remove("hidden");
+        };
+
+        const closeMenu = () => {
+            sideMenu.classList.add("-translate-x-full");
+            menuOverlay.classList.add("hidden");
+        };
+
+        if (openMenuBtn) openMenuBtn.addEventListener("click", openMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener("click", closeMenu);
+        if (menuOverlay) menuOverlay.addEventListener("click", closeMenu);
+
+        document.addEventListener("keydown", (e) => {
+            if (
+                e.key === "Escape" &&
+                !sideMenu.classList.contains("-translate-x-full")
+            ) {
+                closeMenu();
+            }
+        });
+
+        // Carregar contador do carrinho
+        fetch("{% url 'store:cart_count' %}", {
+            headers: { "X-Requested-With": "XMLHttpRequest" },
+        })
+            .then((response) => response.json())
+            .then((data) => {
                 const cartCountElement = document.getElementById("cart-count");
                 if (cartCountElement) {
                     cartCountElement.textContent = data.cart_count;
@@ -696,9 +843,9 @@
                     }
                 }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("Erro ao carregar contador do carrinho:", error);
             });
-        });
-        </script>
+    });
+</script>
 {% endblock content %}

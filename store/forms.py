@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import CustomerProfile, Review, ContactMessage
+from .constants import CONTACT_SUBJECTS, MIN_REVIEW_LENGTH, MAX_REVIEW_LENGTH
 
 class CustomUserCreationForm(UserCreationForm):
     nome = forms.CharField(max_length=150, required=True, label="Nome Completo")
@@ -79,9 +80,16 @@ class ReviewForm(forms.ModelForm):
         label="Sua Avaliação (Estrelas)"
     )
     comment = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 4, 'placeholder': 'Deixe seu comentário sobre o produto...'}),
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'placeholder': 'Deixe seu comentário sobre o produto...',
+            'minlength': MIN_REVIEW_LENGTH,
+            'maxlength': MAX_REVIEW_LENGTH
+        }),
         required=False,
-        label="Comentário"
+        label="Comentário",
+        min_length=MIN_REVIEW_LENGTH,
+        max_length=MAX_REVIEW_LENGTH
     )
 
     class Meta:
@@ -99,16 +107,7 @@ class ReviewForm(forms.ModelForm):
 
 # ---- NOVO FORMULÁRIO DE CONTATO ----
 class ContactForm(forms.ModelForm):
-    SUBJECT_CHOICES = [
-        ('', 'Selecione um assunto'),
-        ('duvida-produto', 'Dúvida sobre produto'),
-        ('pedido', 'Informações sobre pedido'),
-        ('sugestao', 'Sugestão'),
-        ('reclamacao', 'Reclamação'),
-        ('parceria', 'Parceria comercial'),
-        ('outro', 'Outro'),
-    ]
-    subject = forms.ChoiceField(choices=SUBJECT_CHOICES, widget=forms.Select(attrs={
+    subject = forms.ChoiceField(choices=CONTACT_SUBJECTS, widget=forms.Select(attrs={
         'class': 'w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent',
     }))
 
